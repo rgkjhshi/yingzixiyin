@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mapper.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper  namespace="com.yingzixiyin.core.dao.ConsultantDao">
+
+    <sql id="base_select">
+        SELECT
+            id                  AS id,
+            username            AS username,
+            password            AS password,
+            phone               AS phone,
+            email               AS email,
+            nickname            AS nickname,
+            name                AS name,
+            gender              AS gender,
+            age                 AS age,
+            address             AS address,
+            alipay              AS alipay,
+            professional        AS professional,
+            background          AS background,
+            book_time           AS bookTime,
+            price               AS price,
+            introduce           AS introduce,
+            signature           AS signature,
+            range_type          AS rangeType,
+            avatar              AS avatar,
+            status              AS status
+        FROM consultant
+    </sql>
+    <!-- 查询条件 -->
+    <sql id="where_condition">
+        <where>
+            <if test="id != null">
+                id = #{id}
+            </if>
+            <if test="username != null">
+                AND username = #{username}
+            </if>
+            <if test="password != null">
+                AND password = #{password}
+            </if>
+            <if test="phone != null">
+                AND phone = #{actiphonevityId}
+            </if>
+            <if test="email != null">
+                AND email = #{email}
+            </if>
+            <if test="gender != null">
+                AND gender = #{gender}
+            </if>
+            <if test="rangeType != null">
+                AND range_type = #{rangeType}
+            </if>
+            <if test="status != null">
+                AND status = #{status}
+            </if>
+        </where>
+    </sql>
+
+
+    <select id="getConsultant" parameterType="Object" resultType="Consultant">
+        <include refid="base_select" />
+        <include refid="where_condition" />
+    </select>
+
+    <select id="getConsultantList" parameterType="Object" resultType="Consultant">
+        <include refid="base_select" />
+        <include refid="where_condition" />
+    </select>
+
+</mapper>

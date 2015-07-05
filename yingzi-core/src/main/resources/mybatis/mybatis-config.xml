@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD SQL Map Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <typeAliases>
+        <package name="com.yingzixiyin.core.entity"/>
+    </typeAliases>
+
+    <typeHandlers>
+
+    </typeHandlers>
+
+    <mappers>
+        <mapper resource="sqlmaps/Consultant.xml" />
+        <mapper resource="sqlmaps/Message.xml" />
+        <mapper resource="sqlmaps/Record.xml" />
+        <mapper resource="sqlmaps/User.xml" />
+    </mappers>
+
+</configuration>

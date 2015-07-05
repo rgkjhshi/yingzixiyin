@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+    http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+    <!-- 事务处理 -->
+    <tx:annotation-driven transaction-manager="transactionManager" />
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!-- mybatis整合spring的配置 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!-- dataSource用于指定mybatis的数据源 -->
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="classpath:mybatis/mybatis-config.xml"/>
+        <!-- mapperLocations用于指定mybatis中mapper文件所在的位置 -->
+        <!--<property name="mapperLocations">-->
+            <!--<list>-->
+                <!--<value>classpath:sqlmaps/*.xml</value>-->
+            <!--</list>-->
+        <!--</property>-->
+    </bean>
+
+    <!--使用这种方式，Dao的实现就不会被调用-->
+    <!--<bean id="tradeOrderInfoDao" class="org.mybatis.spring.mapper.MapperFactoryBean">-->
+        <!-- 指定的映射器类必须是一个接口,而不是具体的实现类 -->
+        <!--<property name="mapperInterface" value="com.qunar.pay.g2.core.order.dao.TradeOrderInfoDao"/>-->
+        <!--<property name="sqlSessionFactory" ref="sqlSessionFactory"/>-->
+    <!--</bean>-->
+    <!--自动注册mybatis中的mapper。 使用这种方式，上面的那种MapperFactoryBean就可以批量注册-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.yingzixiyin.core.dao"/>
+    </bean>
+</beans>

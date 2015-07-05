@@ -1,0 +1,160 @@
+package com.yingzixiyin.api.dto;
+
+import com.yingzixiyin.api.enums.GenderTypeEnum;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+
+/**
+ * @author song.shi
+ * @date 2015-07-04
+ */
+
+public class ConsultantInfo implements Serializable {
+    private static final long serialVersionUID = -5554209037777700465L;
+
+    private Long id;               // 主键id
+    private String username;       // 用户名
+    private String phone;          // 电话
+    private String email;          // 邮箱
+    private String nickname;       // 昵称
+    private String name;           // 姓名
+    private GenderTypeEnum gender; // 性别
+    private Integer age;           // 年龄
+    private String address;        // 咨询地址
+    private String professional;   // 专业背景
+    private String background;     // 受训背景
+    private String bookTime;       // 可预定时间
+    private BigDecimal price;      // 咨询单价
+    private String introduce;      // 个人简介
+    private String signature;      // 个性签名
+    private String avatar;         // 头像url
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public GenderTypeEnum getGender() {
+        return gender;
+    }
+
+    public void setGender(GenderTypeEnum gender) {
+        this.gender = gender;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getProfessional() {
+        return professional;
+    }
+
+    public void setProfessional(String professional) {
+        this.professional = professional;
+    }
+
+    public String getBackground() {
+        return background;
+    }
+
+    public void setBackground(String background) {
+        this.background = background;
+    }
+
+    public String getBookTime() {
+        return bookTime;
+    }
+
+    public void setBookTime(String bookTime) {
+        this.bookTime = bookTime;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public String getIntroduce() {
+        return introduce;
+    }
+
+    public void setIntroduce(String introduce) {
+        this.introduce = introduce;
+    }
+
+    public String getSignature() {
+        return signature;
+    }
+
+    public void setSignature(String signature) {
+        this.signature = signature;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+}

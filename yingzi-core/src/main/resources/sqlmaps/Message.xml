@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mapper.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper  namespace="com.yingzixiyin.core.dao.MessageDao">
+
+    <sql id="base_select">
+        SELECT
+            id                  AS id,
+            record_id           AS recordId,
+            message             AS message,
+            create_time         AS createTime
+        FROM message
+    </sql>
+
+    <select id="getMessageList" parameterType="Object" resultType="Message">
+        <include refid="base_select" />
+
+    </select>
+
+</mapper>
