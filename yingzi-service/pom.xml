@@ -33,7 +33,30 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
         </dependency>
+        
+        <!-- 日志相关 -->
+        <!-- slf4j-api -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <!-- logback -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+        </dependency>
+        <dependency>
+			<groupId>dom4j</groupId>
+			<artifactId>dom4j</artifactId>
+			<version>1.6.1</version>
+		</dependency>
+        
     </dependencies>
+    
     <!-- profiles -->
     <properties>
         <profiles.dir>src/profiles</profiles.dir>
@@ -49,6 +72,9 @@
                     </resource>
                 </resources>
             </build>
+            <activation>
+            	<activeByDefault>true</activeByDefault>
+            </activation>
         </profile>
 
         <profile>
@@ -62,4 +88,23 @@
             </build>
         </profile>
     </profiles>
+    <build>
+    	<finalName>yingzi-test</finalName>
+    	<plugins>
+    		<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.1.1</version>
+                <configuration>
+                    <!--将资源文件打到classes目录下-->
+                    <webResources>
+                        <resource>
+                            <directory>src/main/resources</directory>
+                            <targetPath>WEB-INF/classes</targetPath>
+                        </resource>
+                    </webResources>
+                </configuration>
+            </plugin>
+    	</plugins>
+    </build>
 </project>

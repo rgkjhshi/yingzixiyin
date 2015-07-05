@@ -14,7 +14,9 @@
     <!-- 使用注解 -->
     <context:annotation-config />
     <!-- 自动扫描Bean注解 -->
-    <context:component-scan base-package="com.yingzixiyin.core"/>
+    <context:component-scan base-package="com.yingzixiyin.web"/>
 
+	<import resource="classpath*:spring/applicationContext-datasource.xml" />
+    <import resource="classpath*:spring/applicationContext-dao.xml" />
 
 </beans>
