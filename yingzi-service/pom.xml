@@ -39,27 +39,4 @@
         <profiles.dir>src/profiles</profiles.dir>
     </properties>
 
-    <profiles>
-        <profile>
-            <id>local</id>
-            <build>
-                <resources>
-                    <resource>
-                        <directory>${profiles.dir}/local</directory>
-                    </resource>
-                </resources>
-            </build>
-        </profile>
-
-        <profile>
-            <id>prod</id>
-            <build>
-                <resources>
-                    <resource>
-                        <directory>${profiles.dir}/dev</directory>
-                    </resource>
-                </resources>
-            </build>
-        </profile>
-    </profiles>
 </project>
