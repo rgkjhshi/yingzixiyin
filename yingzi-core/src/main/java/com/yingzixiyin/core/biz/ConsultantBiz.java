@@ -9,5 +9,8 @@ import com.yingzixiyin.api.dto.ConsultantRequestDto;
  */
 public interface ConsultantBiz {
 
-    public ConsultantQueryResponseDto getConsultantListByRangeType(ConsultantRequestDto requestDto);
+    public ConsultantQueryResponseDto getConsultantList(ConsultantRequestDto requestDto);
+
+    public ConsultantQueryResponseDto getConsultantListByIds(String ids);
+
 }

@@ -3,6 +3,8 @@ package com.yingzixiyin.core.utils;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+import java.util.Collection;
+import java.util.Map;
 
 /**
  * @author song.shi
@@ -58,6 +60,31 @@ public class ParameterUtils {
                     }
                 }
             }
+        }
+    }
+
+    /**
+     * 检查Collection、Map、String不为null且不为空
+     * 只能检查Collection、Map、String对象，其他对象无法检查
+     * @param obj 待检查对象
+     */
+    public static void notEmpty(Object obj) {
+        notEmpty(obj, "object can not be null or empty");
+    }
+
+    /**
+     * 检查Collection、Map、String不为null且不为空
+     * 只能检查Collection、Map、String对象，其他对象无法检查
+     * @param obj 待检查对象
+     * @param desc 异常描述
+     */
+    public static void notEmpty(Object obj, String desc) {
+        if ((null == obj) ||
+                (obj instanceof Map && ((Map) obj).isEmpty()) ||              // 空map
+                (obj instanceof String && ((String) obj).isEmpty()) ||        // 空字符串
+                (obj instanceof Collection && ((Collection) obj).isEmpty())   // 空集合
+                ) {
+            throw new IllegalArgumentException(desc);
         }
     }
 }

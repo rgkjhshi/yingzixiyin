@@ -28,7 +28,14 @@ public class ConsultantFacadeTest extends BaseTest {
         logger.info("info");
         ConsultantRequestDto requestDto = new ConsultantRequestDto();
         requestDto.setRangeType(RangeTypeEnum.ONE);
-        ConsultantQueryResponseDto responseDto =  consultantFacade.getConsultantListByRangeType(requestDto);
+        ConsultantQueryResponseDto responseDto =  consultantFacade.query(requestDto);
+        logger.info(responseDto.toString());
+    }
+
+    @Test
+    public void getConsultantListByIdsTest() {
+        String ids = "1 ,2, ,4 ,";
+        ConsultantQueryResponseDto responseDto =  consultantFacade.queryByIds(ids);
         logger.info(responseDto.toString());
     }
 }

@@ -40,7 +40,7 @@
                 AND password = #{password}
             </if>
             <if test="phone != null">
-                AND phone = #{actiphonevityId}
+                AND phone = #{phone}
             </if>
             <if test="email != null">
                 AND email = #{email}
@@ -58,14 +58,43 @@
     </sql>
 
 
-    <select id="getConsultant" parameterType="Object" resultType="Consultant">
+    <select id="getConsultantList" parameterType="Consultant" resultType="Consultant">
         <include refid="base_select" />
         <include refid="where_condition" />
     </select>
 
-    <select id="getConsultantList" parameterType="Object" resultType="Consultant">
+    <!-- 优化筛选 -->
+    <select id="getConsultantListByFilter" parameterType="map" resultType="Consultant">
         <include refid="base_select" />
-        <include refid="where_condition" />
+        <where>
+            <if test="gender != null">
+                gender = #{gender}
+            </if>
+            <if test="rangeType != null">
+                AND range_type = #{rangeType}
+            </if>
+            <if test="status != null">
+                AND status = #{status}
+            </if>
+            <if test="minAge != null">
+                AND <![CDATA[ age >= #{minAge} ]]>
+            </if>
+            <if test="maxAge != null">
+                AND <![CDATA[ age <= maxAge ]]>
+            </if>
+        </where>
     </select>
 
+    <!-- 优化筛选 -->
+    <select id="getConsultantListByIdList" parameterType="list" resultType="Consultant">
+        <include refid="base_select" />
+        <where>
+            <if test="list != null">
+                id IN
+                <foreach collection="list" item="id"  open="(" separator="," close=")">
+                    #{id}
+                </foreach>
+            </if>
+        </where>
+    </select>
 </mapper>

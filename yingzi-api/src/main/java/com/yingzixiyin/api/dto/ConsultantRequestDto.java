@@ -21,7 +21,8 @@ public class ConsultantRequestDto implements Serializable {
     private String email;          // 邮箱
     private String name;           // 姓名
     private GenderTypeEnum gender; // 性别
-    private Integer age;           // 年龄
+    private Integer minAge;        // 最小年龄
+    private Integer maxAge;        // 最大年龄
     private RangeTypeEnum rangeType;     // 咨询类型
     private StatusEnum status;     // 状态
 
@@ -81,12 +82,20 @@ public class ConsultantRequestDto implements Serializable {
         this.gender = gender;
     }
 
-    public Integer getAge() {
-        return age;
+    public Integer getMinAge() {
+        return minAge;
     }
 
-    public void setAge(Integer age) {
-        this.age = age;
+    public void setMinAge(Integer minAge) {
+        this.minAge = minAge;
+    }
+
+    public Integer getMaxAge() {
+        return maxAge;
+    }
+
+    public void setMaxAge(Integer maxAge) {
+        this.maxAge = maxAge;
     }
 
     public RangeTypeEnum getRangeType() {
@@ -95,6 +104,14 @@ public class ConsultantRequestDto implements Serializable {
 
     public void setRangeType(RangeTypeEnum rangeType) {
         this.rangeType = rangeType;
+    }
+
+    public StatusEnum getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusEnum status) {
+        this.status = status;
     }
 
     @Override
@@ -106,10 +123,11 @@ public class ConsultantRequestDto implements Serializable {
                 ", phone='" + phone + '\'' +
                 ", email='" + email + '\'' +
                 ", name='" + name + '\'' +
-                ", gender=" +( null == gender?null:gender.getValue()) +
-                ", age=" + age +
-                ", rangeType=" + rangeType.getValue() +
+                ", gender=" + gender +
+                ", minAge=" + minAge +
+                ", maxAge=" + maxAge +
+                ", rangeType=" + (null == rangeType ? null : rangeType.getDesc()) +
+                ", status=" + (null == status ? null : status.getDesc()) +
                 '}';
     }
-
 }

@@ -1,11 +1,14 @@
 package com.yingzixiyin.core.entity;
 
+import com.google.common.collect.Lists;
 import com.yingzixiyin.api.dto.ConsultantInfo;
+import com.yingzixiyin.api.dto.ConsultantRequestDto;
 import com.yingzixiyin.api.enums.GenderTypeEnum;
+import com.yingzixiyin.api.enums.RangeTypeEnum;
+import com.yingzixiyin.api.enums.StatusEnum;
 import org.springframework.util.CollectionUtils;
 
 import java.math.BigDecimal;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -37,6 +40,23 @@ public class Consultant {
     private String avatar;         // 头像url
     private Integer status;        // 状态
 
+    public static Consultant getBean(ConsultantRequestDto requestDto) {
+        if (null == requestDto) {
+            return null;
+        }
+        Consultant consultant = new Consultant();
+        consultant.setId(requestDto.getId());
+        consultant.setUsername(requestDto.getUsername());
+        consultant.setPassword(requestDto.getPassword());
+        consultant.setPhone(requestDto.getPhone());
+        consultant.setEmail(requestDto.getEmail());
+        consultant.setName(requestDto.getName());
+        consultant.setGender(null == requestDto.getGender() ? null : requestDto.getGender().getValue());
+        consultant.setRangeType(null == requestDto.getRangeType() ? null : requestDto.getRangeType().getValue());
+        consultant.setStatus(null == requestDto.getStatus() ? null : requestDto.getStatus().getValue());
+        return consultant;
+    }
+
     /**
      * 将bean类型转换成api的dto中对应的的类型
      * @param consultant 需要转换的对象
@@ -63,6 +83,8 @@ public class Consultant {
         consultantInfo.setIntroduce(consultant.getIntroduce());
         consultantInfo.setSignature(consultant.getSignature());
         consultantInfo.setAvatar(consultant.getAvatar());
+        consultantInfo.setRangeType(RangeTypeEnum.toEnum(consultant.getRangeType()));
+        consultantInfo.setStatus(StatusEnum.toEnum(consultant.getStatus()));
         return consultantInfo;
     }
 
@@ -75,7 +97,7 @@ public class Consultant {
         if (CollectionUtils.isEmpty(consultantList)) {
             return null;
         }
-        List<ConsultantInfo> consultantInfoList = Collections.emptyList();
+        List<ConsultantInfo> consultantInfoList = Lists.newArrayList();
         for (Consultant consultant : consultantList) {
             consultantInfoList.add(translateBean(consultant));
         }

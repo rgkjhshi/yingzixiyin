@@ -1,6 +1,8 @@
 package com.yingzixiyin.api.dto;
 
 import com.yingzixiyin.api.enums.GenderTypeEnum;
+import com.yingzixiyin.api.enums.RangeTypeEnum;
+import com.yingzixiyin.api.enums.StatusEnum;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -17,6 +19,7 @@ public class ConsultantInfo implements Serializable {
     private String username;       // 用户名
     private String phone;          // 电话
     private String email;          // 邮箱
+    private String alipay;         // 支付宝
     private String nickname;       // 昵称
     private String name;           // 姓名
     private GenderTypeEnum gender; // 性别
@@ -29,6 +32,8 @@ public class ConsultantInfo implements Serializable {
     private String introduce;      // 个人简介
     private String signature;      // 个性签名
     private String avatar;         // 头像url
+    private RangeTypeEnum rangeType;     // 咨询类型
+    private StatusEnum status;     // 状态
 
     public Long getId() {
         return id;
@@ -60,6 +65,14 @@ public class ConsultantInfo implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getAlipay() {
+        return alipay;
+    }
+
+    public void setAlipay(String alipay) {
+        this.alipay = alipay;
     }
 
     public String getNickname() {
@@ -156,5 +169,46 @@ public class ConsultantInfo implements Serializable {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    public RangeTypeEnum getRangeType() {
+        return rangeType;
+    }
+
+    public void setRangeType(RangeTypeEnum rangeType) {
+        this.rangeType = rangeType;
+    }
+
+    public StatusEnum getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusEnum status) {
+        this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "ConsultantInfo{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                ", alipay='" + alipay + '\'' +
+                ", nickname='" + nickname + '\'' +
+                ", name='" + name + '\'' +
+                ", gender=" + gender +
+                ", age=" + age +
+                ", address='" + address + '\'' +
+                ", professional='" + professional + '\'' +
+                ", background='" + background + '\'' +
+                ", bookTime='" + bookTime + '\'' +
+                ", price=" + price +
+                ", introduce='" + introduce + '\'' +
+                ", signature='" + signature + '\'' +
+                ", avatar='" + avatar + '\'' +
+                ", rangeType=" + rangeType.getDesc() +
+                ", status=" + status.getDesc() +
+                '}';
     }
 }

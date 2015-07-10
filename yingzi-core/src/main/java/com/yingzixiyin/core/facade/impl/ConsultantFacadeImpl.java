@@ -24,22 +24,43 @@ public class ConsultantFacadeImpl implements ConsultantFacade {
     ConsultantBiz consultantBiz;
 
     @Override
-    public ConsultantQueryResponseDto getConsultantListByRangeType(ConsultantRequestDto requestDto) {
-        logger.info("ConsultantFacade#getConsultantListByRangeType 收到数据:" + requestDto);
+    public ConsultantQueryResponseDto query(ConsultantRequestDto requestDto) {
+        logger.info("收到参数:" + requestDto);
         ConsultantQueryResponseDto responseDto = new ConsultantQueryResponseDto();
         try {
-            ParameterUtils.notNull(requestDto, "ConsultantRequestDto为null");
-            ParameterUtils.notNull(requestDto.getRangeType(), "getRangeType为null");
-
-            responseDto = consultantBiz.getConsultantListByRangeType(requestDto);
+            ParameterUtils.notNull(requestDto, "ConsultantRequestDto不能为null");
+            responseDto = consultantBiz.getConsultantList(requestDto);
+            responseDto.setReturnCode(0);
         } catch (IllegalArgumentException e) {
-            logger.error("payCoin exception ,errMsg:" + e.getMessage(), e);
+            logger.info("参数异常:" + e.getMessage(), e);
             responseDto.setReturnCode(-1);
             responseDto.setReturnMessage(e.getMessage());
         } catch (Exception e) {
-            logger.error("payCoin exception ,errMsg:" + e.getMessage(), e);
+            logger.error("捕获异常:" + e.getMessage(), e);
         }
-        logger.info("payCoin, 返回参数  [" + responseDto + "]");
+        logger.info("返回数据:" + responseDto);
         return responseDto;
     }
+
+    @Override
+    public ConsultantQueryResponseDto queryByIds(String ids) {
+        logger.info("收到参数:" + ids);
+        ConsultantQueryResponseDto responseDto = new ConsultantQueryResponseDto();
+        try {
+            ParameterUtils.notEmpty(ids, "ids不能为空");
+            responseDto = consultantBiz.getConsultantListByIds(ids);
+            responseDto.setReturnCode(0);
+
+        } catch (IllegalArgumentException e) {
+            logger.info("参数异常:" + e.getMessage(), e);
+            responseDto.setReturnCode(-1);
+            responseDto.setReturnMessage(e.getMessage());
+        } catch (Exception e) {
+            logger.error("捕获异常:" + e.getMessage(), e);
+        }
+        logger.info("返回数据:" + responseDto);
+        return responseDto;
+    }
+
+
 }

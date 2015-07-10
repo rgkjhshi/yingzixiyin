@@ -1,7 +1,5 @@
 package com.yingzixiyin.api.dto;
 
-import com.yingzixiyin.api.utils.StringUtils;
-
 import java.util.List;
 
 /**
@@ -35,7 +33,7 @@ public class ConsultantQueryResponseDto extends BaseResponseDto {
     public String toString() {
         return "ConsultantQueryResponseDto{" +
                 "count=" + count +
-                ", consultantList=" + StringUtils.listToString(consultantList) +
+                ", consultantList=" + consultantList +
                 '}';
     }
 }
