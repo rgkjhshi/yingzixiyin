@@ -89,6 +89,11 @@
                 <artifactId>slf4j-api</artifactId>
                 <version>1.7.12</version>
             </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>jcl-over-slf4j</artifactId>
+                <version>1.7.12</version>
+            </dependency>
             <!-- logback -->
             <dependency>
                 <groupId>ch.qos.logback</groupId>
@@ -109,6 +114,39 @@
         </dependencies>
     </dependencyManagement>
 
+    <dependencies>
+        <!-- spring core 去掉 JCL -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- 日志相关 -->
+        <!-- SLF4J-JCL 桥 -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+        </dependency>
+        <!-- slf4j-api -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <!-- logback -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+        </dependency>
+    </dependencies>
     <build>
         <pluginManagement>
             <plugins>

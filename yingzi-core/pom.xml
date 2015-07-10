@@ -74,21 +74,6 @@
             <artifactId>aspectjweaver</artifactId>
         </dependency>
 
-        <!-- 日志相关 -->
-        <!-- slf4j-api -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-        </dependency>
-        <!-- logback -->
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-        </dependency>
         <!-- 测试相关 -->
         <dependency>
             <groupId>junit</groupId>
