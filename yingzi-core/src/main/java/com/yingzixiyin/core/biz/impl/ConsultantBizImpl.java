@@ -1,7 +1,6 @@
 package com.yingzixiyin.core.biz.impl;
 
 import com.google.common.collect.Maps;
-import com.yingzixiyin.api.dto.BaseResponseDto;
 import com.yingzixiyin.api.dto.ConsultantInfo;
 import com.yingzixiyin.api.dto.ConsultantQueryRequestDto;
 import com.yingzixiyin.api.dto.ConsultantQueryResponseDto;
@@ -34,13 +33,12 @@ public class ConsultantBizImpl implements ConsultantBiz {
     public void add(ConsultantInfo consultantInfo) {
         // 增
         consultantService.insert(Consultant.getBean(consultantInfo));
-        // 返回responseDto
-        BaseResponseDto responseDto = new BaseResponseDto();
     }
 
     @Override
-    public BaseResponseDto update(ConsultantInfo consultantInfo) {
-        return null;
+    public void update(ConsultantInfo consultantInfo) {
+        // 改
+        consultantService.update(Consultant.getBean(consultantInfo));
     }
 
     @Override
