@@ -11,7 +11,7 @@ import java.io.Serializable;
  * @date 2015-07-04
  */
 
-public class ConsultantRequestDto implements Serializable {
+public class ConsultantQueryRequestDto implements Serializable {
     private static final long serialVersionUID = 1611119459947347588L;
 
     private Long id;               // 主键id

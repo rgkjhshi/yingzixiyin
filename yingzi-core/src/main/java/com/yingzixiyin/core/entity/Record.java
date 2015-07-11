@@ -1,5 +1,7 @@
 package com.yingzixiyin.core.entity;
 
+import org.apache.ibatis.type.Alias;
+
 import java.util.Date;
 
 /**
@@ -8,6 +10,7 @@ import java.util.Date;
  * @date 2015-07-02
  */
 
+@Alias("Record")
 public class Record {
 
     private Long id;               // 主键id

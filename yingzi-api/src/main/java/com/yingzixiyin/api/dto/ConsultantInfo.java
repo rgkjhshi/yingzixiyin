@@ -17,6 +17,7 @@ public class ConsultantInfo implements Serializable {
 
     private Long id;               // 主键id
     private String username;       // 用户名
+    private String password;       // 密码
     private String phone;          // 电话
     private String email;          // 邮箱
     private String alipay;         // 支付宝
@@ -31,8 +32,8 @@ public class ConsultantInfo implements Serializable {
     private BigDecimal price;      // 咨询单价
     private String introduce;      // 个人简介
     private String signature;      // 个性签名
-    private String avatar;         // 头像url
     private RangeTypeEnum rangeType;     // 咨询类型
+    private String avatar;         // 头像url
     private StatusEnum status;     // 状态
 
     public Long getId() {
@@ -49,6 +50,14 @@ public class ConsultantInfo implements Serializable {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getPhone() {
@@ -192,6 +201,7 @@ public class ConsultantInfo implements Serializable {
         return "ConsultantInfo{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
+                ", password='******'" +
                 ", phone='" + phone + '\'' +
                 ", email='" + email + '\'' +
                 ", alipay='" + alipay + '\'' +

@@ -1,7 +1,9 @@
 package com.yingzixiyin.core.facade.impl;
 
+import com.yingzixiyin.api.dto.BaseResponseDto;
+import com.yingzixiyin.api.dto.ConsultantInfo;
+import com.yingzixiyin.api.dto.ConsultantQueryRequestDto;
 import com.yingzixiyin.api.dto.ConsultantQueryResponseDto;
-import com.yingzixiyin.api.dto.ConsultantRequestDto;
 import com.yingzixiyin.api.facade.ConsultantFacade;
 import com.yingzixiyin.core.biz.ConsultantBiz;
 import com.yingzixiyin.core.utils.ParameterUtils;
@@ -24,7 +26,50 @@ public class ConsultantFacadeImpl implements ConsultantFacade {
     ConsultantBiz consultantBiz;
 
     @Override
-    public ConsultantQueryResponseDto query(ConsultantRequestDto requestDto) {
+    public BaseResponseDto add(ConsultantInfo consultantInfo) {
+        logger.info("收到参数:" + consultantInfo);
+        BaseResponseDto responseDto = new BaseResponseDto();
+        try {
+            ParameterUtils.notNull(consultantInfo, "consultantInfo不能为null");
+            ParameterUtils.notNull(consultantInfo.getUsername(), "username不能为null");
+            ParameterUtils.notNull(consultantInfo.getPassword(), "password不能为null");
+            consultantBiz.add(consultantInfo);
+            responseDto.setReturnCode(0);
+        } catch (IllegalArgumentException e) {
+            logger.info("参数异常:" + e.getMessage(), e);
+            responseDto.setReturnCode(-1);
+            responseDto.setReturnMessage(e.getMessage());
+        } catch (Exception e) {
+            logger.error("捕获异常:" + e.getMessage(), e);
+            responseDto.setReturnCode(-1);
+        }
+        logger.info("返回数据:" + responseDto);
+        return responseDto;
+    }
+
+    @Override
+    public BaseResponseDto update(ConsultantInfo consultantInfo) {
+        logger.info("收到参数:" + consultantInfo);
+        BaseResponseDto responseDto = new BaseResponseDto();
+        try {
+            ParameterUtils.notNull(consultantInfo, "consultantInfo不能为null");
+            ParameterUtils.notNull(consultantInfo.getId(), "id不能为null");
+            consultantBiz.update(consultantInfo);
+            responseDto.setReturnCode(0);
+        } catch (IllegalArgumentException e) {
+            logger.info("参数异常:" + e.getMessage(), e);
+            responseDto.setReturnCode(-1);
+            responseDto.setReturnMessage(e.getMessage());
+        } catch (Exception e) {
+            logger.error("捕获异常:" + e.getMessage(), e);
+            responseDto.setReturnCode(-1);
+        }
+        logger.info("返回数据:" + responseDto);
+        return responseDto;
+    }
+
+    @Override
+    public ConsultantQueryResponseDto query(ConsultantQueryRequestDto requestDto) {
         logger.info("收到参数:" + requestDto);
         ConsultantQueryResponseDto responseDto = new ConsultantQueryResponseDto();
         try {
@@ -37,6 +82,7 @@ public class ConsultantFacadeImpl implements ConsultantFacade {
             responseDto.setReturnMessage(e.getMessage());
         } catch (Exception e) {
             logger.error("捕获异常:" + e.getMessage(), e);
+            responseDto.setReturnCode(-1);
         }
         logger.info("返回数据:" + responseDto);
         return responseDto;
@@ -50,17 +96,15 @@ public class ConsultantFacadeImpl implements ConsultantFacade {
             ParameterUtils.notEmpty(ids, "ids不能为空");
             responseDto = consultantBiz.getConsultantListByIds(ids);
             responseDto.setReturnCode(0);
-
         } catch (IllegalArgumentException e) {
             logger.info("参数异常:" + e.getMessage(), e);
             responseDto.setReturnCode(-1);
             responseDto.setReturnMessage(e.getMessage());
         } catch (Exception e) {
             logger.error("捕获异常:" + e.getMessage(), e);
+            responseDto.setReturnCode(-1);
         }
         logger.info("返回数据:" + responseDto);
         return responseDto;
     }
-
-
 }

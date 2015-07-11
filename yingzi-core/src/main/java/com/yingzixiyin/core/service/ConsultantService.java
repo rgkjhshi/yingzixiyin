@@ -15,6 +15,19 @@ import java.util.Map;
 public interface ConsultantService {
 
     /**
+     * 增
+     * @param consultant 咨询师
+     * @return
+     */
+    public Integer insert(Consultant consultant);
+
+    /**
+     * 修改信息
+     * @param consultant id必需，通过id去修改
+     */
+    public void update(Consultant consultant);
+
+    /**
      * 查询咨询师
      * @param consultant 类型
      * @return 咨询师列表

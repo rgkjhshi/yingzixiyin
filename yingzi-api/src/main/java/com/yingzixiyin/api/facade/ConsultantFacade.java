@@ -1,7 +1,9 @@
 package com.yingzixiyin.api.facade;
 
+import com.yingzixiyin.api.dto.BaseResponseDto;
+import com.yingzixiyin.api.dto.ConsultantInfo;
+import com.yingzixiyin.api.dto.ConsultantQueryRequestDto;
 import com.yingzixiyin.api.dto.ConsultantQueryResponseDto;
-import com.yingzixiyin.api.dto.ConsultantRequestDto;
 
 /**
  * @author song.shi
@@ -11,11 +13,25 @@ import com.yingzixiyin.api.dto.ConsultantRequestDto;
 public interface ConsultantFacade {
 
     /**
+     * 增加，id字段不要填写
+     * @param consultantInfo 注册的信息
+     * @return 结果
+     */
+    public BaseResponseDto add(ConsultantInfo consultantInfo);
+
+    /**
+     * 修改，id字段必需，修改什么字段就填什么字段，不修改的不要填
+     * @param consultantInfo 新信息
+     * @return 结果
+     */
+    public BaseResponseDto update(ConsultantInfo consultantInfo);
+
+    /**
      * 通过分类获取咨询师列表
-     * @param requestDto rangeType字段必填
+     * @param requestDto 按照所填字段去查询
      * @return ConsultantQueryResponseDto
      */
-    public ConsultantQueryResponseDto query(ConsultantRequestDto requestDto);
+    public ConsultantQueryResponseDto query(ConsultantQueryRequestDto requestDto);
 
     /**
      * 通过id列表查询咨询师

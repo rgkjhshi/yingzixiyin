@@ -1,11 +1,14 @@
 package com.yingzixiyin.core.entity;
 
+import org.apache.ibatis.type.Alias;
+
 /**
  * 用户
  * @author song.shi
  * @date 2015-07-02
  */
 
+@Alias("User")
 public class User {
 
     private Long id;            // 主键id

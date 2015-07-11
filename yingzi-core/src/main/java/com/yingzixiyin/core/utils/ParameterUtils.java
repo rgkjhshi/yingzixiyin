@@ -16,7 +16,6 @@ import java.util.Map;
  */
 public class ParameterUtils {
 
-
     /**
      * 检查对象不为null
      *

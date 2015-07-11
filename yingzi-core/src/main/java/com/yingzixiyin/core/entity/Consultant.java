@@ -2,10 +2,11 @@ package com.yingzixiyin.core.entity;
 
 import com.google.common.collect.Lists;
 import com.yingzixiyin.api.dto.ConsultantInfo;
-import com.yingzixiyin.api.dto.ConsultantRequestDto;
+import com.yingzixiyin.api.dto.ConsultantQueryRequestDto;
 import com.yingzixiyin.api.enums.GenderTypeEnum;
 import com.yingzixiyin.api.enums.RangeTypeEnum;
 import com.yingzixiyin.api.enums.StatusEnum;
+import org.apache.ibatis.type.Alias;
 import org.springframework.util.CollectionUtils;
 
 import java.math.BigDecimal;
@@ -17,6 +18,7 @@ import java.util.List;
  * @date 2015-07-02
  */
 
+@Alias("Consultant")
 public class Consultant {
 
     private Long id;               // 主键id
@@ -40,7 +42,35 @@ public class Consultant {
     private String avatar;         // 头像url
     private Integer status;        // 状态
 
-    public static Consultant getBean(ConsultantRequestDto requestDto) {
+    public static Consultant getBean(ConsultantInfo info) {
+        if (null == info) {
+            return null;
+        }
+        Consultant consultant = new Consultant();
+        consultant.setId(info.getId());
+        consultant.setUsername(info.getUsername());
+        consultant.setPassword(info.getPassword());
+        consultant.setPhone(info.getPhone());
+        consultant.setEmail(info.getEmail());
+        consultant.setNickname(info.getNickname());
+        consultant.setName(info.getName());
+        consultant.setGender(null == info.getGender() ? null : info.getGender().getValue());
+        consultant.setAge(info.getAge());
+        consultant.setAddress(info.getAddress());
+        consultant.setAlipay(info.getAlipay());
+        consultant.setProfessional(info.getProfessional());
+        consultant.setBackground(info.getBackground());
+        consultant.setBookTime(info.getBookTime());
+        consultant.setPrice(info.getPrice());
+        consultant.setIntroduce(info.getIntroduce());
+        consultant.setSignature(info.getSignature());
+        consultant.setRangeType(null == info.getRangeType() ? null : info.getRangeType().getValue());
+        consultant.setAvatar(info.getAvatar());
+        consultant.setStatus(null == info.getStatus() ? null : info.getStatus().getValue());
+        return consultant;
+    }
+
+    public static Consultant getBean(ConsultantQueryRequestDto requestDto) {
         if (null == requestDto) {
             return null;
         }

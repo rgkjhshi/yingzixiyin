@@ -15,6 +15,19 @@ import java.util.Map;
 public interface ConsultantDao {
 
     /**
+     * 增
+     * @param consultant 咨询师
+     * @return
+     */
+    public Integer insert(Consultant consultant);
+
+    /**
+     * 改
+     * @param consultant id必需，通过id去修改
+     */
+    public void update(Consultant consultant);
+
+    /**
      * 单个查询，确保查询条件能够得到唯一结果
      * @param consultant , 可填字段: id, username, password, phone, email, gender, rangeType, status
      * @return 符合条件的 Consultant
@@ -35,6 +48,11 @@ public interface ConsultantDao {
      */
     public List<Consultant> getConsultantListByFilter(Map<String, Object> map);
 
+    /**
+     * 通过id列表查找咨询师
+     * @param idList id 列表
+     * @return 咨询师列表
+     */
     public List<Consultant> getConsultantListByIdList(List<String> idList);
 
 }

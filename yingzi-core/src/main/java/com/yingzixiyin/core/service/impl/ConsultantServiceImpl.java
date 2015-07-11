@@ -27,10 +27,29 @@ public class ConsultantServiceImpl implements ConsultantService {
     @Resource
     ConsultantDao consultantDao;
 
+
+    @Override
+    public Integer insert(Consultant consultant) {
+        if (null == consultant || StringUtils.isEmpty(consultant.getUsername()) || StringUtils.isEmpty(consultant.getPassword())) {
+            logger.info("username和password不能为空");
+            return null;
+        }
+        return consultantDao.insert(consultant);
+    }
+
+    @Override
+    public void update(Consultant consultant) {
+        if (null == consultant || null == consultant.getId()) {
+            logger.error("id不能为空");
+            return ;
+        }
+        consultantDao.update(consultant);
+    }
+
     @Override
     public List<ConsultantInfo> getConsultantList(Consultant consultant) {
         if (null == consultant) {
-            logger.info("ConsultantServiceImpl#getConsultantList的参数consultant为null");
+            logger.info("参数consultant为null");
             return null;
         }
         List<Consultant> consultantList = consultantDao.getConsultantList(consultant);
@@ -40,7 +59,7 @@ public class ConsultantServiceImpl implements ConsultantService {
     @Override
     public List<ConsultantInfo> getConsultantList(Map<String, Object> map) {
         if (CollectionUtils.isEmpty(map)) {
-            logger.info("ConsultantServiceImpl#getConsultantList的参数map为空");
+            logger.info("参数map为空");
             return null;
         }
         List<Consultant> consultantList = consultantDao.getConsultantListByFilter(map);

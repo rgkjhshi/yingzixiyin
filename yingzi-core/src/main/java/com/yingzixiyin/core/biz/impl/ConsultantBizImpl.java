@@ -1,9 +1,10 @@
 package com.yingzixiyin.core.biz.impl;
 
 import com.google.common.collect.Maps;
+import com.yingzixiyin.api.dto.BaseResponseDto;
 import com.yingzixiyin.api.dto.ConsultantInfo;
+import com.yingzixiyin.api.dto.ConsultantQueryRequestDto;
 import com.yingzixiyin.api.dto.ConsultantQueryResponseDto;
-import com.yingzixiyin.api.dto.ConsultantRequestDto;
 import com.yingzixiyin.core.biz.ConsultantBiz;
 import com.yingzixiyin.core.entity.Consultant;
 import com.yingzixiyin.core.service.ConsultantService;
@@ -30,7 +31,20 @@ public class ConsultantBizImpl implements ConsultantBiz {
     ConsultantService consultantService;
 
     @Override
-    public ConsultantQueryResponseDto getConsultantList(ConsultantRequestDto requestDto) {
+    public void add(ConsultantInfo consultantInfo) {
+        // 增
+        consultantService.insert(Consultant.getBean(consultantInfo));
+        // 返回responseDto
+        BaseResponseDto responseDto = new BaseResponseDto();
+    }
+
+    @Override
+    public BaseResponseDto update(ConsultantInfo consultantInfo) {
+        return null;
+    }
+
+    @Override
+    public ConsultantQueryResponseDto getConsultantList(ConsultantQueryRequestDto requestDto) {
         List<ConsultantInfo> consultantInfoList = Collections.emptyList();
         // 按年龄范围查询
         if (null != requestDto.getMinAge() || null != requestDto.getMaxAge()) {

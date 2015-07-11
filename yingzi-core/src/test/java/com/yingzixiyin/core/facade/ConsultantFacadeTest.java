@@ -1,7 +1,7 @@
 package com.yingzixiyin.core.facade;
 
+import com.yingzixiyin.api.dto.ConsultantQueryRequestDto;
 import com.yingzixiyin.api.dto.ConsultantQueryResponseDto;
-import com.yingzixiyin.api.dto.ConsultantRequestDto;
 import com.yingzixiyin.api.enums.RangeTypeEnum;
 import com.yingzixiyin.api.facade.ConsultantFacade;
 import com.yingzixiyin.core.BaseTest;
@@ -26,7 +26,7 @@ public class ConsultantFacadeTest extends BaseTest {
     public void getConsultantListTest() {
         logger.debug("debug");
         logger.info("info");
-        ConsultantRequestDto requestDto = new ConsultantRequestDto();
+        ConsultantQueryRequestDto requestDto = new ConsultantQueryRequestDto();
         requestDto.setRangeType(RangeTypeEnum.ONE);
         ConsultantQueryResponseDto responseDto =  consultantFacade.query(requestDto);
         logger.info(responseDto.toString());

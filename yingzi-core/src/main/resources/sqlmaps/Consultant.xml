@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mapper.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper  namespace="com.yingzixiyin.core.dao.ConsultantDao">
+<mapper namespace="com.yingzixiyin.core.dao.ConsultantDao">
 
     <sql id="base_select">
         SELECT
@@ -57,15 +57,199 @@
         </where>
     </sql>
 
+    <insert id="insert" parameterType="Consultant" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO consultant
+        (
+        <if test="username != null">
+            username
+        </if>
+        <if test="password != null">
+            ,password
+        </if>
+        <if test="phone != null">
+            ,phone
+        </if>
+        <if test="email != null">
+            ,email
+        </if>
+        <if test="nickname != null">
+            ,nickname
+        </if>
+        <if test="name != null">
+            ,name
+        </if>
+        <if test="gender != null">
+            gender
+        </if>
+        <if test="age != null">
+            ,age
+        </if>
+        <if test="address != null">
+            ,address
+        </if>
+        <if test="alipay != null">
+            ,alipay
+        </if>
+        <if test="professional != null">
+            ,professional
+        </if>
+        <if test="background != null">
+            ,background
+        </if>
+        <if test="bookTime != null">
+            ,book_time
+        </if>
+        <if test="price != null">
+            ,price
+        </if>
+        <if test="introduce != null">
+            ,introduce
+        </if>
+        <if test="signature != null">
+            ,signature
+        </if>
+        <if test="rangeType != null">
+            ,range_type
+        </if>
+        <if test="avatar != null">
+            ,avatar
+        </if>
+        <if test="status != null">
+            ,status
+        </if>
+        )
+        values
+        (
+        <if test="username != null">
+            #{username}
+        </if>
+        <if test="password != null">
+            ,#{password}
+        </if>
+        <if test="phone != null">
+            ,#{phone}
+        </if>
+        <if test="email != null">
+            ,#{email}
+        </if>
+        <if test="nickname != null">
+            ,#{nickname}
+        </if>
+        <if test="name != null">
+            ,#{name}
+        </if>
+        <if test="gender != null">
+            ,#{gender}
+        </if>
+        <if test="age != null">
+            ,#{age}
+        </if>
+        <if test="address != null">
+            ,#{address}
+        </if>
+        <if test="alipay != null">
+            ,#{alipay}
+        </if>
+        <if test="professional != null">
+            ,#{professional}
+        </if>
+        <if test="background != null">
+            ,#{background}
+        </if>
+        <if test="bookTime != null">
+            ,#{bookTime}
+        </if>
+        <if test="price != null">
+            ,#{price}
+        </if>
+        <if test="introduce != null">
+            ,#{introduce}
+        </if>
+        <if test="signature != null">
+            ,#{signature}
+        </if>
+        <if test="rangeType != null">
+            ,#{rangeType}
+        </if>
+        <if test="avatar != null">
+            ,#{avatar}
+        </if>
+        <if test="status != null">
+            ,#{status}
+        </if>
+        )
+    </insert>
+
+    <update id="update" parameterType="Consultant">
+        UPDATE   consultant
+        <trim   prefix="SET" suffixOverrides="," >
+            <if test="password != null">
+                password = #{password}
+            </if>
+            <if test="phone != null">
+                phone = #{phone}
+            </if>
+            <if test="email != null">
+                email = #{email}
+            </if>
+            <if test="nickname != null">
+                nickname = #{nickname}
+            </if>
+            <if test="name != null">
+                name = #{name}
+            </if>
+            <if test="gender != null">
+                gender = #{gender}
+            </if>
+            <if test="age != null">
+                age = #{age}
+            </if>
+            <if test="address != null">
+                address = #{address}
+            </if>
+            <if test="alipay != null">
+                alipay = #{alipay}
+            </if>
+            <if test="professional != null">
+                professional = #{professional}
+            </if>
+            <if test="background != null">
+                background = #{background}
+            </if>
+            <if test="bookTime != null">
+                book_time = #{bookTime}
+            </if>
+            <if test="price != null">
+                price = #{price}
+            </if>
+            <if test="introduce != null">
+                introduce = #{introduce}
+            </if>
+            <if test="signature != null">
+                signature = #{signature}
+            </if>
+            <if test="rangeType != null">
+                range_type = #{rangeType}
+            </if>
+            <if test="avatar != null">
+                avatar = #{avatar}
+            </if>
+            <if test="status != null">
+                status = #{status}
+            </if>
+        </trim>
+        WHERE
+        id = #{id}
+    </update>
 
     <select id="getConsultantList" parameterType="Consultant" resultType="Consultant">
-        <include refid="base_select" />
-        <include refid="where_condition" />
+        <include refid="base_select"/>
+        <include refid="where_condition"/>
     </select>
 
     <!-- 优化筛选 -->
     <select id="getConsultantListByFilter" parameterType="map" resultType="Consultant">
-        <include refid="base_select" />
+        <include refid="base_select"/>
         <where>
             <if test="gender != null">
                 gender = #{gender}
@@ -87,11 +271,11 @@
 
     <!-- 优化筛选 -->
     <select id="getConsultantListByIdList" parameterType="list" resultType="Consultant">
-        <include refid="base_select" />
+        <include refid="base_select"/>
         <where>
             <if test="list != null">
                 id IN
-                <foreach collection="list" item="id"  open="(" separator="," close=")">
+                <foreach collection="list" item="id" open="(" separator="," close=")">
                     #{id}
                 </foreach>
             </if>
