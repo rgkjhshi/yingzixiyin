@@ -36,7 +36,7 @@ public class ConsultantFacadeImpl implements ConsultantFacade {
             consultantBiz.add(consultantInfo);
             responseDto.setReturnCode(0);
         } catch (IllegalArgumentException e) {
-            logger.info("参数异常:" + e.getMessage(), e);
+            logger.info("参数异常:" + e.getMessage());
             responseDto.setReturnCode(-1);
             responseDto.setReturnMessage(e.getMessage());
         } catch (Exception e) {
@@ -57,7 +57,7 @@ public class ConsultantFacadeImpl implements ConsultantFacade {
             consultantBiz.update(consultantInfo);
             responseDto.setReturnCode(0);
         } catch (IllegalArgumentException e) {
-            logger.info("参数异常:" + e.getMessage(), e);
+            logger.info("参数异常:" + e.getMessage());
             responseDto.setReturnCode(-1);
             responseDto.setReturnMessage(e.getMessage());
         } catch (Exception e) {
@@ -77,7 +77,7 @@ public class ConsultantFacadeImpl implements ConsultantFacade {
             responseDto = consultantBiz.getConsultantList(requestDto);
             responseDto.setReturnCode(0);
         } catch (IllegalArgumentException e) {
-            logger.info("参数异常:" + e.getMessage(), e);
+            logger.info("参数异常:" + e.getMessage());
             responseDto.setReturnCode(-1);
             responseDto.setReturnMessage(e.getMessage());
         } catch (Exception e) {
@@ -97,7 +97,7 @@ public class ConsultantFacadeImpl implements ConsultantFacade {
             responseDto = consultantBiz.getConsultantListByIds(ids);
             responseDto.setReturnCode(0);
         } catch (IllegalArgumentException e) {
-            logger.info("参数异常:" + e.getMessage(), e);
+            logger.info("参数异常:" + e.getMessage());
             responseDto.setReturnCode(-1);
             responseDto.setReturnMessage(e.getMessage());
         } catch (Exception e) {

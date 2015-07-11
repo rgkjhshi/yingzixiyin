@@ -1,8 +1,11 @@
 package com.yingzixiyin.core.facade;
 
+import com.yingzixiyin.api.dto.BaseResponseDto;
+import com.yingzixiyin.api.dto.ConsultantInfo;
 import com.yingzixiyin.api.dto.ConsultantQueryRequestDto;
 import com.yingzixiyin.api.dto.ConsultantQueryResponseDto;
 import com.yingzixiyin.api.enums.RangeTypeEnum;
+import com.yingzixiyin.api.enums.StatusEnum;
 import com.yingzixiyin.api.facade.ConsultantFacade;
 import com.yingzixiyin.core.BaseTest;
 import org.junit.Test;
@@ -21,6 +24,25 @@ public class ConsultantFacadeTest extends BaseTest {
 
     @Resource
     ConsultantFacade consultantFacade;
+
+    @Test
+    public void addTest() {
+        ConsultantInfo info = new ConsultantInfo();
+        info.setUsername("asdf");
+        info.setPassword("123123");
+        info.setAge(25);
+        BaseResponseDto responseDto =  consultantFacade.add(info);
+        logger.info(responseDto.toString());
+    }
+
+    @Test
+    public void updateTest() {
+        ConsultantInfo info = new ConsultantInfo();
+        info.setId(1L);
+        info.setStatus(StatusEnum.ACCEPTED);
+        BaseResponseDto responseDto =  consultantFacade.update(info);
+        logger.info(responseDto.toString());
+    }
 
     @Test
     public void getConsultantListTest() {

@@ -217,8 +217,8 @@ public class ConsultantInfo implements Serializable {
                 ", introduce='" + introduce + '\'' +
                 ", signature='" + signature + '\'' +
                 ", avatar='" + avatar + '\'' +
-                ", rangeType=" + rangeType.getDesc() +
-                ", status=" + status.getDesc() +
+                ", rangeType=" + (null == rangeType ? null : rangeType.getDesc()) +
+                ", status=" + (null == status ? null : status.getDesc()) +
                 '}';
     }
 }

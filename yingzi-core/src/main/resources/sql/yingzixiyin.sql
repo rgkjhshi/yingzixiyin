@@ -28,7 +28,7 @@ CREATE TABLE `consultant` (
   `phone` varchar(20) NOT NULL DEFAULT '' COMMENT '电话号码',
   `email` varchar(20) NOT NULL DEFAULT '' COMMENT '邮箱',
   `alipay` varchar(100) NOT NULL DEFAULT '' COMMENT '支付宝账号',
-  `nickname` varchar(50) NOT NULL COMMENT '昵称',
+  `nickname` varchar(50) NOT NULL DEFAULT '' COMMENT '昵称',
   `name` varchar(10) NOT NULL DEFAULT '' COMMENT '姓名',
   `gender` tinyint(4) NOT NULL DEFAULT 0 COMMENT '性别, 0:未知, 1:男, 2:女',
   `age` int(4) NOT NULL DEFAULT 25 COMMENT '年龄',
