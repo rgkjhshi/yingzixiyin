@@ -14,6 +14,7 @@ public interface ConsultantFacade {
 
     /**
      * 增加，id字段不要填写
+     *
      * @param consultantInfo 注册的信息
      * @return 结果
      */
@@ -21,10 +22,18 @@ public interface ConsultantFacade {
 
     /**
      * 修改，id字段必需，修改什么字段就填什么字段，不修改的不要填
+     *
      * @param consultantInfo 新信息
      * @return 结果
      */
     public BaseResponseDto update(ConsultantInfo consultantInfo);
+
+    /**
+     * 查询一个结果
+     * @param requestDto 查询条件
+     * @return ConsultantInfo
+     */
+    public ConsultantInfo queryOne(ConsultantQueryRequestDto requestDto);
 
     /**
      * 通过分类获取咨询师列表
@@ -35,6 +44,7 @@ public interface ConsultantFacade {
 
     /**
      * 通过id列表查询咨询师
+     *
      * @param ids id列表字符串，用","隔开
      * @return ConsultantQueryResponseDto
      */

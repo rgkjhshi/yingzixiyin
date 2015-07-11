@@ -28,6 +28,13 @@ public interface ConsultantService {
     public void update(Consultant consultant);
 
     /**
+     * 查询一个
+     * @param consultant 类型
+     * @return 咨询师列表
+     */
+    public ConsultantInfo getConsultant(Consultant consultant);
+
+    /**
      * 查询咨询师
      * @param consultant 类型
      * @return 咨询师列表

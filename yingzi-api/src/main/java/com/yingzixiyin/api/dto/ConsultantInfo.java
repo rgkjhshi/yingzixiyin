@@ -201,7 +201,6 @@ public class ConsultantInfo implements Serializable {
         return "ConsultantInfo{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
-                ", password='******'" +
                 ", phone='" + phone + '\'' +
                 ", email='" + email + '\'' +
                 ", alipay='" + alipay + '\'' +

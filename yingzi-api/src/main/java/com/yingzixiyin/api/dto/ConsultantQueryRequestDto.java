@@ -119,7 +119,6 @@ public class ConsultantQueryRequestDto implements Serializable {
         return "ConsultantRequestDto{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
                 ", phone='" + phone + '\'' +
                 ", email='" + email + '\'' +
                 ", name='" + name + '\'' +

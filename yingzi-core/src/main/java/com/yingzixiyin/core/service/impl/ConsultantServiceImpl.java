@@ -40,10 +40,20 @@ public class ConsultantServiceImpl implements ConsultantService {
     @Override
     public void update(Consultant consultant) {
         if (null == consultant || null == consultant.getId()) {
-            logger.error("id不能为空");
+            logger.info("id不能为空");
             return ;
         }
         consultantDao.update(consultant);
+    }
+
+    @Override
+    public ConsultantInfo getConsultant(Consultant consultant) {
+        if (null == consultant) {
+            logger.info("参数consultant为null");
+            return null;
+        }
+        Consultant result = consultantDao.getConsultant(consultant);
+        return Consultant.translateBean(result);
     }
 
     @Override

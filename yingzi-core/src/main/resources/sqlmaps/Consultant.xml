@@ -242,6 +242,12 @@
         id = #{id}
     </update>
 
+    <select id="getConsultant" parameterType="Consultant" resultType="Consultant">
+        <include refid="base_select"/>
+        <include refid="where_condition"/>
+        limit 1;
+    </select>
+
     <select id="getConsultantList" parameterType="Consultant" resultType="Consultant">
         <include refid="base_select"/>
         <include refid="where_condition"/>

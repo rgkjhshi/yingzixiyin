@@ -14,10 +14,110 @@
             visited             AS visited
         FROM user
     </sql>
+    <!-- 查询条件 -->
+    <sql id="where_condition">
+        <where>
+            <if test="id != null">
+                id = #{id}
+            </if>
+            <if test="openId != null">
+                AND open_id = #{openId}
+            </if>
+            <if test="phone != null">
+                AND phone = #{phone}
+            </if>
+            <if test="password != null">
+                AND password = #{password}
+            </if>
+            <if test="isBind != null">
+                AND is_bind = #{isBind}
+            </if>
+            <if test="collected != null">
+                AND collected = #{collected}
+            </if>
+            <if test="visited != null">
+                AND visited = #{visited}
+            </if>
+        </where>
+    </sql>
 
-    <select id="getUserList" parameterType="Object" resultType="User">
+    <insert id="insert" parameterType="User" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO user
+        (
+        <if test="openId != null">
+            open_id
+        </if>
+        <if test="phone != null">
+            ,phone
+        </if>
+        <if test="password != null">
+            ,password
+        </if>
+        <if test="isBind != null">
+            ,is_bind
+        </if>
+        <if test="collected != null">
+            ,collected
+        </if>
+        <if test="visited != null">
+            ,visited
+        </if>
+        )
+        values
+        (
+        <if test="openId != null">
+            #{openId}
+        </if>
+        <if test="phone != null">
+            ,#{phone}
+        </if>
+        <if test="password != null">
+            ,#{password}
+        </if>
+        <if test="isBind != null">
+            ,#{isBind}
+        </if>
+        <if test="collected != null">
+            ,#{collected}
+        </if>
+        <if test="visited != null">
+            ,#{visited}
+        </if>
+        )
+    </insert>
 
+    <update id="update" parameterType="User">
+        UPDATE   user
+        <trim   prefix="SET" suffixOverrides="," >
+            <if test="phone != null">
+                phone = #{phone}
+            </if>
+            <if test="password != null">
+                password = #{password}
+            </if>
+            <if test="isBind != null">
+                is_bind = #{isBind}
+            </if>
+            <if test="collected != null">
+                collected = #{collected}
+            </if>
+            <if test="visited != null">
+                visited = #{visited}
+            </if>
+        </trim>
+        WHERE
+        id = #{id}
+    </update>
 
+    <select id="getUser" parameterType="User" resultType="User">
+        <include refid="base_select"/>
+        <include refid="where_condition"/>
+        limit 1;
+    </select>
+
+    <select id="getUserList" parameterType="User" resultType="User">
+        <include refid="base_select"/>
+        <include refid="where_condition"/>
     </select>
 
 </mapper>

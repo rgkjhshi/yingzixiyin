@@ -18,7 +18,7 @@ import javax.annotation.Resource;
  * @date 2015-07-04
  */
 
-@Component("ConsultantFacade")
+@Component("consultantFacade")
 public class ConsultantFacadeImpl implements ConsultantFacade {
     private static final Logger logger = LoggerFactory.getLogger(ConsultantFacadeImpl.class.getName());
 
@@ -66,6 +66,22 @@ public class ConsultantFacadeImpl implements ConsultantFacade {
         }
         logger.info("返回数据:" + responseDto);
         return responseDto;
+    }
+
+    @Override
+    public ConsultantInfo queryOne(ConsultantQueryRequestDto requestDto) {
+        logger.info("收到参数:" + requestDto);
+        ConsultantInfo consultantInfo = null;
+        try {
+            ParameterUtils.notNull(requestDto, "UserQueryRequestDto不能为null");
+            consultantInfo = consultantBiz.getConsultant(requestDto);
+        } catch (IllegalArgumentException e) {
+            logger.info("参数异常:" + e.getMessage());
+        } catch (Exception e) {
+            logger.error("捕获异常:" + e.getMessage(), e);
+        }
+        logger.info("返回数据:" + consultantInfo);
+        return consultantInfo;
     }
 
     @Override

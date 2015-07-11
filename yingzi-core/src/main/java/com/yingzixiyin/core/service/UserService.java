@@ -1,15 +1,15 @@
-package com.yingzixiyin.core.dao;
+package com.yingzixiyin.core.service;
 
+import com.yingzixiyin.api.dto.UserInfo;
 import com.yingzixiyin.core.entity.User;
-import org.springframework.stereotype.Repository;
 
 /**
  * @author song.shi
  * @date 2015-07-02
  */
 
-@Repository("userDao")
-public interface UserDao {
+
+public interface UserService {
 
     /**
      * 增
@@ -19,16 +19,10 @@ public interface UserDao {
     public Integer insert(User user);
 
     /**
-     * 改
+     * 修改信息
      * @param user id必需，通过id去修改
      */
     public void update(User user);
 
-    /**
-     * 查询一个用户
-     * @param user 查询条件
-     * @return User
-     */
-    public User getUser(User user);
-
+    public UserInfo getUser(User user);
 }

@@ -22,7 +22,7 @@ import java.util.Map;
  * @date 2015-07-04
  */
 
-@Component("ConsultantBiz")
+@Component("consultantBiz")
 public class ConsultantBizImpl implements ConsultantBiz {
     private static final Logger logger = LoggerFactory.getLogger(ConsultantBizImpl.class);
 
@@ -39,6 +39,11 @@ public class ConsultantBizImpl implements ConsultantBiz {
     public void update(ConsultantInfo consultantInfo) {
         // 改
         consultantService.update(Consultant.getBean(consultantInfo));
+    }
+
+    @Override
+    public ConsultantInfo getConsultant(ConsultantQueryRequestDto requestDto) {
+        return consultantService.getConsultant(Consultant.getBean(requestDto));
     }
 
     @Override

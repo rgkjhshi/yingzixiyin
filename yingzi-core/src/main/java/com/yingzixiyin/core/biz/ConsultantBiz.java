@@ -20,6 +20,8 @@ public interface ConsultantBiz {
      */
     public void update(ConsultantInfo consultantInfo);
 
+    public ConsultantInfo getConsultant(ConsultantQueryRequestDto requestDto);
+
     public ConsultantQueryResponseDto getConsultantList(ConsultantQueryRequestDto requestDto);
 
     public ConsultantQueryResponseDto getConsultantListByIds(String ids);
