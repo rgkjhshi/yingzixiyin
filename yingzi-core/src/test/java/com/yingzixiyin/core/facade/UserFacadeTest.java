@@ -1,15 +1,15 @@
 package com.yingzixiyin.core.facade;
 
-import com.google.common.base.Splitter;
-import com.google.common.collect.Sets;
-import com.yingzixiyin.api.facade.ConsultantFacade;
+import com.yingzixiyin.api.dto.BaseResponseDto;
+import com.yingzixiyin.api.dto.UserInfo;
+import com.yingzixiyin.api.dto.UserQueryRequestDto;
+import com.yingzixiyin.api.facade.UserFacade;
 import com.yingzixiyin.core.BaseTest;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.annotation.Resource;
-import java.util.Set;
 
 /**
  * @author song.shi
@@ -20,12 +20,31 @@ public class UserFacadeTest extends BaseTest {
     private static final Logger logger = LoggerFactory.getLogger(UserFacadeTest.class.getName());
 
     @Resource
-    ConsultantFacade consultantFacade;
+    UserFacade userFacade;
 
     @Test
     public void addTest() {
-        Set<Long> set = Sets.newHashSet(1L, 2L, 3L);
-        logger.info(set.toString());
+        UserInfo info = new UserInfo();
+        info.setOpenId("123123");
+        BaseResponseDto responseDto =  userFacade.add(info);
+        logger.info(responseDto.toString());
+    }
+
+    @Test
+    public void updateTest() {
+        UserInfo info = new UserInfo();
+        info.setId(1L);
+        info.setPhone("12312331234");
+        BaseResponseDto responseDto =  userFacade.update(info);
+        logger.info(responseDto.toString());
+    }
+
+    @Test
+    public void queryOneTest() {
+        UserQueryRequestDto requestDto = new UserQueryRequestDto();
+        requestDto.setOpenId("123123");
+        UserInfo userInfo =  userFacade.queryOne(requestDto);
+        logger.info(userInfo.toString());
     }
 
 }
