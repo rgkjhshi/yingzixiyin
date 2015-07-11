@@ -18,7 +18,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import com.yingzi.web.weixin.utils.SignUtil;
+
+import com.gson.WeChat;
+import com.yingzi.web.constant.WeiXinConstant;
+
 
 @Controller
 public class WeiXinResponseController {
@@ -36,7 +39,11 @@ public class WeiXinResponseController {
 			String echostr,String timestamp,String nonce) throws IOException{
 		logger.info("--微信调用，传参：signature="+signature
 				+"|timestamp="+timestamp+"|nonce="+nonce+"|echostr="+echostr);
-		if(SignUtil.checkSignature(signature,timestamp,nonce)){
+		/*if(SignUtil.checkSignature(signature,timestamp,nonce)){
+			return echostr;
+		}*/
+		String token=WeiXinConstant.iniConfig.getProperty(WeiXinConstant.WX_TOKEN_KEY);
+		if(WeChat.checkSignature(token, signature, timestamp, nonce)){
 			return echostr;
 		}
 		return "";
@@ -60,13 +67,7 @@ public class WeiXinResponseController {
 		String nonce = request.getParameter("nonce");
 		
 		PrintWriter out = response.getWriter();
-		if(SignUtil.checkSignature(signature,timestamp,nonce)){
-		/*	ApplicationContext ctx = WebApplicationContextUtils.getWebApplicationContext(request.getSession().getServletContext());
-			 MarketService marketService=(MarketService)ctx.getBean("marketService");
-			 
-			String respMessage = marketService.processRequest(request);
-			out.print(respMessage);*/
-		}
+	
 		out.close();
 		out = null;
 	}

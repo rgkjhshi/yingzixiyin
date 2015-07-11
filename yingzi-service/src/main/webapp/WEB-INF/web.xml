@@ -49,5 +49,25 @@
         <servlet-name>web</servlet-name>
         <url-pattern>*.do</url-pattern>
     </servlet-mapping>
-
+	<jsp-config>
+		<!-- jstl标签-->  
+	   <taglib>  
+	       <taglib-uri>http://java.sun.com/jsp/jstl/core</taglib-uri>  
+	       <taglib-location>/WEB-INF/tld/c.tld</taglib-location>  
+	   </taglib> 
+	   <taglib>  
+	       <taglib-uri> http://java.sun.com/jsp/jstl/fmt</taglib-uri>  
+	       <taglib-location>/WEB-INF/tld/fmt.tld</taglib-location>  
+	   </taglib>
+	   <!-- page标签-->  
+	  <!-- <taglib>  
+	       <taglib-uri>http://jsptags.com/tags/navigation/pager</taglib-uri>  
+	       <taglib-location>/WEB-INF/tld/pager-taglib.tld</taglib-location>  
+	   </taglib>  -->
+	   <!-- fn标签 -->
+	    <taglib>  
+	       <taglib-uri>http://java.su.com/jstl/function</taglib-uri>  
+	       <taglib-location>/WEB-INF/tld/fn.tld</taglib-location>  
+	   	</taglib>  
+	</jsp-config>
 </web-app>
