@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -48,7 +47,7 @@ public class ConsultantBizImpl implements ConsultantBiz {
 
     @Override
     public ConsultantQueryResponseDto getConsultantList(ConsultantQueryRequestDto requestDto) {
-        List<ConsultantInfo> consultantInfoList = Collections.emptyList();
+        List<ConsultantInfo> consultantInfoList;
         // 按年龄范围查询
         if (null != requestDto.getMinAge() || null != requestDto.getMaxAge()) {
             Map<String, Object> map = Maps.newHashMap();
@@ -63,7 +62,7 @@ public class ConsultantBizImpl implements ConsultantBiz {
         // 返回responseDto
         ConsultantQueryResponseDto responseDto = new ConsultantQueryResponseDto();
         if (!CollectionUtils.isEmpty(consultantInfoList)) {
-            responseDto.setConsultantList(consultantInfoList);
+            responseDto.setConsultantInfoList(consultantInfoList);
             responseDto.setCount(consultantInfoList.size());
         }
         return responseDto;
@@ -76,7 +75,7 @@ public class ConsultantBizImpl implements ConsultantBiz {
         // 返回responseDto
         ConsultantQueryResponseDto responseDto = new ConsultantQueryResponseDto();
         if (!CollectionUtils.isEmpty(consultantInfoList)) {
-            responseDto.setConsultantList(consultantInfoList);
+            responseDto.setConsultantInfoList(consultantInfoList);
             responseDto.setCount(consultantInfoList.size());
         }
         return responseDto;

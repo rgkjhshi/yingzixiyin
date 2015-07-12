@@ -36,7 +36,6 @@ public enum RangeTypeEnum {
     }
 
     RangeTypeEnum(Integer value, String desc) {
-
         this.value = value;
         this.desc = desc;
     }

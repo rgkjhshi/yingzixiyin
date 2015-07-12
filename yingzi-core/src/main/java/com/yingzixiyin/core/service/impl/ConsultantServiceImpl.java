@@ -59,7 +59,7 @@ public class ConsultantServiceImpl implements ConsultantService {
     @Override
     public List<ConsultantInfo> getConsultantList(Consultant consultant) {
         if (null == consultant) {
-            logger.info("参数consultant为null");
+            logger.info("参数consultant不能为null");
             return null;
         }
         List<Consultant> consultantList = consultantDao.getConsultantList(consultant);
@@ -69,7 +69,7 @@ public class ConsultantServiceImpl implements ConsultantService {
     @Override
     public List<ConsultantInfo> getConsultantList(Map<String, Object> map) {
         if (CollectionUtils.isEmpty(map)) {
-            logger.info("参数map为空");
+            logger.info("map不能为空");
             return null;
         }
         List<Consultant> consultantList = consultantDao.getConsultantListByFilter(map);
@@ -79,7 +79,7 @@ public class ConsultantServiceImpl implements ConsultantService {
     @Override
     public List<ConsultantInfo> getConsultantList(String ids) {
         if (StringUtils.isEmpty(ids)) {
-            logger.info("ConsultantServiceImpl#getConsultantList的参数ids为空");
+            logger.info("ids不能为空");
             return null;
         }
         List<String> idList = Splitter.on(",").trimResults().omitEmptyStrings().splitToList(ids);

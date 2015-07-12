@@ -30,10 +30,4 @@ public interface UserFacade {
      */
     public UserInfo queryOne(UserQueryRequestDto requestDto);
 
-    /**
-     * 通过id列表查询咨询师
-     * @param ids id列表字符串，用","隔开
-     * @return ConsultantQueryResponseDto
-     */
-//    public ConsultantQueryResponseDto queryByIds(String ids);
 }

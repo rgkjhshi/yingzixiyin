@@ -1,7 +1,7 @@
-package com.yingzixiyin.core.dao;
+package com.yingzixiyin.core.service;
 
+import com.yingzixiyin.api.dto.RecordInfo;
 import com.yingzixiyin.core.entity.Record;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -10,8 +10,8 @@ import java.util.List;
  * @date 2015-07-02
  */
 
-@Repository("recordDao")
-public interface RecordDao {
+
+public interface RecordService {
 
     /**
      * 增
@@ -31,13 +31,12 @@ public interface RecordDao {
      * @param record 查询条件
      * @return Record
      */
-    public Record getRecord(Record record);
+    public RecordInfo getRecord(Record record);
 
     /**
      * 查询多个
      * @param record 查询条件
-     * @return RecordList
+     * @return RecordInfoList
      */
-    public List<Record> getRecordList(Record record);
-
+    public List<RecordInfo> getRecordList(Record record);
 }

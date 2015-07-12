@@ -2,15 +2,13 @@ package com.yingzixiyin.api.enums;
 
 /**
  * @author song.shi
- * @date 2015-07-04
+ * @date 2015-07-02
  */
-public enum StatusEnum {
+public enum ConsultTypeEnum {
 
-    INIT(0, "初始状态"),
+    ON_LINE(1, "线上咨询"),
 
-    ACCEPTED(1, "审核通过"),
-
-    REFUSED(2, "审核不通过");
+    OFF_LINE(2, "线下咨询");
 
     private Integer value;
 
@@ -32,13 +30,13 @@ public enum StatusEnum {
         this.desc = desc;
     }
 
-    StatusEnum(Integer value, String desc) {
+    ConsultTypeEnum(Integer value, String desc) {
         this.value = value;
         this.desc = desc;
     }
 
-    public static StatusEnum toEnum(int code) {
-        for (StatusEnum item : StatusEnum.values()) {
+    public static ConsultTypeEnum toEnum(int code) {
+        for (ConsultTypeEnum item : ConsultTypeEnum.values()) {
             if (code == item.getValue()) {
                 return item;
             }

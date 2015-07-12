@@ -11,7 +11,7 @@ public class ConsultantQueryResponseDto extends BaseResponseDto {
     private static final long serialVersionUID = 5588604487346912586L;
 
     private Integer count;    // list中元素个数
-    private List<ConsultantInfo> consultantList;
+    private List<ConsultantInfo> consultantInfoList;
 
     public Integer getCount() {
         return count;
@@ -21,19 +21,19 @@ public class ConsultantQueryResponseDto extends BaseResponseDto {
         this.count = count;
     }
 
-    public List<ConsultantInfo> getConsultantList() {
-        return consultantList;
+    public List<ConsultantInfo> getConsultantInfoList() {
+        return consultantInfoList;
     }
 
-    public void setConsultantList(List<ConsultantInfo> consultantList) {
-        this.consultantList = consultantList;
+    public void setConsultantInfoList(List<ConsultantInfo> consultantInfoList) {
+        this.consultantInfoList = consultantInfoList;
     }
 
     @Override
     public String toString() {
         return "ConsultantQueryResponseDto{" +
                 "count=" + count +
-                ", consultantList=" + consultantList +
+                ", consultantInfoList=" + consultantInfoList +
                 '}';
     }
 }

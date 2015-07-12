@@ -73,7 +73,7 @@ public class ConsultantFacadeImpl implements ConsultantFacade {
         logger.info("收到参数:" + requestDto);
         ConsultantInfo consultantInfo = null;
         try {
-            ParameterUtils.notNull(requestDto, "UserQueryRequestDto不能为null");
+            ParameterUtils.notNull(requestDto, "ConsultantRequestDto不能为null");
             consultantInfo = consultantBiz.getConsultant(requestDto);
         } catch (IllegalArgumentException e) {
             logger.info("参数异常:" + e.getMessage());

@@ -16,6 +16,84 @@
         FROM record
     </sql>
 
+    <!-- 查询条件 -->
+    <sql id="where_condition">
+        <where>
+            <if test="id != null">
+                id = #{id}
+            </if>
+            <if test="userId != null">
+                AND user_id = #{userId}
+            </if>
+            <if test="consultantId != null">
+                AND consultant_id = #{consultantId}
+            </if>
+            <if test="consultType != null">
+                AND consult_type = #{consultType}
+            </if>
+            <if test="isPaid != null">
+                AND is_paid = #{isPaid}
+            </if>
+            <if test="isReplied != null">
+                AND is_replied = #{isReplied}
+            </if>
+            <if test="isCompleted != null">
+                AND is_completed = #{isCompleted}
+            </if>
+        </where>
+    </sql>
+
+    <insert id="insert" parameterType="Record" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO record
+        (
+        <if test="userId != null">
+            user_id
+        </if>
+        <if test="consultantId != null">
+            ,consultant_id
+        </if>
+        <if test="consultType != null">
+            ,consult_type
+        </if>
+        <if test="isPaid != null">
+            ,is_replied
+        </if>
+        <if test="isReplied != null">
+            ,is_replied
+        </if>
+        <if test="isCompleted != null">
+            ,is_completed
+        </if>
+        <if test="createTime != null">
+            ,create_time
+        </if>
+        )
+        values
+        (
+        <if test="userId != null">
+            #{userId}
+        </if>
+        <if test="consultantId != null">
+            ,#{consultantId}
+        </if>
+        <if test="consultType != null">
+            ,#{consultType}
+        </if>
+        <if test="isPaid != null">
+            ,#{isPaid}
+        </if>
+        <if test="isReplied != null">
+            ,#{isReplied}
+        </if>
+        <if test="isCompleted != null">
+            ,#{isCompleted}
+        </if>
+        <if test="createTime != null">
+            ,#{createTime}
+        </if>
+        )
+    </insert>
+
     <select id="getRecordList" parameterType="Object" resultType="Record">
         <include refid="base_select" />
 

@@ -33,7 +33,6 @@ public enum GenderTypeEnum {
     }
 
     GenderTypeEnum(Integer value, String desc) {
-
         this.value = value;
         this.desc = desc;
     }
