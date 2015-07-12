@@ -22,6 +22,7 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.common.collect.Sets;
 import com.yingzi.web.enums.AgeEnum;
+import com.yingzixiyin.api.dto.BaseResponseDto;
 import com.yingzixiyin.api.dto.ConsultantInfo;
 import com.yingzixiyin.api.dto.ConsultantQueryResponseDto;
 import com.yingzixiyin.api.enums.ConsultTypeEnum;
@@ -126,5 +127,11 @@ public class JsonUtil {
 		ObjectMapper objectMapper = new ObjectMapper();
 		JsonNode jsonNode = objectMapper.readTree(json);
 		return jsonNode;
+	}
+	public static String getJsonText(BaseResponseDto brDto) {
+		StringBuffer sb=new StringBuffer();
+		sb.append("{\"returnCode\":"+brDto.getReturnCode()+",");
+		sb.append("\"returnMessage\":\""+brDto.getReturnMessage()+"\"}");
+		return sb.toString();
 	}
 }

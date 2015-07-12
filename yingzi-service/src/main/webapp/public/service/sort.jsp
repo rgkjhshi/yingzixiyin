@@ -25,10 +25,10 @@
     </div>
     <div class="main">
         <ul class="pro layout">
-            <li><a href="<%=path %>/weixin/get_consultants.do?ctype=<%=RangeTypeEnum.ONE.getValue()%>">恋爱关系困惑</a></li>
-            <li><a href="<%=path %>/weixin/get_consultants.do?ctype=<%=RangeTypeEnum.TWO.getValue()%>">情侣关系与维护</a></li>
-            <li><a href="<%=path %>/weixin/get_consultants.do?ctype=<%=RangeTypeEnum.THREE.getValue()%>">婚前关系问题</a></li>
-            <li><a href="<%=path %>/weixin/get_consultants.do?ctype=<%=RangeTypeEnum.FOUR.getValue()%>">夫妻关系困惑</a></li>
+            <li><a href="<%=path %>/consultant/get_consultants.do?ctype=<%=RangeTypeEnum.ONE.getValue()%>">恋爱关系困惑</a></li>
+            <li><a href="<%=path %>/consultant/get_consultants.do?ctype=<%=RangeTypeEnum.TWO.getValue()%>">情侣关系与维护</a></li>
+            <li><a href="<%=path %>/consultant/get_consultants.do?ctype=<%=RangeTypeEnum.THREE.getValue()%>">婚前关系问题</a></li>
+            <li><a href="<%=path %>/consultant/get_consultants.do?ctype=<%=RangeTypeEnum.FOUR.getValue()%>">夫妻关系困惑</a></li>
         </ul>
     </div>
 <script type="text/javascript" src="<%=path %>/js/main_wechat.js"></script>

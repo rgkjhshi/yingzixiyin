@@ -45,7 +45,7 @@ import com.yingzixiyin.api.facade.UserFacade;
  *
  */
 @Controller
-@RequestMapping("/weixin")
+@RequestMapping("/consultant")
 public class ConsultantController {
 	private static Logger logger = LoggerFactory.getLogger(ConsultantController.class);
 	
