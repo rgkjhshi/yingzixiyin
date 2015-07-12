@@ -12,6 +12,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -59,6 +60,17 @@ public class WeiXinResponseController {
 		logger.info("--微信调用后台请求|request:"+request.getContextPath());
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
+		StringBuffer sb=new StringBuffer();
+		String msg=null;
+		BufferedReader br=request.getReader();
+		do{
+			msg=br.readLine();
+			if(StringUtils.isNotEmpty(msg)){
+				sb.append(msg);
+			}
+		}while(msg!=null);
+		br.close();
+		logger.info("---用户发送的消息|XML："+sb);
 		
 	}
 }
