@@ -18,20 +18,26 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+
+
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.common.collect.Collections2;
-import com.gson.WeChat;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.gson.oauth.Oauth;
+import com.yingzi.web.enums.AgeEnum;
+import com.yingzi.web.utils.JsonUtil;
+import com.yingzi.web.utils.SessionUtil;
 import com.yingzixiyin.api.dto.ConsultantInfo;
+import com.yingzixiyin.api.dto.ConsultantQueryRequestDto;
 import com.yingzixiyin.api.dto.ConsultantQueryResponseDto;
-import com.yingzixiyin.api.dto.ConsultantRequestDto;
+import com.yingzixiyin.api.dto.UserInfo;
+import com.yingzixiyin.api.dto.UserQueryRequestDto;
+import com.yingzixiyin.api.enums.GenderTypeEnum;
 import com.yingzixiyin.api.enums.RangeTypeEnum;
 import com.yingzixiyin.api.facade.ConsultantFacade;
+import com.yingzixiyin.api.facade.UserFacade;
 
 @Controller
 @RequestMapping("/weixin")
@@ -40,6 +46,8 @@ public class ConsultantController {
 	
 	@Resource
 	private ConsultantFacade consultantFacade;
+	@Resource
+	private UserFacade userFacade;
 	/**
 	 * 根据咨询类型获取咨询师列表
 	 * @param request
@@ -59,11 +67,63 @@ public class ConsultantController {
 		if(consultantType==null){
 			return response_page;
 		}
-		ConsultantRequestDto rcrDto=new ConsultantRequestDto();
+		ConsultantQueryRequestDto rcrDto=new ConsultantQueryRequestDto();
 		rcrDto.setRangeType(consultantType);
 		ConsultantQueryResponseDto resDto=  consultantFacade.query(rcrDto); 
-		request.setAttribute("consultants", resDto.getConsultantList());
+		request.setAttribute("consultants", resDto.getConsultantInfoList());
+		request.setAttribute("ctype", ctype);
 		return response_page;
+	}
+	private boolean checkValidParams(Object ...params){
+		if(params==null) return false;
+		for(Object obj:params){
+			if(obj instanceof String){
+				String para=(String) obj;
+				if(StringUtils.isEmpty(para)){
+					return false;
+				}
+			}
+			if(obj instanceof Integer){
+				Integer para=(Integer) obj;
+				if(para==null){
+					return false;
+				}
+			}
+			
+		}
+		return true;
+	}
+	/**
+	 * 咨询类型+条件筛选获取咨询师列表
+	 * @param request
+	 * @param response
+	 * @param ctype
+	 * @return
+	 * @throws IOException
+	 */
+	@RequestMapping(value="query_consultants.do")
+	@ResponseBody
+	public String queryConsultantsByCondition(HttpServletRequest request,HttpServletResponse response,Integer ctype,Integer gender,Integer age) throws IOException{
+		logger.info("---用户调用条件筛选咨询师接口页面|ctype="+ctype+"|gender="+gender+"|age="+age);
+		if(!checkValidParams(ctype,gender,age)){
+			return "";
+		}
+		RangeTypeEnum consultantType=RangeTypeEnum.toEnum(ctype);
+		AgeEnum ageEnum=AgeEnum.toEnum(age);
+		GenderTypeEnum genderEnum=GenderTypeEnum.toEnum(gender);
+		ConsultantQueryRequestDto rcrDto=new ConsultantQueryRequestDto();
+		rcrDto.setRangeType(consultantType);
+		rcrDto.setGender(genderEnum);
+		if(ageEnum!=null){
+			rcrDto.setMinAge(ageEnum.getMinAge());
+			rcrDto.setMaxAge(ageEnum.getMaxAge());
+		}
+//		logger.info("请求参数："+rcrDto);
+		ConsultantQueryResponseDto resDto=  consultantFacade.query(rcrDto); 
+//		logger.info("--条件筛选得到的咨询师列表为："+resDto.getConsultantInfoList());
+		String res=JsonUtil.getListObjectNode(resDto.getConsultantInfoList()).toString();
+		logger.info("---查询到的咨询师列表为："+res);
+		return res;
 	}
 	/**
 	 * 根据咨询类型获取咨询师列表
@@ -74,19 +134,52 @@ public class ConsultantController {
 	 * @throws IOException
 	 */
 	@RequestMapping(value="consultant_deatil.do")
-	public String getConsultantInfor(HttpServletRequest request,HttpServletResponse response,String id) throws IOException{
+	public String getConsultantInfor(HttpServletRequest request,HttpServletResponse response,Long id) throws IOException{
 		logger.info("---用户调用咨询师详细信息接口页面----");
 		String response_page="public/service/detail";
-		if(StringUtils.isEmpty(id)){
+		if(id==null){
 			return response_page;
 		}
-		ConsultantQueryResponseDto cqrDto=consultantFacade.queryByIds(id);
+		ConsultantQueryRequestDto rcrDto=new ConsultantQueryRequestDto();
+		rcrDto.setId(id);
+		ConsultantInfo cqrDto=consultantFacade.queryOne(rcrDto);
 		if(cqrDto!=null){
-			List<ConsultantInfo> infoList= cqrDto.getConsultantList();
-			if(infoList!=null&&infoList.size()>0){
-				request.setAttribute("consultant", infoList.get(0));
-			}
+			request.setAttribute("consultant", cqrDto);
 		}
+		return response_page;
+	}
+	@RequestMapping(value="consultant_yingzi.do")
+	public String weixinToYingziCounsultant(HttpServletRequest request,HttpServletResponse response,String code) throws IOException{
+		logger.info("---用户调用进入咨询师页面|code="+code);
+		String response_page="public/service/sort";
+		if(StringUtils.isEmpty(code)){
+			return response_page;
+		}
+		
+		try {
+			Oauth oauth=new Oauth();
+			String token = oauth.getToken(code);
+			logger.info("----查询得到用户token="+token);
+			JsonNode node = JsonUtil.StringToJsonNode(token);
+			String openId = node.get("openid").asText();
+			//get openId
+			//do something
+			logger.info("----查询得到用户OpenId="+openId);
+			UserQueryRequestDto uqrDto=new UserQueryRequestDto();
+			uqrDto.setOpenId(openId);
+			UserInfo userInfo=userFacade.queryOne(uqrDto);
+			if(userInfo==null){
+				userInfo=new UserInfo();
+				userInfo.setOpenId(openId);
+				userFacade.add(userInfo);
+			}
+			SessionUtil.setLoginUserToSession(request, userInfo);
+			
+		} catch (Exception e) {
+			logger.error("调用consultant_yingzi.do异常", e);
+		}
+	   
+	
 		return response_page;
 	}
 	@RequestMapping(value="consultant_online.do")

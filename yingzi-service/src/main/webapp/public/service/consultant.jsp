@@ -129,18 +129,19 @@
         <ul>
             <li>
                 <div class="condi">性别：</div>
-                <label><input type="radio" value="0" checked="checked" />不限</label>
-                <label><input type="radio" value="1" />男</label>
-                <label><input type="radio" value="2" />女</label>
+                <label><input type="radio" value="0" checked="checked" name="gender" />不限</label>
+                <label><input type="radio" value="1" name="gender" />男</label>
+                <label><input type="radio" value="2" name="gender" />女</label>
             </li>
             <li>
                 <div class="condi">年龄：</div>
-                <label><input type="checkbox" value="0" checked="checked" />不限</label>
-                <label><input type="checkbox" value="1" />30岁以下</label>
-                <label><input type="checkbox" value="2" />31-50岁</label>
-                <label><input type="checkbox" value="3" />51岁以上</label>
+                <label><input type="radio" value="0" checked="checked" name="age" />不限</label>
+                <label><input type="radio" value="1" name="age" />30岁以下</label>
+                <label><input type="radio" value="2" name="age" />31-50岁</label>
+                <label><input type="radio" value="3" name="age" />51岁以上</label>
+                <input type="hidden" name="ctype" id="ctype" value="${ctype}">
             </li>
-            <li class="choose_min_btn">筛选</li>
+            <li class="choose_min_btn" id="choose_g_a">筛选</li>
         </ul>
     </div>
 <script type="text/javascript" src="<%=path %>/js/main_wechat.js"></script>

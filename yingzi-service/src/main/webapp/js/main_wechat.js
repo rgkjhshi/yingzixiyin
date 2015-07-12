@@ -17,4 +17,22 @@
 	$(".header i").on("tap",function(){
 		window.history.go(-1);
 	});
+	
+	$("#choose_g_a").on("tap",function(){
+		var gender = $("input[name='gender']:checked").val();
+		var age = $("input[name='age']:checked").val();
+		var ctype = $("#ctype").val();
+		$.ajax({
+			url:"query_consultants.do",
+			async:true,
+			type:"post",
+			data:{"gender":gender,"age":age,"ctype":ctype},
+			success:function(data){
+				console.log(data);
+			},
+			error:function(){
+				alert("error");
+			}
+		});
+	});
 })();
