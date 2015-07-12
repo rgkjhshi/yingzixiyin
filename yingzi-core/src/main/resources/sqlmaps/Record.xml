@@ -56,7 +56,7 @@
             ,consult_type
         </if>
         <if test="isPaid != null">
-            ,is_replied
+            ,is_paid
         </if>
         <if test="isReplied != null">
             ,is_replied
@@ -94,9 +94,43 @@
         )
     </insert>
 
-    <select id="getRecordList" parameterType="Object" resultType="Record">
-        <include refid="base_select" />
+    <update id="update" parameterType="Record">
+        UPDATE   record
+        <set>
+            <if test="userId != null">
+                user_id = #{userId},
+            </if>
+            <if test="consultantId != null">
+                consultant_id = #{consultantId},
+            </if>
+            <if test="consultType != null">
+                consult_type = #{consultType},
+            </if>
+            <if test="isPaid != null">
+                is_paid = #{isPaid},
+            </if>
+            <if test="isReplied != null">
+                is_replied = #{isReplied},
+            </if>
+            <if test="isCompleted != null">
+                is_completed = #{isCompleted},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
 
+    <select id="getRecord" parameterType="Record" resultType="Record">
+        <include refid="base_select" />
+        <include refid="where_condition" />
+        limit 1;
+    </select>
+
+    <select id="getRecordList" parameterType="Record" resultType="Record">
+        <include refid="base_select" />
+        <include refid="where_condition" />
     </select>
 
 </mapper>

@@ -89,23 +89,23 @@
 
     <update id="update" parameterType="User">
         UPDATE   user
-        <trim   prefix="SET" suffixOverrides="," >
+        <set>
             <if test="phone != null">
-                phone = #{phone}
+                phone = #{phone},
             </if>
             <if test="password != null">
-                password = #{password}
+                password = #{password},
             </if>
             <if test="isBind != null">
-                is_bind = #{isBind}
+                is_bind = #{isBind},
             </if>
             <if test="collected != null">
-                collected = #{collected}
+                collected = #{collected},
             </if>
             <if test="visited != null">
-                visited = #{visited}
+                visited = #{visited},
             </if>
-        </trim>
+        </set>
         WHERE
         id = #{id}
     </update>
