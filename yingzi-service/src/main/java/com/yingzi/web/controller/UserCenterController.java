@@ -36,11 +36,14 @@ import com.yingzi.web.utils.SessionUtil;
 import com.yingzixiyin.api.dto.ConsultantInfo;
 import com.yingzixiyin.api.dto.ConsultantQueryRequestDto;
 import com.yingzixiyin.api.dto.ConsultantQueryResponseDto;
+import com.yingzixiyin.api.dto.RecordQueryRequestDto;
+import com.yingzixiyin.api.dto.RecordQueryResponseDto;
 import com.yingzixiyin.api.dto.UserInfo;
 import com.yingzixiyin.api.dto.UserQueryRequestDto;
 import com.yingzixiyin.api.enums.GenderTypeEnum;
 import com.yingzixiyin.api.enums.RangeTypeEnum;
 import com.yingzixiyin.api.facade.ConsultantFacade;
+import com.yingzixiyin.api.facade.RecordFacade;
 import com.yingzixiyin.api.facade.UserFacade;
 /***
  * 咨询师相关接口业务类
@@ -56,6 +59,8 @@ public class UserCenterController {
 	private ConsultantFacade consultantFacade;
 	@Resource
 	private UserFacade userFacade;
+	@Resource
+	private RecordFacade recordFacade;
 	/**
 	 * 根据咨询用户收藏的咨询师id获取咨询师列表
 	 * @param request
@@ -82,7 +87,7 @@ public class UserCenterController {
 		}
 	}
 	/**
-	 * 根据咨询用户收藏的咨询师id获取咨询师列表
+	 * 根据咨询用户咨询过的的咨询师id获取咨询师列表
 	 * @param request
 	 * @param response
 	 * @return
@@ -103,6 +108,22 @@ public class UserCenterController {
 			ResponseUtils.renderJsonText(response, res);
 		} catch(Exception e){
 			logger.error("得到用户咨询过的咨询师列表异常",e);
+		}
+	}
+	@PowerCheck(type=PowerCheckEnum.LOGIN)
+	@RequestMapping(value="consume_records.do")
+	public void consumeConsultantRecord(HttpServletRequest request,HttpServletResponse response) throws IOException{
+		logger.info("---用户咨询的消费记录页面----");
+		//重新从数据库查询一遍，防止刚登陆用户看不到咨询过的咨询师数据
+		UserInfo user=SessionUtil.getLoginUserToSession(request);
+		RecordQueryRequestDto rqrDto=new RecordQueryRequestDto();
+		rqrDto.setUserId(user.getId());
+		RecordQueryResponseDto resqrDto=recordFacade.query(rqrDto);
+		try{
+			String res=JsonUtil.getJsonByRecordQueryResponseDto(resqrDto);
+			ResponseUtils.renderJsonText(response, res);
+		} catch(Exception e){
+			logger.error("得到用户咨询消费记录列表异常",e);
 		}
 	}
 }

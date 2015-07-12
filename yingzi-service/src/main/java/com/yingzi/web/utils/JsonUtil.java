@@ -25,6 +25,8 @@ import com.yingzi.web.enums.AgeEnum;
 import com.yingzixiyin.api.dto.BaseResponseDto;
 import com.yingzixiyin.api.dto.ConsultantInfo;
 import com.yingzixiyin.api.dto.ConsultantQueryResponseDto;
+import com.yingzixiyin.api.dto.RecordInfo;
+import com.yingzixiyin.api.dto.RecordQueryResponseDto;
 import com.yingzixiyin.api.enums.ConsultTypeEnum;
 import com.yingzixiyin.api.enums.GenderTypeEnum;
 import com.yingzixiyin.api.enums.RangeTypeEnum;
@@ -36,12 +38,12 @@ import com.yingzixiyin.api.enums.YesOrNoEnum;
  *
  */
 public class JsonUtil {
-	public static String getJsonConsultant(ConsultantInfo cinfo,String ...ignoreFieldName)
+	public static String getJsonBySingleObject(Class clazz,Object cinfo,String ...ignoreFieldName)
 			throws IllegalArgumentException, IllegalAccessException, NoSuchMethodException, SecurityException, InvocationTargetException{
 		StringBuffer sb=new StringBuffer();
 		if(cinfo==null) return "";
 		sb.append("{");
-		Field fileds[]=  ConsultantInfo.class.getDeclaredFields();
+		Field fileds[]=  clazz.getDeclaredFields();
 		Set<String> fset=Sets.newHashSet();
 		for(String fname:ignoreFieldName){
 			fset.add(fname);
@@ -95,6 +97,7 @@ public class JsonUtil {
 	public static String getJsonByConsultantQueryResponseDto(
 			ConsultantQueryResponseDto resDto,String ...ignoreFieldName) throws NoSuchMethodException, SecurityException, InvocationTargetException {
 		StringBuffer sb=new StringBuffer();
+		sb.append("{");
 		sb.append("\"returnCode\":"+resDto.getReturnCode()+",");
 		sb.append("\"returnMessage\":\""+resDto.getReturnMessage()+"\",");
 		List<ConsultantInfo> list=resDto.getConsultantInfoList();
@@ -104,10 +107,10 @@ public class JsonUtil {
 			for(int i=0;i<list.size();i++){
 				try {
 					if(i<list.size()-1){
-							sb.append(getJsonConsultant(list.get(i), ignoreFieldName)+",");
+						sb.append(getJsonBySingleObject(ConsultantInfo.class, list.get(i), ignoreFieldName)+",");
 					}
 					else{
-						sb.append(getJsonConsultant(list.get(i), ignoreFieldName));
+						sb.append(getJsonBySingleObject(ConsultantInfo.class, list.get(i), ignoreFieldName));
 					}
 				} catch (IllegalArgumentException | IllegalAccessException e) {
 					// TODO Auto-generated catch block
@@ -132,6 +135,34 @@ public class JsonUtil {
 		StringBuffer sb=new StringBuffer();
 		sb.append("{\"returnCode\":"+brDto.getReturnCode()+",");
 		sb.append("\"returnMessage\":\""+brDto.getReturnMessage()+"\"}");
+		return sb.toString();
+	}
+	public static String getJsonByRecordQueryResponseDto(
+			RecordQueryResponseDto resqrDto,String ...ignoreFieldName) throws NoSuchMethodException, SecurityException, InvocationTargetException {
+		StringBuffer sb=new StringBuffer();
+		sb.append("{");
+		sb.append("\"returnCode\":"+resqrDto.getReturnCode()+",");
+		sb.append("\"returnMessage\":\""+resqrDto.getReturnMessage()+"\",");
+		List<RecordInfo> list=resqrDto.getRecordInfoList();
+		
+		if(null!=list&&list.size()>0){
+			sb.append("\"list\":[");
+			for(int i=0;i<list.size();i++){
+				try {
+					if(i<list.size()-1){
+						sb.append(getJsonBySingleObject(RecordInfo.class, list.get(i), ignoreFieldName)+",");
+					}
+					else{
+						sb.append(getJsonBySingleObject(RecordInfo.class, list.get(i), ignoreFieldName));
+					}
+				} catch (IllegalArgumentException | IllegalAccessException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			sb.append("]");
+		}
+		sb.append("}");
 		return sb.toString();
 	}
 }
