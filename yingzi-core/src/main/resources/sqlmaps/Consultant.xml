@@ -181,63 +181,63 @@
     </insert>
 
     <update id="update" parameterType="Consultant">
-        UPDATE   consultant
-        <trim   prefix="SET" suffixOverrides="," >
+        UPDATE consultant
+        <set>
             <if test="password != null">
-                password = #{password}
+                password = #{password},
             </if>
             <if test="phone != null">
-                phone = #{phone}
+                phone = #{phone},
             </if>
             <if test="email != null">
-                email = #{email}
+                email = #{email},
             </if>
             <if test="nickname != null">
-                nickname = #{nickname}
+                nickname = #{nickname},
             </if>
             <if test="name != null">
-                name = #{name}
+                name = #{name},
             </if>
             <if test="gender != null">
-                gender = #{gender}
+                gender = #{gender},
             </if>
             <if test="age != null">
-                age = #{age}
+                age = #{age},
             </if>
             <if test="address != null">
-                address = #{address}
+                address = #{address},
             </if>
             <if test="alipay != null">
-                alipay = #{alipay}
+                alipay = #{alipay},
             </if>
             <if test="professional != null">
-                professional = #{professional}
+                professional = #{professional},
             </if>
             <if test="background != null">
-                background = #{background}
+                background = #{background},
             </if>
             <if test="bookTime != null">
-                book_time = #{bookTime}
+                book_time = #{bookTime},
             </if>
             <if test="price != null">
-                price = #{price}
+                price = #{price},
             </if>
             <if test="introduce != null">
-                introduce = #{introduce}
+                introduce = #{introduce},
             </if>
             <if test="signature != null">
-                signature = #{signature}
+                signature = #{signature},
             </if>
             <if test="rangeType != null">
-                range_type = #{rangeType}
+                range_type = #{rangeType},
             </if>
             <if test="avatar != null">
-                avatar = #{avatar}
+                avatar = #{avatar},
             </if>
             <if test="status != null">
-                status = #{status}
+                status = #{status},
             </if>
-        </trim>
+        </set>
         WHERE
         id = #{id}
     </update>

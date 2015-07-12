@@ -3,6 +3,7 @@ package com.yingzixiyin.core.facade;
 import com.yingzixiyin.api.dto.BaseResponseDto;
 import com.yingzixiyin.api.dto.UserInfo;
 import com.yingzixiyin.api.dto.UserQueryRequestDto;
+import com.yingzixiyin.api.enums.YesOrNoEnum;
 import com.yingzixiyin.api.facade.UserFacade;
 import com.yingzixiyin.core.BaseTest;
 import org.junit.Test;
@@ -34,7 +35,9 @@ public class UserFacadeTest extends BaseTest {
     public void updateTest() {
         UserInfo info = new UserInfo();
         info.setId(1L);
-        info.setPhone("12312331234");
+        info.setPhone("13121435540");
+        info.setPassword("123456");
+        info.setIsBind(YesOrNoEnum.YES);
         BaseResponseDto responseDto =  userFacade.update(info);
         logger.info(responseDto.toString());
     }

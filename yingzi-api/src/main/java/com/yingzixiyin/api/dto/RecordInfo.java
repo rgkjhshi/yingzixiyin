@@ -93,10 +93,10 @@ public class RecordInfo implements Serializable {
                 "id=" + id +
                 ", userId=" + userId +
                 ", consultantId=" + consultantId +
-                ", isBind=" + (null == consultType ? null : consultType.getDesc()) +
-                ", isBind=" + (null == isPaid ? null : isPaid.getDesc()) +
-                ", isBind=" + (null == isReplied ? null : isReplied.getDesc()) +
-                ", isBind=" + (null == isCompleted ? null : isCompleted.getDesc()) +
+                ", consultType=" + (null == consultType ? null : consultType.getDesc()) +
+                ", isPaid=" + (null == isPaid ? null : isPaid.getDesc()) +
+                ", isReplied=" + (null == isReplied ? null : isReplied.getDesc()) +
+                ", isCompleted=" + (null == isCompleted ? null : isCompleted.getDesc()) +
                 ", createTime=" + createTime +
                 '}';
     }

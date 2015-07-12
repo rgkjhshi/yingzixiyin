@@ -1,0 +1,65 @@
+package com.yingzixiyin.core.facade;
+
+import com.yingzixiyin.api.dto.BaseResponseDto;
+import com.yingzixiyin.api.dto.RecordInfo;
+import com.yingzixiyin.api.dto.RecordQueryRequestDto;
+import com.yingzixiyin.api.dto.RecordQueryResponseDto;
+import com.yingzixiyin.api.enums.ConsultTypeEnum;
+import com.yingzixiyin.api.facade.RecordFacade;
+import com.yingzixiyin.core.BaseTest;
+import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.annotation.Resource;
+
+/**
+ * @author song.shi
+ * @date 2015-07-04
+ */
+
+public class RecordFacadeTest extends BaseTest {
+    private static final Logger logger = LoggerFactory.getLogger(RecordFacadeTest.class.getName());
+
+    @Resource
+    RecordFacade recordFacade;
+
+    @Test
+    public void addTest() {
+        RecordInfo info = new RecordInfo();
+        info.setUserId(1L);
+        info.setConsultantId(1L);
+        BaseResponseDto responseDto =  recordFacade.add(info);
+        logger.info(responseDto.toString());
+    }
+
+    @Test
+    public void updateTest() {
+        RecordInfo info = new RecordInfo();
+        info.setId(1L);
+        info.setConsultType(ConsultTypeEnum.OFF_LINE);
+        BaseResponseDto responseDto =  recordFacade.update(info);
+        logger.info(responseDto.toString());
+    }
+
+    @Test
+    public void queryOneTest() {
+        RecordQueryRequestDto requestDto = new RecordQueryRequestDto();
+        requestDto.setUserId(1L);
+        requestDto.setConsultantId(1L);
+        requestDto.setConsultType(ConsultTypeEnum.OFF_LINE);
+        RecordInfo info =  recordFacade.queryOne(requestDto);
+        logger.info("{}", info);
+    }
+
+    @Test
+    public void queryTest() {
+        RecordQueryRequestDto requestDto = new RecordQueryRequestDto();
+        requestDto.setUserId(1L);
+        requestDto.setConsultantId(1L);
+        requestDto.setConsultType(ConsultTypeEnum.OFF_LINE);
+        RecordQueryResponseDto responseDto =  recordFacade.query(requestDto);
+        logger.info("{}", responseDto);
+    }
+
+}
