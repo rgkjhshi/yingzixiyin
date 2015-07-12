@@ -39,7 +39,11 @@ import com.yingzixiyin.api.enums.GenderTypeEnum;
 import com.yingzixiyin.api.enums.RangeTypeEnum;
 import com.yingzixiyin.api.facade.ConsultantFacade;
 import com.yingzixiyin.api.facade.UserFacade;
-
+/***
+ * 咨询师相关接口业务类
+ * @author lkzlee
+ *
+ */
 @Controller
 @RequestMapping("/weixin")
 public class ConsultantController {
@@ -121,9 +125,14 @@ public class ConsultantController {
 //		logger.info("请求参数："+rcrDto);
 		ConsultantQueryResponseDto resDto=  consultantFacade.query(rcrDto); 
 //		logger.info("--条件筛选得到的咨询师列表为："+resDto.getConsultantInfoList());
-		String res=JsonUtil.getListObjectNode(resDto.getConsultantInfoList()).toString();
-		logger.info("---查询到的咨询师列表为："+res);
-		ResponseUtils.renderJsonText(response, res);
+		try{
+			String res=JsonUtil.getJsonByConsultantQueryResponseDto(resDto,"password","alipay");
+			logger.info("---查询到的咨询师列表为："+res);
+			ResponseUtils.renderJsonText(response, res);
+		}catch(Exception e){
+			logger.error("咨询师列表解析结果出错",e);
+		}
+	
 	}
 	/**
 	 * 根据咨询类型获取咨询师列表

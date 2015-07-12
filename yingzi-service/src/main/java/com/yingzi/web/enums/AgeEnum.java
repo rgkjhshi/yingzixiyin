@@ -4,23 +4,24 @@ public enum AgeEnum {
 	ONE(1,0,30,"30岁以下"),
 	TWO(2,31,50,"31-50岁"),
 	THREE(2,51,120,"51岁以上");
-	private Integer key;
+	private Integer value;
 	private Integer minAge;
 	private Integer maxAge;
 	private String desc;
 	
-	private AgeEnum(Integer key, Integer minAge, Integer maxAge, String desc) {
-		this.key = key;
+	private AgeEnum(Integer value, Integer minAge, Integer maxAge, String desc) {
+		this.value = value;
 		this.minAge = minAge;
 		this.maxAge = maxAge;
 		this.desc = desc;
 	}
-	public Integer getKey() {
-		return key;
+	public Integer getValue() {
+		return value;
 	}
-	public void setKey(Integer key) {
-		this.key = key;
+	public void setValue(Integer value) {
+		this.value = value;
 	}
+
 	public Integer getMinAge() {
 		return minAge;
 	}
@@ -39,9 +40,9 @@ public enum AgeEnum {
 	public void setDesc(String desc) {
 		this.desc = desc;
 	}
-	public static AgeEnum toEnum(int key){
+	public static AgeEnum toEnum(int code){
 		for(AgeEnum ageEnum:AgeEnum.values()){
-			if(key==ageEnum.getKey()){
+			if(code==ageEnum.getValue()){
 				return ageEnum;
 			}
 		}
