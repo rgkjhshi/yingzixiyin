@@ -130,7 +130,7 @@
         </profile>
     </profiles>
     <build>
-    	<finalName>yingzi-test</finalName>
+    	<finalName>weixin</finalName>
     	<plugins>
     		<plugin>
                 <groupId>org.apache.maven.plugins</groupId>

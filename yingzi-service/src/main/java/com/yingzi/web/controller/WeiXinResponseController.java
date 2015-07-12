@@ -33,21 +33,19 @@ public class WeiXinResponseController {
 	 * @param token
 	 * @throws IOException 
 	 */
-	@RequestMapping(value="/weixin/check_signature.do",method=RequestMethod.GET)
+	@RequestMapping(value="/signature/check_signature.do",method=RequestMethod.GET)
 	@ResponseBody
 	public String checkSignatrue(HttpServletRequest request,HttpServletResponse response,String signature,
 			String echostr,String timestamp,String nonce) throws IOException{
 		logger.info("--微信调用，传参：signature="+signature
 				+"|timestamp="+timestamp+"|nonce="+nonce+"|echostr="+echostr);
-		/*if(SignUtil.checkSignature(signature,timestamp,nonce)){
-			return echostr;
-		}*/
 		String token=WeiXinConstant.iniConfig.getProperty(WeiXinConstant.WX_TOKEN_KEY);
 		if(WeChat.checkSignature(token, signature, timestamp, nonce)){
 			return echostr;
 		}
 		return "";
 	}
+	
 	/***
 	 * 微信调用该接口，处理请求
 	 * @param timestamp
@@ -55,20 +53,12 @@ public class WeiXinResponseController {
 	 * @param token
 	 * @throws IOException 
 	 */
-	@RequestMapping(value="/weixin/request.do",method=RequestMethod.POST)
+	@RequestMapping(value="/signature/check_signature.do",method=RequestMethod.POST)
 	@ResponseBody
 	public void proccessRequest(HttpServletRequest request,HttpServletResponse response) throws IOException{
 		logger.info("--微信调用后台请求|request:"+request.getContextPath());
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		
-		String signature = request.getParameter("signature");
-		String timestamp = request.getParameter("timestamp");
-		String nonce = request.getParameter("nonce");
-		
-		PrintWriter out = response.getWriter();
-	
-		out.close();
-		out = null;
 	}
 }
