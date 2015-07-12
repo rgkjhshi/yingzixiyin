@@ -28,6 +28,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.gson.oauth.Oauth;
 import com.yingzi.web.enums.AgeEnum;
 import com.yingzi.web.utils.JsonUtil;
+import com.yingzi.web.utils.ResponseUtils;
 import com.yingzi.web.utils.SessionUtil;
 import com.yingzixiyin.api.dto.ConsultantInfo;
 import com.yingzixiyin.api.dto.ConsultantQueryRequestDto;
@@ -102,11 +103,10 @@ public class ConsultantController {
 	 * @throws IOException
 	 */
 	@RequestMapping(value="query_consultants.do")
-	@ResponseBody
-	public String queryConsultantsByCondition(HttpServletRequest request,HttpServletResponse response,Integer ctype,Integer gender,Integer age) throws IOException{
+	public void queryConsultantsByCondition(HttpServletRequest request,HttpServletResponse response,Integer ctype,Integer gender,Integer age) throws IOException{
 		logger.info("---用户调用条件筛选咨询师接口页面|ctype="+ctype+"|gender="+gender+"|age="+age);
 		if(!checkValidParams(ctype,gender,age)){
-			return "";
+			return ;
 		}
 		RangeTypeEnum consultantType=RangeTypeEnum.toEnum(ctype);
 		AgeEnum ageEnum=AgeEnum.toEnum(age);
@@ -123,7 +123,7 @@ public class ConsultantController {
 //		logger.info("--条件筛选得到的咨询师列表为："+resDto.getConsultantInfoList());
 		String res=JsonUtil.getListObjectNode(resDto.getConsultantInfoList()).toString();
 		logger.info("---查询到的咨询师列表为："+res);
-		return res;
+		ResponseUtils.renderJsonText(response, res);
 	}
 	/**
 	 * 根据咨询类型获取咨询师列表
