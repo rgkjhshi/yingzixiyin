@@ -126,4 +126,11 @@ public class UserCenterController {
 			logger.error("得到用户咨询消费记录列表异常",e);
 		}
 	}
+	@PowerCheck(type=PowerCheckEnum.LOGIN)
+	@RequestMapping(value="message_records.do")
+	public void messageRecord(HttpServletRequest request,HttpServletResponse response) throws IOException{
+		logger.info("---用户咨询的消费记录页面----");
+		//用户未读信息
+		
+	}
 }

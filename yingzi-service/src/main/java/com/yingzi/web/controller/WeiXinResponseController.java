@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gson.WeChat;
-import com.yingzi.web.constant.WeiXinConstant;
 
 
 @Controller
@@ -40,7 +39,7 @@ public class WeiXinResponseController {
 			String echostr,String timestamp,String nonce) throws IOException{
 		logger.info("--微信调用，传参：signature="+signature
 				+"|timestamp="+timestamp+"|nonce="+nonce+"|echostr="+echostr);
-		String token=WeiXinConstant.iniConfig.getProperty(WeiXinConstant.WX_TOKEN_KEY);
+		String token=WeChat.getToken();
 		if(WeChat.checkSignature(token, signature, timestamp, nonce)){
 			return echostr;
 		}

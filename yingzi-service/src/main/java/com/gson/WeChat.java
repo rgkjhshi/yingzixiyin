@@ -82,6 +82,18 @@ public class WeChat {
         Map<String, Object> map = JSONObject.parseObject(jsonStr);
         return map.get("access_token").toString();
     }
+    public static String getAppId(){
+    	 String appid = ConfKit.get("AppId");
+    	 return appid;
+    }
+    public static String getAppSercret(){
+    	 String secret = ConfKit.get("AppSecret");
+    	 return secret;
+    }
+    public static String getToken(){
+   	 String token = ConfKit.get("WxToken");
+   	 return token;
+   }
 
     /**
      * 获取access_token
