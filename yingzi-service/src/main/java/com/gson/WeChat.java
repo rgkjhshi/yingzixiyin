@@ -47,6 +47,14 @@ public class WeChat {
     private static final String UPLOAD_MEDIA_URL = "http://file.api.weixin.qq.com/cgi-bin/media/upload?access_token=";
     private static final String JSAPI_TICKET = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?type=jsapi&access_token=";
     private static Class<?> messageProcessingHandlerClazz = null;
+    static{
+    	try{
+    		messageProcessingHandlerClazz=Class.forName(ConfKit.get("MessageProcessingHandlerImpl"));
+    	}catch(Exception e){
+    		e.printStackTrace();
+    	}
+    }
+    
     /**
      * 消息操作接口
      */

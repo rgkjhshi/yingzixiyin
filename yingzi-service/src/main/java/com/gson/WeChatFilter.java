@@ -54,20 +54,18 @@ public class WeChatFilter implements Filter {
     }
 
     private void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String path = request.getServletPath();
-        String pathInfo = path.substring(path.lastIndexOf("/"));
-        String _token;
+        String _token=WeChat.getToken();
         String outPut = "error";
-        if (pathInfo != null) {
-            _token = pathInfo.substring(1);
-            String signature = request.getParameter("signature");// 微信加密签名
-            String timestamp = request.getParameter("timestamp");// 时间戳
-            String nonce = request.getParameter("nonce");// 随机数
-            String echostr = request.getParameter("echostr");//
-            // 验证
-            if (WeChat.checkSignature(_token, signature, timestamp, nonce)) {
-                outPut = echostr;
-            }
+       
+        String signature = request.getParameter("signature");// 微信加密签名
+        String timestamp = request.getParameter("timestamp");// 时间戳
+        String nonce = request.getParameter("nonce");// 随机数
+        String echostr = request.getParameter("echostr");//
+        LOGGER.info("[WeChat] 微信调用，传参：signature="+signature
+				+"|timestamp="+timestamp+"|nonce="+nonce+"|echostr="+echostr);
+        // 验证
+        if (WeChat.checkSignature(_token, signature, timestamp, nonce)) {
+            outPut = echostr;
         }
         response.getWriter().write(outPut);
     }

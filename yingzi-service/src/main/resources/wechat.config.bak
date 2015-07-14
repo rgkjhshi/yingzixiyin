@@ -1,4 +1,5 @@
-{
+公众号菜单
+ {
      "button":[
       {	
           "type":"click",
@@ -8,7 +9,7 @@
        {	
           "type":"view",
           "name":"服务中心",
-          "url":"http://open.weixin.qq.com/connect/oauth2/authorize?appid=wx46701bcc055a3dec&redirect_uri=http://lkzlee.imwork.net/yingzi-service/consultant/consultant_yingzi.do&response_type=code&scope=snsapi_base&state=DXFG#wechat_redirect"
+          "url":"http://open.weixin.qq.com/connect/oauth2/authorize?appid=wx9187b72329d7b103&redirect_uri=http://yingzixiyin.com/yingzi-test&response_type=code&scope=snsapi_base&state=wx#wechat_redirect"
       },
        {
            "name":"我的",
@@ -30,3 +31,7 @@
             }]
        }]
  }
+ 
+ --消息例子
+ 
+ <xml><ToUserName><![CDATA[gh_38dedf8a03f5]]></ToUserName><FromUserName><![CDATA[oY83Wjm2Mm_UOkm7sJaH4usyc_Kw]]></FromUserName><CreateTime>1420808908</CreateTime><MsgType><![CDATA[event]]></MsgType><Event><![CDATA[scancode_push]]></Event><EventKey><![CDATA[V1001_SCAN_CODE]]></EventKey><ScanCodeInfo><ScanType><![CDATA[barcode]]></ScanType><ScanResult><![CDATA[CODE_128,81499220024612257712]]></ScanResult></ScanCodeInfo></xml>

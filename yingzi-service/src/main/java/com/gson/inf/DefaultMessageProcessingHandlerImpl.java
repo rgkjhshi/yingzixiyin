@@ -5,6 +5,8 @@
  */
 package com.gson.inf;
 
+import org.apache.commons.lang.StringUtils;
+
 import com.gson.bean.InMessage;
 import com.gson.bean.OutMessage;
 import com.gson.bean.TextOutMessage;
@@ -16,7 +18,14 @@ public class DefaultMessageProcessingHandlerImpl implements MessageProcessingHan
 	@Override
 	public void allType(InMessage msg){
 		TextOutMessage out = new TextOutMessage();
-		out.setContent("亲，您的消息已经收到！");
+		String content=msg.getContent();
+		if(StringUtils.isEmpty(content)) return;
+		if(content.contains("好")||content.contains("棒")||content.contains("赞")){
+			out.setContent("谢谢亲，我们会继续努力！");
+		}
+		else{
+			out.setContent("亲，英姿吸引已经收到您的消息！");
+		}
 		setOutMessage(out);
 	}
 	

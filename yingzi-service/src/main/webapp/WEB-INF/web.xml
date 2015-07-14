@@ -34,7 +34,14 @@
         <filter-name>encodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-
+	<filter>
+		<filter-name>weixin</filter-name>
+		<filter-class>com.gson.WeChatFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>weixin</filter-name>
+		<url-pattern>/signature/check_signature.do</url-pattern>
+	</filter-mapping>
     <!-- spring mvc配置 -->
     <servlet>
         <servlet-name>web</servlet-name>
