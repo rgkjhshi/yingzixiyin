@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>yingzi-parent</artifactId>
+        <groupId>com.yingzixiyin</groupId>
+        <version>1.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>consultant</artifactId>
+    <packaging>war</packaging>
+
+
+    <dependencies>
+        <!-- 自己的jar包 -->
+        <dependency>
+            <groupId>com.yingzixiyin</groupId>
+            <artifactId>yingzi-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.yingzixiyin</groupId>
+            <artifactId>yingzi-core</artifactId>
+        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>cn.loveshisong</groupId>-->
+            <!--<artifactId>spring-jsonbody</artifactId>-->
+            <!--<version>1.0</version>-->
+        <!--</dependency>-->
+
+        <!-- spring-mvc -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+        </dependency>
+        <!-- servlet -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+        <!-- json spring4.1之后使用了这个包-->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.5.4</version>
+        </dependency>
+    </dependencies>
+
+    <!-- profiles -->
+    <properties>
+        <profiles.dir>src/profiles</profiles.dir>
+    </properties>
+
+    <profiles>
+        <profile>
+            <id>local</id>
+            <build>
+                <resources>
+                    <resource>
+                        <directory>${profiles.dir}/local</directory>
+                    </resource>
+                </resources>
+            </build>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+
+        <profile>
+            <id>prod</id>
+            <build>
+                <resources>
+                    <resource>
+                        <directory>${profiles.dir}/prod</directory>
+                    </resource>
+                </resources>
+            </build>
+        </profile>
+    </profiles>
+</project>

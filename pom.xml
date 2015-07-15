@@ -13,6 +13,7 @@
         <module>yingzi-core</module>
         <module>yingzi-api</module>
         <module>yingzi-service</module>
+        <module>consultant-web</module>
     </modules>
 
     <properties>
@@ -147,6 +148,7 @@
             <artifactId>logback-classic</artifactId>
         </dependency>
     </dependencies>
+
     <build>
         <pluginManagement>
             <plugins>
