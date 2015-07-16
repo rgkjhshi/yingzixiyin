@@ -8,9 +8,11 @@ public enum StatusEnum {
 
     INIT(0, "初始状态"),
 
-    ACCEPTED(1, "审核通过"),
+    APPLIED(1, "申请"),
 
-    REFUSED(2, "审核不通过");
+    ACCEPTED(2, "审核通过"),
+
+    REFUSED(3, "审核不通过");
 
     private Integer value;
 

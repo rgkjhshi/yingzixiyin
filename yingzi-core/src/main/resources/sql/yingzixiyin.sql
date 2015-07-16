@@ -41,7 +41,7 @@ CREATE TABLE `consultant` (
   `signature` varchar(255) NOT NULL DEFAULT '' COMMENT '个人签名',
   `avatar` varchar(255) NOT NULL DEFAULT '' COMMENT '头像url',
   `range_type` tinyint(4) NOT NULL DEFAULT 0 COMMENT '咨询师可咨询的范围类型',
-  `status` tinyint(4) NOT NULL DEFAULT 0 COMMENT '咨询师状态，0:初始状态, 1:审核通过, 2:审核不通过',
+  `status` tinyint(4) NOT NULL DEFAULT 0 COMMENT '咨询师状态，0:初始状态, 1:申请 2:审核通过, 3:审核不通过',
   PRIMARY KEY (`id`),
   KEY `idx_username` (username),
   KEY `idx_email` (email),
