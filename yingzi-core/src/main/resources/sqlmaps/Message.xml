@@ -8,13 +8,75 @@
             id                  AS id,
             record_id           AS recordId,
             message             AS message,
-            create_time         AS createTime
+            create_time         AS createTime,
+            is_read				AS isRead 
         FROM message
     </sql>
-
-    <select id="getMessageList" parameterType="Object" resultType="Message">
-        <include refid="base_select" />
-
+     <insert id="insert" parameterType="Message" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO message
+        (
+        <if test="recordId != null">
+            record_id
+        </if>
+        <if test="message != null">
+            ,message
+        </if>
+        <if test="createTime != null">
+            ,create_time
+        </if>
+        <if test="isRead != null">
+            ,is_read
+        </if>
+        )
+        values
+        (
+        <if test="recordId != null">
+            #{recordId}
+        </if>
+        <if test="message != null">
+            ,#{message}
+        </if>
+        <if test="createTime != null">
+            ,#{createTime}
+        </if>
+         <if test="isRead != null">
+            ,#{isRead}
+        </if>
+        )
+    </insert>
+ 	<update id="update" parameterType="Message">
+        UPDATE message
+        <set>
+            <if test="recordId != null">
+                 record_id = #{recordId},
+            </if>
+          	<if test="message != null">
+                 message = #{message},
+            </if>
+            <if test="createTime != null">
+                 create_time = #{createTime},
+            </if>
+        </set>
+        WHERE
+        id = #{id}
+    </update>
+  <select id="getMessageListByFilter" parameterType="map" resultType="Message">
+        <include refid="base_select"/>
+        <where>
+            <if test="id != null">
+                id = #{id}
+            </if>
+            <if test="recordId != null">
+                AND record_id = #{recordId}
+            </if>
+            <if test="message != null">
+                AND message = #{message}
+            </if>
+            <if test="createTime != null">
+                AND create_time = #{createTime}
+            </if>
+            
+        </where>
     </select>
 
 </mapper>

@@ -1,3 +1,8 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
+<%
+	String path=request.getContextPath();    
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,10 +15,10 @@
 <title>消息详情</title>
 <meta name="description" content="">
 <meta name="keywords" content="">
-<link rel="stylesheet" href="../../css/base.css">
-<link href="../../favicon.ico" rel="shortcut icon"></head>
-<script type="text/javascript" src="../../js/zepto.min.js"></script>
-<script type="text/javascript" src="../../js/touch.js"></script>
+<link rel="stylesheet" href="<%=path%>/css/base.css">
+<link href="<%=path%>/favicon.ico" rel="shortcut icon"></head>
+<script type="text/javascript" src="<%=path%>/js/zepto.min.js"></script>
+<script type="text/javascript" src="<%=path%>/js/touch.js"></script>
 <body>
     <div class="header">
     	<i></i>
@@ -73,6 +78,6 @@
             -->       	
         </div>
     </div>
-<script type="text/javascript" src="../../js/main_wechat.js"></script>
+<script type="text/javascript" src="<%=path%>/js/main_wechat.js"></script>
 </body>
 </html>

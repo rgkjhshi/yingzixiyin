@@ -1,8 +1,14 @@
 package com.yingzixiyin.core.entity;
 
 import org.apache.ibatis.type.Alias;
+import org.springframework.util.CollectionUtils;
+
+import com.google.common.collect.Lists;
+import com.yingzixiyin.api.dto.ConsultantInfo;
+import com.yingzixiyin.api.dto.MessageInfo;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * 聊天消息
@@ -58,4 +64,38 @@ public class Message {
     public void setIsRead(Integer isRead) {
         this.isRead = isRead;
     }
+
+	public static Message getBean(MessageInfo messageInfo) {
+		if (null == messageInfo) {
+            return null;
+        }
+		Message message=new Message();
+		message.setCreateTime(messageInfo.getCreateTime());
+		message.setId(messageInfo.getId());
+		message.setIsRead(messageInfo.getIsRead());
+		message.setMessage(messageInfo.getMessage());
+		message.setRecordId(messageInfo.getRecordId());
+		return message;
+	}
+
+	public static List<MessageInfo> translateBeanList(List<Message> messageList) {
+		 if (CollectionUtils.isEmpty(messageList)) {
+	            return null;
+	        }
+	        List<MessageInfo> messageInfoList = Lists.newArrayList();
+	        for (Message message : messageList) {
+	        	messageInfoList.add(translateBean(message));
+	        }
+	        return messageInfoList;
+	}
+
+	private static MessageInfo translateBean(Message message) {
+		MessageInfo msgInfo=new MessageInfo();
+		msgInfo.setCreateTime(message.getCreateTime());
+		msgInfo.setId(message.getId());
+		msgInfo.setIsRead(message.getIsRead());
+		msgInfo.setMessage(message.getMessage());
+		msgInfo.setRecordId(message.getRecordId());
+		return msgInfo;
+	}
 }

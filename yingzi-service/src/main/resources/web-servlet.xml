@@ -13,7 +13,7 @@
     <!-- Enables the Spring MVC @Controller programming model -->  
     <mvc:annotation-driven />  
       
-    <context:component-scan base-package="com.yingzi.web.controller" />  
+    <context:component-scan base-package="com.yingzi.web" />  
       
     <!-- Handles HTTP GET requests for /static/** by efficiently serving up static resources in the ${webappRoot}/static/ directory -->  
     <mvc:resources mapping="/static/**" location="/static/" />  

@@ -1,3 +1,8 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
+<%
+	String path=request.getContextPath();    
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,10 +15,10 @@
 <title>我的咨询师</title>
 <meta name="description" content="">
 <meta name="keywords" content="">
-<link rel="stylesheet" href="../../css/base.css">
-<link href="../../favicon.ico" rel="shortcut icon"></head>
-<script type="text/javascript" src="../../js/zepto.min.js"></script>
-<script type="text/javascript" src="../../js/touch.js"></script>
+<link rel="stylesheet" href="<%=path%>/css/base.css">
+<link href="<%=path%>/favicon.ico" rel="shortcut icon"></head>
+<script type="text/javascript" src="<%=path%>/js/zepto.min.js"></script>
+<script type="text/javascript" src="<%=path%>/js/touch.js"></script>
 <body>
     <div class="header">
         我的咨询师
@@ -23,7 +28,7 @@
     	<ul class="consultants">
     		<li class="record">
     			<a href="../service/detail.html">
-            		<img src="../../images/test.png" />
+            		<img src="<%=path%>/images/test.png" />
             		<div class="info">
             			<div class="name">张三</div>
             			<div class="desc">
@@ -34,7 +39,7 @@
     		</li>
     		<li class="record">
     			<a href="../service/detail.html">
-            		<img src="../../images/test.png" />
+            		<img src="<%=path%>/images/test.png" />
             		<div class="info">
             			<div class="name">张三</div>
             			<div class="desc">
@@ -45,7 +50,7 @@
     		</li>
     		<li class="record">
     			<a href="../service/detail.html">
-            		<img src="../../images/test.png" />
+            		<img src="<%=path%>/images/test.png" />
             		<div class="info">
             			<div class="name">张三</div>
             			<div class="desc">
@@ -60,7 +65,7 @@
     	<ul class="consultants">
     		<li class="record">
     			<a href="../service/detail.html">
-            		<img src="../../images/test.png" />
+            		<img src="<%=path%>/images/test.png" />
             		<div class="info">
             			<div class="name">张三</div>
             			<div class="desc">
@@ -71,7 +76,7 @@
     		</li>
     		<li class="record">
     			<a href="../service/detail.html">
-            		<img src="../../images/test.png" />
+            		<img src="<%=path%>/images/test.png" />
             		<div class="info">
             			<div class="name">张三</div>
             			<div class="desc">
@@ -82,7 +87,7 @@
     		</li>
     		<li class="record">
     			<a href="../service/detail.html">
-            		<img src="../../images/test.png" />
+            		<img src="<%=path%>/images/test.png" />
             		<div class="info">
             			<div class="name">张三</div>
             			<div class="desc">
@@ -93,7 +98,7 @@
     		</li>
     		<li class="record">
     			<a href="../service/detail.html">
-               		<img src="../../images/test.png" />
+               		<img src="<%=path%>/images/test.png" />
             		<div class="info">
             			<div class="name">张三</div>
             			<div class="desc">
@@ -104,6 +109,6 @@
     		</li>
     	</ul>    	
     </div>
-<script type="text/javascript" src="../../js/main_wechat.js"></script>
+<script type="text/javascript" src="<%=path%>/js/main_wechat.js"></script>
 </body>
 </html>

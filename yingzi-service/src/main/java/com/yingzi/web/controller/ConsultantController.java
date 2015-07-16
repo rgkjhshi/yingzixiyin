@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -27,6 +28,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.gson.oauth.Oauth;
 import com.yingzi.web.enums.AgeEnum;
+import com.yingzi.web.helper.WeixinOauthHelper;
 import com.yingzi.web.utils.JsonUtil;
 import com.yingzi.web.utils.ResponseUtils;
 import com.yingzi.web.utils.SessionUtil;
@@ -53,6 +55,8 @@ public class ConsultantController {
 	private ConsultantFacade consultantFacade;
 	@Resource
 	private UserFacade userFacade;
+	@Resource
+	private WeixinOauthHelper weixinOauthHelper;
 	/**
 	 * 根据咨询类型获取咨询师列表
 	 * @param request
@@ -164,31 +168,10 @@ public class ConsultantController {
 		if(StringUtils.isEmpty(code)){
 			return response_page;
 		}
-		
-		try {
-			Oauth oauth=new Oauth();
-			String token = oauth.getToken(code);
-			logger.info("----查询得到用户token="+token);
-			JsonNode node = JsonUtil.StringToJsonNode(token);
-			String openId = node.get("openid").asText();
-			//get openId
-			//do something
-			logger.info("----查询得到用户OpenId="+openId);
-			UserQueryRequestDto uqrDto=new UserQueryRequestDto();
-			uqrDto.setOpenId(openId);
-			UserInfo userInfo=userFacade.queryOne(uqrDto);
-			if(userInfo==null){
-				userInfo=new UserInfo();
-				userInfo.setOpenId(openId);
-				userFacade.add(userInfo);
-			}
-			SessionUtil.setLoginUserToSession(request, userInfo);
-			
-		} catch (Exception e) {
-			logger.error("调用consultant_yingzi.do异常", e);
+		boolean flag=weixinOauthHelper.oauthAndLogin(request, code);
+		if(!flag){
+			logger.error("---微信调转consultant_yingzi.do页面，认证失败");
 		}
-	   
-	
 		return response_page;
 	}
 	@RequestMapping(value="consultant_online.do")

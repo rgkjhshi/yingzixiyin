@@ -20,7 +20,7 @@ public class DefaultMessageProcessingHandlerImpl implements MessageProcessingHan
 		TextOutMessage out = new TextOutMessage();
 		String content=msg.getContent();
 		if(StringUtils.isEmpty(content)) return;
-		if(content.contains("好")||content.contains("棒")||content.contains("赞")){
+		if(content.contains("真好")||content.contains("真棒")||content.contains("赞")){
 			out.setContent("谢谢亲，我们会继续努力！");
 		}
 		else{
