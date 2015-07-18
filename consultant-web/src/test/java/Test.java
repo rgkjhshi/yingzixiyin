@@ -13,5 +13,7 @@ public class Test {
         Map<String ,Object> map = Maps.newHashMap();
         map.put("name", "test");
         map.put("date", new Date());
+
+        System.out.println("obj=" + null);
     }
 }

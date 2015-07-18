@@ -30,8 +30,8 @@ public class ConsultantServiceImpl implements ConsultantService {
 
     @Override
     public Integer insert(Consultant consultant) {
-        if (null == consultant || StringUtils.isEmpty(consultant.getUsername()) || StringUtils.isEmpty(consultant.getPassword())) {
-            logger.info("username和password不能为空");
+        if (null == consultant || StringUtils.isEmpty(consultant.getPhone()) || StringUtils.isEmpty(consultant.getPassword())) {
+            logger.info("phone和password不能为空");
             return null;
         }
         return consultantDao.insert(consultant);

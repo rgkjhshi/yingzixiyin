@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>个人信息-英姿吸引</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+        <meta name="viewport" content="widdiv=device-widdiv, initial-scale=1">
+        <meta name="keywords" content="">
+        <meta name="description" content="">
+        <link href="../images/favicon.ico" rel="shortcut icon">
+        <link href="../css/base.css" rel="stylesheet" type="text/css">
+        <script src="../js/jquery.js"></script>
+    </head>
+    <body>
+        <div class="header" role="navigation">
+            <div class="layout">
+                <img height="20" alt="Brand" src="../images/logo.png">
+                <ul class="signin">
+                    <li>
+                        <a href="signin.html">登录</a>
+                    </li>
+                    <li>
+                        <a href="signup.html">注册</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="info">
+            <div class="layout">
+            	<div class="leftnav">
+            		<ul class="leftitem">
+            			<a><li class="detail cur"><i>&nbsp;</i>个人信息</li></a>
+            			<a href="secure.html"><li class="secure"><i>&nbsp;</i>安全中心</li></a>
+            			<a href="message.html"><li class="message"><i>&nbsp;</i>消息管理</li></a>
+               		</ul>
+            	</div>
+            	<div class="maincontent">
+            		<div class="subtitle">完善个人信息</div>
+                    <div>
+                        <div class="sign_title">真实姓名：</div>
+                        <div class="sign_content"><input type="text" /></div>
+                    </div>
+                    <div>
+                        <div class="sign_title">性别：</div>
+                        <div class="sign_content">
+                            <label class="radio_la">
+                                <div id="male"><i></i></div><input class="gender" type="radio" name="gender" value="0" hidden="hidden" />男
+                            </label>
+                            <label class="radio_la">
+                                <div id="female"><i></i></div><input class="gender" type="radio" name="gender" value="1" hidden="hidden" />女
+                            </label>
+                        </div>
+                    </div>
+                    <script>
+                        $(".gender").on("click",function(){
+                            var v = $("input[name='gender']:checked").val();
+                            if(v==0){
+                                $("#male i").show();
+                                $("#female i").hide();
+                            }else{
+                                $("#male i").hide();
+                                $("#female i").show();
+                            }
+                        });
+                    </script>
+                    <div>
+                        <div class="sign_title">年龄：</div>
+                        <div class="sign_content"><input type="text" /></div>
+                    </div>
+                    <div>
+                        <div class="sign_title">E-mail：</div>
+                        <div class="sign_content"><input type="text" /></div>
+                    </div>
+                    <div>
+                        <div class="sign_title">手机号码：</div>
+                        <div class="sign_content"><input type="text" /></div>
+                    </div>
+                    <div>
+                        <div class="sign_title">支付宝账号：</div>
+                        <div class="sign_content"><input type="text" /></div>
+                    </div>
+                    <div>
+                        <div class="sign_title">专业背景：</div>
+                        <div class="sign_content"><textarea class="form_border"></textarea></div>
+                    </div>
+                    <div>
+                        <div class="sign_title">受训背景：</div>
+                        <div class="sign_content"><textarea class="form_border"></textarea></div>
+                    </div>
+                    <div>
+                        <div class="sign_title">咨询范围：</div>
+                        <div class="sign_content">
+                            <select>
+                                <option>婚姻咨询</option>
+                                <option>情感咨询</option>
+                                <option>心理咨询</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="sign_title">咨询单价：</div>
+                        <div class="sign_content"><input type="text" /></div>
+                    </div>
+                    <div>
+                        <div class="sign_title">可预约时间：</div>
+                        <div class="sign_content"><textarea class="form_border"></textarea></div>
+                    </div>
+                    <div>
+                        <div class="sign_title">个人简介：</div>
+                        <div class="sign_content"><textarea class="form_border"></textarea></div>
+                    </div>
+                    <div>
+                        <div class="sign_title">上传头像：</div>
+                        <div class="sign_content"><input type="file" /></div>
+                    </div>
+                    <div class="btn">保存</div>
+            	</div>
+            </div>
+        </div>
+        <div class="copyright">
+            <div class="layout">
+                <p>Copyright © 2015 英姿吸引
+                    <a style="margin-left:10px;" href="http://www.miitbeian.gov.cn/" target="_blank">京ICP备 15035175号－1</a>
+                </p>
+            </div>
+        </div>
+    </body>
+
+</html>

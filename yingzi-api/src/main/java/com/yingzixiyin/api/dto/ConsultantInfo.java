@@ -16,10 +16,9 @@ public class ConsultantInfo implements Serializable {
     private static final long serialVersionUID = -5554209037777700465L;
 
     private Long id;               // 主键id
-    private String username;       // 用户名
-    private String password;       // 密码
     private String phone;          // 电话
     private String email;          // 邮箱
+    private String password;       // 密码
     private String alipay;         // 支付宝
     private String nickname;       // 昵称
     private String name;           // 姓名
@@ -42,14 +41,6 @@ public class ConsultantInfo implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getPassword() {
@@ -200,7 +191,6 @@ public class ConsultantInfo implements Serializable {
     public String toString() {
         return "ConsultantInfo{" +
                 "id=" + id +
-                ", username='" + username + '\'' +
                 ", phone='" + phone + '\'' +
                 ", email='" + email + '\'' +
                 ", alipay='" + alipay + '\'' +

@@ -40,7 +40,7 @@
             <artifactId>javax.servlet-api</artifactId>
             <version>3.1.0</version>
         </dependency>
-        <!-- json spring4.1之后使用了这个包-->
+        <!-- json2 spring4.1之后使用了json2-->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>

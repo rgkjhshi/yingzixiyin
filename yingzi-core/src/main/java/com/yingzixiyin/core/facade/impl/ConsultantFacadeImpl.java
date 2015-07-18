@@ -31,7 +31,7 @@ public class ConsultantFacadeImpl implements ConsultantFacade {
         BaseResponseDto responseDto = new BaseResponseDto();
         try {
             ParameterUtils.notNull(consultantInfo, "consultantInfo不能为null");
-            ParameterUtils.notNull(consultantInfo.getUsername(), "username不能为null");
+            ParameterUtils.notNull(consultantInfo.getPhone(), "phone不能为null");
             ParameterUtils.notNull(consultantInfo.getPassword(), "password不能为null");
             consultantBiz.add(consultantInfo);
             responseDto.setReturnCode(0);

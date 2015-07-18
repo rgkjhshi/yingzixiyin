@@ -28,7 +28,7 @@ public class ConsultantFacadeTest extends BaseTest {
     @Test
     public void addTest() {
         ConsultantInfo info = new ConsultantInfo();
-        info.setUsername("asdf");
+        info.setPhone("13121435540");
         info.setPassword("123123");
         info.setAge(25);
         BaseResponseDto responseDto =  consultantFacade.add(info);

@@ -18,7 +18,12 @@
             <groupId>com.yingzixiyin</groupId>
             <artifactId>yingzi-api</artifactId>
         </dependency>
-
+        <!-- 发短信 -->
+        <dependency>
+            <groupId>com.cloopen</groupId>
+            <artifactId>ccpsdk</artifactId>
+            <version>2.7</version>
+        </dependency>
         <!-- 工具类 -->
         <!-- guava -->
         <dependency>

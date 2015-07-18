@@ -22,10 +22,9 @@ import java.util.List;
 public class Consultant {
 
     private Long id;               // 主键id
-    private String username;       // 用户名
-    private String password;       // 密码
     private String phone;          // 电话
     private String email;          // 邮箱
+    private String password;       // 密码
     private String nickname;       // 昵称
     private String name;           // 姓名
     private Integer gender;        // 性别
@@ -48,7 +47,6 @@ public class Consultant {
         }
         Consultant consultant = new Consultant();
         consultant.setId(info.getId());
-        consultant.setUsername(info.getUsername());
         consultant.setPassword(info.getPassword());
         consultant.setPhone(info.getPhone());
         consultant.setEmail(info.getEmail());
@@ -76,7 +74,6 @@ public class Consultant {
         }
         Consultant consultant = new Consultant();
         consultant.setId(requestDto.getId());
-        consultant.setUsername(requestDto.getUsername());
         consultant.setPassword(requestDto.getPassword());
         consultant.setPhone(requestDto.getPhone());
         consultant.setEmail(requestDto.getEmail());
@@ -98,7 +95,6 @@ public class Consultant {
         }
         ConsultantInfo consultantInfo = new ConsultantInfo();
         consultantInfo.setId(consultant.getId());
-        consultantInfo.setUsername(consultant.getUsername());
         consultantInfo.setPhone(consultant.getPhone());
         consultantInfo.setEmail(consultant.getEmail());
         consultantInfo.setNickname(consultant.getNickname());
@@ -140,14 +136,6 @@ public class Consultant {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getPassword() {

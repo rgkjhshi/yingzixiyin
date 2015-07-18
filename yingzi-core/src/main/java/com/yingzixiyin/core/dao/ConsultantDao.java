@@ -29,7 +29,7 @@ public interface ConsultantDao {
 
     /**
      * 单个查询，确保查询条件能够得到唯一结果
-     * @param consultant , 可填字段: id, username, password, phone, email, gender, rangeType, status
+     * @param consultant , 可填字段: id, phone, email, password, gender, rangeType, status
      * @return 符合条件的 Consultant
      */
     public Consultant getConsultant(Consultant consultant);

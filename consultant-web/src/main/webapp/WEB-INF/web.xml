@@ -11,7 +11,7 @@
         <param-value>classpath*:spring/spring.xml</param-value>
     </context-param>
 
-    <!-- 过滤编码 -->
+    <!-- 编码过滤 -->
     <filter>
         <filter-name>Spring character encoding filter</filter-name>
         <filter-class> org.springframework.web.filter.CharacterEncodingFilter </filter-class>
@@ -20,10 +20,19 @@
             <param-value>utf-8</param-value>
         </init-param>
     </filter>
+    <!-- 登陆过滤 -->
+    <filter>
+        <filter-name>loginFilter</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
 
     <filter-mapping>
         <filter-name>Spring character encoding filter</filter-name>
         <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>loginFilter</filter-name>
+        <url-pattern>/admin/*</url-pattern>
     </filter-mapping>
 
     <listener>

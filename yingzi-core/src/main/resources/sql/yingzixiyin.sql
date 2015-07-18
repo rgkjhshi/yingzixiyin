@@ -23,10 +23,9 @@ CREATE TABLE `admin` (
 
 CREATE TABLE `consultant` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键id',
-  `username` varchar(50) NOT NULL COMMENT '用户名',
-  `password` varchar(20) NOT NULL DEFAULT '123456' COMMENT '密码',
   `phone` varchar(20) NOT NULL DEFAULT '' COMMENT '电话号码',
   `email` varchar(20) NOT NULL DEFAULT '' COMMENT '邮箱',
+  `password` varchar(20) NOT NULL DEFAULT '123456' COMMENT '密码',
   `alipay` varchar(100) NOT NULL DEFAULT '' COMMENT '支付宝账号',
   `nickname` varchar(50) NOT NULL DEFAULT '' COMMENT '昵称',
   `name` varchar(10) NOT NULL DEFAULT '' COMMENT '姓名',
@@ -43,9 +42,8 @@ CREATE TABLE `consultant` (
   `range_type` tinyint(4) NOT NULL DEFAULT 0 COMMENT '咨询师可咨询的范围类型',
   `status` tinyint(4) NOT NULL DEFAULT 0 COMMENT '咨询师状态，0:初始状态, 1:申请 2:审核通过, 3:审核不通过',
   PRIMARY KEY (`id`),
-  KEY `idx_username` (username),
-  KEY `idx_email` (email),
-  KEY `idx_phone` (phone)
+  UNIQUE KEY `idx_phone` (phone),
+  UNIQUE KEY `idx_email` (email)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='咨询师信息';
 
 CREATE TABLE `record` (
