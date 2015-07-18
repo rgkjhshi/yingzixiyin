@@ -73,7 +73,7 @@ CREATE TABLE `message` (
 CREATE TABLE `code` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键id',
   `phone` varchar(20) NOT NULL DEFAULT '' COMMENT '电话号码',
-  `code` varchar(20) NOT NULL DEFAULT '123456' COMMENT '密码',
+  `code` varchar(20) NOT NULL DEFAULT '' COMMENT '验证码',
   `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `idx_phone` (phone)

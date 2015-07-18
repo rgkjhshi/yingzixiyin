@@ -52,7 +52,7 @@
     </insert>
 
     <update id="update" parameterType="Code">
-        UPDATE   record
+        UPDATE   code
         <set>
             <if test="code != null">
                 code = #{code},

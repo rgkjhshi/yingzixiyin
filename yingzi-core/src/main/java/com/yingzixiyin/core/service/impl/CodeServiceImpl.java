@@ -25,7 +25,7 @@ import java.util.Random;
 public class CodeServiceImpl implements CodeService {
     private static final Logger logger = LoggerFactory.getLogger(CodeServiceImpl.class.getName());
 
-    public static final Long INTERVAL = 2L;              // 发送短信的最短间隔, 单位min
+    public static final Long INTERVAL = 5L;              // 发送短信的最短间隔, 单位min
     public static final String TEMPLATE_ID = "1";                    // 发送短信的模板, 1: 测试模板
     public static final String HOST_NAME = "sandboxapp.cloopen.com"; // 服务器地址,不需要写https://
     public static final String PORT = "8883";                        // 服务器端口号
@@ -163,7 +163,7 @@ public class CodeServiceImpl implements CodeService {
             responseDto.setReturnMessage(result.get("statusMsg").toString());
             logger.info("发送短信失败,错误码={},错误信息={}", result.get("statusCode"), result.get("statusMsg"));
         }
-        return null;
+        return responseDto;
     }
 
     private String generateRandomCode() {
