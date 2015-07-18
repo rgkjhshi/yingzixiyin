@@ -61,7 +61,9 @@ public class ConsultantController {
                                  @RequestParam(value = "phone", required = true) String checkCode,
                                  @RequestParam(value = "password", required = true) String password) {
         logger.info("registerApi.htm");
-        // 查询
+        //查询验证码
+
+        // 查询用户名和密码
 //        ConsultantQueryRequestDto queryRequestDto = new ConsultantQueryRequestDto();
 //        queryRequestDto.setPhone(phone);
 //        queryRequestDto.setPassword(password);
