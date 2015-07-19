@@ -28,8 +28,14 @@
         <div class="wrap">
             <div class="layout">
                 <div class="signupcontent">
+                    <div class="regist_tab">
+                        <ul>
+                            <li class="cur"><span>手机注册</span></a></li>
+                            <a href="signin.html"><li><span>立即登录</span></li></a>
+                        </ul>
+                        <p class="cur_up"></p>
+                    </div>
                     <fieldset>
-                        <legend class="step">&gt;&gt; 注册账号，加入我们</legend>
                         <div>
                             <div class="sign_title">手机号码：<span class="redstar">*</span></div>
                             <div class="sign_content">
@@ -48,8 +54,8 @@
                         <div>
                             <div class="sign_title">密码：<span class="redstar">*</span></div>
                             <div class="sign_content">
-                                <input type="password" data-validate="notnull" data-tip="密码" id="pwd" />
-                                <span class="tips"></span>
+                                <input type="password" data-validate="pwd" data-tip="密码" id="pwd" />
+                                <span class="tips">请输入6-12位包含数字、字母或下划线的密码</span>
                             </div>
                         </div>
                         <div>

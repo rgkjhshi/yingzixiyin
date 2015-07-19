@@ -88,12 +88,11 @@ textarea {
 fieldset {
 	border:1px solid #ddd;
 	padding:50px;
+	padding-right: 0;
 	box-sizing: border-box;
-	margin: 30px 0;
+	margin:0 0 30px 0;
 	background: #fcfcfc;
 	position: relative;
-	border-radius: 6px;
-	box-shadow: 0 2px 2px 10px #ccc;
 }
 fieldset div {
 	margin:5px 0;
@@ -102,6 +101,50 @@ fieldset div {
 	color:#a94442;
 	font-weight: bold;
 	font-size: 1.5em;
+}
+.regist_tab{
+	position: relative;
+	height: 53px;
+	margin: 0;
+}
+.regist_tab ul{
+	overflow: hidden;
+	padding: 15px 0;
+	border: 1px solid #e5e5e5;
+	background:#fff;
+	margin-top: 60px;
+}
+.regist_tab li{
+	float: left;
+	display: block;
+	width: 50%;
+	height: 18px;
+	overflow: hidden;
+	margin-left: -1px;
+	padding: 2px 0;
+	border-left: 1px solid #e5e5e5;
+	font-family: "Microsoft YaHei";
+	font-size: 16px;
+	font-weight: bold;
+	color: #777;
+	line-height: 18px;
+	text-align: center;
+	cursor: pointer;
+}
+.regist_tab li.cur{
+	color:#444;
+}
+.regist_tab .cur_in,.regist_tab .cur_up {
+	position: absolute;
+	left: 0;
+	bottom: -1px;
+	width: 50%;
+	height: 3px;
+	font-size: 0;
+	background: #e53b3b;
+}
+.regist_tab .cur_in{
+	left:50%;
 }
 .signin {
 	float: right;
@@ -210,7 +253,7 @@ fieldset div {
 	line-height:1.5em;
 }
 .redlink {
-	color: #d9534f;
+	color: #e53b3b;
 	font-weight: bold;
 	display: inline-block;
 	margin: 0 5px;

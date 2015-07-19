@@ -32,7 +32,7 @@
             			<a><li class="detail cur"><i>&nbsp;</i>个人信息</li></a>
                         <ul class="infomation">
                             <a><li class="active">基本信息</li></a>
-                            <a href="photo.html"><li>头像管理</li></a>
+                            <a href="avatar.html"><li>头像管理</li></a>
                         </ul>
             			<a href="secure.html"><li class="secure"><i>&nbsp;</i>安全中心</li></a>
             			<a href="message.html"><li class="message"><i>&nbsp;</i>消息管理</li></a>
@@ -48,103 +48,129 @@
                             </div>
                         </div>
                     </div>
-                    <div>
-                        <div class="sign_title">真实姓名：</div>
-                        <div class="sign_content">
-                            <input type="text" data-validate="notnull" data-tip="真实姓名" id="realname" />
-                            <span class="tips"></span>
+                    <form id="infoform">
+                        <div>
+                            <div class="sign_title">昵称：</div>
+                            <div class="sign_content">
+                                <input type="text" data-validate="notnull" data-tip="昵称" name="nickname" id="nickname" />
+                                <span class="tips"></span>
+                            </div>
                         </div>
-                    </div>
-                    <div>
-                        <div class="sign_title">性别：</div>
-                        <div class="sign_content">
-                            <label class="radio_la">
-                                <div id="male"><i></i></div><input class="gender" type="radio" name="gender" value="0" hidden="hidden" />男
-                            </label>
-                            <label class="radio_la">
-                                <div id="female"><i></i></div><input class="gender" type="radio" name="gender" value="1" hidden="hidden" />女
-                            </label>
+                        <div>
+                            <div class="sign_title">真实姓名：</div>
+                            <div class="sign_content">
+                                <input type="text" data-validate="notnull" data-tip="真实姓名" name="name" id="name" />
+                                <span class="tips"></span>
+                            </div>
                         </div>
-                    </div>
-                    <script>
-                        $(".gender").on("click",function(){
-                            var v = $("input[name='gender']:checked").val();
-                            if(v==0){
-                                $("#male i").show();
-                                $("#female i").hide();
-                            }else{
-                                $("#male i").hide();
-                                $("#female i").show();
-                            }
-                        });
-                    </script>
-                    <div>
-                        <div class="sign_title">年龄：</div>
-                        <div class="sign_content">
-                            <input type="text" data-validate="number" data-tip="年龄" id="age"  />
-                            <span class="tips"></span>
+                        <div>
+                            <div class="sign_title">性别：</div>
+                            <div class="sign_content">
+                                <label class="radio_la">
+                                    <div id="male"><i></i></div>
+                                    <input class="gender" type="radio" name="gender" value="1" hidden="hidden" />男
+                                </label>
+                                <label class="radio_la">
+                                    <div id="female"><i></i></div>
+                                    <input class="gender" type="radio" name="gender" value="2" hidden="hidden" />女
+                                </label>
+                                <span class="tips gender_tips"></span>
+                            </div>
                         </div>
-                    </div>
-                    <div>
-                        <div class="sign_title">E-mail：</div>
-                        <div class="sign_content">
-                            <input id="email" type="text" data-validate="email" data-tip="Email" />
-                            <span class="tips"></span>
+                        <script>
+                            $(".gender").on("click",function(){
+                                var v = $("input[name='gender']:checked").val();
+                                if(v==1){
+                                    $("#male i").show();
+                                    $("#female i").hide();
+                                }else{
+                                    $("#male i").hide();
+                                    $("#female i").show();
+                                }
+                            });
+                        </script>
+                        <div>
+                            <div class="sign_title">年龄：</div>
+                            <div class="sign_content">
+                                <input type="text" data-validate="number" data-tip="年龄" name="age" id="age"  />
+                                <span class="tips"></span>
+                            </div>
                         </div>
-                    </div>
-                    <div>
-                        <div class="sign_title">支付宝账号：</div>
-                        <div class="sign_content">
-                            <input type="text" data-validate="notnull" data-tip="支付宝账号" id="alipay"  />
-                            <span class="tips"></span>
+                        <div>
+                            <div class="sign_title">E-mail：</div>
+                            <div class="sign_content">
+                                <input id="email" name="email" type="text" data-validate="email" data-tip="Email" />
+                                <span class="tips"></span>
+                            </div>
                         </div>
-                    </div>
-                    <div>
-                        <div class="sign_title">专业背景：</div>
-                        <div class="sign_content">
-                            <textarea class="form_border"></textarea>
-                            <span class="tips"></span>
+                        <div>
+                            <div class="sign_title">支付宝账号：</div>
+                            <div class="sign_content">
+                                <input type="text" name="alipay" data-validate="notnull" data-tip="支付宝账号" id="alipay" />
+                                <span class="tips"></span>
+                            </div>
                         </div>
-                    </div>
-                    <div>
-                        <div class="sign_title">受训背景：</div>
-                        <div class="sign_content">
-                            <textarea class="form_border"></textarea>
-                            <span class="tips"></span>
+                        <div>
+                            <div class="sign_title">专业背景：</div>
+                            <div class="sign_content">
+                                <textarea class="form_border" name="professional" data-validate="notnull" data-tip="专业背景" id="professional"></textarea>
+                                <span class="tips"></span>
+                            </div>
                         </div>
-                    </div>
-                    <div>
-                        <div class="sign_title">咨询范围：</div>
-                        <div class="sign_content">
-                            <select>
-                                <option>婚姻咨询</option>
-                                <option>情感咨询</option>
-                                <option>心理咨询</option>
-                            </select>
+                        <div>
+                            <div class="sign_title">受训背景：</div>
+                            <div class="sign_content">
+                                <textarea class="form_border" name="background" data-validate="notnull" data-tip="受训背景" id="background"></textarea>
+                                <span class="tips"></span>
+                            </div>
                         </div>
-                    </div>
-                    <div>
-                        <div class="sign_title">咨询单价：</div>
-                        <div class="sign_content">
-                            <input id="price" type="text" data-validate="number" data-tip="咨询单价" />
-                            <span class="tips"></span>
+                        <div>
+                            <div class="sign_title">咨询范围：</div>
+                            <div class="sign_content">
+                                <select name="range_type">
+                                    <option value="0">婚姻咨询</option>
+                                    <option value="1">情感咨询</option>
+                                    <option value="2">心理咨询</option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <div>
-                        <div class="sign_title">可预约时间：</div>
-                        <div class="sign_content">
-                            <textarea class="form_border"></textarea>
-                            <span class="tips"></span>
+                        <div>
+                            <div class="sign_title">咨询单价：</div>
+                            <div class="sign_content">
+                                <input id="price" name="price" type="text" data-validate="number" data-tip="咨询单价" />
+                                <span class="tips"></span>
+                            </div>
                         </div>
-                    </div>
-                    <div>
-                        <div class="sign_title">个人简介：</div>
-                        <div class="sign_content">
-                            <textarea class="form_border"></textarea>
-                            <span class="tips"></span>
+                        <div>
+                            <div class="sign_title">可预约时间：</div>
+                            <div class="sign_content">
+                                <textarea class="form_border" name="book_time" data-validate="notnull" data-tip="可预约时间" id="book_time"></textarea>
+                                <span class="tips"></span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="btn">保存</div>
+                        <div>
+                            <div class="sign_title">地址：</div>
+                            <div class="sign_content">
+                                <textarea class="form_border" name="address" data-validate="notnull" data-tip="地址" id="address"></textarea>
+                                <span class="tips"></span>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="sign_title">个人简介：</div>
+                            <div class="sign_content">
+                                <textarea class="form_border" name="introduce" data-validate="notnull" data-tip="个人简介" id="introduce"></textarea>
+                                <span class="tips"></span>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="sign_title">个性签名：</div>
+                            <div class="sign_content">
+                                <textarea class="form_border" name="signature" data-validate="notnull" data-tip="个性签名" id="signature"></textarea>
+                                <span class="tips"></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="btn" id="moreinfo">保存</div>
             	</div>
             </div>
         </div>

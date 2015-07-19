@@ -7,16 +7,18 @@
 (function(){
 	
 	// 格式验证
-	var check = function(name,vid,tip){
-		var tip = tip||"";
+	var check = function(vid){//传入id和默认的提示
+		var tip = $("#"+vid).attr("data-tip")||"";
+		var name = $("#"+vid).attr("data-validate")||"default";
 		var type = {
 			"tel":[/^1\d{10}$/,"请输入正确的"+tip],
-			// "pwd":[/\S+/,"密码不能为空"], 待修改
+			"pwd":[/^[\d_a-zA-Z]{6,12}$/,"请输入6-12位包含数字、字母或下划线的密码"],
 			"notnull":[/\S+/,tip+"不能为空"],
 			"email":[/^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$/,tip+"格式不正确"],
-			"number":[/^\d+(\.\d+)?$/,"请输入正确的"+tip]
+			"number":[/^\d+(\.\d+)?$/,"请输入正确的"+tip],
+			"default":[/\S+/,"不能为空"]
 		}
-		if(name=="pwd2"){
+		if(vid=="pwd2"){
 			var pwd2 = $("#pwd2").val();
 			var pwd = $("#pwd").val();
 			if(pwd2 != pwd){
@@ -40,12 +42,10 @@
 		}	
 	}
 
-	$(".sign_content input")
+	$(".sign_content input,.sign_content textarea")
 		.on("blur",function(){
-			var name = $(this).attr("data-validate");
 			var vid = $(this).attr("id");
-			var tip = $(this).attr("data-tip");
-			check(name,vid,tip);
+			check(vid);
 		})
 		.on("focus",function(){
 			$(this).siblings(".tips").text("");
@@ -56,15 +56,15 @@
 
 	// 短信验证码获取
 	var getCode = function(){
-		var phone_num = $.trim($("#phone_num").val());
-		var tip = $("#phone_num").attr("data-tip");
-		var name = $("#phone_num").attr("data-validate");
+		var phone = $.trim($("#phone").val());
+		var tip = $("#phone").attr("data-tip");
+		var name = $("#phone").attr("data-validate");
 		// 验证手机号码合法性
-		if(!check(name,"phone_num",tip)){
+		if(!check("phone")){
 			return;
 		}
 
-		$("#phone_num").attr("disabled","disabled");
+		$("#phone").attr("disabled","disabled");
 		$("#sms_btn").html("<span id='count'>60</span> 秒后重新获取").unbind("click");
 
 		// 倒计时
@@ -81,9 +81,8 @@
 
 		// 请求验证码
 		// url:接口地址
-		// "phone_num":改为接口中的参数名
 
-		// $.post(url,{"phone_num":phone_num},function(){});
+		// $.post(url,{"phone":phone},function(){});
 	};
 
 	$("#sms_btn").on("click",getCode);
@@ -102,12 +101,12 @@
 		*/
 
 		//检查其他数据格式
-		if(check("tel","phone_num","手机号码")&&check("notnull","sms_code","验证码")&&check("notnull","pwd","密码")&&check("pwd2","pwd2")){
+		if(check("phone")&&check("sms_code")&&check("pwd")&&check("pwd2")){
 			//提交数据
-			var phone_num = $.trim($("#phone_num").val());
+			var phone = $.trim($("#phone").val());
 			var pwd = $.trim($("#pwd").val());
 			/*
-			$.post(url,{"phone_num":phone_num,"pwd",pwd},function(data){
+			$.post(url,{"phone":phone,"password",pwd},function(data){
 				if(!data.status){
 					alert(data.errorCode);//输出错误原因
 				}else{
@@ -126,12 +125,12 @@
 	var signin = function(){
 
 		//检查数据
-		if(check("tel","phone_num","手机号码")&&check("notnull","pwd","密码")){
+		if(check("phone")&&check("pwd")){
 			//提交数据
-			var phone_num = $.trim($("#phone_num").val());
+			var phone = $.trim($("#phone").val());
 			var pwd = $.trim($("#pwd").val());
 			/*
-			$.post(url,{"phone_num":phone_num,"pwd",pwd},function(data){
+			$.post(url,{"phone":phone,"pwd",pwd},function(data){
 				if(!data.status){
 					alert(data.errorCode);//输出错误原因
 				}else{
@@ -140,8 +139,43 @@
 			});
 			*/
 		}
-	}
+	};
 
 	$("#signin").on("click",signin);
+
+
+	//完善个人信息
+	var moreinfo = function(){
+		var gender = $("input[name=gender]:checked").val();
+		if(!gender){
+			$(".gender_tips").text("请选择您的性别");
+			return;
+		}
+		//检查数据
+		if(check("nickname")&&check("name")&&check("age")&&check("email")&&check("alipay")&&check("professional")&&check("background")&&check("price")&&check("book_time")&&check("address")&&check("introduce")&&check("signature")){
+			
+			//格式化数据
+			var _data = decodeURIComponent("{'"+$("#infoform").serialize()+"'}");
+			//将form serialize格式转换为json
+			var reg1 = new RegExp("=","g");
+			var reg2 = new RegExp("&","g"); 
+			var _newdata=_data.replace(reg1,"':'").replace(reg2,"','");  
+
+			//提交数据
+			/*
+			$.post(url,_newdata,function(data){
+				if(!data.status){
+					alert(data.errorCode);//输出错误原因
+				}else{
+					alert("个人资料提交成功，请耐心等待审核！");
+					window.location.href="admin/info.html";//刷新页面
+					//锁定个人信息，审核完成之前不允许修改，待完成
+				}
+			});
+			*/
+		}
+	};
+
+	$("#moreinfo").on("click",moreinfo);
 
 })();
