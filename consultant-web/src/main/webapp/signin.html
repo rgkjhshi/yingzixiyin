@@ -4,12 +4,12 @@
         <meta charset="utf-8">
         <title>咨询师登录-英姿吸引</title>
         <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-        <meta name="viewport" content="widdiv=device-widdiv, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="keywords" content="">
         <meta name="description" content="">
         <link href="images/favicon.ico" rel="shortcut icon">
         <link href="css/base.css" rel="stylesheet" type="text/css">
-        <script src="js/jquery.js"></script>
+        <script src="js/jquery-1.9.1.min.js"></script>
     </head>
     <body>
         <div class="header" role="navigation">
@@ -31,14 +31,14 @@
                     <fieldset>
                         <legend class="step">&gt;&gt; 登录</legend>
                         <div>
-                            <div class="sign_title">用户名：<span class="redstar">*</span></div>
-                            <div class="sign_content"><input type="text" /></div>
+                            <div class="sign_title">手机号码：<span class="redstar">*</span></div>
+                            <div class="sign_content"><input id="phone_num" type="text" /><span class="tips"></span></div>
                         </div>
                         <div>
                             <div class="sign_title">密码：<span class="redstar">*</span></div>
-                            <div class="sign_content"><input type="password" /></div>
+                            <div class="sign_content"><input id="pwd" type="password" /><span class="tips"></span></div>
                         </div>
-                        <div class="btn">登录</div>
+                        <div class="btn" id="signin">登录</div>
                     </fieldset>
                 </div>
                 <div class="rightbar">
@@ -51,6 +51,7 @@
                 <a style="margin-left:10px;" href="http://www.miitbeian.gov.cn/" target="_blank">京ICP备 15035175号－1</a>
             </p>
         </div>
+    <script src="js/main_consultant.js"></script>
     </body>
 
 </html>

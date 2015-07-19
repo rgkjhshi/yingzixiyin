@@ -45,8 +45,8 @@ input {
 	-moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
 	box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
 	vertical-align: middle;
-	height: 2em;
-	line-height: 2em;
+	height: 2rem;
+	line-height: 2rem;
 	color: #555555;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
@@ -55,6 +55,9 @@ input {
 }
 input[type="text"],input[type="password"] {
 	width: 200px;
+}
+input[disabled="disabled"]{
+	background:#eee;
 }
 textarea {
 	width: 300px;
@@ -113,11 +116,29 @@ fieldset div {
 	line-height: 2.5em;
 	float: left;
 }
+.signupcontent .tips{
+	color:#f00;
+	font-size: 0.6rem;
+	display:inline-block;
+	margin-left: 10px;
+}
 .sign_title,.sign_content {
 	display: inline-block;
 }
-.sign_content {
-	width: 330px;
+.sms_code{
+	width:90px!important;
+}
+.sms_btn{
+	display: inline-block;
+	width:106px;
+	text-align: center;
+	color: #666;
+	background: #eee;
+	font-size: 0.6rem;
+	margin-left: 5px;
+	border: 1px solid #ddd;
+	cursor: pointer;
+	line-height: 2rem;
 }
 .sign_content .radio_la{
 	margin-right:20px;
