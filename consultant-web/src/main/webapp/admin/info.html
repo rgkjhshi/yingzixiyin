@@ -4,12 +4,12 @@
         <meta charset="utf-8">
         <title>个人信息-英姿吸引</title>
         <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-        <meta name="viewport" content="widdiv=device-widdiv, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="keywords" content="">
         <meta name="description" content="">
-        <link href="../images/favicon.ico" rel="shortcut icon">
+        <link href="../favicon.ico" rel="shortcut icon">
         <link href="../css/base.css" rel="stylesheet" type="text/css">
-        <script src="../js/jquery.js"></script>
+        <script src="../js/jquery-1.9.1.min.js"></script>
     </head>
     <body>
         <div class="header" role="navigation">
@@ -17,10 +17,10 @@
                 <img height="20" alt="Brand" src="../images/logo.png">
                 <ul class="signin">
                     <li>
-                        <a href="signin.html">登录</a>
+                        <a href="../signin.html">登录</a>
                     </li>
                     <li>
-                        <a href="signup.html">注册</a>
+                        <a href="../signup.html">注册</a>
                     </li>
                 </ul>
             </div>
@@ -30,15 +30,30 @@
             	<div class="leftnav">
             		<ul class="leftitem">
             			<a><li class="detail cur"><i>&nbsp;</i>个人信息</li></a>
+                        <ul class="infomation">
+                            <a><li class="active">基本信息</li></a>
+                            <a href="photo.html"><li>头像管理</li></a>
+                        </ul>
             			<a href="secure.html"><li class="secure"><i>&nbsp;</i>安全中心</li></a>
             			<a href="message.html"><li class="message"><i>&nbsp;</i>消息管理</li></a>
                		</ul>
             	</div>
             	<div class="maincontent">
             		<div class="subtitle">完善个人信息</div>
+                    <div class="uc-tips">
+                        <div class="bd">
+                            <b>公告：</b>
+                            <div class="uc-tips-ctn">
+                                <a>请尽快完善个人信息，以便管理员审核。</a>
+                            </div>
+                        </div>
+                    </div>
                     <div>
                         <div class="sign_title">真实姓名：</div>
-                        <div class="sign_content"><input type="text" /></div>
+                        <div class="sign_content">
+                            <input type="text" data-validate="notnull" data-tip="真实姓名" id="realname" />
+                            <span class="tips"></span>
+                        </div>
                     </div>
                     <div>
                         <div class="sign_title">性别：</div>
@@ -65,27 +80,38 @@
                     </script>
                     <div>
                         <div class="sign_title">年龄：</div>
-                        <div class="sign_content"><input type="text" /></div>
+                        <div class="sign_content">
+                            <input type="text" data-validate="number" data-tip="年龄" id="age"  />
+                            <span class="tips"></span>
+                        </div>
                     </div>
                     <div>
                         <div class="sign_title">E-mail：</div>
-                        <div class="sign_content"><input type="text" /></div>
-                    </div>
-                    <div>
-                        <div class="sign_title">手机号码：</div>
-                        <div class="sign_content"><input type="text" /></div>
+                        <div class="sign_content">
+                            <input id="email" type="text" data-validate="email" data-tip="Email" />
+                            <span class="tips"></span>
+                        </div>
                     </div>
                     <div>
                         <div class="sign_title">支付宝账号：</div>
-                        <div class="sign_content"><input type="text" /></div>
+                        <div class="sign_content">
+                            <input type="text" data-validate="notnull" data-tip="支付宝账号" id="alipay"  />
+                            <span class="tips"></span>
+                        </div>
                     </div>
                     <div>
                         <div class="sign_title">专业背景：</div>
-                        <div class="sign_content"><textarea class="form_border"></textarea></div>
+                        <div class="sign_content">
+                            <textarea class="form_border"></textarea>
+                            <span class="tips"></span>
+                        </div>
                     </div>
                     <div>
                         <div class="sign_title">受训背景：</div>
-                        <div class="sign_content"><textarea class="form_border"></textarea></div>
+                        <div class="sign_content">
+                            <textarea class="form_border"></textarea>
+                            <span class="tips"></span>
+                        </div>
                     </div>
                     <div>
                         <div class="sign_title">咨询范围：</div>
@@ -99,19 +125,24 @@
                     </div>
                     <div>
                         <div class="sign_title">咨询单价：</div>
-                        <div class="sign_content"><input type="text" /></div>
+                        <div class="sign_content">
+                            <input id="price" type="text" data-validate="number" data-tip="咨询单价" />
+                            <span class="tips"></span>
+                        </div>
                     </div>
                     <div>
                         <div class="sign_title">可预约时间：</div>
-                        <div class="sign_content"><textarea class="form_border"></textarea></div>
+                        <div class="sign_content">
+                            <textarea class="form_border"></textarea>
+                            <span class="tips"></span>
+                        </div>
                     </div>
                     <div>
                         <div class="sign_title">个人简介：</div>
-                        <div class="sign_content"><textarea class="form_border"></textarea></div>
-                    </div>
-                    <div>
-                        <div class="sign_title">上传头像：</div>
-                        <div class="sign_content"><input type="file" /></div>
+                        <div class="sign_content">
+                            <textarea class="form_border"></textarea>
+                            <span class="tips"></span>
+                        </div>
                     </div>
                     <div class="btn">保存</div>
             	</div>
@@ -124,6 +155,6 @@
                 </p>
             </div>
         </div>
+    <script src="../js/main_consultant.js"></script>
     </body>
-
 </html>

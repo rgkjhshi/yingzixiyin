@@ -5,15 +5,16 @@
  * @version $Id$
  */
 (function(){
-
-	// 咨询师注册
-
+	
 	// 格式验证
-	var check = function(name){
+	var check = function(name,vid,tip){
+		var tip = tip||"";
 		var type = {
-			"phone_num":[/^1\d{10}$/,"请输入正确的手机号码"],
-			"sms_code":[/\S+/,"验证码不能为空"],
-			"pwd":[/\S+/,"密码不能为空"]
+			"tel":[/^1\d{10}$/,"请输入正确的"+tip],
+			// "pwd":[/\S+/,"密码不能为空"], 待修改
+			"notnull":[/\S+/,tip+"不能为空"],
+			"email":[/^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$/,tip+"格式不正确"],
+			"number":[/^\d+(\.\d+)?$/,"请输入正确的"+tip]
 		}
 		if(name=="pwd2"){
 			var pwd2 = $("#pwd2").val();
@@ -26,8 +27,8 @@
 			}
 		}else{
 			var re = type[name][0];
-			var tips = $("#"+name).siblings(".tips");
-			var str = $("#"+name).val();
+			var tips = $("#"+vid).siblings(".tips");
+			var str = $("#"+vid).val();
 
 			if(!re.test(str)){
 				tips.text(type[name][1]);
@@ -41,19 +42,25 @@
 
 	$(".sign_content input")
 		.on("blur",function(){
-			var name = $(this).attr("id");
-			check(name);
+			var name = $(this).attr("data-validate");
+			var vid = $(this).attr("id");
+			var tip = $(this).attr("data-tip");
+			check(name,vid,tip);
 		})
 		.on("focus",function(){
 			$(this).siblings(".tips").text("");
 		});
 
+
+	// 咨询师注册
+
 	// 短信验证码获取
 	var getCode = function(){
 		var phone_num = $.trim($("#phone_num").val());
-
+		var tip = $("#phone_num").attr("data-tip");
+		var name = $("#phone_num").attr("data-validate");
 		// 验证手机号码合法性
-		if(!check("phone_num")){
+		if(!check(name,"phone_num",tip)){
 			return;
 		}
 
@@ -95,7 +102,7 @@
 		*/
 
 		//检查其他数据格式
-		if(check("phone_num")&&check("pwd")&&check(pwd2)){
+		if(check("tel","phone_num","手机号码")&&check("notnull","sms_code","验证码")&&check("notnull","pwd","密码")&&check("pwd2","pwd2")){
 			//提交数据
 			var phone_num = $.trim($("#phone_num").val());
 			var pwd = $.trim($("#pwd").val());
@@ -119,7 +126,7 @@
 	var signin = function(){
 
 		//检查数据
-		if(check("phone_num")&&check("pwd")){
+		if(check("tel","phone_num","手机号码")&&check("notnull","pwd","密码")){
 			//提交数据
 			var phone_num = $.trim($("#phone_num").val());
 			var pwd = $.trim($("#pwd").val());

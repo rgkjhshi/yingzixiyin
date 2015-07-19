@@ -65,7 +65,7 @@ textarea {
 	line-height: 1.5em;
 	vertical-align:text-top;
 	resize: none;
-	padding:0 10px;
+	padding:10px;
 	box-sizing:border-box;
 }
 .header {
@@ -116,7 +116,7 @@ fieldset div {
 	line-height: 2.5em;
 	float: left;
 }
-.signupcontent .tips{
+.signupcontent .tips,.sign_content .tips{
 	color:#f00;
 	font-size: 0.6rem;
 	display:inline-block;
@@ -185,6 +185,7 @@ fieldset div {
 	width:100%;
 	padding:30px 0;
 	background:#fff;
+	font-size: 0.85rem;
 }
 .btn {
 	color: #fff;
@@ -230,6 +231,27 @@ fieldset div {
 	overflow: hidden;
 	padding:0;
 	background:#282d45;
+}
+.info .uc-tips{
+	font-size: 12px;
+	line-height: 20px;
+	color: #333;
+	text-align: left;
+	padding: 5px 10px;
+	margin-bottom: 10px;
+	background-color: #fff1c4;
+	border: 1px solid #ffe793;
+	margin-top: -10px;
+	margin-right: 20px;
+}
+.uc-tips .bd {
+  height: 20px;
+  overflow: hidden;
+  zoom: 1;
+}
+.uc-tips b {
+  float: left;
+  font-weight: bold;
 }
 .leftnav {
 	float: left;
@@ -295,21 +317,21 @@ fieldset div {
 	box-sizing: border-box;
 }
 /*message*/
-	.sms {
+.sms,.infomation{
 	margin:0;
 	padding:0;
 }
-.sms li {
+.sms li ,.infomation li{
 	display:block;
 	border:none;
-	height:2em;
-	line-height: 2em;
+	height:2.5em;
+	line-height: 2.5em;
 	font-weight: normal;
 	font-size: 14px;
 	background: #1f233a;
 	padding-left: 42px;
 }
-.sms li:hover,.sms li.active {
+.sms li:hover,.sms li.active,.infomation li:hover,.infomation li.active{
 	border:none;
 	padding-left: 42px;
 	color:#d1402f;
