@@ -8,6 +8,9 @@
 	
 	// 格式验证
 	var check = function(vid){//传入id和默认的提示
+		if(!vid){
+			return true;
+		}
 		var tip = $("#"+vid).attr("data-tip")||"";
 		var name = $("#"+vid).attr("data-validate")||"default";
 		var type = {
@@ -177,5 +180,26 @@
 	};
 
 	$("#moreinfo").on("click",moreinfo);
+
+	//安全中心－修改密码
+	var modPwd = function(){
+
+		//检查数据格式
+		if(check("oldpwd")&&check("pwd")&&check("pwd2")){
+			//提交数据
+			var oldpwd = $("#oldpwd").val();
+			var pwd = $("#pwd").val();
+			/*
+			$.post(url,{"oldpwd":oldpwd,"password",pwd},function(data){
+				if(!data.status){
+					alert(data.errorCode);//输出错误原因
+				}else{
+					alert("密码修改成功！")
+				}
+				window.location.href="admin/secure.html";
+			});
+			*/
+		}
+	}
 
 })();
