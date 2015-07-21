@@ -349,6 +349,7 @@ fieldset div {
 	box-sizing: border-box;
 	line-height: 3.5em;
 	min-height: 500px;
+	position:relative;
 }
 .subtitle {
 	color: #666;
@@ -446,7 +447,7 @@ fieldset div {
 	display:none;
 }
 .detail_box{
-	width: 80%;
+	width: 60%;
 	margin: 0 auto;
 	letter-spacing: normal;
 	word-spacing: normal;
@@ -457,6 +458,12 @@ fieldset div {
 	background: #fff;
 	padding-bottom: 2px;
 	line-height: 1.5em;
+	position:fixed;
+	top:50%;
+	left:50%;
+	transform:translate(-50%,-50%);	/*兼容性问题，待检测*/
+	z-index: 999;
+	display:none;
 }
 .dialog_header{
 	position: relative;
@@ -469,7 +476,7 @@ fieldset div {
 	text-align: center;
 }
 .dialog_content{
-	height: 300px;
+	height: 360px;
 	overflow: hidden;
 	position: relative;
 	width: 100%;
@@ -480,9 +487,9 @@ fieldset div {
 .dialog_reply{
 	border-top:1px solid #d9d9d9;
 }
-.relay_inner{
+.reply_inner{
 	width:92%;
-	margin: 20px auto;
+	margin: 14px auto;
 	overflow:hidden;
 }
 .reply_content{
@@ -506,5 +513,58 @@ fieldset div {
 	text-decoration: none;
 	float:right;
 	text-align: center;
-	margin-top:20px;
+	margin-top:4px;
+	cursor:pointer;
+}
+/*咨询详情*/
+.dialog_content ul{
+	overflow:scroll;
+	margin:0;
+	padding:10px 20px;
+
+}
+.dialog_content li{
+	list-style: none;
+	display:inline-block;
+	clear:both;
+	max-width: 80%;
+	line-height: 1.2rem;
+	word-wrap: break-word;
+ 	word-break: break-all;
+}
+.dialog_content li div{
+	border:1px solid #ddddee;
+	border-radius: 3px;
+	margin: 5px 0;
+	padding:4px 8px;
+}
+.dialog_content li.user{
+	text-align: left;
+	float:left;
+} 
+.dialog_content li.user div{
+	background:#fff;
+}
+.dialog_content li.me{
+	text-align: right;
+	float:right;
+}
+.dialog_content li.me div{
+	background:#d7ebfe;
+	border-color: #b7d4ef;
+}
+.dialog_content li span{
+	display:block;
+}
+/*dialog tips*/
+.layer{
+	width:100%;
+	height:100%;
+	background:#000;
+	opacity: 0.4;
+	position:fixed;
+	left:0;
+	top:0;
+	z-index: 10;
+	display:none;
 }
