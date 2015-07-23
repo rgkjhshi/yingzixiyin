@@ -9,7 +9,6 @@ import com.yingzixiyin.api.facade.CodeFacade;
 import com.yingzixiyin.api.facade.ConsultantFacade;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,7 +19,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.Date;
 import java.util.Map;
 
 /**
@@ -114,14 +112,5 @@ public class ConsultantController {
         return new ModelAndView(new MappingJackson2JsonView(), map);
     }
 
-    @RequestMapping("/test.htm")
-    public Map test(@RequestHeader("Accept-Encoding") String encoding) {
-        String result = null == encoding ? "nothing" : encoding;
-        Map<String, Object> map = Maps.newHashMap();
-        map.put("Accept-Encoding", result);
-        map.put("test", "test");
-        map.put("date", new Date());
-        return map;
-    }
 
 }
