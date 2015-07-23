@@ -35,6 +35,7 @@ public class ConsultantFacadeImpl implements ConsultantFacade {
             ParameterUtils.notNull(consultantInfo.getPassword(), "password不能为null");
             consultantBiz.add(consultantInfo);
             responseDto.setReturnCode(0);
+            responseDto.setReturnMessage("成功");
         } catch (IllegalArgumentException e) {
             logger.info("参数异常:" + e.getMessage());
             responseDto.setReturnCode(-1);

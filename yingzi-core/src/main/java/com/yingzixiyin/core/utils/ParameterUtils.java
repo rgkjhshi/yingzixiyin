@@ -65,6 +65,7 @@ public class ParameterUtils {
     /**
      * 检查Collection、Map、String不为null且不为空
      * 只能检查Collection、Map、String对象，其他对象无法检查
+     *
      * @param obj 待检查对象
      */
     public static void notEmpty(Object obj) {
@@ -72,18 +73,32 @@ public class ParameterUtils {
     }
 
     /**
-     * 检查Collection、Map、String不为null且不为空
+     * 检查Collection、Map、String不为null且不为空(只有空格的String也算空)
      * 只能检查Collection、Map、String对象，其他对象无法检查
-     * @param obj 待检查对象
+     *
+     * @param obj  待检查对象
      * @param desc 异常描述
      */
     public static void notEmpty(Object obj, String desc) {
         if ((null == obj) ||
-                (obj instanceof Map && ((Map) obj).isEmpty()) ||              // 空map
-                (obj instanceof String && ((String) obj).isEmpty()) ||        // 空字符串
-                (obj instanceof Collection && ((Collection) obj).isEmpty())   // 空集合
+                (obj instanceof Map && ((Map) obj).isEmpty()) ||                // 空map
+                (obj instanceof String && ((String) obj).trim().isEmpty()) ||   // 空字符串
+                (obj instanceof Collection && ((Collection) obj).isEmpty())     // 空集合
                 ) {
             throw new IllegalArgumentException(desc);
         }
+    }
+
+    /**
+     * 判断Collection、Map、String是否为空
+     * @param obj Collection、Map、String类型的对象
+     * @return 为空返回true
+     */
+    public static Boolean isEmpty(Object obj) {
+        return ((null == obj) ||
+                (obj instanceof Map && ((Map) obj).isEmpty()) ||                // 空map
+                (obj instanceof String && ((String) obj).trim().isEmpty()) ||   // 空字符串
+                (obj instanceof Collection && ((Collection) obj).isEmpty())     // 空集合
+        );
     }
 }

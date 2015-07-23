@@ -24,31 +24,16 @@
  		<!-- 添加Servlet -->  
 	    <dependency>    
 	        <groupId>javax.servlet</groupId>    
-	        <artifactId>servlet-api</artifactId>    
-	        <version>2.5</version>    
-	        <scope>provided</scope>    
+	        <artifactId>servlet-api</artifactId>
+	        <version>2.5</version>
+	        <scope>provided</scope>
 	    </dependency>
         <!-- spring-mvc -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
         </dependency>
-        
-        <!-- 日志相关 -->
-        <!-- slf4j-api -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-        </dependency>
-        <!-- logback -->
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-        </dependency>
+
         <dependency>
 			<groupId>dom4j</groupId>
 			<artifactId>dom4j</artifactId>

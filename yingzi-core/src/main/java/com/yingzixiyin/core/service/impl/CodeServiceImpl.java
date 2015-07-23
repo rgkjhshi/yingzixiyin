@@ -25,7 +25,7 @@ import java.util.Random;
 public class CodeServiceImpl implements CodeService {
     private static final Logger logger = LoggerFactory.getLogger(CodeServiceImpl.class.getName());
 
-    public static final Long INTERVAL = 5L;              // 发送短信的最短间隔, 单位min
+    public static final Long INTERVAL = 10L;              // 发送短信的最短间隔, 单位min
     public static final String TEMPLATE_ID = "1";                    // 发送短信的模板, 1: 测试模板
     public static final String HOST_NAME = "sandboxapp.cloopen.com"; // 服务器地址,不需要写https://
     public static final String PORT = "8883";                        // 服务器端口号

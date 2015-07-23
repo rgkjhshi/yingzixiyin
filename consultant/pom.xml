@@ -23,12 +23,6 @@
             <groupId>com.yingzixiyin</groupId>
             <artifactId>yingzi-core</artifactId>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>cn.loveshisong</groupId>-->
-            <!--<artifactId>spring-jsonbody</artifactId>-->
-            <!--<version>1.0</version>-->
-        <!--</dependency>-->
-
         <!-- spring-mvc -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -37,8 +31,9 @@
         <!-- servlet -->
         <dependency>
             <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>3.1.0</version>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
+            <scope>provided</scope>
         </dependency>
         <!-- json2 spring4.1之后使用了json2-->
         <dependency>

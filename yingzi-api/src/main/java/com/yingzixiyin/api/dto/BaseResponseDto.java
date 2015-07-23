@@ -30,7 +30,7 @@ public class BaseResponseDto implements Serializable {
         this.returnMessage = returnMessage;
     }
 
-    boolean isSuccess() {
+    public boolean isSuccess() {
         if (getReturnCode().equals(0)) {
             return true;
         }

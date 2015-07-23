@@ -17,7 +17,7 @@ import java.util.Map;
 /**
  * 登陆拦截器
  */
-@Component
+@Component("loginFilter")
 public class LoginFilter implements Filter {
 
 	private static final Logger logger = LoggerFactory.getLogger(LoginFilter.class);

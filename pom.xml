@@ -13,7 +13,8 @@
         <module>yingzi-core</module>
         <module>yingzi-api</module>
         <module>yingzi-service</module>
-        <module>consultant-web</module>
+        <module>consultant</module>
+        <module>websocket</module>
     </modules>
 
     <properties>
