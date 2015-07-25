@@ -32,5 +32,6 @@ public interface MessageDao {
 	 * @return
 	 */
 	List<Message> getMessageListByFilter(Map<String, Object> map);
+	List<Map<String, Object>> queryConsultantAndMessageCountByUserId(Map<String, Object> map);
 
 }

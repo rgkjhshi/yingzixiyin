@@ -78,5 +78,11 @@
             
         </where>
     </select>
+    
+    <select id="queryConsultantAndMessageCountByUserId" parameterType="map" resultType="map"> 
+    select c.id as consultant_id ,c.username as username,r.id as record_id,r.is_completed as is_completed,count(1) as msgcount,
+    case when count(1)>sum(m.is_read) then 0 else 1 end as is_read  
+    from consultant c,record r,message m where c.id=r.consultant_id and r.id=m.record_id and r.user_id=#{userId} group by r.id,c.id order by m.create_time desc
+    </select>
 
 </mapper>

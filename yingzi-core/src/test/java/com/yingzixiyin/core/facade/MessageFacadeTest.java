@@ -1,6 +1,8 @@
 package com.yingzixiyin.core.facade;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 import com.yingzixiyin.api.dto.BaseResponseDto;
 import com.yingzixiyin.api.dto.ConsultantInfo;
@@ -61,5 +63,12 @@ public class MessageFacadeTest extends BaseTest {
         requestDto.setRecordId(1L);
         MessageQueryResponseDto responseDto =  messageFacade.query(requestDto);
         logger.info(responseDto.toString());
+    }
+    @Test
+    public void getConsultantAndMessageCountByUserId() {
+        logger.debug("debug");
+        logger.info("info");
+        List<Map<String,Object>>  res =  messageFacade.queryConsultantAndMessageCountByUserId(3l);
+        logger.info(res.toString());
     }
 }

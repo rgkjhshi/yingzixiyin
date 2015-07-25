@@ -1,5 +1,8 @@
 package com.yingzixiyin.core.biz;
 
+import java.util.List;
+import java.util.Map;
+
 import com.yingzixiyin.api.dto.ConsultantInfo;
 import com.yingzixiyin.api.dto.ConsultantQueryRequestDto;
 import com.yingzixiyin.api.dto.ConsultantQueryResponseDto;
@@ -25,6 +28,9 @@ public interface MessageBiz {
 
 
     public MessageQueryResponseDto getMessageList(MessageQueryRequestDto requestDto);
+
+	public List<Map<String, Object>> queryConsultantAndMessageCountByUserId(
+			Long userId);
 
 
 }

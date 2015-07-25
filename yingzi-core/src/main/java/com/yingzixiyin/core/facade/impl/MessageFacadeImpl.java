@@ -1,5 +1,8 @@
 package com.yingzixiyin.core.facade.impl;
 
+import java.util.List;
+import java.util.Map;
+
 import com.yingzixiyin.api.dto.BaseResponseDto;
 import com.yingzixiyin.api.dto.ConsultantInfo;
 import com.yingzixiyin.api.dto.ConsultantQueryRequestDto;
@@ -91,5 +94,12 @@ public class MessageFacadeImpl implements MessageFacade {
 	        }
 	        logger.info("返回数据:" + responseDto);
 	        return responseDto;
+	}
+
+	@Override
+	public List<Map<String, Object>> queryConsultantAndMessageCountByUserId(
+			Long userId) {
+		if(userId==null) return null;
+		return messageBiz.queryConsultantAndMessageCountByUserId(userId);
 	}
 }

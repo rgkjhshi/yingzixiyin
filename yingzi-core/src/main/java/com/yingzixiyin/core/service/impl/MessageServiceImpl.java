@@ -59,5 +59,14 @@ public class MessageServiceImpl implements MessageService {
         List<Message> messageList = messageDao.getMessageListByFilter(map);
         return Message.translateBeanList(messageList);
     }
+	@Override
+	public List<Map<String, Object>> queryConsultantAndMessageCountByUserId(
+			Map<String, Object> map) {
+		if (CollectionUtils.isEmpty(map)) {
+			logger.info("map不能为空");
+			return null;
+		}
+		return messageDao.queryConsultantAndMessageCountByUserId(map);
+	}
 
 }

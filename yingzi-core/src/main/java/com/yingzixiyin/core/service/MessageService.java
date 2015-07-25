@@ -38,4 +38,7 @@ public interface MessageService {
      */
     public List<MessageInfo> getMessageList(Map<String, Object> map);
 
+	public List<Map<String, Object>> queryConsultantAndMessageCountByUserId(
+			Map<String, Object> map);
+
 }

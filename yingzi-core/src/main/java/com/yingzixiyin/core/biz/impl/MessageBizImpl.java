@@ -67,4 +67,12 @@ public class MessageBizImpl implements MessageBiz {
 		}
 		return responseDto;
     }
+
+	@Override
+	public List<Map<String, Object>> queryConsultantAndMessageCountByUserId(
+			Long userId) {
+		Map<String, Object> map = Maps.newHashMap();
+		map.put("userId", userId);
+		return messageService.queryConsultantAndMessageCountByUserId(map);
+	}
 }

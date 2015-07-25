@@ -1,5 +1,8 @@
 package com.yingzixiyin.api.facade;
 
+import java.util.List;
+import java.util.Map;
+
 import com.yingzixiyin.api.dto.*;
 
 /***
@@ -29,5 +32,8 @@ public interface MessageFacade {
      * @return MessageQueryResponseDto
      */
     public MessageQueryResponseDto query(MessageQueryRequestDto requestDto);
+
+	public List<Map<String, Object>> queryConsultantAndMessageCountByUserId(
+			Long id);
 
 }
