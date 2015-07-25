@@ -32,15 +32,17 @@ public class LoginFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         HttpSession session = request.getSession();
-        if(null == session.getAttribute("phone")) {
+        if(null == session.getAttribute("session_phone")) {
+            logger.info("用户未登陆,session_phone={}", session.getAttribute("session_phone"));
             response.reset();
             response.setCharacterEncoding("UTF-8");
             Map<String, Object> map = Maps.newHashMap();
             map.put("status", -1);
             map.put("message", "用户未登陆");
+            response.setHeader("Content-type","application/json;charset=UTF-8");
             response.getOutputStream().write(new Gson().toJson(map).getBytes("UTF-8"));
         } else {
-            request.setAttribute("phone", session.getAttribute("phone"));
+            request.setAttribute("phone", session.getAttribute("session_phone"));
             filterChain.doFilter(request, response);
         }
     }

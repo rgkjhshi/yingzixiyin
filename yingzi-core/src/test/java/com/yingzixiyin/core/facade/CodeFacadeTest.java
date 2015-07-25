@@ -1,16 +1,11 @@
 package com.yingzixiyin.core.facade;
 
-import com.cloopen.rest.sdk.CCPRestSDK;
-import com.yingzixiyin.api.dto.BaseResponseDto;
 import com.yingzixiyin.api.dto.CodeInfo;
 import com.yingzixiyin.api.facade.CodeFacade;
 import com.yingzixiyin.core.BaseTest;
 import org.junit.Test;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
-import java.util.Random;
-import java.util.Set;
 
 /**
  * @author song.shi
@@ -25,8 +20,8 @@ public class CodeFacadeTest extends BaseTest {
     @Test
     public void testSendCode() {
 
-        BaseResponseDto responseDto = codeFacade.sendCode("13121435540");
-        System.out.println(responseDto);
+//        BaseResponseDto responseDto = codeFacade.sendCode("13121435540");
+//        System.out.println(responseDto);
     }
 
     @Test
@@ -35,12 +30,13 @@ public class CodeFacadeTest extends BaseTest {
         CodeInfo info = new CodeInfo();
         info.setPhone("13121435540");
         info.setCode("627843");
-        BaseResponseDto responseDto = codeFacade.checkCode(info);
-        System.out.println(responseDto);
+//        BaseResponseDto responseDto = codeFacade.checkCode(info);
+//        System.out.println(responseDto);
     }
 
     @Test
     public void test() {
+        /*
         Random random = new Random();
         Integer randomInteger = random.nextInt(900000)+100000;
         HashMap<String, Object> result = null;
@@ -62,6 +58,7 @@ public class CodeFacadeTest extends BaseTest {
             //异常返回输出错误码和错误信息
             System.out.println("错误码=" + result.get("statusCode") +" 错误信息= "+result.get("statusMsg"));
         }
+        */
     }
 
 }

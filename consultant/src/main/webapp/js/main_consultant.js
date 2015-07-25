@@ -6,9 +6,9 @@
  */
 (function () {
 
-    var checkCodeURL = window.location.host + "consultant/getCheckCodeApi.htm";
-    var loginURL = window.location.host + "consultant/loginApi.htm";
-    var registerUrl = window.location.host + "consultant/registerApi.htm";
+    var getCheckCodeURL = "http://" + window.location.host + "/consultant/getCheckCodeApi.htm";
+    var loginURL = "http://" + window.location.host + "/consultant/loginApi.htm";
+    var registerUrl = "http://" + window.location.host + "/consultant/registerApi.htm";
 
     // 格式验证
     var check = function (vid) {//传入id和默认的提示
@@ -89,7 +89,7 @@
         // 请求验证码
         // url:接口地址
 
-        $.post(checkCodeURL, {"phone": phone}, function () {
+        $.post(getCheckCodeURL, {"phone": phone}, function () {
         });
     };
 
@@ -127,7 +127,7 @@
             //提交数据
             var phone = $.trim($("#phone").val());
             var pwd = $.trim($("#pwd").val());
-            $.post(loginURL, {"phone": phone, "pwd": pwd}, function (data) {
+            $.post(loginURL, {"phone": phone, "password": pwd}, function (data) {
                 if (!data.status) {
                     alert(data.errorCode);//输出错误原因
                 } else {

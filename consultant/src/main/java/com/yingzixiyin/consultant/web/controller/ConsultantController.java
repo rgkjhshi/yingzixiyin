@@ -55,7 +55,7 @@ public class ConsultantController {
             map.put("status", 0);
             map.put("message", "登陆成功");
         }
-        Cookie cookie = new Cookie("phone", phone);
+        Cookie cookie = new Cookie("cookie_phone", phone);
         response.addCookie(cookie);
         session.setAttribute("session_phone", phone);
         return new ModelAndView(new MappingJackson2JsonView(), map);
