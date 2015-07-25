@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>  
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="fmt"%>
 <%
 	String path=request.getContextPath();    
 %>
@@ -25,7 +26,17 @@
     </div>
     <div class="main">
     	<ul class="layout">
-    		<li class="record">
+    		<c:forEach items="${userRecords}" var="r">
+    			<li class="record">
+	    			<div class="sub">时间：<fmt:formatDate value="${r.createTime}" pattern="yyyy-MM-dd"/></div>
+	    			<div>
+	    				<span class="half"><strong>咨询师：</strong>${r.consultantId }</span>
+	    				<span class="half"><strong>消费：</strong>59元</span></div>
+	    			<div><strong>咨询方式：</strong>${r.consultType.desc }</div>
+	    			<div><strong>状态：</strong>${r.isCompleted.desc }</div>
+    			</li>
+    		</c:forEach>
+    		<!-- <li class="record">
     			<div class="sub">时间：2015-04-23</div>
     			<div>
     				<span class="half"><strong>咨询师：</strong>张三</span><span class="half"><strong>消费：</strong>59元</span></div>
@@ -54,7 +65,7 @@
     				<span class="half"><strong>咨询师：</strong>张三</span><span class="half"><strong>消费：</strong>519元</span></div>
     			<div><strong>咨询方式：</strong>面对面咨询</div>
     			<div><strong>状态：</strong>已结束</div>
-    		</li>
+    		</li> -->
     	</ul>
     </div>
 <script type="text/javascript" src="<%=path%>/js/main_wechat.js"></script>

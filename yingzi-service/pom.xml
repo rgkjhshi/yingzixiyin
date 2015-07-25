@@ -20,6 +20,12 @@
         <dependency>
             <groupId>com.yingzixiyin</groupId>
             <artifactId>yingzi-core</artifactId>
+            <exclusions>
+            	<exclusion>
+            		 <groupId>com.cloopen</groupId>
+           			 <artifactId>ccpsdk</artifactId>
+            	</exclusion>
+            </exclusions>
         </dependency>
  		<!-- 添加Servlet -->  
 	    <dependency>    

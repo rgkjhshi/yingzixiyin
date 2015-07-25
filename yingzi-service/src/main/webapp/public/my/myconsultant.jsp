@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>  
 <%
 	String path=request.getContextPath();    
 %>
@@ -26,8 +26,21 @@
     <div class="main layout">
     	<div class="sub">我咨询过的咨询师</div>
     	<ul class="consultants">
+    	<c:forEach items="${ visited}" var="cinfo">
     		<li class="record">
-    			<a href="../service/detail.html">
+    			<a href="<%=path%>/consultant/consultant_deatil.do?id=${cinfo.id}">
+            		<img src="<%=path%>/images/test.png" />
+            		<div class="info">
+            			<div class="name">${cinfo.name }</div>
+            			<div class="desc">
+            				${cinfo.introduce }
+            			</div>
+            		</div>
+            	</a>
+    		</li>
+    	</c:forEach>
+    		<%-- <li class="record">
+    			<a href="consultant_deatil.do?id=${cinfo.id}">
             		<img src="<%=path%>/images/test.png" />
             		<div class="info">
             			<div class="name">张三</div>
@@ -58,12 +71,25 @@
             			</div>
             		</div>
             	</a>
-    		</li>
+    		</li> --%>
     	</ul>
 
 		<div class="sub">我收藏的咨询师</div>
     	<ul class="consultants">
-    		<li class="record">
+    		<c:forEach items="${ collected }" var="cinfo">
+    			<li class="record">
+	    			<a href="<%=path%>/consultant/consultant_deatil.do?id=${cinfo.id}">
+	            		<img src="<%=path%>/images/test.png" />
+	            		<div class="info">
+	            			<div class="name">${cinfo.name }</div>
+	            			<div class="desc">
+	            				${cinfo.introduce }
+	            			</div>
+	            		</div>
+	            	</a>
+    			</li>
+    		</c:forEach>
+    		<%-- <li class="record">
     			<a href="../service/detail.html">
             		<img src="<%=path%>/images/test.png" />
             		<div class="info">
@@ -106,7 +132,7 @@
             			</div>
             		</div>
             	</a>
-    		</li>
+    		</li> --%>
     	</ul>    	
     </div>
 <script type="text/javascript" src="<%=path%>/js/main_wechat.js"></script>
