@@ -442,9 +442,36 @@ fieldset div {
 	color: #fff;
 	border-radius: 3px;
 	position: absolute;
+	right: 70px;
+	top: 10px;
+}
+.ms_ing{
+	min-width: 18px;
+	_width: 18px;
+	font-size: 12px;
+	line-height: 14px;
+	text-align: center;
+	padding: 2px 4px;
+	background: #79B00A;
+	color: #fff;
+	border-radius: 3px;
+	position: absolute;
 	right: 18px;
 	top: 10px;
-	display:none;
+}
+.ms_end{
+	min-width: 18px;
+	_width: 18px;
+	font-size: 12px;
+	line-height: 14px;
+	text-align: center;
+	padding: 2px 4px;
+	background: #aaa;
+	color: #fff;
+	border-radius: 3px;
+	position: absolute;
+	right: 18px;
+	top: 10px;
 }
 .detail_box{
 	width: 60%;

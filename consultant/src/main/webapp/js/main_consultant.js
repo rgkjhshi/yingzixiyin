@@ -94,24 +94,16 @@
 	var signup = function(){
 		//检查短信验证码
 		var sms_code = $.trim($("#sms_code").val());
-		/*
-		$.post(url,{"sms_code":sms_code},function(data){
-			if(!data.status){
-				("#sms_code").siblings(".tips").text("短信验证码输入有误");
-				return;
-			}
-		});
-		*/
-
-		//检查其他数据格式
+		//检查数据格式
 		if(check("phone")&&check("sms_code")&&check("pwd")&&check("pwd2")){
 			//提交数据
 			var phone = $.trim($("#phone").val());
 			var pwd = $.trim($("#pwd").val());
 			/*
-			$.post(url,{"phone":phone,"password",pwd},function(data){
+			$.post(url,{"phone":phone,"password",pwd,"checkCode",sms_code},function(data){
 				if(!data.status){
 					alert(data.errorCode);//输出错误原因
+					//("#sms_code").siblings(".tips").text("短信验证码输入有误");
 				}else{
 					alert("注册成功，请完善您的个人信息！")
 					window.location.href="admin/info.html";//跳转到后台管理页面
