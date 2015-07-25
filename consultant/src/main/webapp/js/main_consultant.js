@@ -195,4 +195,6 @@
         }
     }
 
+    $("#modPwd").on("click",modPwd);    
+
 })();

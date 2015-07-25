@@ -605,3 +605,53 @@ fieldset div {
 	z-index: 10;
 	display:none;
 }
+/*avatar*/
+.file_upload,#upload_btn{
+	display:inline-block;
+	padding:0 20px;
+	background:#EA837F;
+	border:1px solid #ED9E9C;
+	position:relative;
+	overflow:hidden;
+	text-align: center;
+	height:2rem;
+	line-height: 2rem;
+	color:#fff;
+	font-size: 0.85rem;
+	cursor:pointer;
+}
+.file_upload input{
+	position:absolute;
+	right:0;
+	top:0;
+	font-size:100px;
+	opacity:0;
+	filter:alpha(opacity=0);
+}
+#upload_btn{
+	display:none;
+	margin-top: 30px;
+}
+.avatar_preview{
+	width:150px;
+	height:150px;
+	margin:20px 0;
+	border:1px solid #aaa;
+	background-size: cover;
+	background-repeat: no-repeat;
+	display:none;
+}
+.mainup{
+	position:relative;
+}
+.up_tips{
+	position:absolute;
+	right:20px;
+	width:50%;
+	margin:0;
+	top:10px;
+}
+.up_tips li.uc-tips{
+	list-style: none;
+	margin-bottom: 30px;
+}

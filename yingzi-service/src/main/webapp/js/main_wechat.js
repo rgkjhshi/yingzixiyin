@@ -29,7 +29,8 @@
 			data:{"gender":gender,"age":age,"ctype":ctype},
 			success:function(data){
 				console.log(data);
-				data = $.parseJson(data);
+				$("#choose_dialog").hide();
+				data = $.parseJSON(data);
 				if(data.returnCode=="0"){
 					$("#consultant_list").empty();
 					if(data.returnMessage==null||data.returnMessage=='null'||(!data.list)){
@@ -48,6 +49,7 @@
 				}
 			},
 			error:function(){
+				$("#choose_dialog").hide();
 				alert("对不起，出错啦！");
 			}
 		});

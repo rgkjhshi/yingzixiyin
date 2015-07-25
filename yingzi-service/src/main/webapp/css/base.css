@@ -116,12 +116,12 @@ a{text-decoration: none;color:#333;}
 }
 .choose_dialog{
 	position:absolute;
-	width:120px;
+	width:240px;
 	min-height: 50px;
     top:35%;
     left:50%;
     /*transform: translate(-50%,-50%);*/
-    margin-left: -60px;
+    margin-left: -120px;
 	z-index: 999;
 	background:#fff;
 	display:none;
@@ -129,6 +129,7 @@ a{text-decoration: none;color:#333;}
 	box-sizing:border-box;
 	padding:1rem;
 	line-height: 1.5rem;
+	border:1px solid #aaa;
 }
 .choose_dialog label{
 	display:inline-block;
