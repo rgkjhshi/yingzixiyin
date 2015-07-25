@@ -30,10 +30,10 @@
     			<li class="record">
 	    			<div class="sub">时间：<fmt:formatDate value="${r.createTime}" pattern="yyyy-MM-dd"/></div>
 	    			<div>
-	    				<span class="half"><strong>咨询师：</strong>${r.consultantId }</span>
-	    				<span class="half"><strong>消费：</strong>59元</span></div>
+	    				<span class="half"><strong>咨询师：</strong>${r.consultantName }</span>
+	    				<span class="half"><strong>消费：</strong><fmt:formatNumber value="${r.price }" pattern="##.##" minFractionDigits="2"></fmt:formatNumber>元</span></div>
 	    			<div><strong>咨询方式：</strong>${r.consultType.desc }</div>
-	    			<div><strong>状态：</strong>${r.isCompleted.desc }</div>
+	    			<div><strong>状态：</strong>${r.isCompleted.value==0?"未结束":"已结束" }</div>
     			</li>
     		</c:forEach>
     		<!-- <li class="record">

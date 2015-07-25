@@ -1,14 +1,14 @@
-<%@page import="java.util.List"%>
-<%@page import="com.yingzixiyin.api.dto.*"%>
+<%@ page import="java.util.List"%>
+<%@ page import="com.yingzixiyin.api.dto.*"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>  
-<%
-	String path=request.getContextPath();    
-%>
 <!DOCTYPE html>
 <html>
 <head>
+<%
+	String path=request.getContextPath();
+%>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
@@ -44,86 +44,9 @@
             	</a>
             </li>
         </c:forEach>
-        <!--   <li class="items">
-            	<a href="detail.html">
-            		<img src="../../images/test.png" />
-            		<div class="info">
-            			<div class="name">张三</div>
-            			<div class="desc">
-            				这里是咨询师的介绍，比如他的年龄、经历什么的，总之可以写好多好多东西，记得overflow。
-            			</div>
-            		</div>
-            	</a>
-            </li>
-            <li class="items">
-            	<a href="detail.html">
-            		<img src="../../images/test.png" />
-            		<div class="info">
-            			<div class="name">张三</div>
-            			<div class="desc">
-            				这里是咨询师的介绍，比如他的年龄、经历什么的，总之可以写好多好多东西，记得overflow。
-            			</div>
-            		</div>
-            	</a>
-            </li>
-            <li class="items">
-            	<a href="detail.html">
-            		<img src="../../images/test.png" />
-            		<div class="info">
-            			<div class="name">张三</div>
-            			<div class="desc">
-            				这里是咨询师的介绍，比如他的年龄、经历什么的，总之可以写好多好多东西，记得overflow。
-            			</div>
-            		</div>
-            	</a>
-            </li>
-            <li class="items">
-            	<a href="detail.html">
-            		<img src="../../images/test.png" />
-            		<div class="info">
-            			<div class="name">张三</div>
-            			<div class="desc">
-            				这里是咨询师的介绍，比如他的年龄、经历什么的，总之可以写好多好多东西，记得overflow。
-            			</div>
-            		</div>
-            	</a>
-            </li>
-            <li class="items">
-            	<a href="detail.html">
-            		<img src="../../images/test.png" />
-            		<div class="info">
-            			<div class="name">张三</div>
-            			<div class="desc">
-            				这里是咨询师的介绍，比如他的年龄、经历什么的，总之可以写好多好多东西，记得overflow。
-            			</div>
-            		</div>
-            	</a>
-            </li>
-            <li class="items">
-            	<a href="detail.html">
-            		<img src="../../images/test.png" />
-            		<div class="info">
-            			<div class="name">张三</div>
-            			<div class="desc">
-            				这里是咨询师的介绍，比如他的年龄、经历什么的，总之可以写好多好多东西，记得overflow。
-            			</div>
-            		</div>
-            	</a>
-            </li>
-            <li class="items">
-            	<a href="detail.html">
-            		<img src="../../images/test.png" />
-            		<div class="info">
-            			<div class="name">张三</div>
-            			<div class="desc">
-            				这里是咨询师的介绍，比如他的年龄、经历什么的，总之可以写好多好多东西，记得overflow。
-            			</div>
-            		</div>
-            	</a>
-            </li> -->
         </ul>
     </div>
-    <div class="layer" id="choose_layer"></div>
+    <!--<div class="layer" id="choose_layer"></div>-->
     <div class="choose_dialog" id="choose_dialog">
         <div class="sub">筛选条件</div>
         <ul>

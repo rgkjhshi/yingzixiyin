@@ -4,7 +4,9 @@
  * @date    2015-07-04 17:01:19
  * @version $Id$
  */
+//alert("test");
 (function(){
+//	alert("a");
 	$("#choose").on("tap",function(){
 		$("#choose_layer").show();
 		$("#choose_dialog").show();
@@ -35,4 +37,5 @@
 			}
 		});
 	});
+//	alert("b");
 })();

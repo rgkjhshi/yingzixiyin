@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.google.common.collect.Lists;
 import com.google.common.util.concurrent.ExecutionError;
 import com.gson.oauth.Oauth;
 import com.yingzi.web.annotation.PowerCheck;
@@ -34,10 +36,12 @@ import com.yingzi.web.helper.WeixinOauthHelper;
 import com.yingzi.web.utils.JsonUtil;
 import com.yingzi.web.utils.ResponseUtils;
 import com.yingzi.web.utils.SessionUtil;
+import com.yingzi.web.views.ConsumeRecordsInfo;
 import com.yingzixiyin.api.dto.ConsultantInfo;
 import com.yingzixiyin.api.dto.ConsultantQueryRequestDto;
 import com.yingzixiyin.api.dto.ConsultantQueryResponseDto;
 import com.yingzixiyin.api.dto.MessageQueryRequestDto;
+import com.yingzixiyin.api.dto.RecordInfo;
 import com.yingzixiyin.api.dto.RecordQueryRequestDto;
 import com.yingzixiyin.api.dto.RecordQueryResponseDto;
 import com.yingzixiyin.api.dto.UserInfo;
@@ -160,9 +164,39 @@ public class UserCenterController {
 		boolean flag=weixinOauthHelper.oauthAndLogin(request, code);
 		if(flag){
 			RecordQueryResponseDto resqrDto=queryUserConsumeRecords(request);
-			request.setAttribute("userRecords", resqrDto.getRecordInfoList());
+			List<ConsumeRecordsInfo> userRecords=new ArrayList<ConsumeRecordsInfo>();
+			if(resqrDto!=null&&resqrDto.getRecordInfoList()!=null){
+				for(RecordInfo rinfo:resqrDto.getRecordInfoList()){
+					ConsultantQueryRequestDto rcrDto=new ConsultantQueryRequestDto();
+					rcrDto.setId(rinfo.getConsultantId());
+					ConsultantInfo cqrDto=consultantFacade.queryOne(rcrDto);
+					ConsumeRecordsInfo crInfo=buildConsumeRecordsInfo(rinfo,cqrDto);	
+					userRecords.add(crInfo);
+				}
+			}
+			request.setAttribute("userRecords",userRecords);
+			logger.debug("获取到消费记录："+userRecords);
 		}
 		return response_page;
+	}
+	private ConsumeRecordsInfo buildConsumeRecordsInfo(RecordInfo rinfo,
+			ConsultantInfo cqrDto) {
+		ConsumeRecordsInfo crInfo=new ConsumeRecordsInfo();
+		crInfo.setConsultantId(rinfo.getConsultantId());
+		crInfo.setConsultantName(cqrDto.getName());
+		crInfo.setConsultType(rinfo.getConsultType());
+		crInfo.setCreateTime(rinfo.getCreateTime());
+		crInfo.setId(rinfo.getId());
+		crInfo.setIsCompleted(rinfo.getIsCompleted());
+		crInfo.setIsPaid(rinfo.getIsPaid());
+		crInfo.setIsReplied(rinfo.getIsReplied());
+		crInfo.setUserId(rinfo.getUserId());
+		crInfo.setPrice(cqrDto.getPrice());
+		crInfo.setAvatar(cqrDto.getAvatar());
+		crInfo.setSignature(cqrDto.getSignature());
+		crInfo.setRangeType(cqrDto.getRangeType());
+		crInfo.setIntroduce(cqrDto.getIntroduce());
+		return crInfo;
 	}
 	private UserInfo queryUserInfo(HttpServletRequest request){
 		//重新从数据库查询一遍，防止刚登陆用户看不到咨询过的咨询师数据
