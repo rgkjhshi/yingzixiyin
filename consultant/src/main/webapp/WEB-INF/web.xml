@@ -52,6 +52,7 @@
             <param-name>contextConfigLocation</param-name>
             <param-value>classpath*:spring/spring-mvc.xml</param-value>
         </init-param>
+        <async-supported>true</async-supported>
     </servlet>
 
     <servlet-mapping>

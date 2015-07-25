@@ -5,8 +5,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.http.server.ServletServerHttpRequest;
+import org.springframework.stereotype.Component;
 import org.springframework.web.socket.WebSocketHandler;
-import org.springframework.web.socket.server.HandshakeInterceptor;
+import org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor;
 
 import javax.servlet.http.HttpSession;
 import java.util.Map;
@@ -16,14 +17,14 @@ import java.util.Map;
  * @date 2015-07-22
  */
 
-public class ChatHandshakeInterceptor implements HandshakeInterceptor {
+@Component("handShakeInterceptor")
+public class ChatHandshakeInterceptor extends HttpSessionHandshakeInterceptor {
     private static final Logger logger = LoggerFactory.getLogger(ChatHandshakeInterceptor.class);
 
     @Override
-    public boolean beforeHandshake(ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse,
-                                   WebSocketHandler webSocketHandler, Map<String, Object> map) throws Exception {
+    public boolean beforeHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler, Map<String, Object> attributes) throws Exception {
 
-        HttpSession session = getSession(serverHttpRequest);
+        HttpSession session = getSession(request);
         logger.info("session:{}", session);
 
         if (session != null) {
@@ -32,13 +33,13 @@ public class ChatHandshakeInterceptor implements HandshakeInterceptor {
 //            String userName = (String) session.getAttribute(Constants.SESSION_USERNAME);
 //            map.put(Constants.WEBSOCKET_USERNAME, userName);
         }
-        return true;
+        return super.beforeHandshake(request, response, wsHandler, attributes);
     }
 
     @Override
-    public void afterHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler, Exception exception) {
+    public void afterHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler, Exception ex) {
+        super.afterHandshake(request, response, wsHandler, ex);
     }
-
 
     private HttpSession getSession(ServerHttpRequest request) {
         if (request instanceof ServletServerHttpRequest) {
@@ -47,5 +48,4 @@ public class ChatHandshakeInterceptor implements HandshakeInterceptor {
         }
         return null;
     }
-
 }

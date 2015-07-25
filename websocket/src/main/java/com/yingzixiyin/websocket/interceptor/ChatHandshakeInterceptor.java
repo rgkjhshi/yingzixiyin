@@ -6,7 +6,7 @@ import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.web.socket.WebSocketHandler;
-import org.springframework.web.socket.server.HandshakeInterceptor;
+import org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor;
 
 import javax.servlet.http.HttpSession;
 import java.util.Map;
@@ -16,36 +16,33 @@ import java.util.Map;
  * @date 2015-07-22
  */
 
-public class ChatHandshakeInterceptor implements HandshakeInterceptor {
+public class ChatHandshakeInterceptor extends HttpSessionHandshakeInterceptor {
     private static final Logger logger = LoggerFactory.getLogger(ChatHandshakeInterceptor.class);
 
     @Override
-    public boolean beforeHandshake(ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse,
-                                   WebSocketHandler webSocketHandler, Map<String, Object> map) throws Exception {
-
-        HttpSession session = getSession(serverHttpRequest);
-        logger.info("session:{}", session);
-
-        if (session != null) {
-            logger.info("getAttributeNames:{}", session.getAttributeNames());
-            //使用userName区分WebSocketHandler，以便定向发送消息
-//            String userName = (String) session.getAttribute(Constants.SESSION_USERNAME);
-//            map.put(Constants.WEBSOCKET_USERNAME, userName);
+    public boolean beforeHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler, Map<String, Object> attributes) throws Exception {
+        logger.info("Before Handshake");
+        if (request instanceof ServletServerHttpRequest) {
+            ServletServerHttpRequest servletRequest = (ServletServerHttpRequest) request;
+            HttpSession session = servletRequest.getServletRequest().getSession(false);
+            if (session != null) {
+                //使用userName区分WebSocketHandler，以便定向发送消息
+                String userName = (String) session.getAttribute("SESSION_USERNAME");
+                if (userName == null) {
+                    userName = "default-system";
+                }
+                attributes.put("SESSION_USERNAME", userName);
+                logger.info("SESSION_USERNAME:{}", userName);
+            }
         }
-        return true;
+        return super.beforeHandshake(request, response, wsHandler, attributes);
     }
 
     @Override
-    public void afterHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler, Exception exception) {
+    public void afterHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler, Exception ex) {
+        logger.info("After Handshake");
+        super.afterHandshake(request, response, wsHandler, ex);
     }
 
-
-    private HttpSession getSession(ServerHttpRequest request) {
-        if (request instanceof ServletServerHttpRequest) {
-            ServletServerHttpRequest serverRequest = (ServletServerHttpRequest) request;
-            return serverRequest.getServletRequest().getSession(false);
-        }
-        return null;
-    }
 
 }
