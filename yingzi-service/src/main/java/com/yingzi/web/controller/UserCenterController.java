@@ -50,6 +50,7 @@ import com.yingzixiyin.api.enums.GenderTypeEnum;
 import com.yingzixiyin.api.enums.RangeTypeEnum;
 import com.yingzixiyin.api.enums.YesOrNoEnum;
 import com.yingzixiyin.api.facade.ConsultantFacade;
+import com.yingzixiyin.api.facade.MessageFacade;
 import com.yingzixiyin.api.facade.RecordFacade;
 import com.yingzixiyin.api.facade.UserFacade;
 /***
@@ -68,6 +69,8 @@ public class UserCenterController {
 	private UserFacade userFacade;
 	@Resource
 	private RecordFacade recordFacade;
+	@Resource
+	private MessageFacade messageFacade;
 	@Resource
 	private WeixinOauthHelper weixinOauthHelper;
 	/**
@@ -254,11 +257,10 @@ public class UserCenterController {
 		boolean flag=weixinOauthHelper.oauthAndLogin(request, code);
 		if(flag){
 			UserInfo user=SessionUtil.getLoginUserToSession(request);
-			RecordQueryRequestDto rqrDto=new RecordQueryRequestDto();
-			rqrDto.setIsPaid(YesOrNoEnum.YES);
-			rqrDto.setUserId(user.getId());
-			RecordQueryResponseDto cqrDto=recordFacade.query(rqrDto);
-			
+			List<Map<String,Object>> message=messageFacade.queryConsultantAndMessageCountByUserId(user.getId());
+			if(message!=null){
+				request.setAttribute("myMessages", message);
+			}
 		}
 		return response_page;
 	}
