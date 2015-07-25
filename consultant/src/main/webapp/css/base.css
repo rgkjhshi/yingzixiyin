@@ -500,6 +500,7 @@ fieldset div {
 	height: 24px;
 	background:url(../images/close.png);
 	cursor:pointer;
+	z-index: 999;
 }
 .dialog_header{
 	position: relative;

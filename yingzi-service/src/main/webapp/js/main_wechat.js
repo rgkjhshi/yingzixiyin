@@ -29,6 +29,7 @@
 			data:{"gender":gender,"age":age,"ctype":ctype},
 			success:function(data){
 				console.log(data);
+				data = $.parseJson(data);
 				if(data.returnCode=="0"){
 					$("#consultant_list").empty();
 					if(data.returnMessage==null||data.returnMessage=='null'||(!data.list)){
