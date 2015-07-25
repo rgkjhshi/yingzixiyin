@@ -54,7 +54,7 @@
 
     <script type="text/javascript">
         var ws = null;
-        var webSocketURL = 'ws://' + window.location.host + "/websocket/echo";
+        var webSocketURL = 'ws://' + window.location.host + "/websocket/echo?phone=13121435540";
         var socketJSURL = 'ws://' + window.location.host + "/websocket/sockjs/echo";
         var transports = [];
 
@@ -67,13 +67,11 @@
         function connect() {
             if ('WebSocket' in window) {
                 ws = new WebSocket(webSocketURL);
-                alert("WebSocket")
+                alert(window.location.host)
             } else if ('MozWebSocket' in window) {
                 ws = new MozWebSocket(webSocketURL);
-                alert("MozWebSocket")
             } else {
                 ws = new SockJS(socketJSURL);
-                alert("SockJS")
             }
 
             ws.onopen = function () {
