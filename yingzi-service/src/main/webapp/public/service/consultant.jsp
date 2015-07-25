@@ -30,7 +30,7 @@
     </div>
     <div class="main">
     	<div class="choose_btn layout" id="choose">优化筛选</div>
-        <ul class="consultants layout">
+        <ul class="consultants layout" id="consultant_list">
         <c:forEach items="${consultants}" var="cinfo">
         	<li class="items">
             	<a href="consultant_deatil.do?id=${cinfo.id}">
@@ -52,7 +52,7 @@
         <ul>
             <li>
                 <div class="condi">性别：</div>
-                <label><input type="radio" value="0" checked="checked" name="gender" />不限</label>
+                <label><input type="radio" value="9" checked="checked" name="gender" />不限</label>
                 <label><input type="radio" value="1" name="gender" />男</label>
                 <label><input type="radio" value="2" name="gender" />女</label>
             </li>
