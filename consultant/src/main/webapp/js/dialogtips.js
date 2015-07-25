@@ -7,7 +7,7 @@
  */
  function init(){
  	var layer = $("<div class='layer'></div>");
- 	var tips = $('<div class="detail_box"><div class="dialog_header" node-type="header">来自&nbsp;<strong>张三</strong>&nbsp;的咨询</div><div class="dialog_body"><div class="dialog_content"><ul id="ms_inner"></ul></div><div class="dialog_reply"><div class="reply_inner"><textarea class="reply_content"></textarea><a class="send_btn">发送</a></div></div></div>');
+ 	var tips = $('<div class="detail_box"><i></i><div class="dialog_header" node-type="header">来自&nbsp;<strong>张三</strong>&nbsp;的咨询</div><div class="dialog_body"><div class="dialog_content"><ul id="ms_inner"></ul></div><div class="dialog_reply"><div class="reply_inner"><textarea class="reply_content"></textarea><a class="send_btn">发送</a></div></div></div>');
  	$("body").append(layer).append(tips);
  }
 

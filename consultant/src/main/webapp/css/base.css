@@ -492,6 +492,15 @@ fieldset div {
 	z-index: 999;
 	display:none;
 }
+.detail_box i{
+	position: absolute;
+	right: 10px;
+	top: 7px;
+	width: 24px;
+	height: 24px;
+	background:url(../images/close.png);
+	cursor:pointer;
+}
 .dialog_header{
 	position: relative;
 	border-bottom-style: solid;
