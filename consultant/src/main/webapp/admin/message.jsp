@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
@@ -13,33 +13,10 @@
         <script src="../js/jquery-1.9.1.min.js"></script>
     </head>
     <body>
-        <div class="header" role="navigation">
-            <div class="layout">
-                <img height="20" alt="Brand" src="../images/logo.png">
-                <ul class="signin">
-                    <li>
-                        <a href="../signin.jsp">登录</a>
-                    </li>
-                    <li>
-                        <a href="../signup.jsp">注册</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
+        <%@ include file="../parts/head.jsp" %> 
         <div class="info">
             <div class="layout">
-            	<div class="leftnav">
-            		<ul class="leftitem">
-            			<a href="info.jsp"><li class="detail"><i>&nbsp;</i>个人信息</li></a>
-            			<a href="secure.jsp"><li class="secure"><i>&nbsp;</i>安全中心</li></a>
-            			<a><li class="message cur"><i>&nbsp;</i>消息管理</li></a>
-                        <ul class="sms">
-                            <a><li class="active">全部咨询</li></a>
-                            <a href="message_unread.jsp"><li>进行中的咨询</li></a>
-                            <a href="message_read.jsp"><li>已结束的咨询</li></a>
-                        </ul>
-            		</ul>
-            	</div>
+            	<%@ include file="../parts/left.jsp" %> 
             	<div class="maincontent">
             		<div class="subtitle">全部消息</div>
                     <div class="message_box">
@@ -86,5 +63,10 @@
             </div>
         </div>
     <script src="../js/dialogtips.js"></script>
+    <script>
+        $("#message").addClass("cur");
+        $("#message_all").show();
+        $("#sms_all").addClass("active");
+    </script>
     </body>
 </html>

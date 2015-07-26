@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
@@ -68,32 +68,10 @@
             return param;
         }
         </script>
-        <div class="header" role="navigation">
-            <div class="layout">
-                <img height="20" alt="Brand" src="../images/logo.png">
-                <ul class="signin">
-                    <li>
-                        <a href="../signin.jsp">登录</a>
-                    </li>
-                    <li>
-                        <a href="../signup.jsp">注册</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
+        <%@ include file="../parts/head.jsp" %> 
         <div class="info">
             <div class="layout">
-            	<div class="leftnav">
-            		<ul class="leftitem">
-            			<a><li class="detail cur"><i>&nbsp;</i>个人信息</li></a>
-                        <ul class="infomation">
-                            <a href="info.jsp"><li>基本信息</li></a>
-                            <a><li class="active">头像管理</li></a>
-                        </ul>
-            			<a href="secure.jsp"><li class="secure"><i>&nbsp;</i>安全中心</li></a>
-            			<a href="message.jsp"><li class="message"><i>&nbsp;</i>消息管理</li></a>
-               		</ul>
-            	</div>
+            	<%@ include file="../parts/left.jsp" %> 
             	<div class="maincontent">
             		<div class="subtitle">上传头像</div>
                     <div class="mainup">
@@ -121,5 +99,10 @@
             </div>
         </div>
     <script src="../js/main_consultant.js"></script>
+    <script>
+        $("#info").addClass("cur");
+        $("#info_all").show();
+        $("#avatarinfo").addClass("active");
+    </script>
     </body>
 </html>

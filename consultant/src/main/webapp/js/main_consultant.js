@@ -11,6 +11,7 @@
     var loginURL = "http://" + window.location.host + "/consultant/loginApi.htm";
     var registerUrl = "http://" + window.location.host + "/consultant/registerApi.htm";
     var infoURL = "http://" + window.location.host + "/consultant/admin/queryInfoApi.htm";
+    var changePwdURL = "http://" + window.location.host + "/consultant/admin/changePasswordApi.htm"
 
     // 格式验证
     var check = function (vid) {//传入id和默认的提示
@@ -111,7 +112,9 @@
                     alert("注册成功，现在为您跳转到登录页面！");
                     window.location.href = 'http://'+window.location.host+"/consultant/signin.jsp";//跳转到后台管理页面
                 } else {
-                    alert(data.message);
+                    $("input").val("");
+                    var tips = $("<div class='fdtips errortip'>"+data.message+"</div>");
+                    $(tips).appendTo($("body")).fadeOut(3000);
                 }
             });
         }
@@ -132,7 +135,9 @@
                 if (data.status==0||data.status=="0") {
                     window.location.href = 'http://'+window.location.host+"/consultant/admin/info.jsp";//跳转到后台管理页面
                 } else {
-                    alert(data.message);
+                    $("input").val("");
+                    var tips = $("<div class='fdtips errortip'>"+data.message+"</div>");
+                    $(tips).appendTo($("body")).fadeOut(3000);
                 }
             });
         }
@@ -181,18 +186,19 @@
         //检查数据格式
         if (check("oldpwd") && check("pwd") && check("pwd2")) {
             //提交数据
-            var oldpwd = $("#oldpwd").val();
-            var pwd = $("#pwd").val();
-            /*
-             $.post(url,{"oldpwd":oldpwd,"password",pwd},function(data){
-             if(!data.status){
-             alert(data.errorCode);//输出错误原因
-             }else{
-             alert("密码修改成功！")
-             }
-             window.location.href="admin/secure.jsp";
-             });
-             */
+            var oldPassword = $("#oldpwd").val();
+            var newPassword = $("#pwd").val();
+            
+            $.post(changePwdURL,{"oldPassword":oldPassword,"newPassword":newPassword},function(data){
+                $("input").val("");
+                if(data.status==0||data.status=="0"){
+                    var tips = $("<div class='fdtips successtip'>密码修改成功！</div>");
+                }else{
+                    var tips = $("<div class='fdtips errortip'>"+data.message+"</div>");
+                }
+                $(tips).appendTo($("body")).fadeOut(3000);
+            });
+             
         }
     }
 
@@ -218,6 +224,8 @@
                         }
                     }else if(i=="rangeType"){
                         $("select[name=rangeType] option[value="+_data[i]+"]").attr("selected",true);
+                    }else if(i=="status"){
+                        console.log(_data[i]);
                     }else{
                         if($("#"+i)&&$("#"+i).length>0){
                             $("#"+i).val(_data[i]);
@@ -225,7 +233,8 @@
                     }  
                 }
             }else{
-                alert(data.message);
+                var tips = $("<div class='fdtips errortip'>"+data.message+"</div>");
+                $(tips).appendTo($("body")).fadeOut(3000);
             }
         });
     }

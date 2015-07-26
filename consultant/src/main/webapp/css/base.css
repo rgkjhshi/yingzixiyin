@@ -360,6 +360,27 @@ fieldset div {
 	border-bottom: 2px solid #d1402f;
 	box-sizing: border-box;
 }
+.fdtips{
+    width:300px;
+    text-align: center;
+    position:absolute;
+    top:40%;
+    left:50%;
+    height:50px;
+    line-height: 50px;
+    margin-left: -150px;
+    font-size: 0.85rem;
+}
+.successtip{
+	background-color: #dff0d8;
+    border-color: #B3DE8E;
+    color: #468847;
+}
+.errortip{
+	background-color: #f2dede;
+    border-color: #EFB6BE;
+    color: #b94a48;
+}
 /*message*/
 .sms,.infomation{
 	margin:0;

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
@@ -13,28 +13,10 @@
         <script src="../js/jquery-1.9.1.min.js"></script>
     </head>
     <body>
-        <div class="header" role="navigation">
-            <div class="layout">
-                <img height="20" alt="Brand" src="../images/logo.png">
-                <ul class="signin">
-                    <li>
-                        <a href="../signin.jsp">登录</a>
-                    </li>
-                    <li>
-                        <a href="../signup.jsp">注册</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
+        <%@ include file="../parts/head.jsp" %> 
         <div class="info">
             <div class="layout">
-            	<div class="leftnav">
-            		<ul class="leftitem">
-            			<a href="info.jsp"><li class="detail"><i>&nbsp;</i>个人信息</li></a>
-            			<a><li class="secure cur"><i>&nbsp;</i>安全中心</li></a>
-            			<a href="message.jsp"><li class="message"><i>&nbsp;</i>消息管理</li></a>
-            		</ul>
-            	</div>
+            	<%@ include file="../parts/left.jsp" %> 
             	<div class="maincontent">
             		<div class="subtitle">修改密码</div>
                     <div>
@@ -70,5 +52,8 @@
             </div>
         </div>
     <script src="../js/main_consultant.js"></script>
+    <script>
+        $("#secure").addClass("cur");
+    </script>
     </body>
 </html>
