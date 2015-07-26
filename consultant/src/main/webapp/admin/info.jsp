@@ -91,6 +91,13 @@
                             });
                         </script>
                         <div>
+                            <div class="sign_title">手机号码：</div>
+                            <div class="sign_content">
+                                <input type="text" readonly data-validate="phone" data-tip="手机号码" name="phone" id="phone" />
+                                <span class="tips"></span>
+                            </div>
+                        </div>
+                        <div>
                             <div class="sign_title">年龄：</div>
                             <div class="sign_content">
                                 <input type="text" data-validate="number" data-tip="年龄" name="age" id="age"  />
