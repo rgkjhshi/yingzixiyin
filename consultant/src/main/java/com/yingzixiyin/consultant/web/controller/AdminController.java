@@ -97,7 +97,7 @@ public class AdminController {
         } else {
             map.put("status", 0);
             map.put("message", "查询个人信息成功");
-            map.put("consultantInfo", info);
+            map.put("data", ConsultantInfo.toMap(info));
             logger.info("phone={}, 查询个人信息成功", phone);
         }
         return new ModelAndView(new MappingJackson2JsonView(), map);

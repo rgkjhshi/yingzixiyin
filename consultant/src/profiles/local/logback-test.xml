@@ -27,5 +27,6 @@
 
     <root level="info">
         <appender-ref ref="Console" />
+        <appender-ref ref="File" />
     </root>
 </configuration>
