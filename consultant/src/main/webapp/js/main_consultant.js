@@ -149,7 +149,7 @@
             return;
         }
         //检查数据
-        if (check("nickname") && check("name") && check("age") && check("email") && check("alipay") && check("professional") && check("background") && check("price") && check("book_time") && check("address") && check("introduce") && check("signature")) {
+        if (check("nickname") && check("name") && check("age") && check("email") && check("alipay") && check("professional") && check("background") && check("price") && check("bookTime") && check("address") && check("introduce") && check("signature")) {
 
             //格式化数据
             var _data = decodeURIComponent("{'" + $("#infoform").serialize() + "'}");
@@ -202,12 +202,31 @@
     var infoQuery = function (){
         $.post(infoURL,function(data){
             if(data.status==0||data.status=="0"){
+                $(".uc-tips").hide();
                 var _data = data.data;
-                
+                var l = _data.length;
+                for(var i in _data){
+                    if(i=="gender"){
+                        $("input[name=gender][value="+_data[i]+"]").attr("checked",true);
+                        var v = _data[i];
+                        if(v==1){
+                            $("#male i").show();
+                            $("#female i").hide();
+                        }else{
+                            $("#male i").hide();
+                            $("#female i").show();
+                        }
+                    }else if(i=="rangeType"){
+                        $("select[name=rangeType] option[value="+_data[i]+"]").attr("selected",true);
+                    }else{
+                        if($("#"+i)&&$("#"+i).length>0){
+                            $("#"+i).val(_data[i]);
+                        }
+                    }  
+                }
             }else{
                 alert(data.message);
             }
-            window.location.href="admin/secure.jsp";
         });
     }
 
