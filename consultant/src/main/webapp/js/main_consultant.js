@@ -109,11 +109,7 @@
                     alert("注册成功，现在为您跳转到登录页面！");
                     window.location.href = "../signin.jsp";//跳转到后台管理页面
                 } else {
-                    if(data.status==-1||data.status=="-1"){
-                        alert(data.message);
-                    }else{
-                        alert("注册失败，请重试！");
-                    }
+                    alert(data.message);
                 }
             });
         }
@@ -134,11 +130,7 @@
                 if (data.status==0||data.status=="0") {
                     window.location.href = "../admin/info.jsp";//跳转到后台管理页面
                 } else {
-                    if(data.status==-1||data.status=="-1"){
-                        alert(data.message);
-                    }else{
-                        alert("登录失败，请重试！");
-                    }
+                    alert(data.message);
                 }
             });
         }
