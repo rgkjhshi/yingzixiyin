@@ -28,10 +28,12 @@
 			type:"post",
 			data:{"gender":gender,"age":age,"ctype":ctype},
 			success:function(data){
+				console.log(typeof data);
 				console.log(data);
 				$("#choose_dialog").hide();
-				data = $.parseJSON(data);
-				if(data.returnCode=="0"){
+				//data = $.parseJSON(data);
+				console.log(data.returnCode);
+				if(data.returnCode==0){
 					$("#consultant_list").empty();
 					if(data.returnMessage==null||data.returnMessage=='null'||(!data.list)){
 						$("#consultant_list").append("没有符合条件的咨询师噢！");
