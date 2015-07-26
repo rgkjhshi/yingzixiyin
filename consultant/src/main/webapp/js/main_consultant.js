@@ -110,7 +110,7 @@
                     //("#sms_code").siblings(".tips").text("短信验证码输入有误");
                 } else {
                     alert("注册成功，请完善您的个人信息！")
-                    window.location.href = "admin/info.html";//跳转到后台管理页面
+                    window.location.href = "../admin/info.jsp";//跳转到后台管理页面
                 }
             });
         }
@@ -131,7 +131,7 @@
                 if (!data.status) {
                     alert(data.errorCode);//输出错误原因
                 } else {
-                    window.location.href = "admin/info.html";//跳转到后台管理页面
+                    window.location.href = "../admin/info.jsp";//跳转到后台管理页面
                 }
             });
         }
@@ -164,7 +164,7 @@
              alert(data.errorCode);//输出错误原因
              }else{
              alert("个人资料提交成功，请耐心等待审核！");
-             window.location.href="admin/info.html";//刷新页面
+             window.location.href="admin/info.jsp";//刷新页面
              //锁定个人信息，审核完成之前不允许修改，待完成
              }
              });
@@ -189,7 +189,7 @@
              }else{
              alert("密码修改成功！")
              }
-             window.location.href="admin/secure.html";
+             window.location.href="admin/secure.jsp";
              });
              */
         }

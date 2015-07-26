@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
     <head>
         <meta charset="utf-8">
@@ -20,7 +21,7 @@
                         <a>登录</a>
                     </li>
                     <li>
-                        <a href="signup.html">注册</a>
+                        <a href="signup.jsp">注册</a>
                     </li>
                 </ul>
             </div>
@@ -30,7 +31,7 @@
                 <div class="signupcontent">
                     <div class="regist_tab">
                         <ul>
-                            <a href="signup.html"><li><span>手机注册</span></li></a>
+                            <a href="signup.jsp"><li><span>手机注册</span></li></a>
                             <li class="cur"><span>立即登录</span></li>
                         </ul>
                         <p class="cur_in"></p>
@@ -54,7 +55,7 @@
                     </fieldset>
                 </div>
                 <div class="rightbar">
-                    还没有英姿账号？<br/>点击这里<a class="redlink" href="signup.html">快速注册</a>吧！
+                    还没有英姿账号？<br/>点击这里<a class="redlink" href="signup.jsp">快速注册</a>吧！
                 </div>
             </div>
         </div>

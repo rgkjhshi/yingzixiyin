@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
     <head>
         <meta charset="utf-8">
@@ -17,10 +18,10 @@
                 <img height="20" alt="Brand" src="../images/logo.png">
                 <ul class="signin">
                     <li>
-                        <a href="../signin.html">登录</a>
+                        <a href="../signin.jsp">登录</a>
                     </li>
                     <li>
-                        <a href="../signup.html">注册</a>
+                        <a href="../signup.jsp">注册</a>
                     </li>
                 </ul>
             </div>
@@ -32,10 +33,10 @@
             			<a><li class="detail cur"><i>&nbsp;</i>个人信息</li></a>
                         <ul class="infomation">
                             <a><li class="active">基本信息</li></a>
-                            <a href="avatar.html"><li>头像管理</li></a>
+                            <a href="avatar.jsp"><li>头像管理</li></a>
                         </ul>
-            			<a href="secure.html"><li class="secure"><i>&nbsp;</i>安全中心</li></a>
-            			<a href="message.html"><li class="message"><i>&nbsp;</i>消息管理</li></a>
+            			<a href="secure.jsp"><li class="secure"><i>&nbsp;</i>安全中心</li></a>
+            			<a href="message.jsp"><li class="message"><i>&nbsp;</i>消息管理</li></a>
                		</ul>
             	</div>
             	<div class="maincontent">
