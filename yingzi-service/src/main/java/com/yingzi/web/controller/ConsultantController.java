@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.math.BigDecimal;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
@@ -26,10 +27,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.google.common.collect.Maps;
+import com.gson.WeChat;
+import com.gson.bean.PreOrder;
 import com.gson.oauth.Oauth;
+import com.gson.oauth.Pay;
+import com.yingzi.web.annotation.PowerCheck;
 import com.yingzi.web.enums.AgeEnum;
+import com.yingzi.web.enums.PowerCheckEnum;
 import com.yingzi.web.helper.WeixinOauthHelper;
 import com.yingzi.web.utils.JsonUtil;
+import com.yingzi.web.utils.MD5Utils;
+import com.yingzi.web.utils.NetUtils;
+import com.yingzi.web.utils.RandomUtil;
 import com.yingzi.web.utils.ResponseUtils;
 import com.yingzi.web.utils.SessionUtil;
 import com.yingzixiyin.api.dto.ConsultantInfo;
@@ -175,17 +185,68 @@ public class ConsultantController {
 		return response_page;
 	}
 	@RequestMapping(value="consultant_online.do")
-	public String consultantByOnline(HttpServletRequest request,HttpServletResponse response,String consultant_id) throws IOException{
+	@PowerCheck(type=PowerCheckEnum.LOGIN)
+	public String consultantByOnline(HttpServletRequest request,HttpServletResponse response,Long consultant_id) throws IOException{
 		logger.info("---用户调用咨询师进行线上咨询信息接口页面----");
 		String response_page="public/service/online";
-		
+		ConsultantQueryRequestDto cqrDto=new ConsultantQueryRequestDto();
+		cqrDto.setId(consultant_id);
+		ConsultantInfo cinfo=consultantFacade.queryOne(cqrDto);
+		if(cinfo==null){
+			//做异常处理
+		}
+		PreOrder pro=buildPreOrderVo(request, cinfo);
+		String xml="";
+		try {
+			xml = pro.serializeToXml();
+		} catch (IllegalArgumentException | IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		logger.info("得到预下单请求微信xml："+xml);
 		return response_page;
 	}
 	@RequestMapping(value="consultant_offline.do")
+	@PowerCheck(type=PowerCheckEnum.LOGIN)
 	public String consultantByOffline(HttpServletRequest request,HttpServletResponse response,String consultant_id) throws IOException{
 		logger.info("---用户调用咨询师进行线下咨询信息接口页面----");
 		String response_page="public/service/offline";
-		
+		String ip =NetUtils.getRemoteHost(request);
+		logger.info("得到用户IP："+ip);
 		return response_page;
+	}
+	private PreOrder buildPreOrderVo(HttpServletRequest request,ConsultantInfo cinfo) throws UnsupportedEncodingException{
+		String appid=WeChat.getAppId();
+		String mch_id=WeChat.getMch_id();
+		String device_info="WEB";
+		String nonce_str=RandomUtil.generateCode();
+		String body="线上情感咨询";
+		Map<String,String> signMap=Maps.newHashMap();
+		signMap.put("appid", appid);
+		signMap.put("mch_id", mch_id);
+		signMap.put("device_info", device_info);
+		signMap.put("nonce_str", nonce_str);
+		signMap.put("body", body);
+		String sign=MD5Utils.getMD5(Pay.createSign(signMap, true));
+//		String detail="具体情感咨询用户线上和咨询师收费沟通";
+//		String attach="附加信息";
+		String out_trade_no=RandomUtil.generateOrderId();
+		String fee_type="CNY";
+		int total_fee= 0;
+		if(null==cinfo||null==cinfo.getPrice()){
+			return null;
+		}
+		total_fee=cinfo.getPrice().multiply(new BigDecimal(100)).intValue();
+		String spbill_create_ip=NetUtils.getRemoteHost(request);
+		String trade_type="JSAPI";
+		String notify_url=WeChat.getNotifyUrl();
+		String limit_pay="no_credit";
+		String openid=SessionUtil.getLoginUserToSession(request).getOpenId();
+		String product_id=RandomUtil.generateProductId();
+		PreOrder po=new PreOrder(appid, mch_id, device_info, nonce_str,
+								sign, body, out_trade_no, fee_type, total_fee, 
+								spbill_create_ip, notify_url, trade_type, product_id, 
+								limit_pay, openid);
+		return po;
 	}
 }

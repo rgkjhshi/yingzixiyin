@@ -15,10 +15,12 @@ import com.gson.inf.MessageProcessingHandler;
 import com.gson.oauth.*;
 import com.gson.util.*;
 import com.thoughtworks.xstream.XStream;
+
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 
 import javax.servlet.http.HttpServletRequest;
+
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -331,4 +333,12 @@ public class WeChat {
         }
         return false;
     }
+	public static String getMch_id() {
+		String mch_id = ConfKit.get("mch_id");
+		return mch_id;
+	}
+	public static String getNotifyUrl() {
+		String mch_id = ConfKit.get("notify_url");
+		return mch_id;
+	}
 }

@@ -1,6 +1,10 @@
 package com.yingzi.web.utils;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Random;
+
+import com.mysql.fabric.xmlrpc.base.Data;
 
 public class RandomUtil {
 	public static Random r = new Random(System.currentTimeMillis());
@@ -46,7 +50,22 @@ public class RandomUtil {
         int code = (int)((Math.random()*9+1)*100000);
         return Integer.valueOf(code).toString();
     }
-	
+	public static String generateOrderId(){
+		long time=System.currentTimeMillis();
+		Date d=new Date(time);
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMddHHmmss");
+		String orderId=sdf.format(d)+"CP"+generateCode();
+		return orderId;
+		
+	}
+	public static String generateProductId(){
+		long time=System.currentTimeMillis();
+		Date d=new Date(time);
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMddHHmmss");
+		String orderId=sdf.format(d)+"PO"+generateCode();
+		return orderId;
+		
+	}
 	public static void main(String[] args) {
 		System.out.println(generateCode());
 	}
