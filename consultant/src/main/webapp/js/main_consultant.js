@@ -105,12 +105,15 @@
             var phone = $.trim($("#phone").val());
             var pwd = $.trim($("#pwd").val());
             $.post(registerUrl, {"phone": phone, "password": pwd, "checkCode": sms_code}, function (data) {
-                if (!data.status) {
-                    alert(data.errorCode);//输出错误原因
-                    //("#sms_code").siblings(".tips").text("短信验证码输入有误");
+                if (data.status==0||data.status=="0") {
+                    alert("注册成功，现在为您跳转到登录页面！");
+                    window.location.href = "../signin.jsp";//跳转到后台管理页面
                 } else {
-                    alert("注册成功，请完善您的个人信息！")
-                    window.location.href = "../admin/info.jsp";//跳转到后台管理页面
+                    if(data.status==-1||data.status=="-1"){
+                        alert(data.message);
+                    }else{
+                        alert("注册失败，请重试！");
+                    }
                 }
             });
         }
@@ -128,10 +131,14 @@
             var phone = $.trim($("#phone").val());
             var pwd = $.trim($("#pwd").val());
             $.post(loginURL, {"phone": phone, "password": pwd}, function (data) {
-                if (!data.status) {
-                    alert(data.errorCode);//输出错误原因
-                } else {
+                if (data.status==0||data.status=="0") {
                     window.location.href = "../admin/info.jsp";//跳转到后台管理页面
+                } else {
+                    if(data.status==-1||data.status=="-1"){
+                        alert(data.message);
+                    }else{
+                        alert("登录失败，请重试！");
+                    }
                 }
             });
         }
