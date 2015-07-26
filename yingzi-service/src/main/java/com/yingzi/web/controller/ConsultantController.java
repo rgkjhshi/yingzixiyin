@@ -228,7 +228,7 @@ public class ConsultantController {
 		signMap.put("nonce_str", nonce_str);
 		signMap.put("body", body);
 		String sign=MD5Utils.getMD5(Pay.createSign(signMap, true));
-//		String detail="具体情感咨询用户线上和咨询师收费沟通";
+		String detail="具体情感咨询用户线上和咨询师收费沟通";
 //		String attach="附加信息";
 		String out_trade_no=RandomUtil.generateOrderId();
 		String fee_type="CNY";
