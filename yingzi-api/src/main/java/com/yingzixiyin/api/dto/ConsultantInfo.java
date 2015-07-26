@@ -190,6 +190,9 @@ public class ConsultantInfo implements Serializable {
     }
 
     public static Map<String, Object> toMap(ConsultantInfo info) {
+        if (null == info) {
+            return null;
+        }
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("id", info.getId());
         map.put("phone", info.getPhone());
@@ -197,7 +200,7 @@ public class ConsultantInfo implements Serializable {
         map.put("alipay", info.getAlipay());
         map.put("nickname", info.getNickname());
         map.put("name", info.getName());
-        map.put("gender", info.getGender().getValue());
+        map.put("gender", null == info.getGender() ? 0 : info.getGender().getValue());
         map.put("age", info.getAge());
         map.put("address", info.getAddress());
         map.put("professional", info.getProfessional());
@@ -206,7 +209,7 @@ public class ConsultantInfo implements Serializable {
         map.put("price", info.getPrice());
         map.put("introduce", info.getIntroduce());
         map.put("signature", info.getSignature());
-        map.put("rangeType", info.getRangeType().getValue());
+        map.put("rangeType", null == info.getRangeType() ? 0 : info.getRangeType().getValue());
         map.put("avatar", info.getAvatar());
         map.put("status", info.getStatus());
         return map;

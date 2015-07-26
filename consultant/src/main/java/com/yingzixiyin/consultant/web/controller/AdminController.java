@@ -13,6 +13,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Map;
 
@@ -87,6 +89,7 @@ public class AdminController {
     public ModelAndView queryInfo(HttpSession session) {
         Map<String, Object> map = Maps.newHashMap();
         String phone = (String)session.getAttribute("session_phone");
+        logger.info("queryInfoApi.htm, phone={}", phone);
         // 查询
         ConsultantQueryRequestDto queryRequestDto = new ConsultantQueryRequestDto();
         queryRequestDto.setPhone(phone);
@@ -102,5 +105,18 @@ public class AdminController {
             logger.info("phone={}, 查询个人信息成功", phone);
         }
         return new ModelAndView(new MappingJackson2JsonView(), map);
+    }
+
+    @RequestMapping("/chatApi.htm")
+    public void chat(HttpServletRequest request, HttpServletResponse response,
+                     @RequestParam(value = "recordId", required = true) Long recordId)  throws Exception {
+        HttpSession session = request.getSession(false);
+        if (null == session || null == session.getAttribute("session_phone")) {
+            logger.error("chatApi.htm, 无法获取session_phone, recordId={}", recordId);
+            return;
+        }
+        session.setAttribute("session_recordId", recordId);
+        logger.info("chatApi.htm, phone={}, recordId={}", session.getAttribute("session_phone"), recordId);
+        response.sendRedirect("/admin/chat.jsp");
     }
 }

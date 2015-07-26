@@ -6,6 +6,7 @@ package com.yingzixiyin.api.enums;
  */
 public enum RangeTypeEnum {
 
+    UNKNOWN(0, "未知"),
 
     ONE(1, "恋爱关系"),
 
