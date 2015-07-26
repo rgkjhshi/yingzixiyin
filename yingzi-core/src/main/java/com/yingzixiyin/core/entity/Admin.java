@@ -1,5 +1,11 @@
 package com.yingzixiyin.core.entity;
 
+import java.util.List;
+
+import com.google.common.collect.Lists;
+import com.yingzixiyin.api.dto.AdminInfo;
+import com.yingzixiyin.api.dto.AdminQueryRequestDto;
+
 /**
  * 用户
  * @author song.shi
@@ -35,4 +41,36 @@ public class Admin {
     public void setPassword(String password) {
         this.password = password;
     }
+
+	public static Admin getBean(AdminInfo adminInfo) {
+		Admin admin=new Admin();
+		admin.setId(adminInfo.getId());
+		admin.setUsername(adminInfo.getUsername());
+		admin.setPassword(adminInfo.getPassword());
+		return admin;
+	}
+
+	public static Admin getBean(AdminQueryRequestDto requestDto) {
+		Admin admin=new Admin();
+		admin.setId(requestDto.getId());
+		admin.setUsername(requestDto.getUsername());
+		admin.setPassword(requestDto.getPassword());
+		return admin;
+	}
+
+	public static AdminInfo translateBean(Admin adres) {
+		AdminInfo adminInfo=new AdminInfo();
+		adminInfo.setId(adres.getId());
+		adminInfo.setUsername(adres.getUsername());
+		adminInfo.setPassword(adres.getPassword());
+		return adminInfo;
+	}
+
+	public static List<AdminInfo> translateBeanList(List<Admin> list) {
+		List<AdminInfo> res=Lists.newArrayList();
+		for(Admin admin:list){
+			res.add(translateBean(admin));
+		}
+		return res;
+	}
 }

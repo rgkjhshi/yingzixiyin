@@ -16,6 +16,7 @@
         <mapper resource="sqlmaps/Message.xml" />
         <mapper resource="sqlmaps/Record.xml" />
         <mapper resource="sqlmaps/User.xml" />
+        <mapper resource="sqlmaps/Admin.xml" />
         <mapper resource="sqlmaps/Code.xml" />
     </mappers>
 

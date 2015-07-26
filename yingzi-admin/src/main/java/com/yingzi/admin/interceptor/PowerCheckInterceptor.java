@@ -9,8 +9,10 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.yingzi.admin.annotation.PowerCheck;
+import com.yingzi.admin.constant.LoginConstant;
 import com.yingzi.admin.enums.PowerCheckEnum;
 import com.yingzi.admin.utils.SessionUtil;
+import com.yingzixiyin.api.dto.AdminInfo;
 import com.yingzixiyin.api.dto.BaseResponseDto;
 import com.yingzixiyin.api.dto.UserInfo;
 import com.yingzixiyin.core.entity.Admin;
@@ -18,7 +20,6 @@ import com.yingzixiyin.core.entity.Admin;
 public class PowerCheckInterceptor extends HandlerInterceptorAdapter {
 	private static Logger logger = LoggerFactory
 			.getLogger(PowerCheckInterceptor.class);
-	private static final String LOGIN_URL = "q.jsp";  
 	public String[] allowUrls;// 还没发现可以直接配置不拦截的资源，所以在代码里面来排除
 
 	public void setAllowUrls(String[] allowUrls) {
@@ -46,9 +47,9 @@ public class PowerCheckInterceptor extends HandlerInterceptorAdapter {
 			}
 			PowerCheckEnum pce = check.type();
 			if (pce.getId() == PowerCheckEnum.LOGIN.getId()) {
-				Admin user = SessionUtil.getLoginAdminToSession(request);
+				AdminInfo user = SessionUtil.getLoginAdminToSession(request);
 				if (user == null) {
-					response.sendRedirect(request.getContextPath()+"/"+LOGIN_URL);
+					response.sendRedirect(request.getContextPath()+"/"+LoginConstant.NO_LOGIN_URL);
 					return false;
 				}
 			} else if (pce.getId() == PowerCheckEnum.POWER.getId()) {
