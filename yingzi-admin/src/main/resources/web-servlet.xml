@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<beans xmlns="http://www.springframework.org/schema/beans"  
+       xmlns:mvc="http://www.springframework.org/schema/mvc"  
+       xmlns:context="http://www.springframework.org/schema/context"  
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+       xsi:schemaLocation="http://www.springframework.org/schema/beans  
+            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd  
+            http://www.springframework.org/schema/context   
+            http://www.springframework.org/schema/context/spring-context-3.0.xsd  
+            http://www.springframework.org/schema/mvc  
+            http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">  
+  
+    <!-- Enables the Spring MVC @Controller programming model -->  
+    <mvc:annotation-driven />  
+      
+    <context:component-scan base-package="com.yingzi.admin" />  
+      
+    <!-- Handles HTTP GET requests for /static/** by efficiently serving up static resources in the ${webappRoot}/static/ directory -->  
+    <mvc:resources mapping="/static/**" location="/static/" />  
+  
+  	<mvc:interceptors>
+  		<mvc:interceptor>
+			<mvc:mapping path="/*/*.do" />
+			<bean class="com.yingzi.admin.interceptor.PowerCheckInterceptor">
+				<property name="allowUrls">
+					<list>
+						<!-- 如果请求中包含以下路径，则不进行拦截 -->
+						<value>/js</value>
+						<value>/css</value>
+						<value>/image</value>
+						<value>/images</value>
+						<value>/public</value>
+					</list>
+				</property>
+			</bean>
+		</mvc:interceptor>
+  	</mvc:interceptors>
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">    
+        <property name="prefix" value="/" />    
+        <property name="suffix" value=".jsp" />    
+    </bean>    
+  
+</beans>  
