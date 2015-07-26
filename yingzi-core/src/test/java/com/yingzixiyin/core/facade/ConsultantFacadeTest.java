@@ -46,8 +46,6 @@ public class ConsultantFacadeTest extends BaseTest {
 
     @Test
     public void getConsultantListTest() {
-        logger.debug("debug");
-        logger.info("info");
         ConsultantQueryRequestDto requestDto = new ConsultantQueryRequestDto();
         requestDto.setRangeType(RangeTypeEnum.ONE);
         ConsultantQueryResponseDto responseDto =  consultantFacade.query(requestDto);

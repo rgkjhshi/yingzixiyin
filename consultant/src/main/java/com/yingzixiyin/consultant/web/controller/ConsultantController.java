@@ -51,9 +51,11 @@ public class ConsultantController {
         if (null == info) {
             map.put("status", -1);
             map.put("message", "用户名或密码不正确");
+            logger.info("登陆失败");
         } else {
             map.put("status", 0);
             map.put("message", "登陆成功");
+            logger.info("登陆成功");
         }
         Cookie cookie = new Cookie("cookie_phone", phone);
         response.addCookie(cookie);

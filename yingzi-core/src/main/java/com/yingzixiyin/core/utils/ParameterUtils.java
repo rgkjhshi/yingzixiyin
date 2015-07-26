@@ -55,10 +55,43 @@ public class ParameterUtils {
                     try {
                         notNull(field.get(obj), field.getName() + "can not be null");
                     } catch (IllegalAccessException e) {
-                        throw new IllegalArgumentException(e);
+                        throw new IllegalArgumentException("对象的属性不可访问");
                     }
                 }
             }
+        }
+    }
+
+    /**
+     * 检查DTO对象本身不是null,且有属性不是null, 即该对象的所有属性都是null时抛出异常
+     * 该方法不适用于所有对象，仅适用于自定义的DTO，即只包含普通成员那种
+     *
+     * @param obj
+     */
+    public static void notAllNull(Object obj) {
+        notNull(obj, "对象本身不能为null");
+        Class clazz = obj.getClass();
+        int flag = 0;
+        if (clazz != null) {
+            Field[] fields = clazz.getDeclaredFields();  // 获取所有成员
+            for (Field field : fields) {
+                // 只检查非static成员和非primitive成员
+                if (!Modifier.isStatic(field.getModifiers())  // 非static成员
+                        && !field.getType().isPrimitive()) {  // 非原始类型(int)
+                    field.setAccessible(true);
+                    try {
+                        if ( null != field.get(obj)) {
+                            flag = 1;
+                            break;
+                        }
+                    } catch (IllegalAccessException e) {
+                        throw new IllegalArgumentException("对象的属性不可访问");
+                    }
+                }
+            }
+        }
+        if (0 == flag) {
+            throw new IllegalArgumentException("的所有属性均为null");
         }
     }
 

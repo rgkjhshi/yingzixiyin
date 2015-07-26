@@ -281,4 +281,29 @@ public class Consultant {
     public void setStatus(Integer status) {
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return "Consultant{" +
+                "id=" + id +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", nickname='" + nickname + '\'' +
+                ", name='" + name + '\'' +
+                ", gender=" + gender +
+                ", age=" + age +
+                ", address='" + address + '\'' +
+                ", alipay='" + alipay + '\'' +
+                ", professional='" + professional + '\'' +
+                ", background='" + background + '\'' +
+                ", bookTime='" + bookTime + '\'' +
+                ", price=" + price +
+                ", introduce='" + introduce + '\'' +
+                ", signature='" + signature + '\'' +
+                ", rangeType=" + rangeType +
+                ", avatar='" + avatar + '\'' +
+                ", status=" + status +
+                '}';
+    }
 }

@@ -26,6 +26,6 @@
     <logger name="java.sql" level="DEBUG" />
 
     <root level="info">
-        <appender-ref ref="File" />
+        <appender-ref ref="Console" />
     </root>
 </configuration>

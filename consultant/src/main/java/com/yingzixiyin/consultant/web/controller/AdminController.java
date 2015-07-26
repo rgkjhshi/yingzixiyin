@@ -5,9 +5,11 @@ import com.yingzixiyin.api.dto.BaseResponseDto;
 import com.yingzixiyin.api.dto.ConsultantInfo;
 import com.yingzixiyin.api.dto.ConsultantQueryRequestDto;
 import com.yingzixiyin.api.facade.ConsultantFacade;
+import com.yingzixiyin.core.entity.Consultant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
@@ -30,33 +32,35 @@ public class AdminController {
     ConsultantFacade consultantFacade;
 
     @RequestMapping("/updateInfoApi.htm")
-    public ModelAndView login(HttpSession session, ConsultantInfo consultantInfo) {
-        logger.info("updateInfoApi.htm, consultantInfo={}", consultantInfo);
+    public ModelAndView updateInfo(HttpSession session, Consultant consultant) {
+        logger.info("updateInfoApi.htm, consultant={}", consultant);
         Map<String, Object> map = Maps.newHashMap();
-        String phone = (String)session.getAttribute("session_phone");
-        logger.info("session_phone={}", phone);
         // 查询
         ConsultantQueryRequestDto queryRequestDto = new ConsultantQueryRequestDto();
-        queryRequestDto.setPhone(phone);
+        queryRequestDto.setPhone(consultant.getPhone());
         ConsultantInfo info = consultantFacade.queryOne(queryRequestDto);
-//        consultantInfo.setId(info.getId());
         // 登陆结果
         if (null == info) {
             map.put("status", -1);
-            map.put("message", "用户名或密码不正确");
+            map.put("message", "未查到用户相关信息");
+            logger.info("修改信息失败");
         } else {
-            map.put("status", 0);
-            map.put("message", "登陆成功");
+            ConsultantInfo updateInfo = Consultant.translateBean(consultant);
+            updateInfo.setId(info.getId());
+            BaseResponseDto responseDto = consultantFacade.update(updateInfo);
+            map.put("status", responseDto.getReturnCode());
+            map.put("message", responseDto.getReturnMessage());
+            logger.info(responseDto.getReturnMessage());
         }
         return new ModelAndView(new MappingJackson2JsonView(), map);
     }
 
     @RequestMapping("/changePasswordApi.htm")
-    public ModelAndView login(HttpSession session, String oldPassword, String newPassword) {
+    public ModelAndView changePassword(@RequestParam(value = "phone", required = true) String phone,
+                                       @RequestParam(value = "oldPassword", required = true) String oldPassword,
+                                       @RequestParam(value = "newPassword", required = true) String newPassword) {
         Map<String, Object> map = Maps.newHashMap();
-        String phone = (String)session.getAttribute("session_phone");
-        logger.info("sessionAttributeNames={}", session.getAttributeNames());
-        logger.info("session_phone={}", phone);
+        logger.info("phone={}", phone);
         // 查询
         ConsultantQueryRequestDto queryRequestDto = new ConsultantQueryRequestDto();
         queryRequestDto.setPhone(phone);
@@ -65,6 +69,7 @@ public class AdminController {
         if (null == info) {
             map.put("status", -1);
             map.put("message", "旧密码不正确");
+            logger.info("修改密码失败");
         } else {
             ConsultantInfo consultantInfo = new ConsultantInfo();
             consultantInfo.setId(info.getId());
@@ -72,6 +77,7 @@ public class AdminController {
             BaseResponseDto responseDto = consultantFacade.update(consultantInfo);
             map.put("status", responseDto.getReturnCode());
             map.put("message", responseDto.getReturnMessage());
+            logger.info(responseDto.getReturnMessage());
         }
         return new ModelAndView(new MappingJackson2JsonView(), map);
     }
