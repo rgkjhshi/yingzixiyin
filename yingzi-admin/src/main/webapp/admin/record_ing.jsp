@@ -1,3 +1,8 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>  
+<%
+	String path=request.getContextPath();    
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -26,22 +31,22 @@
             			<a><li class="message cur"><i>&nbsp;</i>咨询管理</li></a>
                         <ul class="sms">
                             <a><li>全部咨询</li></a>
-                            <a href="record_ing.html"><li>进行中的咨询</li></a>
-                            <a href="record_end.html"><li class="active">已结束的咨询</li></a>
+                            <a href="record_ing.html"><li class="active">进行中的咨询</li></a>
+                            <a href="record_end.html"><li>已结束的咨询</li></a>
                         </ul>
             		</ul>
             	</div>
             	<div class="maincontent">
-            		<div class="subtitle">已结束的咨询</div>
+            		<div class="subtitle">进行中的咨询</div>
                     <table>
                         <tr>
-                            <th>咨询师</th><th>用户</th><th>开始时间</th><th>结束时间</th><th>结束者</th><th>操作</th>
+                            <th>咨询师</th><th>用户</th><th>开始时间</th><th>操作</th>
                         </tr>
                         <tr>
-                            <td>zhangsan</td><td>小白</td><td>2015-07-12 11:23:00</td><td>2015-07-12 11:23:00</td><td>zhangsan</td><td><a>结束</a></td>
+                            <td>zhangsan</td><td>小白</td><td>2015-07-12 11:23:00</td><td><a>结束</a></td>
                         </tr>
                         <tr>
-                            <td>lisi</td><td>二傻瓜</td><td>2015-07-13 11:23:00</td><td>2015-07-12 11:23:00</td><td>二傻瓜</td><td><a>重新开启</a></td>
+                            <td>lisi</td><td>二傻瓜</td><td>2015-07-13 11:23:00</td><td><a>重新开启</a></td>
                         </tr>
                     </table>
             	</div>

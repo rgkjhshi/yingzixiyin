@@ -69,4 +69,7 @@
 	       <taglib-location>/WEB-INF/tld/fn.tld</taglib-location>  
 	   	</taglib>  
 	</jsp-config>
+	<welcome-file-list>
+		<welcome-file>signin.jsp</welcome-file>
+	</welcome-file-list>
 </web-app>
