@@ -8,9 +8,7 @@ import com.yingzixiyin.api.facade.ConsultantFacade;
 import com.yingzixiyin.core.entity.Consultant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
@@ -35,9 +33,11 @@ public class AdminController {
     public ModelAndView updateInfo(HttpSession session, Consultant consultant) {
         logger.info("updateInfoApi.htm, consultant={}", consultant);
         Map<String, Object> map = Maps.newHashMap();
+        String phone = (String)session.getAttribute("session_phone");
+
         // 查询
         ConsultantQueryRequestDto queryRequestDto = new ConsultantQueryRequestDto();
-        queryRequestDto.setPhone(consultant.getPhone());
+        queryRequestDto.setPhone(phone);
         ConsultantInfo info = consultantFacade.queryOne(queryRequestDto);
         // 登陆结果
         if (null == info) {

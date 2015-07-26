@@ -14,6 +14,7 @@ import java.util.List;
 
 /**
  * 咨询师
+ *
  * @author song.shi
  * @date 2015-07-02
  */
@@ -86,6 +87,7 @@ public class Consultant {
 
     /**
      * 将bean类型转换成api的dto中对应的的类型
+     *
      * @param consultant 需要转换的对象
      * @return 返回对应的类型
      */
@@ -99,7 +101,7 @@ public class Consultant {
         consultantInfo.setEmail(consultant.getEmail());
         consultantInfo.setNickname(consultant.getNickname());
         consultantInfo.setName(consultant.getName());
-        consultantInfo.setGender(GenderTypeEnum.toEnum(consultant.getGender()));
+        consultantInfo.setGender(null == consultant.getGender() ? GenderTypeEnum.UNKNOWN : GenderTypeEnum.toEnum(consultant.getGender()));
         consultantInfo.setAge(consultant.getAge());
         consultantInfo.setAddress(consultant.getAddress());
         consultantInfo.setProfessional(consultant.getProfessional());
@@ -109,13 +111,14 @@ public class Consultant {
         consultantInfo.setIntroduce(consultant.getIntroduce());
         consultantInfo.setSignature(consultant.getSignature());
         consultantInfo.setAvatar(consultant.getAvatar());
-        consultantInfo.setRangeType(RangeTypeEnum.toEnum(consultant.getRangeType()));
-        consultantInfo.setStatus(StatusEnum.toEnum(consultant.getStatus()));
+        consultantInfo.setRangeType(null == consultant.getRangeType() ? RangeTypeEnum.ONE : RangeTypeEnum.toEnum(consultant.getRangeType()));
+        consultantInfo.setStatus(null == consultant.getStatus() ? StatusEnum.INIT : StatusEnum.toEnum(consultant.getStatus()));
         return consultantInfo;
     }
 
     /**
      * 将bean的list转换成api的dto中对应的的类型的list
+     *
      * @param consultantList 需要转换的beanList
      * @return 对应的类型的list
      */

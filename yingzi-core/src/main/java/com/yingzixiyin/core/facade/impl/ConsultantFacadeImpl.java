@@ -57,6 +57,7 @@ public class ConsultantFacadeImpl implements ConsultantFacade {
             ParameterUtils.notNull(consultantInfo.getId(), "id不能为null");
             consultantBiz.update(consultantInfo);
             responseDto.setReturnCode(0);
+            responseDto.setReturnMessage("修改成功");
         } catch (IllegalArgumentException e) {
             logger.info("参数异常:" + e.getMessage());
             responseDto.setReturnCode(-1);
@@ -74,7 +75,7 @@ public class ConsultantFacadeImpl implements ConsultantFacade {
         logger.info("收到参数:" + requestDto);
         ConsultantInfo consultantInfo = null;
         try {
-            ParameterUtils.notNull(requestDto, "ConsultantRequestDto不能为null");
+            ParameterUtils.notAllNull(requestDto);
             consultantInfo = consultantBiz.getConsultant(requestDto);
         } catch (IllegalArgumentException e) {
             logger.info("参数异常:" + e.getMessage());

@@ -13,8 +13,6 @@ import org.slf4j.LoggerFactory;
 
 import javax.annotation.Resource;
 import java.util.Date;
-import java.util.List;
-import java.util.Map;
 
 /**
  * 
@@ -56,7 +54,7 @@ public class MessageFacadeTest extends BaseTest {
     }
     @Test
     public void getConsultantAndMessageCountByUserId() {
-        List<Map<String,Object>>  res =  messageFacade.queryConsultantAndMessageCountByUserId(3l);
-        logger.info(res.toString());
+//        List<Map<String,Object>>  res =  messageFacade.queryConsultantAndMessageCountByUserId(3l);
+//        logger.info(res.toString());
     }
 }

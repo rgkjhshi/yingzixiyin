@@ -42,7 +42,6 @@ public class LoginFilter implements Filter {
             response.setHeader("Content-type","application/json;charset=UTF-8");
             response.getOutputStream().write(new Gson().toJson(map).getBytes("UTF-8"));
         } else {
-            request.setAttribute("phone", session.getAttribute("session_phone"));
             filterChain.doFilter(request, response);
         }
     }
