@@ -100,10 +100,11 @@ public class JsonUtil {
 		sb.append("{");
 		sb.append("\"returnCode\":"+resDto.getReturnCode()+",");
 		sb.append("\"returnMessage\":\""+resDto.getReturnMessage()+"\",");
+		sb.append("\"list\":[");
 		List<ConsultantInfo> list=resDto.getConsultantInfoList();
 		
 		if(null!=list&&list.size()>0){
-			sb.append("\"list\":[");
+			
 			for(int i=0;i<list.size();i++){
 				try {
 					if(i<list.size()-1){
@@ -117,8 +118,8 @@ public class JsonUtil {
 					e.printStackTrace();
 				}
 			}
-			sb.append("]");
 		}
+		sb.append("]");
 		sb.append("}");
 		return sb.toString();
 	}

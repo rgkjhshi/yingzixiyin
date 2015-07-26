@@ -260,7 +260,7 @@
                 AND <![CDATA[ age >= #{minAge} ]]>
             </if>
             <if test="maxAge != null">
-                AND <![CDATA[ age <= maxAge ]]>
+                AND <![CDATA[ age <= #{maxAge} ]]>
             </if>
         </where>
     </select>
