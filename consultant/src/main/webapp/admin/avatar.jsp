@@ -75,6 +75,13 @@
             	<div class="maincontent">
             		<div class="subtitle">上传头像</div>
                     <div class="mainup">
+                        <ul class="up_tips">
+                            <li class="uc-tips">
+                                IE浏览器下无法进行头像实时预览，建议您使用chrome、firefox等浏览器上传。
+                                <br/>
+                                建议上传头像长宽比例为1:1。上传图片大小不能超过1M。
+                            </li>
+                        </ul>
                         <form enctype="multipart/form-data">
                             <div class="sign_content file_upload"><span id="chooseImgText">选择图片</span>
                                 <input type="file" id="filepath" onchange="previewImage(this)"/>
@@ -82,11 +89,6 @@
                             <div class="avatar_preview" id="preview"><img id="imghead" src="" /></div>
                             <div id="upload_btn">保存</div>
                         </form>
-                        <ul class="up_tips">
-                            <li class="uc-tips">IE浏览器下无法进行头像实时预览，建议您使用chrome、firefox等浏览器上传。</li>
-                            <li class="uc-tips">建议上传头像长宽比例为1:1。</li>
-                            <li class="uc-tips">上传图片大小不能超过1M。</li>
-                        </ul>
                     </div>
             	</div>
             </div>

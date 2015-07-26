@@ -666,11 +666,9 @@ fieldset div {
 	position:relative;
 }
 .up_tips{
-	position:absolute;
-	right:20px;
-	width:50%;
+	width:100%;
 	margin:0;
-	top:10px;
+	padding-left: 0;
 }
 .up_tips li.uc-tips{
 	list-style: none;
