@@ -6,9 +6,11 @@
  */
 (function () {
 
+    var currentURL = window.location.href;
     var getCheckCodeURL = "http://" + window.location.host + "/consultant/getCheckCodeApi.htm";
     var loginURL = "http://" + window.location.host + "/consultant/loginApi.htm";
     var registerUrl = "http://" + window.location.host + "/consultant/registerApi.htm";
+    var infoURL = "http://" + window.location.host + "/consultant/admin/queryInfoApi.htm";
 
     // 格式验证
     var check = function (vid) {//传入id和默认的提示
@@ -194,6 +196,23 @@
         }
     }
 
-    $("#modPwd").on("click",modPwd);    
+    $("#modPwd").on("click",modPwd);  
+
+    //查询个人基本信息
+    var infoQuery = function (){
+        $.post(infoURL,function(data){
+            if(data.status==0||data.status=="0"){
+                var _data = data.data;
+                
+            }else{
+                alert(data.message);
+            }
+            window.location.href="admin/secure.jsp";
+        });
+    }
+
+    if(currentURL.indexOf('admin/info')>0){
+        infoQuery();
+    }
 
 })();

@@ -56,15 +56,16 @@ public class AdminController {
     }
 
     @RequestMapping("/changePasswordApi.htm")
-    public ModelAndView changePassword(@RequestParam(value = "phone", required = true) String phone,
+    public ModelAndView changePassword(HttpSession session,
                                        @RequestParam(value = "oldPassword", required = true) String oldPassword,
                                        @RequestParam(value = "newPassword", required = true) String newPassword) {
         Map<String, Object> map = Maps.newHashMap();
-        logger.info("phone={}", phone);
+        String phone = (String)session.getAttribute("session_phone");
+        logger.info("changePasswordApi.htm, phone={}", phone);
         // 查询
         ConsultantQueryRequestDto queryRequestDto = new ConsultantQueryRequestDto();
         queryRequestDto.setPhone(phone);
-        queryRequestDto.setPhone(oldPassword);
+        queryRequestDto.setPassword(oldPassword);
         ConsultantInfo info = consultantFacade.queryOne(queryRequestDto);
         if (null == info) {
             map.put("status", -1);
