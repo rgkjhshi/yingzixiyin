@@ -28,7 +28,9 @@ public class WebConfig extends WebMvcConfigurerAdapter implements WebSocketConfi
         logger.info("websocket注册webconfig");
         registry.addHandler(chatHandler(), "/chat").addInterceptors(new ChatHandshakeInterceptor());
         registry.addHandler(chatHandler(), "/sockjs/chat").addInterceptors(new ChatHandshakeInterceptor()).withSockJS();
+
         registry.addHandler(echoHandler(), "/echo").addInterceptors(new HttpSessionHandshakeInterceptor());
+        registry.addHandler(echoHandler(), "/sockjs/echo").addInterceptors(new HttpSessionHandshakeInterceptor()).withSockJS();
     }
 
     @Bean

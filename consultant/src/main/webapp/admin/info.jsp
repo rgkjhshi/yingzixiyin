@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%
+String session_phone = session.getAttribute("session_phone").toString(); //从session里把a拿出来，并赋值给phone
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
     <head>
@@ -17,12 +20,13 @@
             <div class="layout">
                 <img height="20" alt="Brand" src="../images/logo.png">
                 <ul class="signin">
-                    <li>
-                        <a href="../signin.jsp">登录</a>
-                    </li>
-                    <li>
-                        <a href="../signup.jsp">注册</a>
-                    </li>
+                    <% if(session_phone==""){ %>
+                        <li><a href="../signin.jsp">登录</a></li>
+                        <li><a href="../signup.jsp">注册</a></li>
+                    <% }else{ %>
+                        <li><a><%=session_phone %></a></li>
+                        <li><a>退出</a></li>
+                    <% } %>
                 </ul>
             </div>
         </div>
@@ -135,7 +139,7 @@
                         <div>
                             <div class="sign_title">咨询范围：</div>
                             <div class="sign_content">
-                                <select name="range_type">
+                                <select name="rangeType">
                                     <option value="0">婚姻咨询</option>
                                     <option value="1">情感咨询</option>
                                     <option value="2">心理咨询</option>
@@ -152,7 +156,7 @@
                         <div>
                             <div class="sign_title">可预约时间：</div>
                             <div class="sign_content">
-                                <textarea class="form_border" name="book_time" data-validate="notnull" data-tip="可预约时间" id="book_time"></textarea>
+                                <textarea class="form_border" name="bookTime" data-validate="notnull" data-tip="可预约时间" id="bookTime"></textarea>
                                 <span class="tips"></span>
                             </div>
                         </div>
