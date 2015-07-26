@@ -11,6 +11,9 @@
         <link href="favicon.ico" rel="shortcut icon">
         <link href="css/base.css" rel="stylesheet" type="text/css">
         <script src="js/jquery-1.9.1.min.js"></script>
+        <style>
+            body{background: #f8f8f8;}
+        </style>
     </head>
     <body>
         <div class="header" role="navigation">
@@ -74,11 +77,7 @@
                 </div>
             </div>
         </div>
-        <div class="copyright">
-            <p>Copyright © 2015 英姿吸引
-                <a style="margin-left:10px;" href="http://www.miitbeian.gov.cn/" target="_blank">京ICP备 15035175号－1</a>
-            </p>
-        </div>
+        <%@ include file="../parts/foot.jsp" %> 
     <script src="js/main_consultant.js"></script>
     </body>
 </html>

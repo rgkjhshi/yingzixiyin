@@ -10,10 +10,10 @@ html {
 	height:100%;
 }
 body {
-	margin:0;
+	margin:0;F
 	padding:0;
-	background: #f8f8f8;
-	;font-size:16px;
+	background: #bac3cf;
+	font-size:16px;
 	font-family:sans-serif;
 	font-weight: 300;
 	position: relative;
@@ -348,7 +348,7 @@ fieldset div {
 	padding-left: 20px;
 	box-sizing: border-box;
 	line-height: 3.5em;
-	min-height: 500px;
+	min-height: 600px;
 	position:relative;
 }
 .subtitle {

@@ -160,13 +160,7 @@
             	</div>
             </div>
         </div>
-        <div class="copyright">
-            <div class="layout">
-                <p>Copyright © 2015 英姿吸引
-                    <a style="margin-left:10px;" href="http://www.miitbeian.gov.cn/" target="_blank">京ICP备 15035175号－1</a>
-                </p>
-            </div>
-        </div>
+        <%@ include file="../parts/foot.jsp" %> 
     <script src="../js/main_consultant.js"></script>
     <script>
         $("#info").addClass("cur");
