@@ -82,4 +82,24 @@ public class AdminController {
         return new ModelAndView(new MappingJackson2JsonView(), map);
     }
 
+    @RequestMapping("/queryInfoApi.htm")
+    public ModelAndView queryInfo(HttpSession session) {
+        Map<String, Object> map = Maps.newHashMap();
+        String phone = (String)session.getAttribute("session_phone");
+        // 查询
+        ConsultantQueryRequestDto queryRequestDto = new ConsultantQueryRequestDto();
+        queryRequestDto.setPhone(phone);
+        ConsultantInfo info = consultantFacade.queryOne(queryRequestDto);
+        if (null == info) {
+            map.put("status", -1);
+            map.put("message", "查询个人信息失败");
+            logger.info("phone={},查询个人信息失败");
+        } else {
+            map.put("status", 0);
+            map.put("message", "查询个人信息成功");
+            map.put("data", ConsultantInfo.toMap(info));
+            logger.info("phone={}, 查询个人信息成功", phone);
+        }
+        return new ModelAndView(new MappingJackson2JsonView(), map);
+    }
 }

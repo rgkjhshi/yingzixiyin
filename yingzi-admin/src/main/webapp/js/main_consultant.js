@@ -107,7 +107,7 @@
             $.post(registerUrl, {"phone": phone, "password": pwd, "checkCode": sms_code}, function (data) {
                 if (data.status==0||data.status=="0") {
                     alert("注册成功，现在为您跳转到登录页面！");
-                    window.location.href = 'http://'+window.location.host+"/consultant/signin.jsp";//跳转到后台管理页面
+                    window.location.href = "../signin.jsp";//跳转到后台管理页面
                 } else {
                     alert(data.message);
                 }
@@ -128,7 +128,7 @@
             var pwd = $.trim($("#pwd").val());
             $.post(loginURL, {"phone": phone, "password": pwd}, function (data) {
                 if (data.status==0||data.status=="0") {
-                    window.location.href = 'http://'+window.location.host+"/consultant/admin/info.jsp";//跳转到后台管理页面
+                    window.location.href = "../admin/info.jsp";//跳转到后台管理页面
                 } else {
                     alert(data.message);
                 }

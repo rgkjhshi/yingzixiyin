@@ -98,6 +98,7 @@ public class Consultant {
         ConsultantInfo consultantInfo = new ConsultantInfo();
         consultantInfo.setId(consultant.getId());
         consultantInfo.setPhone(consultant.getPhone());
+        consultantInfo.setAlipay(consultant.getAlipay());
         consultantInfo.setEmail(consultant.getEmail());
         consultantInfo.setNickname(consultant.getNickname());
         consultantInfo.setName(consultant.getName());
