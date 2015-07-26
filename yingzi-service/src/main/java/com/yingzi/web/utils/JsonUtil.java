@@ -145,9 +145,8 @@ public class JsonUtil {
 		sb.append("\"returnCode\":"+resqrDto.getReturnCode()+",");
 		sb.append("\"returnMessage\":\""+resqrDto.getReturnMessage()+"\",");
 		List<RecordInfo> list=resqrDto.getRecordInfoList();
-		
+		sb.append("\"list\":[");
 		if(null!=list&&list.size()>0){
-			sb.append("\"list\":[");
 			for(int i=0;i<list.size();i++){
 				try {
 					if(i<list.size()-1){
@@ -161,8 +160,8 @@ public class JsonUtil {
 					e.printStackTrace();
 				}
 			}
-			sb.append("]");
 		}
+		sb.append("]");
 		sb.append("}");
 		return sb.toString();
 	}
