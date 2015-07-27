@@ -94,6 +94,7 @@ fieldset {
 	background: #fcfcfc;
 	position: relative;
 	text-align: center;
+	min-height: 400px;
 }
 fieldset div {
 	margin:5px 0;
@@ -170,8 +171,14 @@ fieldset div {
 .signupcontent .tips,.sign_content .tips{
 	color:#f00;
 	font-size: 0.6rem;
-	display:inline-block;
 	margin-left: 10px;
+	display: block;
+    text-align: left;
+    padding-left: 284px;
+}
+.sign_content .oldtp,.signupcontent .oldtp{
+	padding-left: 0;
+    display: inline-block;
 }
 .sign_title,.sign_content {
 	display: inline-block;
@@ -243,7 +250,7 @@ fieldset div {
 	background-color: #d9534f;
 	border-color: #d43f3a;
 	font-weight: bold;
-	margin: 30px auto;
+	margin: 20px 0 20px 294px;
 	font-size: 14px;
 	text-align: center;
 	white-space: nowrap;
@@ -340,7 +347,7 @@ fieldset div {
 	padding-left: 20px;
 	box-sizing: border-box;
 	line-height: 3.5em;
-	min-height: 500px;
+	min-height: 600px;
 	position:relative;
 }
 .subtitle {

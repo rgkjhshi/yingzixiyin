@@ -17,20 +17,10 @@
         <script src="../js/jquery-1.9.1.min.js"></script>
     </head>
     <body>
-        <div class="header" role="navigation">
-            <div class="layout">
-                <img height="20" alt="Brand" src="../images/logo.png">
-            </div>
-        </div>
+        <%@ include file="../parts/head.jsp" %> 
         <div class="info">
             <div class="layout">
-                <div class="leftnav">
-                    <ul class="leftitem">
-                        <a><li class="secure cur"><i>&nbsp;</i>个人中心</li></a>
-                        <a href="consultant.html"><li class="detail"><i>&nbsp;</i>咨询师管理</li></a>
-                        <a href="record.html"><li class="message"><i>&nbsp;</i>咨询管理</li></a>
-                    </ul>
-                </div>
+                <%@ include file="../parts/left.jsp" %> 
             	<div class="maincontent">
             		<div class="subtitle">修改密码</div>
                     <div>
@@ -44,7 +34,7 @@
                         <div class="sign_title">新密码：</div>
                         <div class="sign_content">
                             <input data-validate="pwd" data-tip="密码" id="pwd" type="password" />
-                            <span class="tips">请输入6-12位包含数字、字母或下划线的密码</span>
+                            <span class="tips oldtp">请输入6-12位包含数字、字母或下划线的密码</span>
                         </div>
                     </div>
                     <div>
@@ -58,13 +48,10 @@
             	</div>
             </div>
         </div>
-        <div class="copyright">
-            <div class="layout">
-                <p>Copyright © 2015 英姿吸引
-                    <a style="margin-left:10px;" href="http://www.miitbeian.gov.cn/" target="_blank">京ICP备 15035175号－1</a>
-                </p>
-            </div>
-        </div>
+        <%@ include file="../parts/foot.jsp" %> 
     <script src="../js/main_consultant.js"></script>
+    <script>
+            $(".secure").addClass("cur");
+        </script>
     </body>
 </html>

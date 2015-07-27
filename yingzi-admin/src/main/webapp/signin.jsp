@@ -2,7 +2,7 @@
 <%
 	String path=request.getContextPath();    
 %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
@@ -14,6 +14,13 @@
         <link href="favicon.ico" rel="shortcut icon">
         <link href="css/base.css" rel="stylesheet" type="text/css">
         <script src="js/jquery-1.9.1.min.js"></script>
+        <style>
+            .copyright{
+                position:absolute;
+                left: 0;
+                bottom:0;
+            }
+        </style>
     </head>
     <body>
         <div class="header" role="navigation">
@@ -32,32 +39,26 @@
                     </div>
                     <fieldset>
                         <div>
-                            <div class="sign_title">手机号码：<span class="redstar">*</span></div>
+                            <div class="sign_title">手机号码：</div>
                             <div class="sign_content">
                                 <input data-validate="tel" data-tip="手机号码" id="phone" type="text" />
-                                <span class="tips"></span>
                             </div>
                         </div>
                         <div>
-                            <div class="sign_title">密码：<span class="redstar">*</span></div>
+                            <div class="sign_title">密码：</div>
                             <div class="sign_content">
                                 <input data-validate="notnull" data-tip="密码" id="pwd" type="password" />
-                                <span class="tips"></span>
                             </div>
                         </div>
                         <div class="btn" id="signin">登录</div>
+                        <span class="tips"></span>
                     </fieldset>
                 </div>
                 <div class="rightbar">
                 </div>
             </div>
         </div>
-        <div class="copyright fix-bottom">
-            <p>Copyright © 2015 英姿吸引
-                <a style="margin-left:10px;" href="http://www.miitbeian.gov.cn/" target="_blank">京ICP备 15035175号－1</a>
-            </p>
-        </div>
+        <%@ include file="../parts/foot.jsp" %> 
     <script src="js/main_consultant.js"></script>
     </body>
-
 </html>

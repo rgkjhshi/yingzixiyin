@@ -17,25 +17,10 @@
         <script src="../js/jquery-1.9.1.min.js"></script>
     </head>
     <body>
-        <div class="header" role="navigation">
-            <div class="layout">
-                <img height="20" alt="Brand" src="../images/logo.png">
-            </div>
-        </div>
+        <%@ include file="../parts/head.jsp" %> 
         <div class="info">
             <div class="layout">
-            	<div class="leftnav">
-            		<ul class="leftitem">
-            			<a href="secure.html"><li class="secure"><i>&nbsp;</i>个人中心</li></a>
-                        <a href="consultant.html"><li class="detail"><i>&nbsp;</i>咨询师管理</li></a>
-            			<a><li class="message cur"><i>&nbsp;</i>咨询管理</li></a>
-                        <ul class="sms">
-                            <a><li class="active">全部咨询</li></a>
-                            <a href="record_ing.html"><li>进行中的咨询</li></a>
-                            <a href="record_end.html"><li>已结束的咨询</li></a>
-                        </ul>
-            		</ul>
-            	</div>
+            	<%@ include file="../parts/left.jsp" %> 
             	<div class="maincontent">
             		<div class="subtitle">全部咨询</div>
                     <table>
@@ -52,13 +37,12 @@
             	</div>
             </div>
         </div>
-        <div class="copyright">
-            <div class="layout">
-                <p>Copyright © 2015 英姿吸引
-                    <a style="margin-left:10px;" href="http://www.miitbeian.gov.cn/" target="_blank">京ICP备 15035175号－1</a>
-                </p>
-            </div>
-        </div>
+        <%@ include file="../parts/foot.jsp" %> 
+        <script>
+            $(".message").addClass("cur");
+            $("#record_all").show();
+            $(".re_all li").addClass("active");
+        </script>
     </body>
 
 </html>
