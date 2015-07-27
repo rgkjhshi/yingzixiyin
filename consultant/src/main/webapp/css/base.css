@@ -56,7 +56,7 @@ input {
 input[type="text"],input[type="password"] {
 	width: 200px;
 }
-input[disabled="disabled"]{
+input[disabled="disabled"],textarea[disabled="disabled"],select[disabled="disabled"]{
 	background:#eee;
 }
 textarea {
@@ -363,7 +363,7 @@ fieldset div {
 .fdtips{
     width:300px;
     text-align: center;
-    position:absolute;
+    position:fixed;
     top:40%;
     left:50%;
     height:50px;

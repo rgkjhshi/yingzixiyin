@@ -11,7 +11,8 @@
     var loginURL = "http://" + window.location.host + "/consultant/loginApi.htm";
     var registerUrl = "http://" + window.location.host + "/consultant/registerApi.htm";
     var infoURL = "http://" + window.location.host + "/consultant/admin/queryInfoApi.htm";
-    var changePwdURL = "http://" + window.location.host + "/consultant/admin/changePasswordApi.htm"
+    var changePwdURL = "http://" + window.location.host + "/consultant/admin/changePasswordApi.htm";
+    var updataInfoURL = "http://" +window.location.host + "/consultant/admin/updateInfoApi.htm";
 
     // 格式验证
     var check = function (vid) {//传入id和默认的提示
@@ -90,10 +91,7 @@
         var countdown = setInterval(timedown, "1000");
 
         // 请求验证码
-        // url:接口地址
-
-        $.post(getCheckCodeURL, {"phone": phone}, function () {
-        });
+        $.post(getCheckCodeURL, {"phone": phone}, function () {});
     };
 
     $("#sms_btn").on("click", getCode);
@@ -149,6 +147,7 @@
     //完善个人信息
     var moreinfo = function () {
         var gender = $("input[name=gender]:checked").val();
+        console.log(gender);
         if (!gender) {
             $(".gender_tips").text("请选择您的性别");
             return;
@@ -164,17 +163,19 @@
             var _newdata = _data.replace(reg1, "':'").replace(reg2, "','");
 
             //提交数据
-            /*
-             $.post(url,_newdata,function(data){
-             if(!data.status){
-             alert(data.errorCode);//输出错误原因
-             }else{
-             alert("个人资料提交成功，请耐心等待审核！");
-             window.location.href="admin/info.jsp";//刷新页面
-             //锁定个人信息，审核完成之前不允许修改，待完成
-             }
-             });
-             */
+            $.post(updataInfoURL,_newdata,function(data){
+                if(data.status=="0"||data.status==0){
+                    $("input").attr("disabled","disabled");
+                    $("textarea").attr("disabled","disabled");
+                    $("select").attr("disabled","disabled");
+                    $("#moreinfo").remove();
+                    var tips = $("<div class='fdtips successtip'>提交成功，等待审核！</div>");
+                }else{
+                    var tips = $("<div class='fdtips errortip'>" + data.message + "</div>");
+                }
+                $(tips).appendTo($("body")).fadeOut(3000);
+            });
+            
         }
     };
 
@@ -213,7 +214,7 @@
                 var l = _data.length;
                 for(var i in _data){
                     if(i=="gender"){
-                        $("input[name=gender][value="+_data[i]+"]").attr("checked",true);
+                        $("input[name=gender][value="+_data[i]+"]").attr("checked","checked");
                         var v = _data[i];
                         if(v==1){
                             $("#male i").show();
