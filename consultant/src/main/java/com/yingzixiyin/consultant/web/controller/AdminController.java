@@ -8,7 +8,9 @@ import com.yingzixiyin.api.facade.ConsultantFacade;
 import com.yingzixiyin.core.entity.Consultant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
@@ -32,8 +34,8 @@ public class AdminController {
     ConsultantFacade consultantFacade;
 
     @RequestMapping("/updateInfoApi.htm")
-    public ModelAndView updateInfo(HttpSession session, Consultant consultant) {
-        logger.info("updateInfoApi.htm, consultant={}", consultant);
+    public ModelAndView updateInfo(HttpSession session, Consultant entity) {
+        logger.info("updateInfoApi.htm, consultant={}", entity);
         Map<String, Object> map = Maps.newHashMap();
         String phone = (String)session.getAttribute("session_phone");
 
@@ -47,7 +49,7 @@ public class AdminController {
             map.put("message", "未查到用户相关信息");
             logger.info("修改信息失败");
         } else {
-            ConsultantInfo updateInfo = Consultant.translateBean(consultant);
+            ConsultantInfo updateInfo = Consultant.translateBean(entity);
             updateInfo.setId(info.getId());
             BaseResponseDto responseDto = consultantFacade.update(updateInfo);
             map.put("status", responseDto.getReturnCode());

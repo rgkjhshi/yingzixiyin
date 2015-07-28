@@ -211,7 +211,7 @@ public class ConsultantInfo implements Serializable {
         map.put("signature", info.getSignature());
         map.put("rangeType", null == info.getRangeType() ? 0 : info.getRangeType().getValue());
         map.put("avatar", info.getAvatar());
-        map.put("status", info.getStatus());
+        map.put("status", null == info.getStatus() ? 0 : info.getStatus().getValue());
         return map;
     }
 

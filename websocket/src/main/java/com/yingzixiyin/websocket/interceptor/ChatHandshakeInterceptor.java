@@ -21,18 +21,17 @@ public class ChatHandshakeInterceptor extends HttpSessionHandshakeInterceptor {
 
     @Override
     public boolean beforeHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler, Map<String, Object> attributes) throws Exception {
-        logger.info("Before Handshake");
         if (request instanceof ServletServerHttpRequest) {
             ServletServerHttpRequest servletRequest = (ServletServerHttpRequest) request;
+            // 获取原来的session
             HttpSession session = servletRequest.getServletRequest().getSession(false);
             if (session != null) {
                 //使用userName区分WebSocketHandler，以便定向发送消息
-                String userName = (String) session.getAttribute("SESSION_USERNAME");
-                if (userName == null) {
-                    userName = "default-system";
-                }
-                attributes.put("SESSION_USERNAME", userName);
-                logger.info("SESSION_USERNAME:{}", userName);
+                String phone = (String) session.getAttribute("session_phone");
+                Long recordId = (Long) session.getAttribute("session_recordId");
+                logger.info("Before Handshake, phone={}, recordId={}", phone, recordId);
+                attributes.put("phone", phone);
+                attributes.put("recordId", recordId);
             }
         }
         return super.beforeHandshake(request, response, wsHandler, attributes);

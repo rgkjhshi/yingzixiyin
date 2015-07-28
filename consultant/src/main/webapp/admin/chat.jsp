@@ -39,8 +39,8 @@
 
     <script type="text/javascript">
         var ws = null;
-        var webSocketURL = 'ws://' + window.location.host + "/websocket/echo";
-        var socketJSURL = 'ws://' + window.location.host +  "/websocket/sockjs/echo";
+        var webSocketURL = 'ws://' + window.location.host + "/websocket/chat";
+        var socketJSURL = 'ws://' + window.location.host +  "/websocket/sockjs/chat";
         var transports = [];
 
         function setConnected(connected) {

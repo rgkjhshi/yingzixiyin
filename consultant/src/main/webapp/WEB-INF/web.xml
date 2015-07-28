@@ -25,11 +25,7 @@
 
     <filter>
         <filter-name>loginFilter</filter-name>
-        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-        <init-param>
-            <param-name>targetBeanName</param-name>
-            <param-value>loginFilter</param-value>
-        </init-param>
+        <filter-class>com.yingzixiyin.consultant.web.filter.LoginFilter</filter-class>
     </filter>
 
     <filter-mapping>
@@ -51,7 +47,7 @@
         <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>classpath*:spring/spring.xml</param-value>
+            <param-value>classpath*:spring/spring-mvc.xml</param-value>
         </init-param>
         <async-supported>true</async-supported>
     </servlet>
