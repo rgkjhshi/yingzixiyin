@@ -65,16 +65,17 @@
             //提交数据
             var oldpwd = $("#oldpwd").val();
             var pwd = $("#pwd").val();
-            /*
-             $.post(url,{"oldpwd":oldpwd,"password",pwd},function(data){
-             if(!data.status){
-             alert(data.errorCode);//输出错误原因
-             }else{
-             alert("密码修改成功！")
-             }
-             window.location.href="admin/secure.jsp";
+            url="changePasswd.do";
+             $.post(url,{"oldpwd":oldpwd,"password":pwd},function(data){
+	           /*  if(data.status==0||data.status=="0"){
+	            	 alert(data.message);//输出错误原因
+	             }else{
+	            	 alert("密码修改成功！")
+	             }
+	             window.location.href="admin/secure.jsp";*/
+            	 alert(data.returnMessage);
              });
-             */
+             
         }
     }
 
