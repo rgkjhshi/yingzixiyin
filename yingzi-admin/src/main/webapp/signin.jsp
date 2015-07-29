@@ -58,7 +58,7 @@
                 </div>
             </div>
         </div>
-        <%@ include file="../parts/foot.jsp" %> 
+        <%@ include file="parts/foot.jsp" %> 
     <script src="js/main_consultant.js"></script>
     </body>
 </html>

@@ -44,9 +44,10 @@
             //提交数据
             var phone = $.trim($("#phone").val());
             var pwd = $.trim($("#pwd").val());
+            loginURL="admin/login.do";
             $.post(loginURL, {"phone": phone, "password": pwd}, function (data) {
                 if (data.status==0||data.status=="0") {
-                    window.location.href = "../admin/info.jsp";//跳转到后台管理页面
+                    window.location.href = "admin/secure.jsp";//跳转到后台管理页面
                 } else {
                     alert(data.message);
                 }

@@ -1,6 +1,7 @@
 package com.yingzi.admin.controller;
 
 import java.io.IOException;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -11,7 +12,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
+import com.google.common.collect.Maps;
 import com.yingzi.admin.annotation.PowerCheck;
 import com.yingzi.admin.constant.LoginConstant;
 import com.yingzi.admin.enums.PowerCheckEnum;
@@ -39,20 +43,27 @@ public class AdminController {
 	 * @return
 	 */
 	@RequestMapping("/login.do")
-	public String login(HttpServletRequest request,HttpServletResponse response,String username,String password){
+	public ModelAndView login(HttpServletRequest request,HttpServletResponse response,String phone,String password){
 		log.info("---后台用户进行登录---");
-		if(StringUtils.isEmpty(username)){
-			return LoginConstant.NO_LOGIN_URL;
+		Map<String, Object> map = Maps.newHashMap();
+		if(StringUtils.isEmpty(phone)){
+			map.put("status", -1);
+			map.put("message", "登录手机号码为空");
+			return new ModelAndView(new MappingJackson2JsonView(), map);
 		}
 		AdminQueryRequestDto aqrDto=new AdminQueryRequestDto();
-		aqrDto.setUsername(username);
+		aqrDto.setUsername(phone);
 		aqrDto.setPassword(password);
 		AdminInfo adminInfo=adminFacade.queryOne(aqrDto);
 		if(adminInfo==null){
-			return LoginConstant.NO_LOGIN_URL;
+			map.put("status", -1);
+			map.put("message", "登录手机号不存在或密码错误");
+			return new ModelAndView(new MappingJackson2JsonView(), map);
 		}
 		SessionUtil.setLoginAdminToSession(request, adminInfo);
-		return "index";
+		map.put("status", 0);
+		map.put("message", "登录成功");
+		return new ModelAndView(new MappingJackson2JsonView(), map);
 	}
 	/**
 	 * 退出登录，清空session
@@ -60,12 +71,12 @@ public class AdminController {
 	 * @param response
 	 * @return
 	 */
-	@RequestMapping("/loginout.do")
+	@RequestMapping("/logout.do")
 	@PowerCheck(type=PowerCheckEnum.LOGIN)
 	public String login(HttpServletRequest request,HttpServletResponse response){
 		log.info("---用户退出登录--");
 		SessionUtil.removeLoginAdminToSession(request);
-		return LoginConstant.NO_LOGIN_URL;
+		return "redirect:/"+LoginConstant.NO_LOGIN_URL;
 	}
 	/**
 	 * 修改密码，传入原来密码和新密码

@@ -30,6 +30,7 @@
 						<value>/image</value>
 						<value>/images</value>
 						<value>/public</value>
+						<value>/signin.jsp</value>
 					</list>
 				</property>
 			</bean>
