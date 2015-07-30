@@ -49,7 +49,7 @@
             </div>
         </div>
         <%@ include file="../parts/foot.jsp" %> 
-    <script src="../js/main_consultant.js"></script>
+    <script src="../js/main_admin.js"></script>
     <script>
             $(".secure").addClass("cur");
         </script>
