@@ -381,20 +381,48 @@ fieldset div {
 }
 /*咨询师列表*/
 .maincontent table{
-	width:90%;
+	width:98%;
 	font-size: 0.85rem;
+	color:#555;
 }
 .maincontent table,tr,th,td{
-	border:1px solid #ccc;
+	border:1px solid #FBE6E6;
 	border-collapse: collapse;
 	text-align: left;
-	padding:0 10px;
+	padding:6px 10px;
 	line-height: 2rem;
+	padding-left: 1em;
+	text-align: center;
+}
+.maincontent th{
+	background:#FFD2D2;
+	color:#222;
+}
+.maincontent tr:nth-child(odd){
+	background:#FFEDED;
+}
+.maincontent tr:nth-child(even){
+	background:#FFF8F7;
 }
 .maincontent td a{
 	display:inline-block;
 	margin-right: 10px;
 	cursor:pointer;
+}
+.maincontent .func{
+	text-align: center;
+}
+.maincontent td.func a {
+	width:80px;
+	text-align: center;
+	color:#fff;
+	border-radius: 1.5rem;
+}
+.maincontent td.toon a{
+	background-color: #999;
+}
+.maincontent td.tooff a{
+	background-color: #F59292;
 }
 #detailtable th{
 	width:20%;

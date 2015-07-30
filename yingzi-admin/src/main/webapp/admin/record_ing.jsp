@@ -28,10 +28,10 @@
                             <th>咨询师</th><th>用户</th><th>开始时间</th><th>操作</th>
                         </tr>
                         <tr>
-                            <td>zhangsan</td><td>小白</td><td>2015-07-12 11:23:00</td><td><a>结束</a></td>
+                            <td>zhangsan</td><td>小白</td><td>2015-07-12 11:23:00</td><td class="func tooff"><a>结束</a></td>
                         </tr>
                         <tr>
-                            <td>lisi</td><td>二傻瓜</td><td>2015-07-13 11:23:00</td><td><a>重新开启</a></td>
+                            <td>lisi</td><td>二傻瓜</td><td>2015-07-13 11:23:00</td><td class="func tooff"><a>结束</a></td>
                         </tr>
                     </table>
             	</div>
