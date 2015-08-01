@@ -20,9 +20,6 @@
 <script type="text/javascript" src="<%=path%>/js/zepto.min.js"></script>
 <%-- <script type="text/javascript" src="<%=path%>/js/touch.js"></script> --%>
 <body>
-    <div class="header">
-        我的咨询师
-    </div>
     <div class="main layout">
     	<div class="sub">我咨询过的咨询师</div>
     	<ul class="consultants">

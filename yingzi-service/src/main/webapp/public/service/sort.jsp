@@ -20,9 +20,6 @@
 <%-- <script type="text/javascript" src="<%=path %>/js/touch.js"></script> --%>
 </head>
 <body>
-    <div class="header">
-        问题分类
-    </div>
     <div class="main">
         <ul class="pro layout">
             <li><a href="<%=path %>/consultant/get_consultants.do?ctype=<%=RangeTypeEnum.ONE.getValue()%>">恋爱关系困惑</a></li>

@@ -21,10 +21,6 @@
 <%-- <script type="text/javascript" src="<%=path %>/js/touch.js"></script> --%>
 </head>
 <body>
-    <div class="header">
-        <i></i>
-        咨询内容
-    </div>
     <div class="main layout">
         <div>
             <textarea class="contentform" placeholder="请输入您要咨询的内容（500）字以内"></textarea>

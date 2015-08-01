@@ -21,10 +21,6 @@
 <%-- <script type="text/javascript" src="<%=path %>/js/touch.js"></script> --%>
 </head>
 <body>
-    <div class="header">
-        <i></i>
-        预约咨询师
-    </div>
     <div class="main">
         <ul class="consultants layout">
             <li class="items">

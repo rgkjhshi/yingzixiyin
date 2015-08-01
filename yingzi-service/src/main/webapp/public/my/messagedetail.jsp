@@ -20,10 +20,6 @@
 <script type="text/javascript" src="<%=path%>/js/zepto.min.js"></script>
 <%-- <script type="text/javascript" src="<%=path%>/js/touch.js"></script> --%>
 <body>
-    <div class="header">
-    	<i></i>
-        与xxx的咨询
-    </div>
     <div class="main layout">
     	<ul class="consultants ms_detail">
     		<li class="ms_my">

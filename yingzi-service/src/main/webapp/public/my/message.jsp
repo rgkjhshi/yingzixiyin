@@ -21,9 +21,6 @@
 <script type="text/javascript" src="<%=path%>/js/zepto.min.js"></script>
 <%-- <script type="text/javascript" src="<%=path%>/js/touch.js"></script> --%>
 <body>
-    <div class="header">
-        我的消息
-    </div>
     <div class="main layout">
     	<ul class="consultants ms_record">
     		<c:forEach items="${myMessages}" var="m">

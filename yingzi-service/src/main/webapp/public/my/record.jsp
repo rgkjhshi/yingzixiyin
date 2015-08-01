@@ -21,9 +21,6 @@
 <script type="text/javascript" src="<%=path%>/js/zepto.min.js"></script>
 <%-- <script type="text/javascript" src="<%=path%>/js/touch.js"></script> --%>
 <body>
-    <div class="header">
-        消费记录
-    </div>
     <div class="main">
     	<ul class="layout">
     		<c:forEach items="${userRecords}" var="r">
