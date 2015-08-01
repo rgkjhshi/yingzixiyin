@@ -21,7 +21,7 @@
 <link rel="stylesheet" href="<%=path %>/css/base.css">
 <link href="<%=path %>/favicon.ico" rel="shortcut icon">
 <script type="text/javascript" src="<%=path %>/js/zepto.min.js"></script>
-<script type="text/javascript" src="<%=path %>/js/touch.js"></script>
+<%-- <script type="text/javascript" src="<%=path %>/js/touch.js"></script> --%>
 </head>
 <body>
     <div class="header">

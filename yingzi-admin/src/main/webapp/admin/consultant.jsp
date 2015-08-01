@@ -30,8 +30,8 @@
                     		 	<td>${cinfo.name }</td>
                     		 	<td>${cinfo.gender.desc}</td>
                     		 	<td>${cinfo.status.desc }</td>
-                    		 	<td><a href="detail.html">详情</a>
-                    		 	<a>删除</a></td>
+                    		 	<td><a href="<%=path%>/cdetail.do?id=${cinfo.id}">详情</a>
+                    		 	<a href="<%=path%>/cdelete.do?id=${cinfo.id}">删除</a></td>
                     		 </tr>
                     	</c:forEach>
                     </table>

@@ -49,6 +49,7 @@ import com.yingzixiyin.api.dto.UserInfo;
 import com.yingzixiyin.api.dto.UserQueryRequestDto;
 import com.yingzixiyin.api.enums.GenderTypeEnum;
 import com.yingzixiyin.api.enums.RangeTypeEnum;
+import com.yingzixiyin.api.enums.StatusEnum;
 import com.yingzixiyin.api.facade.ConsultantFacade;
 import com.yingzixiyin.api.facade.UserFacade;
 /***
@@ -88,6 +89,7 @@ public class ConsultantController {
 		}
 		ConsultantQueryRequestDto rcrDto=new ConsultantQueryRequestDto();
 		rcrDto.setRangeType(consultantType);
+		rcrDto.setStatus(StatusEnum.ACCEPTED);
 		ConsultantQueryResponseDto resDto=  consultantFacade.query(rcrDto); 
 		request.setAttribute("consultants", resDto.getConsultantInfoList());
 		request.setAttribute("ctype", ctype);
@@ -132,6 +134,7 @@ public class ConsultantController {
 		ConsultantQueryRequestDto rcrDto=new ConsultantQueryRequestDto();
 		rcrDto.setRangeType(consultantType);
 		rcrDto.setGender(genderEnum);
+		rcrDto.setStatus(StatusEnum.ACCEPTED);
 		if(ageEnum!=null){
 			rcrDto.setMinAge(ageEnum.getMinAge());
 			rcrDto.setMaxAge(ageEnum.getMaxAge());
@@ -165,6 +168,7 @@ public class ConsultantController {
 		}
 		ConsultantQueryRequestDto rcrDto=new ConsultantQueryRequestDto();
 		rcrDto.setId(id);
+		rcrDto.setStatus(StatusEnum.ACCEPTED);
 		ConsultantInfo cqrDto=consultantFacade.queryOne(rcrDto);
 		if(cqrDto!=null){
 			request.setAttribute("consultant", cqrDto);
@@ -191,6 +195,7 @@ public class ConsultantController {
 		String response_page="public/service/online";
 		ConsultantQueryRequestDto cqrDto=new ConsultantQueryRequestDto();
 		cqrDto.setId(consultant_id);
+		cqrDto.setStatus(StatusEnum.ACCEPTED);
 		ConsultantInfo cinfo=consultantFacade.queryOne(cqrDto);
 		if(cinfo==null){
 			//做异常处理
