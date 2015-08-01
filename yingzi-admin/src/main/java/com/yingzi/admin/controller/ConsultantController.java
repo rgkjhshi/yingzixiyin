@@ -27,7 +27,7 @@ public class ConsultantController {
 	 * 咨询类型+条件筛选获取咨询师列表
 	 * @param request
 	 * @param response
-	 * @param ctype
+	 * @param pageNum
 	 * @return
 	 * @throws IOException
 	 */
