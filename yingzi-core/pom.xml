@@ -17,6 +17,7 @@
         <dependency>
             <groupId>com.yingzixiyin</groupId>
             <artifactId>yingzi-api</artifactId>
+            <version>1.0</version>
         </dependency>
         <!-- 发短信 -->
         <dependency>

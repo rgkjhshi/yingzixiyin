@@ -14,21 +14,24 @@
 
 
 	<dependencies>
-		<!-- 自己的jar包 -->
-		<dependency>
-			<groupId>com.yingzixiyin</groupId>
-			<artifactId>yingzi-api</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.yingzixiyin</groupId>
-			<artifactId>yingzi-core</artifactId>
-			<exclusions>
-				<exclusion>
-					<groupId>com.cloopen</groupId>
-					<artifactId>ccpsdk</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
+        <!-- 自己的jar  -->
+        <dependency>
+            <groupId>com.yingzixiyin</groupId>
+            <artifactId>yingzi-api</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.yingzixiyin</groupId>
+            <artifactId>yingzi-core</artifactId>
+            <version>1.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.cloopen</groupId>
+                    <artifactId>ccpsdk</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
 		<!-- 添加Servlet -->
 		<dependency>
 			<groupId>javax.servlet</groupId>

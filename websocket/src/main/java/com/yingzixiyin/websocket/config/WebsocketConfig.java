@@ -7,7 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.socket.WebSocketHandler;
@@ -19,15 +18,15 @@ import org.springframework.web.socket.server.support.HttpSessionHandshakeInterce
 @Configuration
 @EnableWebMvc
 @EnableWebSocket
-public class WebConfig extends WebMvcConfigurerAdapter implements WebSocketConfigurer {
+public class WebsocketConfig extends WebMvcConfigurerAdapter implements WebSocketConfigurer {
 
-    private static final Logger logger = LoggerFactory.getLogger(WebConfig.class);
+    private static final Logger logger = LoggerFactory.getLogger(WebsocketConfig.class);
 
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        logger.info("websocket注册webconfig");
-        registry.addHandler(chatHandler(), "/chat").addInterceptors(new ChatHandshakeInterceptor());
-        registry.addHandler(chatHandler(), "/sockjs/chat").addInterceptors(new ChatHandshakeInterceptor()).withSockJS();
+        logger.info("websocket注册webconfig...");
+        registry.addHandler(chatHandler(), "/chat.do").addInterceptors(new ChatHandshakeInterceptor());
+        registry.addHandler(chatHandler(), "/sockjs/chat.do").addInterceptors(new ChatHandshakeInterceptor()).withSockJS();
 
         registry.addHandler(echoHandler(), "/echo").addInterceptors(new HttpSessionHandshakeInterceptor());
         registry.addHandler(echoHandler(), "/sockjs/echo").addInterceptors(new HttpSessionHandshakeInterceptor()).withSockJS();
@@ -42,10 +41,5 @@ public class WebConfig extends WebMvcConfigurerAdapter implements WebSocketConfi
     public WebSocketHandler chatHandler(){
         return new ChatHandler();
     }
-	// Allow serving HTML files through the default Servlet
-	@Override
-	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
-		configurer.enable();
-	}
 
 }

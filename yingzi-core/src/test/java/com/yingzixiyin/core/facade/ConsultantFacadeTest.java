@@ -29,12 +29,12 @@ public class ConsultantFacadeTest extends BaseTest {
 
 /*    @Test
     public void addTest() {
-        ConsultantInfo info = new ConsultantInfo();
-        info.setPhone("13121435540");
-        info.setPassword("123123");
-        info.setAge(25);
-        BaseResponseDto responseDto =  consultantFacade.add(info);
-        logger.info(responseDto.toString());
+//        ConsultantInfo info = new ConsultantInfo();
+//        info.setPhone("13121435540");
+//        info.setPassword("123123");
+//        info.setAge(25);
+//        BaseResponseDto responseDto =  consultantFacade.add(info);
+//        logger.info(responseDto.toString());
     }
 
     @Test

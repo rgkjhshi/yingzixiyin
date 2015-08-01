@@ -5,8 +5,6 @@
 		  http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
            version="3.0">
 
-    <absolute-ordering/>
-
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>classpath*:spring/spring.xml</param-value>
@@ -21,8 +19,8 @@
             <param-value>utf-8</param-value>
         </init-param>
     </filter>
-    <!-- 登陆过滤 -->
 
+    <!-- 登陆过滤 -->
     <filter>
         <filter-name>loginFilter</filter-name>
         <filter-class>com.yingzixiyin.consultant.web.filter.LoginFilter</filter-class>

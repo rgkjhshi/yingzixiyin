@@ -119,6 +119,6 @@ public class AdminController {
         }
         session.setAttribute("session_recordId", recordId);
         logger.info("chatApi.htm, phone={}, recordId={}", session.getAttribute("session_phone"), recordId);
-        response.sendRedirect("/admin/chat.jsp");
+        response.sendRedirect("chat.jsp");
     }
 }

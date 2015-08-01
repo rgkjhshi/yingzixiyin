@@ -8,12 +8,11 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>yingzi-core</module>
-        <module>yingzi-api</module>
-        <module>yingzi-service</module>
         <module>consultant</module>
-        <module>websocket</module>
-    <module>yingzi-admin</module>
+        <module>yingzi-admin</module>
+        <module>yingzi-api</module>
+        <module>yingzi-core</module>
+        <module>yingzi-service</module>
   </modules>
 
     <properties>
@@ -22,18 +21,6 @@
 
     <dependencyManagement>
         <dependencies>
-            <!-- 自己的jar�?-->
-            <dependency>
-                <groupId>com.yingzixiyin</groupId>
-                <artifactId>yingzi-api</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.yingzixiyin</groupId>
-                <artifactId>yingzi-core</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-
             <!-- guava -->
             <dependency>
                 <groupId>com.google.guava</groupId>
@@ -52,7 +39,7 @@
                 <artifactId>mybatis-spring</artifactId>
                 <version>1.2.3</version>
             </dependency>
-            <!-- 数据库相�?-->
+            <!-- 数据库相 -->
             <dependency>
                 <groupId>commons-dbcp</groupId>
                 <artifactId>commons-dbcp</artifactId>
@@ -71,7 +58,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <!--aop 动�?代理相关-->
+            <!--aop 动�?代理相关-->
             <dependency>
                 <groupId>cglib</groupId>
                 <artifactId>cglib</artifactId>
@@ -128,7 +115,7 @@
             </exclusions>
         </dependency>
         <!-- 日志相关 -->
-        <!-- SLF4J-JCL �?-->
+        <!-- SLF4J-JCL -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>jcl-over-slf4j</artifactId>
