@@ -23,10 +23,6 @@
 <%-- <script type="text/javascript" src="<%=path %>/js/touch.js"></script> --%>
 </head>
 <body>
-    <div class="header">
-        <i></i>
-        咨询师详情
-    </div>
     <c:if test="${consultant!=null}">
     	<div class="main">
 	        <ul class="consultants layout">

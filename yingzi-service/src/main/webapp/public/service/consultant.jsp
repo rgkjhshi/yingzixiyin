@@ -24,10 +24,6 @@
 <%-- <script type="text/javascript" src="<%=path %>/js/touch.js"></script> --%>
 </head>
 <body>
-    <div class="header">
-        <i></i>
-        匹配咨询师
-    </div>
     <div class="main">
     	<div class="choose_btn layout" id="choose">优化筛选</div>
         <ul class="consultants layout" id="consultant_list">
