@@ -1,6 +1,7 @@
 package com.yingzixiyin.core.dao;
 
 import com.yingzixiyin.core.entity.Consultant;
+
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -54,5 +55,18 @@ public interface ConsultantDao {
      * @return 咨询师列表
      */
     public List<Consultant> getConsultantListByIdList(List<String> idList);
+
+    /**
+     * 查询个数
+     * @param bean
+     * @return
+     */
+	public Long queryCount(Consultant bean);
+	/**
+	 * 分页查询
+	 * @param map
+	 * @return
+	 */
+	public List<Consultant> queryConsultantListPage(Map<String, Object> map);
 
 }

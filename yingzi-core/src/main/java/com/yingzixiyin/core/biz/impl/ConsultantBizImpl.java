@@ -7,12 +7,15 @@ import com.yingzixiyin.api.dto.ConsultantQueryResponseDto;
 import com.yingzixiyin.core.biz.ConsultantBiz;
 import com.yingzixiyin.core.entity.Consultant;
 import com.yingzixiyin.core.service.ConsultantService;
+import com.yingzixiyin.page.Pagination;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
+
 import java.util.List;
 import java.util.Map;
 
@@ -80,4 +83,32 @@ public class ConsultantBizImpl implements ConsultantBiz {
         }
         return responseDto;
     }
+
+	@Override
+	public ConsultantQueryResponseDto queryConsultantListPage(
+			ConsultantQueryRequestDto requestDto, Pagination page) {
+		 Map<String, Object> map = Maps.newHashMap();
+		 map.put("offset", page.getOffset());
+		 map.put("size", page.getLimit());
+		 map.put("gender", null == requestDto.getGender() ? null : requestDto.getGender().getValue());
+         map.put("status", null == requestDto.getStatus() ? null : requestDto.getStatus().getValue());
+         map.put("maxAge", null == requestDto.getMaxAge() ? null :  requestDto.getMaxAge());
+         map.put("minAge", null == requestDto.getMinAge() ? null :  requestDto.getMinAge());
+         map.put("name", null == requestDto.getName() ? null :  requestDto.getName());
+         map.put("phone", null == requestDto.getPhone() ? null :  requestDto.getPhone());
+		 // 查询
+        List<ConsultantInfo> consultantInfoList = consultantService.queryConsultantListPage(map);
+		 // 返回responseDto
+        ConsultantQueryResponseDto responseDto = new ConsultantQueryResponseDto();
+        if (!CollectionUtils.isEmpty(consultantInfoList)) {
+            responseDto.setConsultantInfoList(consultantInfoList);
+            responseDto.setCount(consultantInfoList.size());
+        }
+        return responseDto;
+	}
+
+	@Override
+	public Long queryCount(ConsultantQueryRequestDto requestDto) {
+		return consultantService.queryCount(Consultant.getBean(requestDto));
+	}
 }

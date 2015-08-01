@@ -277,4 +277,37 @@
             </if>
         </where>
     </select>
+    <!-- 查询数目 -->
+    <select id="queryCount" parameterType="Consultant" resultType="Long">
+       	select count(1) from consultant
+        <include refid="where_condition"/>
+    </select>
+    <!-- 分页查询查询 -->
+    <select id="queryConsultantListPage" parameterType="map" resultType="Consultant">
+        <include refid="base_select"/>
+        <where>
+            <if test="gender != null">
+                gender = #{gender}
+            </if>
+            <if test="rangeType != null">
+                AND range_type = #{rangeType}
+            </if>
+            <if test="name != null">
+                 AND name = #{name}
+            </if>
+            <if test="phone != null">
+                AND phone = #{phone}
+            </if>
+            <if test="status != null">
+                AND status = #{status}
+            </if>
+            <if test="minAge != null">
+                AND <![CDATA[ age >= #{minAge} ]]>
+            </if>
+            <if test="maxAge != null">
+                AND <![CDATA[ age <= #{maxAge} ]]>
+            </if>
+        </where>
+        limit #{offset},#{size}
+    </select>
 </mapper>

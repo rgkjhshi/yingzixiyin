@@ -24,10 +24,18 @@
                 <div class="maincontent">
                     <div class="subtitle">咨询师列表</div>
                     <table>
-                        <tr><th>姓名</th><th>性别</th><th>状态</th><th>操作</th></tr>
-                        <tr><td>zhangsan</td><td>男</td><td>未审核</td><td><a href="detail.html">详情</a><a>删除</a></td></tr>
-                        <tr><td>lisi</td><td>男</td><td>审核通过</td><td><a href="detail.html">详情</a><a>删除</a></td></tr>
+                    	<tr><th>姓名</th><th>性别</th><th>状态</th><th>操作</th></tr>
+                    	<c:forEach items="${list }" var="cinfo">
+                    		 <tr>	
+                    		 	<td>${cinfo.name }</td>
+                    		 	<td>${cinfo.gender.desc}</td>
+                    		 	<td>${cinfo.status.desc }</td>
+                    		 	<td><a href="detail.html">详情</a>
+                    		 	<a>删除</a></td>
+                    		 </tr>
+                    	</c:forEach>
                     </table>
+                    ${page}
                 </div>
             </div>
         </div>

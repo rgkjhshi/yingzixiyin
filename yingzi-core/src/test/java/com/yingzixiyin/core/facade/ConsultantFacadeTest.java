@@ -8,6 +8,8 @@ import com.yingzixiyin.api.enums.RangeTypeEnum;
 import com.yingzixiyin.api.enums.StatusEnum;
 import com.yingzixiyin.api.facade.ConsultantFacade;
 import com.yingzixiyin.core.BaseTest;
+import com.yingzixiyin.page.Pagination;
+
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +27,7 @@ public class ConsultantFacadeTest extends BaseTest {
     @Resource
     ConsultantFacade consultantFacade;
 
-    @Test
+/*    @Test
     public void addTest() {
         ConsultantInfo info = new ConsultantInfo();
         info.setPhone("13121435540");
@@ -57,5 +59,18 @@ public class ConsultantFacadeTest extends BaseTest {
         String ids = "1 ,2, ,4 ,";
         ConsultantQueryResponseDto responseDto =  consultantFacade.queryByIds(ids);
         logger.info(responseDto.toString());
+    }*/
+    @Test
+    public void queryPage(){
+    	logger.info("-----查询分页结果---");
+    	int pageNum=4;
+    	ConsultantQueryRequestDto requestDto = new ConsultantQueryRequestDto();
+    	Long count=consultantFacade.queryCount(requestDto);
+    	logger.info("-----查询分页结果的总数:"+count+"---");
+    	Pagination page=new Pagination();
+    	page.setMaxCountAndCurrentPage(count,pageNum);
+    	ConsultantQueryResponseDto responseDto=consultantFacade.queryPage(requestDto, page);
+    	
+    	logger.info(responseDto.toString());
     }
 }

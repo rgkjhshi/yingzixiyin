@@ -3,6 +3,7 @@ package com.yingzixiyin.core.biz;
 import com.yingzixiyin.api.dto.ConsultantInfo;
 import com.yingzixiyin.api.dto.ConsultantQueryRequestDto;
 import com.yingzixiyin.api.dto.ConsultantQueryResponseDto;
+import com.yingzixiyin.page.Pagination;
 
 /**
  * @author song.shi
@@ -25,5 +26,10 @@ public interface ConsultantBiz {
     public ConsultantQueryResponseDto getConsultantList(ConsultantQueryRequestDto requestDto);
 
     public ConsultantQueryResponseDto getConsultantListByIds(String ids);
+
+	public ConsultantQueryResponseDto queryConsultantListPage(
+			ConsultantQueryRequestDto requestDto, Pagination page);
+
+	public Long queryCount(ConsultantQueryRequestDto requestDto);
 
 }

@@ -55,4 +55,8 @@ public interface ConsultantService {
      * @return 咨询师列表
      */
     public List<ConsultantInfo> getConsultantList(String ids);
+
+	public List<ConsultantInfo> queryConsultantListPage(Map<String, Object> map);
+
+	public Long queryCount(Consultant bean);
 }

@@ -4,6 +4,7 @@ import com.yingzixiyin.api.dto.BaseResponseDto;
 import com.yingzixiyin.api.dto.ConsultantInfo;
 import com.yingzixiyin.api.dto.ConsultantQueryRequestDto;
 import com.yingzixiyin.api.dto.ConsultantQueryResponseDto;
+import com.yingzixiyin.page.Pagination;
 
 /**
  * @author song.shi
@@ -49,4 +50,18 @@ public interface ConsultantFacade {
      * @return ConsultantQueryResponseDto
      */
     public ConsultantQueryResponseDto queryByIds(String ids);
+    /**
+     * 分页查询的count
+     * @param requestDto
+     * @return
+     */
+	public Long queryCount(ConsultantQueryRequestDto requestDto);
+	/**
+	 * 分页查询的list
+	 * @param requestDto
+	 * @param page
+	 * @return
+	 */
+	public ConsultantQueryResponseDto queryPage(
+			ConsultantQueryRequestDto requestDto, Pagination page);
 }
