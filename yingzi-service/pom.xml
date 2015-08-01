@@ -131,6 +131,10 @@
                     <!--将资源文件打到classes目录下-->
                     <webResources>
                         <resource>
+                            <directory>src/profiles/local</directory>
+                            <targetPath>WEB-INF/classes</targetPath>
+                        </resource>
+                        <resource>
                             <directory>src/main/resources</directory>
                             <targetPath>WEB-INF/classes</targetPath>
                         </resource>
