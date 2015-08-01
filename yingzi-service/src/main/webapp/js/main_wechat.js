@@ -5,20 +5,20 @@
  * @version $Id$
  */
 (function(){
-	$("#choose").on("tap",function(){
+	$("#choose").on("click",function(){
 		$("#choose_layer").show();
 		$("#choose_dialog").show();
 	});
-	$("#choose_layer").on("tap",function(){
+	$("#choose_layer").on("click",function(){
 		$("#choose_layer").hide();
 		$("#choose_dialog").hide();
 	});
 
-	$(".header i").on("tap",function(){
+	$(".header i").on("click",function(){
 		window.history.go(-1);
 	});
 	
-	$("#choose_g_a").on("tap",function(){
+	$("#choose_g_a").on("click",function(){
 		var gender = $("input[name='gender']:checked").val();
 		var age = $("input[name='age']:checked").val();
 		var ctype = $("#ctype").val();
