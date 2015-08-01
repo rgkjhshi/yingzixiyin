@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.yingzi.admin.annotation.PowerCheck;
 import com.yingzixiyin.api.dto.ConsultantInfo;
 import com.yingzixiyin.api.dto.ConsultantQueryRequestDto;
 import com.yingzixiyin.api.dto.RecordQueryRequestDto;
@@ -41,6 +42,7 @@ public class RecordController {
 	 * @throws IOException
 	 */
 	@RequestMapping(value="query_records.do")
+	@PowerCheck
 	public String getConsultantInfor(HttpServletRequest request,HttpServletResponse response,Integer status) throws IOException{
 		logger.info("---系统后台调用咨询记录接口页面----");
 		String response_page="admin/record";

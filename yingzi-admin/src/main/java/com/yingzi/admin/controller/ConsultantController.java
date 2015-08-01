@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.yingzi.admin.annotation.PowerCheck;
 import com.yingzixiyin.api.dto.ConsultantInfo;
 import com.yingzixiyin.api.dto.ConsultantQueryRequestDto;
 import com.yingzixiyin.api.dto.ConsultantQueryResponseDto;
@@ -32,6 +33,7 @@ public class ConsultantController {
 	 * @throws IOException
 	 */
 	@RequestMapping(value="query_consultants.do")
+	@PowerCheck
 	public String queryConsultantsByCondition(HttpServletRequest request,HttpServletResponse response,Integer pageNum) throws IOException{
 		logger.info("---后台查询咨询师接口页面");
 		try{
@@ -60,7 +62,8 @@ public class ConsultantController {
 	 * @return
 	 * @throws IOException
 	 */
-	@RequestMapping(value="cdeatil.do")
+	@RequestMapping(value="cdetail.do")
+	@PowerCheck
 	public String getConsultantInfor(HttpServletRequest request,HttpServletResponse response,Long id) throws IOException{
 		logger.info("---系统后台调用咨询师详细信息接口页面----");
 		String response_page="admin/detail";
@@ -71,7 +74,7 @@ public class ConsultantController {
 		rcrDto.setId(id);
 		ConsultantInfo cqrDto=consultantFacade.queryOne(rcrDto);
 		if(cqrDto!=null){
-			request.setAttribute("consultant", cqrDto);
+			request.setAttribute("cinfo", cqrDto);
 		}
 		return response_page;
 	}
