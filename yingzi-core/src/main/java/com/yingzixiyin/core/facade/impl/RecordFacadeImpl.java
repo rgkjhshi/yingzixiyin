@@ -58,6 +58,7 @@ public class RecordFacadeImpl implements RecordFacade {
             ParameterUtils.notNull(recordInfo.getId(), "id不能为null");
             recordBiz.update(recordInfo);
             responseDto.setReturnCode(0);
+            responseDto.setReturnMessage("修改咨询记录信息成功");
         } catch (IllegalArgumentException e) {
             logger.info("参数异常:" + e.getMessage());
             responseDto.setReturnCode(-1);

@@ -11,7 +11,7 @@ import java.util.Map.Entry;
  */
 public class Pagination {
     private String url; // 页码url
-    private int pageSize = 2;  // 每页显示记录数
+    private int pageSize = 20;  // 每页显示记录数
     private int currentPage = 1;    // 当前页码
     private int maxPage;    // 最大页数
     private Long maxCount = 0l;    // 最大数目
