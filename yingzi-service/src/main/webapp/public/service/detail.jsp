@@ -28,7 +28,14 @@
 	        <ul class="consultants layout">
 	            <li class="items">
 	            	<a href="#">
-	            		<img src="<%=path %>/images/test.png" />
+	            	<img src='
+		            	<c:if test="${empty cinfo.avatar}">
+				        	${path}/images/test.png
+				        </c:if>
+				        <c:if test="${(not empty cinfo.avatar) }">
+				        	${cinfo.avatar}
+				        </c:if>
+	            	' />
 	            		<div class="info">
 	            			<div class="name">${consultant.name }</div>
 	            			<div class="desc">

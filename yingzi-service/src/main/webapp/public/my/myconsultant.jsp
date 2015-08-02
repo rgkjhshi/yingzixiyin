@@ -26,7 +26,14 @@
     	<c:forEach items="${ visited}" var="cinfo">
     		<li class="record">
     			<a href="<%=path%>/consultant/consultant_deatil.do?id=${cinfo.id}">
-            		<img src="<%=path%>/images/test.png" />
+					<img src='
+		            	<c:if test="${empty cinfo.avatar}">
+				        	${path}/images/test.png
+				        </c:if>
+				        <c:if test="${(not empty cinfo.avatar) }">
+				        	${cinfo.avatar}
+				        </c:if>
+	            	' />
             		<div class="info">
             			<div class="name">${cinfo.name }</div>
             			<div class="desc">
@@ -76,7 +83,7 @@
     		<c:forEach items="${ collected }" var="cinfo">
     			<li class="record">
 	    			<a href="<%=path%>/consultant/consultant_deatil.do?id=${cinfo.id}">
-	            		<img src="<%=path%>/images/test.png" />
+	            		<img src='${(not empty cinfo.avatar)?cinfo.avatar:pageContext.request.contextPath+"/images/test.png"}' />
 	            		<div class="info">
 	            			<div class="name">${cinfo.name }</div>
 	            			<div class="desc">

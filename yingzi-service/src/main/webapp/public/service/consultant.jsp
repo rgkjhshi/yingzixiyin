@@ -8,6 +8,7 @@
 <head>
 <%
 	String path=request.getContextPath();
+	request.setAttribute("path", path);
 %>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -30,7 +31,14 @@
         <c:forEach items="${consultants}" var="cinfo">
         	<li class="items">
             	<a href="consultant_deatil.do?id=${cinfo.id}">
-            		<img src="<%=path %>/images/test.png" />
+            	<img src='
+	            	<c:if test="${empty cinfo.avatar}">
+			        	${path}/images/test.png
+			        </c:if>
+			        <c:if test="${(not empty cinfo.avatar) }">
+			        	${cinfo.avatar}
+			        </c:if>
+            	' />
             		<div class="info">
             			<div class="name">${cinfo.name }</div>
             			<div class="desc">
