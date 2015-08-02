@@ -25,15 +25,25 @@
             		<div class="subtitle">进行中的咨询</div>
                     <table>
                         <tr>
-                            <th>咨询师</th><th>用户</th><th>开始时间</th><th>操作</th>
+                            <th>咨询师</th><th>用户ID</th><th>开始时间</th><th>操作</th>
                         </tr>
-                        <tr>
-                            <td>zhangsan</td><td>小白</td><td>2015-07-12 11:23:00</td><td class="func tooff"><a>结束</a></td>
-                        </tr>
-                        <tr>
-                            <td>lisi</td><td>二傻瓜</td><td>2015-07-13 11:23:00</td><td class="func tooff"><a>结束</a></td>
-                        </tr>
+                        <c:forEach items="${recordsList}" var="cinfo">
+                        	 <tr>
+                            	<td>${cinfo.consultantName }</td>
+                            	<td>${cinfo.userId }</td>
+                            	<td><fmt:formatDate value="${cinfo.createTime }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+                            	<td class='func ${cinfo.isCompleted.value==0?"tooff":"toon" }'>
+                            		<c:if test="${ cinfo.isCompleted.value==0}">
+                            			<a>结束</a>
+                            		</c:if>
+                            		<c:if test="${ cinfo.isCompleted.value==1}">
+                            			<a>重新开启</a>
+                            		</c:if>
+                            	</td>
+                        	</tr>
+                        </c:forEach>
                     </table>
+                    ${page }
             	</div>
             </div>
         </div>
