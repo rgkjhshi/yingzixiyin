@@ -110,4 +110,9 @@ public class ConsultantServiceImpl implements ConsultantService {
 	public Long queryCount(Consultant bean) {
 		return consultantDao.queryCount(bean);
 	}
+
+	@Override
+	public Integer delete(Consultant bean) {
+		return consultantDao.delete(bean);
+	}
 }

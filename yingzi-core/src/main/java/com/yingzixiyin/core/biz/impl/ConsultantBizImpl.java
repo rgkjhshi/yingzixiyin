@@ -111,4 +111,9 @@ public class ConsultantBizImpl implements ConsultantBiz {
 	public Long queryCount(ConsultantQueryRequestDto requestDto) {
 		return consultantService.queryCount(Consultant.getBean(requestDto));
 	}
+
+	@Override
+	public Integer delete(ConsultantQueryRequestDto requestDto) {
+		return consultantService.delete(Consultant.getBean(requestDto));
+	}
 }

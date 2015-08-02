@@ -12,9 +12,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.yingzi.admin.annotation.PowerCheck;
+import com.yingzi.admin.utils.JsonUtil;
+import com.yingzi.admin.utils.ResponseUtils;
+import com.yingzi.admin.view.ConsultantView;
+import com.yingzixiyin.api.dto.BaseResponseDto;
 import com.yingzixiyin.api.dto.ConsultantInfo;
 import com.yingzixiyin.api.dto.ConsultantQueryRequestDto;
 import com.yingzixiyin.api.dto.ConsultantQueryResponseDto;
+import com.yingzixiyin.api.enums.GenderTypeEnum;
+import com.yingzixiyin.api.enums.RangeTypeEnum;
+import com.yingzixiyin.api.enums.StatusEnum;
 import com.yingzixiyin.api.facade.ConsultantFacade;
 import com.yingzixiyin.page.Pagination;
 
@@ -77,5 +84,81 @@ public class ConsultantController {
 			request.setAttribute("cinfo", cqrDto);
 		}
 		return response_page;
+	}
+	/**
+	 * 删除咨询师
+	 * @param request
+	 * @param response
+	 * @param ctype
+	 * @return
+	 * @throws IOException
+	 */
+	@RequestMapping(value="cdelete.do")
+	@PowerCheck
+	public void deleteConsultantInfor(HttpServletRequest request,HttpServletResponse response,Long id) throws IOException{
+		logger.info("---系统后台调用咨询师删除接口页面----");
+		BaseResponseDto responseDto=new BaseResponseDto();
+		responseDto.setReturnCode(0);
+		responseDto.setReturnMessage("删除成功");
+		try{
+			ConsultantQueryRequestDto rcrDto=new ConsultantQueryRequestDto();
+			rcrDto.setId(id);
+			consultantFacade.delete(rcrDto);
+		}
+		catch(Exception e){
+			logger.error("删除咨询师异常",e);
+			responseDto.setReturnCode(-1);
+			responseDto.setReturnMessage("删除咨询师失败");
+		}
+		ResponseUtils.renderJsonText(response, JsonUtil.getJsonText(responseDto));
+	}
+	/**
+	 * 
+	 * @param request
+	 * @param response
+	 * @param id
+	 * @throws IOException
+	 */
+	@RequestMapping(value="ccheck.do")
+	@PowerCheck
+	public void checkConsultantInfo(HttpServletRequest request,HttpServletResponse response,ConsultantView cinfo) throws IOException{
+		logger.info("---系统后台调用咨询师删除接口页面----");
+		BaseResponseDto responseDto=new BaseResponseDto();
+	
+		try{
+			ConsultantInfo requestDto=new ConsultantInfo();
+			copyConsultantToByView(requestDto,cinfo);
+			responseDto=consultantFacade.update(requestDto);
+		}
+		catch(Exception e){
+			logger.error("删除咨询师异常",e);
+			responseDto.setReturnCode(-1);
+			responseDto.setReturnMessage("删除咨询师失败");
+		}
+		ResponseUtils.renderJsonText(response, JsonUtil.getJsonText(responseDto));
+	}
+	private void copyConsultantToByView(ConsultantInfo requestDto,
+			ConsultantView cinfo) {
+		if(cinfo==null||requestDto==null||cinfo.getId()==null) {
+			return ;
+		}
+		requestDto.setId(cinfo.getId());
+		requestDto.setEmail(cinfo.getEmail());
+		requestDto.setGender(GenderTypeEnum.toEnum(cinfo.getGender()));
+		requestDto.setName(cinfo.getName());
+		requestDto.setPassword(cinfo.getPassword());
+		requestDto.setPhone(cinfo.getPhone());
+		requestDto.setRangeType(RangeTypeEnum.toEnum(cinfo.getRangeType()));
+		requestDto.setStatus(StatusEnum.toEnum(cinfo.getStatus()));
+		requestDto.setAvatar(cinfo.getAvatar());
+		requestDto.setAddress(cinfo.getAddress());
+		requestDto.setAlipay(cinfo.getAlipay());
+		requestDto.setBackground(cinfo.getBackground());
+		requestDto.setBookTime(cinfo.getBookTime());
+		requestDto.setProfessional(cinfo.getProfessional());
+		requestDto.setPrice(cinfo.getPrice());
+		requestDto.setNickname(cinfo.getNickname());
+		requestDto.setIntroduce(cinfo.getIntroduce());
+		requestDto.setSignature(cinfo.getSignature());
 	}
 }

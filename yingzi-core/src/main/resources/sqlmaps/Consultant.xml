@@ -310,4 +310,8 @@
         </where>
         limit #{offset},#{size}
     </select>
+    <delete id="delete" parameterType="Consultant">
+    	delete from consultant
+    	<include refid="base_select"></include>
+    </delete>
 </mapper>

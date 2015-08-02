@@ -32,4 +32,6 @@ public interface ConsultantBiz {
 
 	public Long queryCount(ConsultantQueryRequestDto requestDto);
 
+	public Integer delete(ConsultantQueryRequestDto requestDto);
+
 }

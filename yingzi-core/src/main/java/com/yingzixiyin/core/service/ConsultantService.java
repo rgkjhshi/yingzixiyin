@@ -59,4 +59,6 @@ public interface ConsultantService {
 	public List<ConsultantInfo> queryConsultantListPage(Map<String, Object> map);
 
 	public Long queryCount(Consultant bean);
+
+	public Integer delete(Consultant bean);
 }

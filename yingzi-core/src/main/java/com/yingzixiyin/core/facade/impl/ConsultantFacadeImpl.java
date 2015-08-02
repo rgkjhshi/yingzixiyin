@@ -157,4 +157,10 @@ public class ConsultantFacadeImpl implements ConsultantFacade {
         logger.info("返回数据:" + responseDto);
         return responseDto;
 	}
+
+	@Override
+	public Integer delete(ConsultantQueryRequestDto requestDto) {
+		logger.info("收到参数:" + requestDto);
+		return consultantBiz.delete(requestDto);
+	}
 }
