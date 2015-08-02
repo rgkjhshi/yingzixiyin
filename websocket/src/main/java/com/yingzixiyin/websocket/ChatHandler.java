@@ -1,8 +1,10 @@
-package com.yingzixiyin.websocket.handler;
+package com.yingzixiyin.websocket;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.socket.*;
+import org.springframework.web.socket.CloseStatus;
+import org.springframework.web.socket.TextMessage;
+import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import java.io.IOException;
@@ -16,10 +18,15 @@ import java.util.Map;
  */
 
 public class ChatHandler extends TextWebSocketHandler {
+
     private static final Logger logger = LoggerFactory.getLogger(ChatHandler.class);
     private static final ArrayList<WebSocketSession> users = new ArrayList<>();//这个会出现性能问题，最好用Map来存储，key用userid
     // 所有在线用户的map
     private static final Map<String, WebSocketSession> userMap = new HashMap<String, WebSocketSession>();
+
+
+    public ChatHandler() {
+    }
 
     /**
      * 连接成功时候，会触发onOpen方法

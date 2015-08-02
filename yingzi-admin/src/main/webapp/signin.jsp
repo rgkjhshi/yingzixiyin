@@ -20,6 +20,9 @@
                 left: 0;
                 bottom:0;
             }
+            fieldset{
+                min-height: 280px;
+            }
         </style>
     </head>
     <body>

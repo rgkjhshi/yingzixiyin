@@ -1,4 +1,4 @@
-package com.yingzixiyin.websocket.interceptor;
+package com.yingzixiyin.websocket;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +13,7 @@ import java.util.Map;
 
 /**
  * @author song.shi
- * @date 2015-07-22
+ * @date 2015-07-24
  */
 
 public class ChatHandshakeInterceptor extends HttpSessionHandshakeInterceptor {
@@ -24,14 +24,11 @@ public class ChatHandshakeInterceptor extends HttpSessionHandshakeInterceptor {
         logger.info("Before Handshake...");
         if (request instanceof ServletServerHttpRequest) {
             ServletServerHttpRequest servletRequest = (ServletServerHttpRequest) request;
-            // 获取原来的session
             HttpSession session = servletRequest.getServletRequest().getSession(false);
             if (session != null) {
                 //使用userName区分WebSocketHandler，以便定向发送消息
                 String phone = (String) session.getAttribute("session_phone");
                 Long recordId = (Long) session.getAttribute("session_recordId");
-                Long SESSION_USERNAME = (Long) session.getAttribute("SESSION_USERNAME");
-                logger.info("Before Handshake, SESSION_USERNAME={}", SESSION_USERNAME);
                 logger.info("Before Handshake, phone={}, recordId={}", phone, recordId);
                 attributes.put("phone", phone);
                 attributes.put("recordId", recordId);
