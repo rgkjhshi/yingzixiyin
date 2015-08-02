@@ -21,30 +21,28 @@
         <div class="info">
             <div class="layout">
                 <%@ include file="../parts/left.jsp" %> 
-            	<div class="maincontent">
+            	<div class="maincontent sign_content_admin">
             		<div class="subtitle">修改密码</div>
                     <div>
                         <div class="sign_title">原密码：</div>
                         <div class="sign_content">
                             <input type="password" data-validate="notnull" data-tip="原始密码" id="oldpwd" />
-                            <span class="tips"></span>
                         </div>
                     </div>
                     <div>
                         <div class="sign_title">新密码：</div>
                         <div class="sign_content">
                             <input data-validate="pwd" data-tip="密码" id="pwd" type="password" />
-                            <span class="tips oldtp">请输入6-12位包含数字、字母或下划线的密码</span>
                         </div>
                     </div>
                     <div>
                         <div class="sign_title">确认密码：</div>
                         <div class="sign_content">
                             <input type="password" data-validate="pwd2" id="pwd2" />
-                            <span class="tips"></span>
                         </div>
                     </div>
                     <div class="btn" id="modPwd">保存</div>
+                    <span class="tips"></span>
             	</div>
             </div>
         </div>

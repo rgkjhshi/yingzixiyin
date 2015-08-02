@@ -168,7 +168,7 @@ fieldset div {
 	/*float: left;*/
 	margin:0 auto;
 }
-.signupcontent .tips,.sign_content .tips{
+.signupcontent .tips,.sign_content .tips,.sign_content_admin .tips{
 	color:#f00;
 	font-size: 0.6rem;
 	margin-left: 10px;
@@ -180,23 +180,11 @@ fieldset div {
 	padding-left: 0;
     display: inline-block;
 }
+.sign_content_admin .tips{
+	padding-left: 106px;
+}
 .sign_title,.sign_content {
 	display: inline-block;
-}
-.sms_code{
-	width:90px!important;
-}
-.sms_btn{
-	display: inline-block;
-	width:106px;
-	text-align: center;
-	color: #666;
-	background: #eee;
-	font-size: 0.6rem;
-	margin-left: 5px;
-	border: 1px solid #ddd;
-	cursor: pointer;
-	line-height: 2rem;
 }
 .sign_content .radio_la{
 	margin-right:20px;
@@ -358,6 +346,27 @@ fieldset div {
 	margin-bottom: 30px;
 	border-bottom: 2px solid #d1402f;
 	box-sizing: border-box;
+}
+.fdtips{
+    width:300px;
+    text-align: center;
+    position:fixed;
+    top:40%;
+    left:50%;
+    height:50px;
+    line-height: 50px;
+    margin-left: -150px;
+    font-size: 0.85rem;
+}
+.successtip{
+	background-color: #dff0d8;
+    border-color: #B3DE8E;
+    color: #468847;
+}
+.errortip{
+	background-color: #f2dede;
+    border-color: #EFB6BE;
+    color: #b94a48;
 }
 /*message*/
 .sms,.infomation{
