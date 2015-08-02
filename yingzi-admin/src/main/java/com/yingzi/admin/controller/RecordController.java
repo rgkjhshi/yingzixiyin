@@ -12,8 +12,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.yingzi.admin.annotation.PowerCheck;
+import com.yingzi.admin.utils.JsonUtil;
+import com.yingzi.admin.utils.ResponseUtils;
+import com.yingzi.admin.view.ConsultantView;
+import com.yingzixiyin.api.dto.BaseResponseDto;
 import com.yingzixiyin.api.dto.ConsultantInfo;
 import com.yingzixiyin.api.dto.ConsultantQueryRequestDto;
+import com.yingzixiyin.api.dto.RecordInfo;
 import com.yingzixiyin.api.dto.RecordQueryRequestDto;
 import com.yingzixiyin.api.dto.RecordQueryResponseDto;
 import com.yingzixiyin.api.enums.StatusEnum;
@@ -79,5 +84,31 @@ public class RecordController {
 			logger.error("后台查询咨询师分页结果出错", e);
 		}
 		return response_page;
+	}
+	/**
+	 * 修改咨询回话，关闭或者开启会话
+	 * @param request
+	 * @param response
+	 * @param id
+	 * @param status
+	 * @throws IOException
+	 */
+	@RequestMapping(value="change_state.do")
+	@PowerCheck
+	public void changeRecordState(HttpServletRequest request,HttpServletResponse response,Long id,Integer status) throws IOException{
+		logger.info("---系统后台调用咨询回话状态更新接口页面----");
+		BaseResponseDto responseDto=new BaseResponseDto();
+		try{
+			RecordInfo requestDto=new RecordInfo();
+			requestDto.setId(id);
+			requestDto.setIsCompleted(YesOrNoEnum.toEnum(status));
+			responseDto=recordFacade.update(requestDto);
+		}
+		catch(Exception e){
+			logger.error("修改咨询会话失败",e);
+			responseDto.setReturnCode(-1);
+			responseDto.setReturnMessage("修改咨询会话状态失败");
+		}
+		ResponseUtils.renderJsonText(response, JsonUtil.getJsonText(responseDto));
 	}
 }
