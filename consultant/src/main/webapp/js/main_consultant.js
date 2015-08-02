@@ -110,7 +110,6 @@
                     alert("注册成功，现在为您跳转到登录页面！");
                     window.location.href = 'http://'+window.location.host+"/consultant/signin.jsp";//跳转到后台管理页面
                 } else {
-                    $("input").val("");
                     var tips = $("<div class='fdtips errortip'>"+data.message+"</div>");
                     $(tips).appendTo($("body")).fadeOut(3000);
                 }
