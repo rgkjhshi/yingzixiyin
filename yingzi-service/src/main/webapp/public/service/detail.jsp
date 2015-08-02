@@ -30,11 +30,11 @@
 	            <li class="items">
 	            	<a href="#">
 	            	<img src='
-		            	<c:if test="${empty cinfo.avatar}">
+		            	<c:if test="${empty consultant.avatar}">
 				        	${path}/images/test.png
 				        </c:if>
-				        <c:if test="${(not empty cinfo.avatar) }">
-				        	${cinfo.avatar}
+				        <c:if test="${(not empty consultant.avatar) }">
+				        	${consultant.avatar}
 				        </c:if>
 	            	' />
 	            		<div class="info">

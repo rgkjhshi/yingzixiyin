@@ -35,20 +35,20 @@
 				        </c:if>
 	            	' />
             		<div class="info">
-            			<div class="name">张三</div>
+            			<div class="name">${cinfo.name }</div>
             			<div class="desc">
-            				这里是咨询师的介绍，比如他的年龄、经历什么的，总之可以写好多好多东西，记得overflow。
+            				${cinfo.introduce }
             			</div>
             		</div>
             	</a>
             </li>
             <li>
             	<div class="sub">预约时间</div>
-                <div class="dinfo">每周三8:00-18:00</div>
+                <div class="dinfo">${cinfo.bookTime}</div>
             	<div class="sub">咨询地点</div>
-                <div class="dinfo">北京市海淀区西土城路10号北邮科技大厦3层601室</div>
+                <div class="dinfo">${cinfo.address }</div>
                 <div class="sub">收费标准</div>
-                <div class="dinfo">300元／次</div>
+                <div class="dinfo"><fmt:formatNumber value="${cinfo.price }" pattern="##.##" minFractionDigits="2"></fmt:formatNumber>元／次</div>
             </li>
             <li>
                 <div class="choose_btn">预约</div>
