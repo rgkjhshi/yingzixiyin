@@ -70,7 +70,7 @@
             loginURL="admin/login.do";
             $.post(loginURL, {"phone": phone, "password": pwd}, function (data) {
                 if (data.status==0||data.status=="0") {
-                    window.location.href = "admin/consultant.jsp";//跳转到后台管理页面
+                    window.location.href = "consultant/query_consultants.do";//跳转到后台管理页面
                 } else {
                     $("input").val("");
                     $(".tips").text(data.message);

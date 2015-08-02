@@ -24,9 +24,10 @@
                 <div class="maincontent">
                     <div class="subtitle">咨询师列表</div>
                     <table>
-                    	<tr><th>姓名</th><th>性别</th><th>状态</th><th>操作</th></tr>
+                    	<tr><th>手机号码</th><th>姓名</th><th>性别</th><th>状态</th><th>操作</th></tr>
                     	<c:forEach items="${list }" var="cinfo">
                     		 <tr>	
+                                <td>${cinfo.phone }</td>
                     		 	<td>${cinfo.name }</td>
                     		 	<td>${cinfo.gender.desc}</td>
                     		 	<td>${cinfo.status.desc }</td>
