@@ -312,6 +312,6 @@
     </select>
     <delete id="delete" parameterType="Consultant">
     	delete from consultant
-    	<include refid="base_select"></include>
+    	<include refid="where_condition"></include>
     </delete>
 </mapper>
