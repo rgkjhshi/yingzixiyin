@@ -1,18 +1,25 @@
 package com.yingzixiyin.core.biz.impl;
 
+import com.google.common.collect.Maps;
+import com.yingzixiyin.api.dto.ConsultantQueryResponseDto;
+import com.yingzixiyin.api.dto.ConsultantRecordsInfo;
 import com.yingzixiyin.api.dto.RecordInfo;
 import com.yingzixiyin.api.dto.RecordQueryRequestDto;
 import com.yingzixiyin.api.dto.RecordQueryResponseDto;
 import com.yingzixiyin.core.biz.RecordBiz;
 import com.yingzixiyin.core.entity.Record;
 import com.yingzixiyin.core.service.RecordService;
+import com.yingzixiyin.page.Pagination;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
+
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author song.shi
@@ -57,4 +64,35 @@ public class RecordBizImpl implements RecordBiz {
         }
         return responseDto;
     }
+
+	@Override
+	public Long queryCount(RecordQueryRequestDto requestDto) {
+		return recordService.queryCount(Record.getBean(requestDto));
+	}
+
+	@Override
+	public RecordQueryResponseDto queryRecordListPage(
+			RecordQueryRequestDto requestDto, Pagination page) {
+		Map<String, Object> map = Maps.newHashMap();
+		map.put("offset", page.getOffset());
+		map.put("size", page.getLimit());
+		map.put("consultantId", null == requestDto.getConsultantId() ? null
+				: requestDto.getConsultantId());
+		map.put("consultType", null == requestDto.getConsultType() ? null
+				: requestDto.getConsultType().getValue());
+		map.put("isCompleted", null == requestDto.getIsCompleted() ? null
+				: requestDto.getIsCompleted().getValue());
+		map.put("isPaid", null==requestDto.getIsPaid()?null:requestDto.getIsPaid().getValue());
+		map.put("isReplied", null==requestDto.getIsReplied()?null:requestDto.getIsReplied().getValue());
+		map.put("userId", null==requestDto.getUserId()?null:requestDto.getUserId());
+		List<ConsultantRecordsInfo> list=recordService.queryConsultantRecordsListPage(map);
+		logger.info("--后台查询得到咨询记录："+list);
+		// 返回responseDto
+		RecordQueryResponseDto responseDto = new RecordQueryResponseDto();
+        if (!CollectionUtils.isEmpty(list)) {
+            responseDto.setConsultantRecordList(list);
+            responseDto.setCount(list.size());
+        }
+        return responseDto;
+	}
 }

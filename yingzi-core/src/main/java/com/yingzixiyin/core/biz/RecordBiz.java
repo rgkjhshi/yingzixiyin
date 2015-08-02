@@ -3,6 +3,7 @@ package com.yingzixiyin.core.biz;
 import com.yingzixiyin.api.dto.RecordInfo;
 import com.yingzixiyin.api.dto.RecordQueryRequestDto;
 import com.yingzixiyin.api.dto.RecordQueryResponseDto;
+import com.yingzixiyin.page.Pagination;
 
 /**
  * @author song.shi
@@ -23,5 +24,10 @@ public interface RecordBiz {
     public RecordInfo getRecord(RecordQueryRequestDto requestDto);
 
     public RecordQueryResponseDto getRecordList(RecordQueryRequestDto requestDto);
+
+	public Long queryCount(RecordQueryRequestDto requestDto);
+
+	public RecordQueryResponseDto queryRecordListPage(
+			RecordQueryRequestDto requestDto, Pagination page);
 
 }

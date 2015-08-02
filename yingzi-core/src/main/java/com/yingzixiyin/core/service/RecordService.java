@@ -1,9 +1,11 @@
 package com.yingzixiyin.core.service;
 
+import com.yingzixiyin.api.dto.ConsultantRecordsInfo;
 import com.yingzixiyin.api.dto.RecordInfo;
 import com.yingzixiyin.core.entity.Record;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author song.shi
@@ -39,4 +41,9 @@ public interface RecordService {
      * @return RecordInfoList
      */
     public List<RecordInfo> getRecordList(Record record);
+
+	public Long queryCount(Record bean);
+
+	public List<ConsultantRecordsInfo> queryConsultantRecordsListPage(
+			Map<String, Object> map);
 }

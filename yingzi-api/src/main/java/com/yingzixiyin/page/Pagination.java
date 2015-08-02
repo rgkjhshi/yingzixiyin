@@ -77,6 +77,9 @@ public class Pagination {
 	public void setParams(Map<String, Object> params) {
 		this.params = params;
 	}
+	public void putParams(String key,Object value) {
+		this.params.put(key, value);
+	}
 	private String generateParamString(Map<String, Object> params){
 		StringBuffer sb=new StringBuffer();
 		sb.append("?x="+1);

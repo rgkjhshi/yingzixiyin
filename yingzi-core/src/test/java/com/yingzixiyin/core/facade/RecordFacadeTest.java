@@ -5,8 +5,11 @@ import com.yingzixiyin.api.dto.RecordInfo;
 import com.yingzixiyin.api.dto.RecordQueryRequestDto;
 import com.yingzixiyin.api.dto.RecordQueryResponseDto;
 import com.yingzixiyin.api.enums.ConsultTypeEnum;
+import com.yingzixiyin.api.enums.YesOrNoEnum;
 import com.yingzixiyin.api.facade.RecordFacade;
 import com.yingzixiyin.core.BaseTest;
+import com.yingzixiyin.page.Pagination;
+
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +27,7 @@ public class RecordFacadeTest extends BaseTest {
     @Resource
     RecordFacade recordFacade;
 
-    @Test
+/*    @Test
     public void addTest() {
         RecordInfo info = new RecordInfo();
         info.setUserId(1L);
@@ -60,6 +63,20 @@ public class RecordFacadeTest extends BaseTest {
         requestDto.setConsultType(ConsultTypeEnum.OFF_LINE);
         RecordQueryResponseDto responseDto =  recordFacade.query(requestDto);
         logger.info("{}", responseDto);
+    }*/
+    @Test
+    public void queryPage(){
+    	RecordQueryRequestDto requestDto=new RecordQueryRequestDto();
+    	Pagination page=new Pagination();
+    	requestDto.setIsCompleted(YesOrNoEnum.toEnum(1));
+    	requestDto.setConsultantId(1l);
+    	requestDto.setConsultType(ConsultTypeEnum.toEnum(1));
+    	requestDto.setIsPaid(YesOrNoEnum.toEnum(1));
+    	requestDto.setIsReplied(YesOrNoEnum.toEnum(1));
+    	Long count=recordFacade.queryCount(requestDto);
+    	logger.info("--查询得到数目："+count);
+    	page.setMaxCountAndCurrentPage(count, 1);
+    	RecordQueryResponseDto responseDto=recordFacade.queryPage(requestDto, page);
+    	logger.info("查询结果："+responseDto.getConsultantRecordList());
     }
-
 }

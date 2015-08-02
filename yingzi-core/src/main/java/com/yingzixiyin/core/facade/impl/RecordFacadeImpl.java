@@ -7,6 +7,8 @@ import com.yingzixiyin.api.dto.RecordQueryResponseDto;
 import com.yingzixiyin.api.facade.RecordFacade;
 import com.yingzixiyin.core.biz.RecordBiz;
 import com.yingzixiyin.core.utils.ParameterUtils;
+import com.yingzixiyin.page.Pagination;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -103,5 +105,33 @@ public class RecordFacadeImpl implements RecordFacade {
         logger.info("返回数据:" + responseDto);
         return responseDto;
     }
+
+	@Override
+	public Long queryCount(RecordQueryRequestDto requestDto) {
+		return recordBiz.queryCount(requestDto);
+	}
+
+	@Override
+	public RecordQueryResponseDto queryPage(RecordQueryRequestDto requestDto,
+			Pagination page) {
+		logger.info("收到参数:" + requestDto);
+		RecordQueryResponseDto responseDto = new RecordQueryResponseDto();
+		try {
+			ParameterUtils.notNull(requestDto, "RecordQueryRequestDto不能为null");
+			responseDto = recordBiz.queryRecordListPage(requestDto,page);
+			responseDto.setReturnCode(0);
+			responseDto.setReturnMessage("查询咨询记录成功");
+		} catch (IllegalArgumentException e) {
+			logger.info("参数异常:" + e.getMessage());
+			responseDto.setReturnCode(-1);
+			responseDto.setReturnMessage("查询咨询记录异常");
+		} catch (Exception e) {
+			logger.error("捕获异常:" + e.getMessage(), e);
+			responseDto.setReturnCode(-1);
+			responseDto.setReturnMessage("查询咨询记录异常");
+		}
+		logger.info("返回数据:" + responseDto);
+		return responseDto;
+	}
 
 }

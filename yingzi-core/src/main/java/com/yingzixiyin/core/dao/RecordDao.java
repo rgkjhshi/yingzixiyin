@@ -1,9 +1,11 @@
 package com.yingzixiyin.core.dao;
 
 import com.yingzixiyin.core.entity.Record;
+
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author song.shi
@@ -39,5 +41,10 @@ public interface RecordDao {
      * @return RecordList
      */
     public List<Record> getRecordList(Record record);
+
+	public Long queryCount(Record bean);
+
+	public List<Map<String, Object>> queryConsultantRecordsListPage(
+			Map<String, Object> map);
 
 }

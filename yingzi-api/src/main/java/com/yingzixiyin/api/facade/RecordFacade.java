@@ -4,6 +4,7 @@ import com.yingzixiyin.api.dto.BaseResponseDto;
 import com.yingzixiyin.api.dto.RecordInfo;
 import com.yingzixiyin.api.dto.RecordQueryRequestDto;
 import com.yingzixiyin.api.dto.RecordQueryResponseDto;
+import com.yingzixiyin.page.Pagination;
 
 /**
  * @author song.shi
@@ -39,4 +40,9 @@ public interface RecordFacade {
      * @return RecordInfoList
      */
     public RecordQueryResponseDto query(RecordQueryRequestDto requestDto);
+
+	public Long queryCount(RecordQueryRequestDto requestDto);
+
+	public RecordQueryResponseDto queryPage(RecordQueryRequestDto requestDto,
+			Pagination page);
 }
