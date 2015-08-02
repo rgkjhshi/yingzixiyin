@@ -8,7 +8,6 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>consultant</module>
         <module>yingzi-admin</module>
         <module>yingzi-api</module>
         <module>yingzi-core</module>

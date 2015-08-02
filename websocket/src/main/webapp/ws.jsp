@@ -8,8 +8,8 @@
 <script type="text/javascript" src="./js/sockjs-0.3.min.js"></script>
 
 <script type="text/javascript">
-    var webSocketURL = 'ws://' + window.location.host + "/websocket/chat.do";
-    var socketJSURL = 'ws://' + window.location.host + "/websocket/sockjs/chat.do";
+    var webSocketURL = 'ws://' + window.location.host + "/websocket/chatServer.do";
+    var socketJSURL = 'ws://' + window.location.host + "/websocket/sockjs/chatServer.do";
 
     if ('WebSocket' in window) {
         websocket = new WebSocket(webSocketURL);

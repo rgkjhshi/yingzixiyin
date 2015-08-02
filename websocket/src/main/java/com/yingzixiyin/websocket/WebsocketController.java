@@ -1,4 +1,4 @@
-package com.yingzixiyin.websocket.controller;
+package com.yingzixiyin.websocket;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,8 +27,9 @@ public class WebsocketController {
     public void login(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String username = request.getParameter("username");
         HttpSession session = request.getSession(false);
-        session.setAttribute("SESSION_USERNAME", username);
-        logger.info("SESSION_USERNAME:{}", session.getAttribute("SESSION_USERNAME"));
+        session.setAttribute("session_phone", username);
+        session.setAttribute("session_recordId", 1L);
+        logger.info("session_phone:{}", session.getAttribute("session_phone"));
         response.sendRedirect("/websocket/ws.jsp");
     }
 
