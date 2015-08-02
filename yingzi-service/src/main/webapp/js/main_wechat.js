@@ -28,7 +28,6 @@
 			type:"post",
 			data:{"gender":gender,"age":age,"ctype":ctype},
 			success:function(data){
-				console.log(data);
 				$("#choose_dialog").hide();
 				data = $.parseJSON(data);
 				if(data.returnCode==0){
@@ -40,7 +39,11 @@
 						var tpl = "";
 						for(var i = 0;i<l;i++){
 							var _data = data.list[i];
-							tpl += '<li class="items"><a href="consultant_deatil.do?id='+_data.id+'"><img src="'+_data.avatar+'"><div class="info"><div class="name">'+_data.name+'</div><div class="desc">'+_data.introduce+'</div></div></a></li>'
+							var _avatar = _data.avatar;
+							if(_avatar==""||_avatar==null){
+								_avatar = "../images/test.png";
+							}
+							tpl += '<li class="items"><a href="consultant_deatil.do?id='+_data.id+'"><img src="'+_avatar+'"><div class="info"><div class="name">'+_data.name+'</div><div class="desc">'+_data.introduce+'</div></div></a></li>'
 						}
 						$("#consultant_list").append(tpl);
 					}
