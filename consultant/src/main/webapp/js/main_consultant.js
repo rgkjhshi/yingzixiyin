@@ -12,7 +12,7 @@
     var registerUrl = "http://" + window.location.host + "/consultant/registerApi.htm";
     var infoURL = "http://" + window.location.host + "/consultant/admin/queryInfoApi.htm";
     var changePwdURL = "http://" + window.location.host + "/consultant/admin/changePasswordApi.htm";
-    var updataInfoURL = "http://" +window.location.host + "/consultant/admin/updateInfoApi.htm";
+    var updateInfoURL = "http://" +window.location.host + "/consultant/admin/updateInfoApi.htm";
 
     // 格式验证
     var check = function (vid) {//传入id和默认的提示
@@ -162,7 +162,7 @@
             var _newdata = _data.replace(reg1, "':'").replace(reg2, "','");
 
             //提交数据
-            $.post(updataInfoURL,_newdata,function(data){
+            $.post(updateInfoURL,_newdata,function(data){
                 if(data.status=="0"||data.status==0){
                     $("input").attr("disabled","disabled");
                     $("textarea").attr("disabled","disabled");

@@ -9,6 +9,7 @@ import org.springframework.web.socket.WebSocketHandler;
 import org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor;
 
 import javax.servlet.http.HttpSession;
+import java.util.Enumeration;
 import java.util.Map;
 
 /**
@@ -26,10 +27,16 @@ public class ChatHandshakeInterceptor extends HttpSessionHandshakeInterceptor {
             ServletServerHttpRequest servletRequest = (ServletServerHttpRequest) request;
             HttpSession session = servletRequest.getServletRequest().getSession(false);
             if (session != null) {
+                logger.info("session不为null, session={}", session);
+                Enumeration<String> names = session.getAttributeNames();
+                while (names.hasMoreElements()) {
+                    String name = names.nextElement();
+                    logger.info("name={}, value={}", name, session.getAttribute(name));
+                }
                 //使用userName区分WebSocketHandler，以便定向发送消息
                 String phone = (String) session.getAttribute("session_phone");
                 Long recordId = (Long) session.getAttribute("session_recordId");
-                logger.info("Before Handshake, phone={}, recordId={}", phone, recordId);
+
                 attributes.put("phone", phone);
                 attributes.put("recordId", recordId);
             }
