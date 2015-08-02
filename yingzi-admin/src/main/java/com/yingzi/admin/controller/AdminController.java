@@ -90,7 +90,7 @@ public class AdminController {
 	public void changePassword(HttpServletRequest request,HttpServletResponse response,String oldpwd,String password){
 		log.info("---用户修改密码--");
 		BaseResponseDto responseDto=new BaseResponseDto();
-		responseDto.setReturnCode(1);
+		responseDto.setReturnCode(0);
 		responseDto.setReturnMessage("密码修改成功");
 		
 		AdminInfo admin=SessionUtil.getLoginAdminToSession(request);
@@ -106,7 +106,7 @@ public class AdminController {
 		}
 		//更新Admin值
 		admin.setPassword(password);
-		adminFacade.update(admin);
+		responseDto=adminFacade.update(admin);
 		try {
 			ResponseUtils.renderJsonText(response, JsonUtil.getJsonText(responseDto));
 		} catch (IOException e) {
