@@ -64,4 +64,10 @@ public interface ConsultantFacade {
 	 */
 	public ConsultantQueryResponseDto queryPage(
 			ConsultantQueryRequestDto requestDto, Pagination page);
+	/**
+	 * 删除咨询师接口
+	 * @param rcrDto
+	 * @return
+	 */
+	public Integer delete(ConsultantQueryRequestDto rcrDto);
 }

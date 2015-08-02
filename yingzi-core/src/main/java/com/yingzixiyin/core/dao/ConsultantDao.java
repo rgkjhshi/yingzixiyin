@@ -68,5 +68,11 @@ public interface ConsultantDao {
 	 * @return
 	 */
 	public List<Consultant> queryConsultantListPage(Map<String, Object> map);
+	/**
+	 * 删除
+	 * @param bean
+	 * @return
+	 */
+	public Integer delete(Consultant bean);
 
 }
