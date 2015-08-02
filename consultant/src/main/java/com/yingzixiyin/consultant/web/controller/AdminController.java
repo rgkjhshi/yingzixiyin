@@ -119,6 +119,6 @@ public class AdminController {
         }
         session.setAttribute("session_recordId", recordId);
         logger.info("chatApi.htm, phone={}, recordId={}", session.getAttribute("session_phone"), recordId);
-        response.sendRedirect("chat.jsp");
+        response.sendRedirect("http://localhost:8080/websocket/login.do");
     }
 }
