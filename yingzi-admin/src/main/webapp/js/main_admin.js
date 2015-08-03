@@ -115,42 +115,54 @@
         var id = $(this).attr("data-id");
         var url = "../consultant/cdelete.do";
         var _this = $(this);
-        $.get(url,{'id':id},function(data){
-            var s = data.returnCode;
-            if(data.returnCode==0||data.returnCode=="0"){
-                _this.parents("tr").remove();
-                alert(data.returnMessage);
-            }else{
-                alert(data.returnMessage);
-            }
-        });
+        if(confirm("确定要删除该咨询师吗？")){
+            $.get(url,{'id':id},function(data){
+                var s = data.returnCode;
+                if(data.returnCode==0||data.returnCode=="0"){
+                    _this.parents("tr").remove();
+                    alert(data.returnMessage);
+                }else{
+                    alert(data.returnMessage);
+                }
+            });
+        }
     }
 
     $(".delConsultant").on("click",delConsultant);
 
     //咨询师审核
     var checkConsultant = function(type){
-        var id = $(this).parent("div").attr("data-id");
-        if(type==2){
-
-        }else if(type==3){
-
+        if(type=="2"||type==2){
+            _this = $(".accept");
+        }else{
+            _this = $(".refuse");
         }
+        var id = _this.parent("div").attr("data-id");
         var url = "../consultant/ccheck.do";
-        // $.post(url,{'id':id},function(data){
-        //     var s = data.returnCode;
-        //     if(data.returnCode==0||data.returnCode=="0"){
-        //         alert("success");
-        //         $(this).parent("tr").remove();
-        //         console.log($(this).parent("tr"));
-        //         alert(data.returnMessage);
-        //     }else{
-        //         alert(data.returnMessage);
-        //     }
-        // });
+        var obj = {
+            "id":id,
+            "professional":$("#professional").val(),
+            "background":$("#background").val(),
+            "bookTime":$("#bookTime").val(),
+            "address":$("#address").val(),
+            "introduce":$("#introduce").val(),
+            "signature":$("#signature").val(),
+            "status":type 
+        };
+        console.log(obj);
+        $.post(url,obj,function(data){
+            console.log(data);
+            if(data.returnCode==0||data.returnCode=="0"){
+                alert("success");
+                alert(data.returnMessage);
+                window.location.reload();
+            }else{
+                alert(data.returnMessage);
+            }
+        });
     }
 
-    $(".accept").on("click",checkConsultant(2));
-    $(".refuse").on("click",checkConsultant(3));
+    $(".accept").on("click",function(){checkConsultant(2)});
+    $(".refuse").on("click",function(){checkConsultant(3)});
 
 })();

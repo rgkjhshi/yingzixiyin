@@ -435,6 +435,11 @@ fieldset div {
 #detailtable th{
 	width:20%;
 }
+#detailtable textarea{
+	background: rgba(255,255,255,0.5);
+    text-align: center;
+    border: 1px solid #eee;
+}
 .checkbtns{
 	text-align: center;
     width: 98%;

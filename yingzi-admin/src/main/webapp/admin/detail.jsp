@@ -33,14 +33,14 @@
                         <tr><th>年龄</th><td>${cinfo.age }</td></tr>
                         <tr><th>E-mail</th><td>${cinfo.email }</td></tr>
                         <tr><th>支付宝账号</th><td>${cinfo.alipay }</td></tr>
-                        <tr><th>专业背景</th><td>${cinfo.professional }</td></tr>
-                        <tr><th>受训背景</th><td>${cinfo.background }</td></tr>
                         <tr><th>咨询范围</th><td>${cinfo.rangeType.desc }</td></tr>
                         <tr><th>咨询单价</th><td><fmt:formatNumber value="${cinfo.price }" pattern="##.##" minFractionDigits="2"></fmt:formatNumber></td></tr>
-                        <tr><th>可预约时间</th><td>${cinfo.bookTime}</td></tr>
-                        <tr><th>地址</th><td>${cinfo.address }</td></tr>
-                        <tr><th>个人简介</th><td>${cinfo.introduce }</td></tr>
-                        <tr><th>个性签名</th><td>${cinfo.signature }</td></tr>
+                        <tr><th>专业背景</th><td><textarea id="professional">${cinfo.professional }</textarea></td></tr>
+                        <tr><th>受训背景</th><td><textarea id="background">${cinfo.background }</textarea></td></tr>
+                        <tr><th>可预约时间</th><td><textarea id="bookTime">${cinfo.bookTime}</textarea></td></tr>
+                        <tr><th>地址</th><td><textarea id="address">${cinfo.address }</textarea></td></tr>
+                        <tr><th>个人简介</th><td><textarea id="introduce">${cinfo.introduce }</textarea></td></tr>
+                        <tr><th>个性签名</th><td><textarea id="signature">${cinfo.signature }</textarea></td></tr>
                         <tr><th>状态</th><td id="status" data-status="${cinfo.status.value }">${cinfo.status.desc }</td></tr>
                     </table>
             	</div>
@@ -51,10 +51,12 @@
             $(".detail").addClass("cur");
             var status = $.trim($("#status").attr("data-status"));
             if (status == '1'||status==1){
-                var btn = $("<div data-id='${cinfo.id}' class='checkbtns'><a class='edit'>编辑</a><a class='accept'>审核通过</a><a class='refuse'>审核不通过</a></div>");
+                // <a class='edit'>编辑</a>
+                var btn = $("<div data-id='${cinfo.id}' class='checkbtns'><a class='accept'>保存并审核通过</a><a class='refuse'>审核不通过</a></div>");
                 $(".maincontent").append(btn);
             }
         </script>
+        <script src="../js/main_admin.js"></script>
     </body>
 
 </html>

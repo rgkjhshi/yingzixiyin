@@ -25,14 +25,15 @@
             		<div class="subtitle">已结束的咨询</div>
                     <table>
                         <tr>
-                            <th>咨询师</th><th>用户ID</th><th>开始时间</th><th>结束时间</th><th>操作</th>
+                            <th>咨询师</th><th>用户ID</th><th>开始时间</th><th>咨询类型</th><th>操作</th>
                         </tr>
                          <c:forEach items="${recordsList}" var="cinfo">
                         	 <tr>
                             	<td>${cinfo.consultantName }</td>
                             	<td>${cinfo.userId }</td>
                             	<td><fmt:formatDate value="${cinfo.createTime }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-                            	<td>${cinfo.isCompleted.value==0?"咨询中":"已结束" }</td>
+                            	<!-- <td>${cinfo.isCompleted.value==0?"咨询中":"已结束" }</td> -->
+                                <td>${cinfo.consultType }</td>
                             	<td class='func ${cinfo.isCompleted.value==0?"tooff":"toon" }'>
                             		<c:if test="${ cinfo.isCompleted.value==0}">
                             			<a>结束</a>
