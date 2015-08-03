@@ -41,7 +41,7 @@
                         <tr><th>地址</th><td>${cinfo.address }</td></tr>
                         <tr><th>个人简介</th><td>${cinfo.introduce }</td></tr>
                         <tr><th>个性签名</th><td>${cinfo.signature }</td></tr>
-                        <tr><th>状态</th><td id="status">${cinfo.status.desc }</td></tr>
+                        <tr><th>状态</th><td id="status" data-status="${cinfo.status.value }">${cinfo.status.desc }</td></tr>
                     </table>
             	</div>
             </div>
@@ -49,9 +49,9 @@
         <%@ include file="../parts/foot.jsp" %> 
         <script>
             $(".detail").addClass("cur");
-            var status = $.trim($("#status").text());
-            if (status == '申请'){
-                var btn = $("<div class='checkbtns'><a class='accept'>审核通过</a><a class='refuse'>审核不通过</a></div>");
+            var status = $.trim($("#status").attr("data-status"));
+            if (status == '1'||status==1){
+                var btn = $("<div data-id='${cinfo.id}' class='checkbtns'><a class='edit'>编辑</a><a class='accept'>审核通过</a><a class='refuse'>审核不通过</a></div>");
                 $(".maincontent").append(btn);
             }
         </script>

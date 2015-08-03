@@ -67,7 +67,7 @@
             //提交数据
             var phone = $.trim($("#phone").val());
             var pwd = $.trim($("#pwd").val());
-            loginURL="admin/login.do";
+            var loginURL="admin/login.do";
             $.post(loginURL, {"phone": phone, "password": pwd}, function (data) {
                 if (data.status==0||data.status=="0") {
                     window.location.href = "consultant/query_consultants.do";//跳转到后台管理页面
@@ -93,10 +93,10 @@
         }
         if (check("pwd") && check("pwd2")) {
             //提交数据
-            url="changePasswd.do";
+            var url="changePasswd.do";
              $.post(url,{"oldpwd":oldpwd,"password":pwd},function(data){
                 $("input").val("");
-                if(data.returnCode==1||data.returnCode=="1"){
+                if(data.returnCode==0||data.returnCode=="0"){
                     $("input").val("");
                     $(".tips").text("密码修改成功");
                 }else{
@@ -108,6 +108,49 @@
         }
     }
 
-    $("#modPwd").on("click",modPwd);    
+    $("#modPwd").on("click",modPwd);
+
+    //删除咨询师
+    var delConsultant = function(){
+        var id = $(this).attr("data-id");
+        var url = "../consultant/cdelete.do";
+        var _this = $(this);
+        $.get(url,{'id':id},function(data){
+            var s = data.returnCode;
+            if(data.returnCode==0||data.returnCode=="0"){
+                _this.parents("tr").remove();
+                alert(data.returnMessage);
+            }else{
+                alert(data.returnMessage);
+            }
+        });
+    }
+
+    $(".delConsultant").on("click",delConsultant);
+
+    //咨询师审核
+    var checkConsultant = function(type){
+        var id = $(this).parent("div").attr("data-id");
+        if(type==2){
+
+        }else if(type==3){
+
+        }
+        var url = "../consultant/ccheck.do";
+        // $.post(url,{'id':id},function(data){
+        //     var s = data.returnCode;
+        //     if(data.returnCode==0||data.returnCode=="0"){
+        //         alert("success");
+        //         $(this).parent("tr").remove();
+        //         console.log($(this).parent("tr"));
+        //         alert(data.returnMessage);
+        //     }else{
+        //         alert(data.returnMessage);
+        //     }
+        // });
+    }
+
+    $(".accept").on("click",checkConsultant(2));
+    $(".refuse").on("click",checkConsultant(3));
 
 })();

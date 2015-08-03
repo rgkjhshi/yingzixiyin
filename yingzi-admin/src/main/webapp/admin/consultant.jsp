@@ -32,7 +32,7 @@
                     		 	<td>${cinfo.gender.desc}</td>
                     		 	<td>${cinfo.status.desc }</td>
                     		 	<td><a href="<%=path%>/consultant/cdetail.do?id=${cinfo.id}">详情</a>
-                    		 	<a href="<%=path%>/consultant/cdelete.do?id=${cinfo.id}">删除</a></td>
+                    		 	<a data-id="${cinfo.id}" class="delConsultant">删除</a></td>
                     		 </tr>
                     	</c:forEach>
                     </table>
@@ -44,6 +44,7 @@
         <script>
             $(".detail").addClass("cur");
         </script>
+        <script src="../js/main_admin.js"></script>
     </body>
 
 </html>

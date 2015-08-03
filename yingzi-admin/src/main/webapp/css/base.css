@@ -445,7 +445,7 @@ fieldset div {
 	margin-left: 10px;
 	display:inline-block;
 	font-size: 0.85rem;
-    margin: 20px;
+    margin: 20px 10px;
     display: inline-block;
     line-height: 2em;
     border: 1px solid #969696;
@@ -457,6 +457,10 @@ fieldset div {
 .checkbtns a.accept{
 	background-color: #FF9090;
     border: 1px solid #FF899E;
+}
+.checkbtns a.edit{
+	border: 1px solid #589E4C;
+    background-color: #6BAF5F;
 }
 /*page*/
 .pagediv{
