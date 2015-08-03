@@ -28,15 +28,15 @@
 		<div class="warntips"><i></i>您还未绑定手机</div>
 		<div class="bind_input">
 			<input type="text" placeholder="11位手机号码" maxlength="11"/>
-			<span>获取验证码</span>
+			<span id="getcode">获取验证码</span>
 		</div>
 		<div class="bind_input">
 			<input type="text" placeholder="输入短信验证码" />
 		</div>
 		<div class="bind_btn">
-			<a>绑定手机</a>
+			<a id="bindphone">绑定手机</a>
 		</div>
     </div>
-<script type="text/javascript" src="<%=path %>/js/main_wechat.js"></script>
+<script type="text/javascript" src="<%=path %>/js/bind_wechat.js"></script>
 </body>
 </html>
