@@ -174,7 +174,9 @@ public class UserCenterController {
 					rcrDto.setId(rinfo.getConsultantId());
 					ConsultantInfo cqrDto=consultantFacade.queryOne(rcrDto);
 					ConsumeRecordsInfo crInfo=buildConsumeRecordsInfo(rinfo,cqrDto);	
-					userRecords.add(crInfo);
+					if(crInfo!=null){
+						userRecords.add(crInfo);
+					}
 				}
 			}
 			request.setAttribute("userRecords",userRecords);
@@ -184,6 +186,9 @@ public class UserCenterController {
 	}
 	private ConsumeRecordsInfo buildConsumeRecordsInfo(RecordInfo rinfo,
 			ConsultantInfo cqrDto) {
+		if(rinfo==null||cqrDto==null){
+			return null;
+		}
 		ConsumeRecordsInfo crInfo=new ConsumeRecordsInfo();
 		crInfo.setConsultantId(rinfo.getConsultantId());
 		crInfo.setConsultantName(cqrDto.getName());
