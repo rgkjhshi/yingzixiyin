@@ -299,3 +299,52 @@ a{text-decoration: none;color:#333;}
 	text-align: center;
 	color: #666;
 }
+/*bind phone*/
+.warntips{
+	text-align: center;
+	padding:20px 0;
+}
+.warntips i{
+	background: url(../images/info.png);
+	display:inline-block;
+	width:16px;
+	height:16px;
+	background-size: contain;
+	margin-right: 10px;
+}
+.bind_input,.bind_btn{
+	border-bottom: 1px solid #ccc;
+	width:90%;
+	margin:40px auto;
+	position:relative;
+}
+.bind_input input{
+	border: none;
+    background-color: transparent;
+    font-size: 16px;
+    line-height: 50px;
+    padding-left: 10px;
+    color: #666;
+}
+.bind_btn{
+	border:none;
+}
+.bind_btn a{
+	display: block;
+    background-color: #1D96DE;
+    text-align: center;
+    line-height: 40px;
+    color: #fff;
+    border: 1px solid #078FE0;
+}
+.bind_input span{
+	font-size: 14px;
+    display: inline-block;
+    padding: 8px 10px;
+    position: absolute;
+    right: 0;
+    bottom: 4px;
+    border: 1px solid #ccc;
+    background-color: #FBFBFB;
+    color: #999;
+}

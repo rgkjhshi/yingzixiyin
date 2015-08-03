@@ -50,8 +50,8 @@
 	            	<div class="moreinfo">选择英姿，选择更专业的咨询师，让我们教会您如何去爱，去照顾家庭、爱人，并且提升自己的情感能力，为自己创造一个更好的生活。您值得被爱，更需要好好宠爱自己。英姿吸引——帮您找到身边专业的情感咨询师。选择英姿，选择更专业的咨询师，让我们教会您如何去爱，去照顾家庭、爱人，并且提升自己的情感能力，为自己创造一个更好的生活。您值得被爱，更需要好好宠爱自己。英姿吸引——帮您找到身边专业的情感咨询师。</div>
 	            </li>
 	            <li>
-	    			<a class="choose_btn" href="consultant_online.do?consultant_id=${consultant.id}">发起咨询</a>
-	    			<a class="choose_btn" href="consultant_offline.do?consultant_id=${consultant.id}">面对面咨询</a>
+	    			<a class="choose_btn" id="onlinebtn" data-id="${consultant.id}">发起咨询</a>
+	    			<a class="choose_btn" id="offlinebtn" data-id="${consultant.id}">面对面咨询</a>
 	    		</li>
 	        </ul>
 	    </div> 
