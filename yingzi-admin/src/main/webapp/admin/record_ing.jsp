@@ -54,5 +54,6 @@
             $("#record_all").show();
             $(".re_ing li").addClass("active");
         </script>
+        <script src="../js/main_admin.js"></script>
     </body>
 </html>
