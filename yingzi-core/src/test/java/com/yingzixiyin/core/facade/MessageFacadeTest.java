@@ -29,7 +29,7 @@ public class MessageFacadeTest extends BaseTest {
     public void addTest() {
     	MessageInfo info = new MessageInfo();
     	info.setCreateTime(new Date());
-        info.setIsRead(YesOrNoEnum.NO.getValue());
+        info.setIsRead(YesOrNoEnum.NO);
         info.setMessage("消息测试1");
         info.setRecordId(1L);
         BaseResponseDto responseDto =  messageFacade.add(info);

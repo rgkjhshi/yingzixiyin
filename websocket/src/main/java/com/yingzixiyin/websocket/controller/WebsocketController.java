@@ -1,4 +1,4 @@
-package com.yingzixiyin.websocket;
+package com.yingzixiyin.websocket.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,18 +18,15 @@ import javax.servlet.http.HttpSession;
 public class WebsocketController {
     private static final Logger logger = LoggerFactory.getLogger(WebsocketController.class);
 
-//    @Bean//这个注解会从Spring容器拿出Bean
-//    public InfoHandler infoHandler() {
-//        return new InfoHandler();
-//    }
-
     @RequestMapping("/login.do")
     public void login(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        String username = request.getParameter("username");
-        HttpSession session = request.getSession(false);
-        session.setAttribute("session_phone", username);
+        String phone = request.getParameter("phone");
+        Long recordId = Long.valueOf(request.getParameter("recordId"));
+        // 创建一个session
+        HttpSession session = request.getSession();
+        session.setAttribute("session_phone", "13121435540");
         session.setAttribute("session_recordId", 1L);
-        logger.info("session_phone:{}", session.getAttribute("session_phone"));
+        logger.info("session_phone={}, session_recordId={}", session.getAttribute("session_phone"), session.getAttribute("session_recordId"));
         response.sendRedirect("/websocket/ws.jsp");
     }
 

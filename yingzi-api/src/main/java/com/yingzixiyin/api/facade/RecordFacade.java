@@ -14,6 +14,7 @@ import com.yingzixiyin.page.Pagination;
 public interface RecordFacade {
 
     /**
+     * song.shi
      * 增加，id字段不要填写
      * @param recordInfo 新增信息
      * @return 结果
@@ -21,6 +22,7 @@ public interface RecordFacade {
     public BaseResponseDto add(RecordInfo recordInfo);
 
     /**
+     * song.shi
      * 修改，id字段必需，修改什么字段就填什么字段，不修改的不要填
      * @param recordInfo 新信息
      * @return 结果
@@ -28,6 +30,7 @@ public interface RecordFacade {
     public BaseResponseDto update(RecordInfo recordInfo);
 
     /**
+     * song.shi
      * 查询一个
      * @param requestDto 按照所填字段去查询
      * @return RecordInfo
@@ -35,6 +38,7 @@ public interface RecordFacade {
     public RecordInfo queryOne(RecordQueryRequestDto requestDto);
 
     /**
+     * song.shi
      * 查询多个
      * @param requestDto 按照所填字段去查询
      * @return RecordInfoList

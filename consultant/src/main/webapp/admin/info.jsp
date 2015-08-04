@@ -157,7 +157,6 @@
                         </div>
                     </form>
                     <div class="btn" id="moreinfo">保存</div>
-                    <div class="btn" id="moreinfo2"><a href="chatApi.htm?recordId=1">chat</a></div>
             	</div>
             </div>
         </div>

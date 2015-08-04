@@ -12,7 +12,6 @@
 
     <dependencyManagement>
         <dependencies>
-
             <!-- guava -->
             <dependency>
                 <groupId>com.google.guava</groupId>
@@ -95,6 +94,18 @@
     </dependencyManagement>
 
     <dependencies>
+        <!-- 自己的jar  -->
+        <dependency>
+            <groupId>com.yingzixiyin</groupId>
+            <artifactId>yingzi-api</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.yingzixiyin</groupId>
+            <artifactId>yingzi-core</artifactId>
+            <version>1.0</version>
+        </dependency>
+
         <!-- spring core 去掉 JCL -->
         <dependency>
             <groupId>org.springframework</groupId>

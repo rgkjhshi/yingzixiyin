@@ -1,26 +1,16 @@
 package com.yingzixiyin.core.facade.impl;
 
-import java.util.List;
-import java.util.Map;
-
-import com.yingzixiyin.api.dto.BaseResponseDto;
-import com.yingzixiyin.api.dto.ConsultantInfo;
-import com.yingzixiyin.api.dto.ConsultantQueryRequestDto;
-import com.yingzixiyin.api.dto.ConsultantQueryResponseDto;
-import com.yingzixiyin.api.dto.MessageInfo;
-import com.yingzixiyin.api.dto.MessageQueryRequestDto;
-import com.yingzixiyin.api.dto.MessageQueryResponseDto;
-import com.yingzixiyin.api.facade.ConsultantFacade;
+import com.yingzixiyin.api.dto.*;
 import com.yingzixiyin.api.facade.MessageFacade;
-import com.yingzixiyin.core.biz.ConsultantBiz;
 import com.yingzixiyin.core.biz.MessageBiz;
 import com.yingzixiyin.core.utils.ParameterUtils;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author song.shi
@@ -41,7 +31,9 @@ public class MessageFacadeImpl implements MessageFacade {
 		try {
 			ParameterUtils.notNull(message, "messageInfo不能为null");
 			ParameterUtils.notNull(message.getMessage(), "message不能为null");
-			ParameterUtils.notNull(message.getRecordId(), "recordId不能为null");
+            ParameterUtils.notNull(message.getRecordId(), "recordId不能为null");
+            ParameterUtils.notNull(message.getFromPhone(), "fromPhone不能为null");
+            ParameterUtils.notNull(message.getToPhone(), "toPhone不能为null");
 			messageBiz.add(message);
 			responseDto.setReturnCode(0);
 		} catch (IllegalArgumentException e) {
@@ -76,7 +68,23 @@ public class MessageFacadeImpl implements MessageFacade {
 		return responseDto;
 	}
 
-	@Override
+    @Override
+    public MessageInfo queryOne(MessageQueryRequestDto requestDto) {
+        logger.info("收到参数:" + requestDto);
+        MessageInfo messageInfo = null;
+        try {
+            ParameterUtils.notNull(requestDto, "MessageQueryRequestDto");
+            messageInfo = messageBiz.getMessage(requestDto);
+        } catch (IllegalArgumentException e) {
+            logger.info("参数异常:" + e.getMessage());
+        } catch (Exception e) {
+            logger.error("捕获异常:" + e.getMessage(), e);
+        }
+        logger.info("返回数据:" + messageInfo);
+        return messageInfo;
+    }
+
+    @Override
 	public MessageQueryResponseDto query(MessageQueryRequestDto requestDto) {
 		 logger.info("收到参数:" + requestDto);
 	        MessageQueryResponseDto responseDto = new MessageQueryResponseDto();

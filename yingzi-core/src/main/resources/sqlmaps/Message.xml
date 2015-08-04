@@ -1,66 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mapper.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper  namespace="com.yingzixiyin.core.dao.MessageDao">
+<mapper namespace="com.yingzixiyin.core.dao.MessageDao">
 
+    <!-- song.shi -->
     <sql id="base_select">
         SELECT
             id                  AS id,
             record_id           AS recordId,
             message             AS message,
+            from_phone          AS formPhone,
+            to_phone            AS toPhone,
             create_time         AS createTime,
             is_read				AS isRead 
         FROM message
     </sql>
-     <insert id="insert" parameterType="Message" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO message
-        (
-        <if test="recordId != null">
-            record_id
-        </if>
-        <if test="message != null">
-            ,message
-        </if>
-        <if test="createTime != null">
-            ,create_time
-        </if>
-        <if test="isRead != null">
-            ,is_read
-        </if>
-        )
-        values
-        (
-        <if test="recordId != null">
-            #{recordId}
-        </if>
-        <if test="message != null">
-            ,#{message}
-        </if>
-        <if test="createTime != null">
-            ,#{createTime}
-        </if>
-         <if test="isRead != null">
-            ,#{isRead}
-        </if>
-        )
+    <!-- 查询条件 -->
+    <sql id="where_condition">
+        <where>
+            <if test="id != null">
+                id = #{id}
+            </if>
+            <if test="recordId != null">
+                AND record_id = #{recordId}
+            </if>
+            <if test="fromPhone != null">
+                from_phone = #{formPhone},
+            </if>
+            <if test="toPhone != null">
+                to_phone = #{toPhone},
+            </if>
+        </where>
+    </sql>
+
+    <!-- song.shi -->
+    <insert id="insert" parameterType="Message" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO message (record_id, message, from_phone, to_phone, create_time ,is_read )
+        values (#{recordId}, #{message}, #{fromPhone}, #{toPhone}, #{createTime}, #{isRead})
     </insert>
- 	<update id="update" parameterType="Message">
+
+    <!-- sonbg.shi -->
+    <update id="update" parameterType="Message">
         UPDATE message
         <set>
             <if test="recordId != null">
-                 record_id = #{recordId},
+                record_id = #{recordId},
             </if>
-          	<if test="message != null">
-                 message = #{message},
+            <if test="message != null">
+                message = #{message},
+            </if>
+            <if test="fromPhone != null">
+                from_phone = #{formPhone},
+            </if>
+            <if test="toPhone != null">
+                to_phone = #{toPhone},
             </if>
             <if test="createTime != null">
-                 create_time = #{createTime},
+                create_time = #{createTime},
+            </if>
+            <if test="isRead != null">
+                is_read = #{isRead}
             </if>
         </set>
-        WHERE
-        id = #{id}
+        WHERE id = #{id}
     </update>
-  <select id="getMessageListByFilter" parameterType="map" resultType="Message">
+
+    <!-- song.shi -->
+    <!-- 查询一个 -->
+    <select id="getMessage" parameterType="Message" resultType="Message">
+        <include refid="base_select"/>
+        <include refid="where_condition"/>
+        limit 1;
+    </select>
+
+    <!-- song.shi -->
+    <!-- 查询多个 -->
+    <select id="getMessageList" parameterType="Message" resultType="Message">
+        <include refid="base_select"/>
+        <include refid="where_condition"/>
+    </select>
+
+    <select id="getMessageListByFilter" parameterType="map" resultType="Message">
         <include refid="base_select"/>
         <where>
             <if test="id != null">
@@ -69,16 +89,18 @@
             <if test="recordId != null">
                 AND record_id = #{recordId}
             </if>
-            <if test="message != null">
-                AND message = #{message}
+            <if test="from_phone != null">
+                from_phone = #{formPhone},
+            </if>
+            <if test="to_phone != null">
+                to_phone = #{toPhone},
             </if>
             <if test="createTime != null">
                 AND create_time = #{createTime}
             </if>
-            
         </where>
     </select>
-    
+
     <select id="queryConsultantAndMessageCountByUserId" parameterType="map" resultType="map"> 
     select c.id as consultant_id ,c.username as username,r.id as record_id,r.is_completed as is_completed,count(1) as msgcount,
     case when count(1)>sum(m.is_read) then 0 else 1 end as is_read  

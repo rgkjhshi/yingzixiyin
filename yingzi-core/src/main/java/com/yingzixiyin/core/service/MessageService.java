@@ -1,8 +1,6 @@
 package com.yingzixiyin.core.service;
 
-import com.yingzixiyin.api.dto.ConsultantInfo;
 import com.yingzixiyin.api.dto.MessageInfo;
-import com.yingzixiyin.core.entity.Consultant;
 import com.yingzixiyin.core.entity.Message;
 
 import java.util.List;
@@ -19,7 +17,7 @@ public interface MessageService {
     /**
      * 增
      * @param message 消息
-     * @return
+     * @return 插入的主键
      */
     public Integer insert(Message message);
 
@@ -29,14 +27,20 @@ public interface MessageService {
      */
     public void update(Message message);
 
-   
+    /**
+     * 查询一个
+     * @param message 类型
+     * @return 消息
+     */
+    public MessageInfo getMessage(Message message);
 
     /**
-     * 查询消息
-     * @param consultant 类型
+     * 查询多个
+     * @param message 类型
      * @return 消息列表
      */
-    public List<MessageInfo> getMessageList(Map<String, Object> map);
+    public List<MessageInfo> getMessageList(Message message);
+
 
 	public List<Map<String, Object>> queryConsultantAndMessageCountByUserId(
 			Map<String, Object> map);

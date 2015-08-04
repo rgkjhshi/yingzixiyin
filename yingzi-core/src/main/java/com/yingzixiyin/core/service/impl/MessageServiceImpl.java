@@ -1,15 +1,9 @@
 package com.yingzixiyin.core.service.impl;
 
-import com.google.common.base.Splitter;
-import com.yingzixiyin.api.dto.ConsultantInfo;
 import com.yingzixiyin.api.dto.MessageInfo;
-import com.yingzixiyin.core.dao.ConsultantDao;
 import com.yingzixiyin.core.dao.MessageDao;
-import com.yingzixiyin.core.entity.Consultant;
 import com.yingzixiyin.core.entity.Message;
-import com.yingzixiyin.core.service.ConsultantService;
 import com.yingzixiyin.core.service.MessageService;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -17,7 +11,6 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
-
 import java.util.List;
 import java.util.Map;
 /**
@@ -50,15 +43,27 @@ public class MessageServiceImpl implements MessageService {
         }
         messageDao.update(message);
     }
+
     @Override
-    public List<MessageInfo> getMessageList(Map<String, Object> map) {
-        if (CollectionUtils.isEmpty(map)) {
-            logger.info("map不能为空");
+    public MessageInfo getMessage(Message message) {
+        if (null == message) {
+            logger.info("参数message为null");
             return null;
         }
-        List<Message> messageList = messageDao.getMessageListByFilter(map);
+        Message result = messageDao.getMessage(message);
+        return Message.translateBean(result);
+    }
+
+    @Override
+    public List<MessageInfo> getMessageList(Message message) {
+        if (null == message) {
+            logger.info("参数consultant不能为null");
+            return null;
+        }
+        List<Message> messageList = messageDao.getMessageList(message);
         return Message.translateBeanList(messageList);
     }
+
 	@Override
 	public List<Map<String, Object>> queryConsultantAndMessageCountByUserId(
 			Map<String, Object> map) {

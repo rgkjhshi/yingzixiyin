@@ -8,7 +8,7 @@ import java.util.List;
  */
 
 public class MessageQueryResponseDto extends BaseResponseDto {
-    private static final long serialVersionUID = 5588604487346912586L;
+    private static final long serialVersionUID = 5628588447971673064L;
 
     private Integer count;    // list中元素个数
     private List<MessageInfo> messageInfoList;
@@ -29,10 +29,11 @@ public class MessageQueryResponseDto extends BaseResponseDto {
 		this.messageInfoList = messageInfoList;
 	}
 
-	@Override
-	public String toString() {
-		return "MessageQueryResponseDto [count=" + count + ", messageInfoList="
-				+ messageInfoList + "]";
-	}
-  
+    @Override
+    public String toString() {
+        return "MessageQueryResponseDto{" +
+                "count=" + count +
+                ", messageInfoList=" + messageInfoList +
+                '}';
+    }
 }

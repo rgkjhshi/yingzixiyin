@@ -30,13 +30,21 @@ public interface MessageFacade {
     public BaseResponseDto update(MessageInfo message);
 
     /**
-     * 查询多个用户的未读信息
+     * song.shi
+     * 查询一个
+     * @param requestDto 按照所填字段去查询
+     * @return MessageInfo
+     */
+    public MessageInfo queryOne(MessageQueryRequestDto requestDto);
+
+    /**
+     * song.shi
+     * 查询多个
      * @param requestDto 按照所填字段去查询
      * @return MessageQueryResponseDto
      */
     public MessageQueryResponseDto query(MessageQueryRequestDto requestDto);
 
-	public List<Map<String, Object>> queryConsultantAndMessageCountByUserId(
-			Long id);
+	public List<Map<String, Object>> queryConsultantAndMessageCountByUserId(Long id);
 
 }

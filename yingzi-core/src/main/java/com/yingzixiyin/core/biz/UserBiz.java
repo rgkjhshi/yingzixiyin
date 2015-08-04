@@ -21,6 +21,4 @@ public interface UserBiz {
 
     public UserInfo getUser(UserQueryRequestDto requestDto);
 
-//    public ConsultantQueryResponseDto getConsultantListByIds(String ids);
-
 }

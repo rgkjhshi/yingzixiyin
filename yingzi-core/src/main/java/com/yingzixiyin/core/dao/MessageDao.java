@@ -1,12 +1,10 @@
 package com.yingzixiyin.core.dao;
 
-import java.util.List;
-import java.util.Map;
-
+import com.yingzixiyin.core.entity.Message;
 import org.springframework.stereotype.Repository;
 
-import com.yingzixiyin.core.entity.Consultant;
-import com.yingzixiyin.core.entity.Message;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author song.shi
@@ -17,16 +15,33 @@ import com.yingzixiyin.core.entity.Message;
 public interface MessageDao {
 	/**
 	 * 添加
-	 * @param message
-	 * @return
+	 * @param message 新纪录
+	 * @return 插入的主键
 	 */
 	Integer insert(Message message);
+
 	/**
 	 * 修改
-	 * @param message
+	 * @param message id 字段不能为空
 	 */
 	void update(Message message);
-	/**
+
+    /**
+     * 单个查询，确保查询条件能够得到唯一结果
+     * @param message , 可填字段: id, recordId, fromPhone, toPhone, isRead
+     * @return 符合条件的 Message
+     */
+    public Message getMessage(Message message);
+
+    /**
+     * 批量查询
+     * @param message , 可填字段: id, recordId, fromPhone, toPhone, isRead
+     * @return 符合条件的 Message 列表
+     */
+    public List<Message> getMessageList(Message message);
+
+
+    /**
 	 * 按条件批量查询
 	 * @param map
 	 * @return

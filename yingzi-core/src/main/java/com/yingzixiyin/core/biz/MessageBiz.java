@@ -1,14 +1,11 @@
 package com.yingzixiyin.core.biz;
 
-import java.util.List;
-import java.util.Map;
-
-import com.yingzixiyin.api.dto.ConsultantInfo;
-import com.yingzixiyin.api.dto.ConsultantQueryRequestDto;
-import com.yingzixiyin.api.dto.ConsultantQueryResponseDto;
 import com.yingzixiyin.api.dto.MessageInfo;
 import com.yingzixiyin.api.dto.MessageQueryRequestDto;
 import com.yingzixiyin.api.dto.MessageQueryResponseDto;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author song.shi
@@ -26,8 +23,9 @@ public interface MessageBiz {
      */
     public void update(MessageInfo messageInfo);
 
-
     public MessageQueryResponseDto getMessageList(MessageQueryRequestDto requestDto);
+
+    public MessageInfo getMessage(MessageQueryRequestDto requestDto);
 
 	public List<Map<String, Object>> queryConsultantAndMessageCountByUserId(
 			Long userId);

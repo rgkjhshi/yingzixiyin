@@ -64,9 +64,13 @@ CREATE TABLE `message` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键id',
   `record_id` bigint(20) NOT NULL COMMENT '咨询问题id',
   `message` varchar(1024) NOT NULL DEFAULT '' COMMENT '消息内容',
+  `from_phone` varchar(20) NOT NULL DEFAULT '' COMMENT '发送者的手机号',
+  `to_phone` varchar(20) NOT NULL DEFAULT '' COMMENT '接收者的手机号',
   `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `is_read` tinyint(4) NOT NULL DEFAULT 0 COMMENT '是否已读，0:未读, 1:已读',
   PRIMARY KEY (`id`),
+  KEY `idx_from_phone` (from_phone),
+  KEY `idx_to_phone` (to_phone),
   KEY `idx_record_id` (record_id)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='消息表';
 

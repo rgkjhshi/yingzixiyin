@@ -1,5 +1,7 @@
-package com.yingzixiyin.websocket;
+package com.yingzixiyin.websocket.config;
 
+import com.yingzixiyin.websocket.handler.ChatHandler;
+import com.yingzixiyin.websocket.interceptor.ChatHandshakeInterceptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;

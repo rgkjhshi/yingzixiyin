@@ -31,10 +31,7 @@ public class BaseResponseDto implements Serializable {
     }
 
     public boolean isSuccess() {
-        if (getReturnCode().equals(0)) {
-            return true;
-        }
-        return false;
+        return getReturnCode().equals(0);
     }
 
     @Override
