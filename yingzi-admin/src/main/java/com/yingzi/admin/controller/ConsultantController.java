@@ -122,18 +122,18 @@ public class ConsultantController {
 	@RequestMapping(value="ccheck.do")
 	@PowerCheck
 	public void checkConsultantInfo(HttpServletRequest request,HttpServletResponse response,ConsultantView cinfo) throws IOException{
-		logger.info("---系统后台调用咨询师删除接口页面----");
+		logger.info("---系统后台调用咨询师审核接口页面----");
 		BaseResponseDto responseDto=new BaseResponseDto();
-	
+		logger.info("审核咨询师信息："+cinfo);
 		try{
 			ConsultantInfo requestDto=new ConsultantInfo();
 			copyConsultantToByView(requestDto,cinfo);
 			responseDto=consultantFacade.update(requestDto);
 		}
 		catch(Exception e){
-			logger.error("删除咨询师异常",e);
+			logger.error("审核咨询师异常",e);
 			responseDto.setReturnCode(-1);
-			responseDto.setReturnMessage("删除咨询师失败");
+			responseDto.setReturnMessage("审核咨询师失败");
 		}
 		ResponseUtils.renderJsonText(response, JsonUtil.getJsonText(responseDto));
 	}
@@ -144,12 +144,18 @@ public class ConsultantController {
 		}
 		requestDto.setId(cinfo.getId());
 		requestDto.setEmail(cinfo.getEmail());
-		requestDto.setGender(GenderTypeEnum.toEnum(cinfo.getGender()));
+		if(null!=cinfo.getGender()){
+			requestDto.setGender(GenderTypeEnum.toEnum(cinfo.getGender()));
+		}
 		requestDto.setName(cinfo.getName());
 		requestDto.setPassword(cinfo.getPassword());
 		requestDto.setPhone(cinfo.getPhone());
-		requestDto.setRangeType(RangeTypeEnum.toEnum(cinfo.getRangeType()));
-		requestDto.setStatus(StatusEnum.toEnum(cinfo.getStatus()));
+		if(null!=cinfo.getRangeType()){
+			requestDto.setRangeType(RangeTypeEnum.toEnum(cinfo.getRangeType()));
+		}
+		if(null!=cinfo.getStatus()){
+			requestDto.setStatus(StatusEnum.toEnum(cinfo.getStatus()));
+		}
 		requestDto.setAvatar(cinfo.getAvatar());
 		requestDto.setAddress(cinfo.getAddress());
 		requestDto.setAlipay(cinfo.getAlipay());

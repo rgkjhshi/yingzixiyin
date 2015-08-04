@@ -11,6 +11,8 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import com.yingzi.admin.annotation.PowerCheck;
 import com.yingzi.admin.constant.LoginConstant;
 import com.yingzi.admin.enums.PowerCheckEnum;
+import com.yingzi.admin.utils.JsonUtil;
+import com.yingzi.admin.utils.ResponseUtils;
 import com.yingzi.admin.utils.SessionUtil;
 import com.yingzixiyin.api.dto.AdminInfo;
 import com.yingzixiyin.api.dto.BaseResponseDto;
@@ -49,7 +51,16 @@ public class PowerCheckInterceptor extends HandlerInterceptorAdapter {
 			if (pce.getId() == PowerCheckEnum.LOGIN.getId()) {
 				AdminInfo user = SessionUtil.getLoginAdminToSession(request);
 				if (user == null) {
-					response.sendRedirect(request.getContextPath()+"/"+LoginConstant.NO_LOGIN_URL);
+					if("post".equalsIgnoreCase(request.getMethod())){
+						BaseResponseDto responseDto=new BaseResponseDto();
+						responseDto.setReturnCode(-1);
+						responseDto.setReturnMessage("您登录超时或未登录，请重新登录!");
+						ResponseUtils.renderJsonText(response, JsonUtil.getJsonText(responseDto));
+					}
+					else{
+						response.sendRedirect(request.getContextPath()+"/"+LoginConstant.NO_LOGIN_URL);
+					}
+//					response.sendRedirect(request.getContextPath()+"/"+LoginConstant.NO_LOGIN_URL);
 					return false;
 				}
 			} else if (pce.getId() == PowerCheckEnum.POWER.getId()) {

@@ -116,7 +116,7 @@
         var url = "../consultant/cdelete.do";
         var _this = $(this);
         if(confirm("确定要删除该咨询师吗？")){
-            $.get(url,{'id':id},function(data){
+            $.post(url,{'id':id},function(data){
                 var s = data.returnCode;
                 if(data.returnCode==0||data.returnCode=="0"){
                     _this.parents("tr").remove();
@@ -153,7 +153,6 @@
         $.post(url,obj,function(data){
             console.log(data);
             if(data.returnCode==0||data.returnCode=="0"){
-                alert("success");
                 alert(data.returnMessage);
                 window.location.reload();
             }else{
