@@ -9,14 +9,14 @@
 		$("#choose_layer").show();
 		$("#choose_dialog").show();
 	});
-	$("#choose_layer").on("click",function(){
+	$("#choose_close").on("click",function(){
 		$("#choose_layer").hide();
 		$("#choose_dialog").hide();
 	});
 
-	$(".header i").on("click",function(){
-		window.history.go(-1);
-	});
+	// $(".header i").on("click",function(){
+	// 	window.history.go(-1);
+	// });
 	
 	$("#choose_g_a").on("click",function(){
 		var gender = $("input[name='gender']:checked").val();
@@ -43,7 +43,7 @@
 							if(_avatar==""||_avatar==null){
 								_avatar = "../images/test.png";
 							}
-							tpl += '<li class="items"><a href="consultant_deatil.do?id='+_data.id+'"><img src="'+_avatar+'"><div class="info"><div class="name">'+_data.name+'</div><div class="desc">'+_data.introduce+'</div></div></a></li>'
+							tpl += '<li class="items"><a href="consultant_deatil.do?id='+_data.id+'"><img src="'+_avatar+'"><div class="info"><div class="name nameall">'+_data.name+'</div><div class="desc descall">'+_data.introduce+'</div></div></a></li>'
 						}
 						$("#consultant_list").append(tpl);
 					}

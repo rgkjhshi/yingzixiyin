@@ -40,23 +40,63 @@
 	            		<div class="info">
 	            			<div class="name">${consultant.name }</div>
 	            			<div class="desc">
-	            				${consultant.introduce }
+	            				${consultant.signature}
 	            			</div>
 	            		</div>
 	            	</a>
 	            </li>
 	            <li>
-	            	<div class="sub">${consultant.background}</div>
-	            	<div class="moreinfo">选择英姿，选择更专业的咨询师，让我们教会您如何去爱，去照顾家庭、爱人，并且提升自己的情感能力，为自己创造一个更好的生活。您值得被爱，更需要好好宠爱自己。英姿吸引——帮您找到身边专业的情感咨询师。选择英姿，选择更专业的咨询师，让我们教会您如何去爱，去照顾家庭、爱人，并且提升自己的情感能力，为自己创造一个更好的生活。您值得被爱，更需要好好宠爱自己。英姿吸引——帮您找到身边专业的情感咨询师。</div>
+	            	<div class="sub">个人简介</div>
+	            	<div class="moreinfo">${consultant.introduce}</div>
 	            </li>
 	            <li>
-	    			<a class="choose_btn" id="onlinebtn" data-id="${consultant.id}">发起咨询</a>
-	    			<a class="choose_btn" id="offlinebtn" data-id="${consultant.id}">面对面咨询</a>
+	            	<div class="sub">咨询类型</div>
+	            	<div class="moreinfo">${consultant.rangeType}</div>
+	            </li>
+	            <li>
+	            	<div class="sub">专业背景</div>
+	            	<div class="moreinfo">${consultant.professional}</div>
+	            </li>
+	            <li>
+	            	<div class="sub">受训背景</div>
+	            	<div class="moreinfo">${consultant.background}</div>
+	            </li>
+	            <li>
+	            	<div class="sub">咨询时间</div>
+	            	<div class="moreinfo">${consultant.bookTime}</div>
+	            </li>
+	            <li>
+	            	<div class="sub">咨询价格</div>
+	            	<div class="moreinfo">线上聊天咨询：${consultant.price} 元/次</div>
+	            </li>
+	            <li style="margin:40px 0;">
+	    			<a class="choose_btn" id="onlinebtn" data-type="online" data-id="${consultant.id}">发起咨询</a>
+	    			<a class="choose_btn" id="offlinebtn" data-type="offline" data-id="${consultant.id}">面对面咨询</a>
 	    		</li>
 	        </ul>
 	    </div> 
     </c:if>
     
 <script type="text/javascript" src="<%=path %>/js/main_wechat.js"></script>
+<script type="text/javascript">
+    //检测是否绑定手机号
+    var isbind = function(){//type：咨询类型（线上or线下）
+        var id = $(this).attr("data-id");
+        var type = $(this).attr("data-type");
+        var url = "";
+        var to = "consultant_"+type+".do?consultant_id="+id;
+
+        // $.get(url,function(data){
+        //  if(data.stasuts == 0){
+        //      window.location.href = to;
+        //  }else{
+        //      window.location.href = "/weixin/public/service/bind.jsp?id="+id+"&type="+type;
+        //  }
+        // });
+        window.location.href = "/weixin/public/service/bind.jsp?id="+id+"&type="+type;
+    }
+
+    $("#onlinebtn,#offlinebtn").on("click",isbind);
+</script>
 </body>
 </html>

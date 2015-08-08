@@ -40,18 +40,17 @@
 			        </c:if>
             	' />
             		<div class="info">
-            			<div class="name">${cinfo.name }</div>
-            			<div class="desc">
-            				${cinfo.introduce}
-            			</div>
+            			<div class="name nameall">${cinfo.name }</div>
+            			<div class="desc descall">${cinfo.introduce}</div>
             		</div>
             	</a>
             </li>
         </c:forEach>
         </ul>
     </div>
-    <!--<div class="layer" id="choose_layer"></div>-->
+    <div class="layer" id="choose_layer"></div>
     <div class="choose_dialog" id="choose_dialog">
+        <i class="choose_close"></i>
         <div class="sub">筛选条件</div>
         <ul>
             <li>
