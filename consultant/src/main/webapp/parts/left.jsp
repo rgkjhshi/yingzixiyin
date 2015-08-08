@@ -18,8 +18,8 @@
         <a href="message.jsp"><li id="message" class="message"><i>&nbsp;</i>消息管理</li></a>
         <ul class="sms" id="message_all">
             <!-- <a href="message.jsp"><li id="sms_all">全部咨询</li></a> -->
-            <a href="<%=path %>/queryRecordApi.htm?status=0"><li id="sms_ing">进行中的咨询</li></a>
-            <a href="<%=path %>/queryRecordApi.htm?status=1"><li id="sms_end">已结束的咨询</li></a>
+            <a href="<%=path %>/admin/queryRecordApi.htm?status=0"><li id="sms_ing">进行中的咨询</li></a>
+            <a href="<%=path %>/admin/queryRecordApi.htm?status=1"><li id="sms_end">已结束的咨询</li></a>
         </ul>
     </ul>
 </div>
