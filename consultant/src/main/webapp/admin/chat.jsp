@@ -1,129 +1,49 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
-<head>
-    <title>WebSocket/SockJS Echo Sample (Adapted from Tomcat's echo sample)</title>
-    <style type="text/css">
-        #connect-container {
-            float: left;
-            width: 400px
-        }
-
-        #connect-container div {
-            padding: 5px;
-        }
-
-        #console-container {
-            float: left;
-            margin-left: 15px;
-            width: 400px;
-        }
-
-        #console {
-            border: 1px solid #CCCCCC;
-            border-right-color: #999999;
-            border-bottom-color: #999999;
-            height: 170px;
-            overflow-y: scroll;
-            padding: 5px;
-            width: 100%;
-        }
-
-        #console p {
-            padding: 0;
-            margin: 0;
-        }
-    </style>
-
-    <script src="http://cdn.sockjs.org/sockjs-0.3.min.js"></script>
-
-    <script type="text/javascript">
-        var ws = null;
-        var webSocketURL = 'ws://' + window.location.host + "/websocket/chatServer.do";
-        var socketJSURL = 'ws://' + window.location.host +  "/websocket/sockjs/chatServer.do";
-        var transports = [];
-
-        function setConnected(connected) {
-            document.getElementById('connect').disabled = connected;
-            document.getElementById('disconnect').disabled = !connected;
-            document.getElementById('echo').disabled = !connected;
-        }
-
-        function connect() {
-            if ('WebSocket' in window) {
-                ws = new WebSocket(webSocketURL);
-                alert(webSocketURL)
-            } else if ('MozWebSocket' in window) {
-                ws = new MozWebSocket(webSocketURL);
-            } else {
-                ws = new SockJS(socketJSURL);
-            }
-
-            ws.onopen = function () {
-                setConnected(true);
-                log('Info: connection opened.');
-            };
-            ws.onmessage = function (event) {
-                log('Received: ' + event.data);
-            };
-            ws.onclose = function (event) {
-                setConnected(false);
-                log('Info: connection closed.');
-                log(event);
-            };
-        }
-
-        function disconnect() {
-            if (ws != null) {
-                ws.close();
-                ws = null;
-            }
-            setConnected(false);
-        }
-
-        function echo() {
-            if (ws != null) {
-                var message = document.getElementById('message').value;
-                log('Sent: ' + message);
-                ws.send(message);
-            } else {
-                alert('connection not established, please connect.');
-            }
-        }
-
-        function log(message) {
-            var console = document.getElementById('console');
-            var p = document.createElement('p');
-            p.style.wordWrap = 'break-word';
-            p.appendChild(document.createTextNode(message));
-            console.appendChild(p);
-            while (console.childNodes.length > 25) {
-                console.removeChild(console.firstChild);
-            }
-            console.scrollTop = console.scrollHeight;
-        }
+    <head>
+        <meta charset="utf-8">
+        <title>消息管理-英姿吸引</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="keywords" content="">
+        <meta name="description" content="">
+        <link href="../favicon.ico" rel="shortcut icon">
+        <link href="../css/base.css" rel="stylesheet" type="text/css">
+        <script src="../js/jquery-1.9.1.min.js"></script>
+        <script src="http://cdn.sockjs.org/sockjs-0.3.min.js"></script>
+    </head>
+    <body>
+        <%@ include file="../parts/head.jsp" %> 
+        <div class="info">
+            <div class="layout">
+                <%@ include file="../parts/left.jsp" %> 
+                <div class="maincontent">
+                    <div class="detail_box">
+                        <!-- <i id="closeDialogBtn"></i> -->
+                        <div class="dialog_header" node-type="header">来自&nbsp;<strong>张三</strong>&nbsp;的咨询</div>
+                        <div class="dialog_body">
+                            <div class="dialog_content">
+                                <ul id="ms_inner" id="console">
+                                </ul>
+                            </div>
+                            <div class="dialog_reply">
+                                <div class="reply_inner">
+                                    <textarea class="reply_content" id="message"></textarea>
+                                    <a class="send_btn" id='echo'>发送</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <%@ include file="../parts/foot.jsp" %> 
+    <script src="../js/chat.js"></script>
+    <script>
+        $("#message").addClass("cur");
+        $("#message_all").show();
+        $("#sms_all").addClass("active");
     </script>
-</head>
-<body>
-<noscript><h2 style="color: #ff0000">Seems your browser doesn't support Javascript! Websockets 
-    rely on Javascript being enabled. Please enable
-    Javascript and reload this page!</h2></noscript>
-<div>
-    <div id="connect-container">
-        <div>
-            <button id="connect" onclick="connect();">Connect</button>
-            <button id="disconnect" disabled="disabled" onclick="disconnect();">Disconnect</button>
-        </div>
-        <div>
-            <textarea id="message" style="width: 350px">Here is a message!</textarea>
-        </div>
-        <div>
-            <button id="echo" onclick="echo();" disabled="disabled">Echo message</button>
-        </div>
-    </div>
-    <div id="console-container">
-        <div id="console"></div>
-    </div>
-</div>
-</body>
+    </body>
 </html>

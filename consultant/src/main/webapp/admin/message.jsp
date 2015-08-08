@@ -56,7 +56,8 @@
             </div>
         </div>
         <%@ include file="../parts/foot.jsp" %> 
-    <script src="../js/dialogtips.js"></script>
+        <script src="../js/chat.js"></script>
+    <!--<script src="../js/dialogtips.js"></script>-->
     <script>
         $("#message").addClass("cur");
         $("#message_all").show();
