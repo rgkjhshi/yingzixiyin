@@ -84,7 +84,7 @@
                         </ul>
                         <form enctype="multipart/form-data">
                             <div class="sign_content file_upload"><span id="chooseImgText">选择图片</span>
-                                <input type="file" id="filepath" onchange="previewImage(this)"/>
+                                <input type="file" id="filepath" name="img" onchange="previewImage(this)"/>
                             </div>
                             <div class="avatar_preview" id="preview"><img id="imghead" src="" /></div>
                             <div id="upload_btn">保存</div>

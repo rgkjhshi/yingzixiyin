@@ -5,13 +5,20 @@ import com.yingzixiyin.api.dto.*;
 import com.yingzixiyin.api.enums.YesOrNoEnum;
 import com.yingzixiyin.api.facade.ConsultantFacade;
 import com.yingzixiyin.api.facade.RecordFacade;
+import com.yingzixiyin.consultant.web.util.PictureUtil;
 import com.yingzixiyin.core.entity.Consultant;
 import com.yingzixiyin.page.Pagination;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.MultiValueMap;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.springframework.web.multipart.support.DefaultMultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
@@ -19,6 +26,8 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -159,4 +168,41 @@ public class AdminController {
         }
         return mav;
     }
+    @RequestMapping(value = "uploadPicApi.htm")
+	public ModelAndView uploadPic(HttpServletRequest request,
+			HttpServletResponse response, String callback) {
+		DefaultMultipartHttpServletRequest mulRequest = (DefaultMultipartHttpServletRequest) request;
+		MultiValueMap<String, MultipartFile> multiFileMap = mulRequest
+				.getMultiFileMap();
+		List<MultipartFile> uploadFile = multiFileMap.get("img");
+		String iconUrl = null;
+		if (uploadFile != null) {
+			iconUrl = PictureUtil.savePicture(request,(CommonsMultipartFile) uploadFile
+					.get(0));
+		}
+		Map<String, Object> map = Maps.newHashMap();
+		if(StringUtils.isEmpty(iconUrl)){
+			map.put("status", -1);
+			map.put("message", "图片上传失败");
+			return new ModelAndView(new MappingJackson2JsonView(), map);
+			
+		}
+		logger.info("---上传图片得到url："+iconUrl);
+		HttpSession session = request.getSession(false);
+		String phone = (String) session.getAttribute("session_phone");
+		ConsultantInfo consultantInfo=new ConsultantInfo();
+		consultantInfo.setPhone(phone);
+		consultantInfo.setAvatar(iconUrl);
+		BaseResponseDto responseDto=   consultantFacade.update(consultantInfo);
+		if(!responseDto.isSuccess()){
+			map.put("status", -1);
+			map.put("message", "图片上传失败");
+			return new ModelAndView(new MappingJackson2JsonView(), map);
+		}
+		map.put("status", 0);
+		map.put("message", "图片上传成功");
+		map.put("imgurl", iconUrl);
+		return new ModelAndView(new MappingJackson2JsonView(), map);
+	
+	}
 }
