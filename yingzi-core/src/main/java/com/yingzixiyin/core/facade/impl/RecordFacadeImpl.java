@@ -142,7 +142,6 @@ public class RecordFacadeImpl implements RecordFacade {
 			responseDto.setReturnCode(-1);
 			responseDto.setReturnMessage("查询咨询记录异常");
 		}
-		logger.info("返回数据:" + responseDto);
 		return responseDto;
 	}
 
