@@ -149,7 +149,6 @@
             "signature":$("#signature").val(),
             "status":type 
         };
-        console.log(obj);
         $.post(url,obj,function(data){
             console.log(data);
             if(data.returnCode==0||data.returnCode=="0"){
@@ -163,5 +162,23 @@
 
     $(".accept").on("click",function(){checkConsultant(2)});
     $(".refuse").on("click",function(){checkConsultant(3)});
+
+    //咨询管理
+    var recordManage = function(){
+        var status = $(this).attr("data-status");
+        var id = $(this).attr("data-id");
+        var url = "../record/change_state.do";
+        $.post(url,{'status':status,'id':id},function(data){
+            console.log(data);
+            if(data.returnCode == 0){
+                alert("修改成功！");
+                window.location.reload();
+            }else{
+                alert(data.returnMessage);
+            }
+        });
+    };
+
+    $("#startRecord,#endRecord").on("click",recordManage);
 
 })();
