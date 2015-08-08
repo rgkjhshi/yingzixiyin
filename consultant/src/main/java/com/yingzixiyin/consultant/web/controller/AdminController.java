@@ -139,9 +139,9 @@ public class AdminController {
             YesOrNoEnum st = YesOrNoEnum.toEnum(status);
             requestDto.setIsCompleted(st);
             if (status == 0) {
-                mav = new ModelAndView("record_ing.jsp");
+                mav = new ModelAndView("message_ing.jsp");
             } else {
-                mav = new ModelAndView("record_end.jsp");
+                mav = new ModelAndView("message_end.jsp");
             }
             Long count = recordFacade.queryCount(requestDto);
 
