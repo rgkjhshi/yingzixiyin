@@ -1,7 +1,6 @@
 package com.yingzixiyin.core.biz.impl;
 
 import com.google.common.collect.Maps;
-import com.yingzixiyin.api.dto.ConsultantQueryResponseDto;
 import com.yingzixiyin.api.dto.ConsultantRecordsInfo;
 import com.yingzixiyin.api.dto.RecordInfo;
 import com.yingzixiyin.api.dto.RecordQueryRequestDto;
@@ -10,14 +9,12 @@ import com.yingzixiyin.core.biz.RecordBiz;
 import com.yingzixiyin.core.entity.Record;
 import com.yingzixiyin.core.service.RecordService;
 import com.yingzixiyin.page.Pagination;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
-
 import java.util.List;
 import java.util.Map;
 
@@ -86,7 +83,7 @@ public class RecordBizImpl implements RecordBiz {
 		map.put("isReplied", null==requestDto.getIsReplied()?null:requestDto.getIsReplied().getValue());
 		map.put("userId", null==requestDto.getUserId()?null:requestDto.getUserId());
 		List<ConsultantRecordsInfo> list=recordService.queryConsultantRecordsListPage(map);
-		logger.info("--后台查询得到咨询记录："+list);
+		logger.info("后台查询得到咨询记录");
 		// 返回responseDto
 		RecordQueryResponseDto responseDto = new RecordQueryResponseDto();
         if (!CollectionUtils.isEmpty(list)) {
