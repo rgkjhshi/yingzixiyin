@@ -29,7 +29,7 @@
 	        		<a href="getmessages.do?consultantId=<c:out value='${m[\"consultant_id\"]}'></c:out>">
 	        			<div class="message">
 		        			来自<span class="red_font">
-		        				<c:out value="${m[\"username\"]}"></c:out>
+		        				<c:out value="${m[\"name\"]}"></c:out>
 		        			</span>的消息(<c:out value="${m[\"msgcount\"]}"></c:out>)
 		        			<span class="ms_status">
 		        			<c:out value="${m[\"is_read\"]==0 ?\"未读\":\"已读\"}"></c:out>

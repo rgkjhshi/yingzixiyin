@@ -36,6 +36,9 @@ public class Pay {
     // 发货通知接口
     private static final String DELIVERNOTIFY_URL = "https://api.weixin.qq.com/pay/delivernotify?access_token=";
 
+    //预下单接口
+    private static final String PRE_ORDER_URL="https://api.mch.weixin.qq.com/pay/unifiedorder";
+    //支付接口
     /**
      * 参与 paySign 签名的字段包括：appid、timestamp、noncestr、package 以及 appkey。
      * 这里 signType 并不参与签名微信的Package参数

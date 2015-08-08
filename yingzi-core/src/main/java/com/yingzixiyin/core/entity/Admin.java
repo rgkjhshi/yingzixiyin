@@ -59,6 +59,7 @@ public class Admin {
 	}
 
 	public static AdminInfo translateBean(Admin adres) {
+		if(adres==null) return null;
 		AdminInfo adminInfo=new AdminInfo();
 		adminInfo.setId(adres.getId());
 		adminInfo.setUsername(adres.getUsername());
