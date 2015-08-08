@@ -35,10 +35,10 @@
                                 <td>${cinfo.consultType }</td>
                             	<td class='func ${cinfo.isCompleted.value==0?"tooff":"toon" }'>
                             		<c:if test="${ cinfo.isCompleted.value==0}">
-                            			<a>结束</a>
+                            			<a id='endRecord' data-id="{cinfo.id}" data-status="1">结束</a>
                             		</c:if>
                             		<c:if test="${ cinfo.isCompleted.value==1}">
-                            			<a>重新开启</a>
+                            			<a id='startRecord' data-id="{cinfo.id}" data-status="0">重新开启</a>
                             		</c:if>
                             	</td>
                         	</tr>
