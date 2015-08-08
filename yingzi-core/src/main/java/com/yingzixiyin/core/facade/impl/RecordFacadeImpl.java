@@ -109,7 +109,18 @@ public class RecordFacadeImpl implements RecordFacade {
 
 	@Override
 	public Long queryCount(RecordQueryRequestDto requestDto) {
-		return recordBiz.queryCount(requestDto);
+        logger.info("收到参数:{}", requestDto);
+        Long count = 0L;
+        try {
+            ParameterUtils.notNull(requestDto, "RecordQueryRequestDto不能为null");
+            count = recordBiz.queryCount(requestDto);
+        } catch (IllegalArgumentException e) {
+            logger.info("参数异常:" + e.getMessage());
+        } catch (Exception e) {
+            logger.error("捕获异常:" + e.getMessage(), e);
+        }
+        logger.info("返回数据:{}", count);
+		return count;
 	}
 
 	@Override
