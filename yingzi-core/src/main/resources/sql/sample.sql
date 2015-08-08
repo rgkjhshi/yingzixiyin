@@ -36,7 +36,7 @@ INSERT INTO `record` VALUES (7, 1, 1, 1, 1, 1, 1, '2015-8-8 14:56:08');
 #构造用户记录
 INSERT INTO `user` VALUES (1, 'oGBeWt-feUNN9UJzt7YHJM3VnzKc', '13718340933', '', 0, '1,2', '2,3,4');
 INSERT INTO `user` VALUES (2, 'oGBeWt3HkUfi3C0k7kCVNpGdv6Kf', '13718340934', '', 0, '', '');
-INSERT INTO `user` VALUES (3, 'oGBeWt-feUNN9UJzt7YHJM3VnzKc', '13718340935', '', 0, '', '');
+INSERT INTO `user` VALUES (3, 'oGBeWt-feUNN9UJzt7YHJM3VnzKd', '13718340935', '', 0, '', '');
 INSERT INTO `user` VALUES (4, 'oGBeWt3HlUfi3C0k7pCVNpGmv6Kg', '13718340936', '', 0, '', '');
 
 

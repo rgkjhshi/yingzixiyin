@@ -157,7 +157,12 @@
             //格式化数据
             var _data = $("#infoform").serialize();                     
             //提交数据
+<<<<<<< Updated upstream
             $.post(updateInfoURL,_data,function(data){
+=======
+            $.post(updateInfoURL,_newdata,function(data){
+                console.log(_newdata);
+>>>>>>> Stashed changes
                 if(data.status=="0"||data.status==0){
                     $("input").attr("disabled","disabled");
                     $("textarea").attr("disabled","disabled");

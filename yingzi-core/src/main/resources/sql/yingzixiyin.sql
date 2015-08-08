@@ -82,3 +82,11 @@ CREATE TABLE `code` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `idx_phone` (phone)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='验证码表';
+
+
+INSERT INTO `consultant` (`id`, `phone`, `email`, `password`, `alipay`, `nickname`, `name`, `gender`, `age`, `address`, `professional`, `background`, `book_time`, `price`, `introduce`, `signature`, `avatar`, `range_type`, `status`) VALUES
+  (1, '13121435540', '313832830@qq.com', '123456', '313832830@qq.com', 'nickname', 'name', 0, 18, 'address', 'professional', 'background', 'bookTime', '59.00', 'introduce', 'signature', '', 1, 2);
+
+
+INSERT INTO `user` (`id`, `open_id`, `phone`, `password`, `is_bind`, `collected`, `visited`) VALUES
+  (1, '123123', '13121435540', '123456', 1, '', '');
