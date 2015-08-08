@@ -43,7 +43,6 @@ public class RecordController {
 	 * 咨询管理
 	 * @param request
 	 * @param response
-	 * @param id
 	 * @return
 	 * @throws IOException
 	 */
