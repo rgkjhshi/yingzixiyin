@@ -9,15 +9,10 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 
 public class PictureUtil {
-	public static String PIC_HOME = System.getenv("PIC_HOME");
-	static {
-		if (PIC_HOME == null) {
-			PIC_HOME = "d:/temp";
-		}
-	}
 
 	public static String savePicture(HttpServletRequest request,CommonsMultipartFile uploadFile) {
-		String filePath =PIC_HOME + java.io.File.separator
+		
+		String filePath =request.getRealPath("/cpictures") + java.io.File.separator
 				+ "images" + java.io.File.separator;
 		String uploadFileName = uploadFile.getOriginalFilename();
 		int extPos = uploadFileName.lastIndexOf(".");
@@ -40,9 +35,5 @@ public class PictureUtil {
 			}
 		}
 		return null;
-	}
-
-	public static String getLocalImgUrl(String img) {
-		return PIC_HOME + java.io.File.separator + img;
 	}
 }
