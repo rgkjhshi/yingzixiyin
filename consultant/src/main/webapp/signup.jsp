@@ -26,12 +26,13 @@
                     <li>
                         <a>注册</a>
                     </li>
+                    <li class='con_admin'>咨询师管理后台</li>
                 </ul>
             </div>
         </div>
         <div class="wrap">
             <div class="layout">
-                <div class="signupcontent">
+                <div class="signupcontent" style="margin:0 auto;float:none;">
                     <div class="regist_tab">
                         <ul>
                             <li class="cur"><span>手机注册</span></a></li>
@@ -72,9 +73,11 @@
                         <div class="btn" id="signup">注册</div>
                     </fieldset>
                 </div>
+                <!--
                 <div class="rightbar">
                     已有英姿账号？<br/>点击这里<a class="redlink" href="signin.jsp">直接登录</a>吧！
                 </div>
+                -->
             </div>
         </div>
         <%@ include file="../parts/foot.jsp" %> 

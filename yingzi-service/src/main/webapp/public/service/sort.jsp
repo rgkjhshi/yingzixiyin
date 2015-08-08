@@ -17,15 +17,26 @@
 <link rel="stylesheet" href="<%=path %>/css/base.css">
 <link href="<%=path %>/favicon.ico" rel="shortcut icon">
 <script type="text/javascript" src="<%=path %>/js/zepto.min.js"></script>
-<%-- <script type="text/javascript" src="<%=path %>/js/touch.js"></script> --%>
 </head>
 <body>
-    <div class="main">
+    <div class="main" style="height:100%">
         <ul class="pro layout">
-            <li><a href="<%=path %>/consultant/get_consultants.do?ctype=<%=RangeTypeEnum.ONE.getValue()%>">恋爱关系困惑</a></li>
-            <li><a href="<%=path %>/consultant/get_consultants.do?ctype=<%=RangeTypeEnum.TWO.getValue()%>">情侣关系与维护</a></li>
-            <li><a href="<%=path %>/consultant/get_consultants.do?ctype=<%=RangeTypeEnum.THREE.getValue()%>">婚前关系问题</a></li>
-            <li><a href="<%=path %>/consultant/get_consultants.do?ctype=<%=RangeTypeEnum.FOUR.getValue()%>">夫妻关系困惑</a></li>
+            <li onclick="javascript:window.location.href='<%=path %>/consultant/get_consultants.do?ctype=<%=RangeTypeEnum.ONE.getValue()%>'" style="background: #03C5E8;">
+                <a>解救单身状态</a>
+                <i></i>
+                <div>单身情感问题咨询</div>
+            </li>
+            <li onclick="javascript:window.location.href='<%=path %>/consultant/get_consultants.do?ctype=<%=RangeTypeEnum.TWO.getValue()%>'" style="background:#FF5CA5;text-align:right;">
+                <i style="background: url(../../images/arrow-right.png) no-repeat;background-size: 40px;background-position: right top;"></i>
+                <a style="color:#FEE600;">让恋爱更幸福</a>
+                <div style="color:#FFF0A4;">恋爱情感问题咨询</div>
+            </li>
+            <li onclick="javascript:window.location.href='<%=path %>/consultant/get_consultants.do?ctype=<%=RangeTypeEnum.THREE.getValue()%>'" style="background:#FEE600;">
+                <a style="color:#9501FA;">夫妻那点事儿</a>
+                <i></i>
+                <div style="color:#BF45C3;">夫妻情感咨询</div>
+            </li>
+            <!-- <li><a href="<%=path %>/consultant/get_consultants.do?ctype=<%=RangeTypeEnum.FOUR.getValue()%>">夫妻关系困惑</a></li> -->
         </ul>
     </div>
 <script type="text/javascript" src="<%=path %>/js/main_wechat.js"></script>

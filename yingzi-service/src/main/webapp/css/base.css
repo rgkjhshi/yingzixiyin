@@ -6,14 +6,14 @@
  * @version $Id$
  */
 /*reset*/
-html{font-size: 16px;}
-body { margin:0; padding:0; background:#fff; font-family: "Microsoft YaHei","宋体","Arial Narrow";color:#333;}
+html{font-size: 16px;height:100%;width:100%;}
+body {height:100%;margin:0; padding:0; background:#fff; font-family: "Microsoft YaHei","宋体","Arial Narrow";color:#333;}
 div, form, input, select, ul, ol, li, p, h1, h2, h3, h4, h5, h6, p, dd, dt, dl { margin:0; padding:0; }
 ul, ol, li { list-style:none; }
 img{ border:none; }
 a{text-decoration: none;color:#333;}
 /*global*/
-.header{
+/*.header{
 	position:relative;
 	text-align: center;
 	padding:15px 0;
@@ -31,7 +31,7 @@ a{text-decoration: none;color:#333;}
 	position: absolute;
 	left: 16px;
 	top: 10px;
-}
+}*/
 .layout{
 	width:90%;
 	margin:20px auto;
@@ -53,26 +53,44 @@ a{text-decoration: none;color:#333;}
 }
 /*sort*/
 .pro{
-	padding-top: 20px;
+	padding:0;
+	margin: 0;
+	height:100%;
+	width:100%;
 }
 .pro li{
-	padding:24px 0;
-	margin:20px auto;
-	text-align: center;
-	background:#f8f8f8;
-	box-sizing:border-box;
-	border:1px solid #ddd;
-	border-left: 6px solid #d9534f;
-	box-shadow: 0 4px 10px #ccc;
+	margin: 0;
+    height: 33%;
+    padding: 0 30px;
+    border-bottom: 2px solid #fff;
+}
+.pro li a {
+	margin: 40px 0 10px 0;
+    display: inline-block;
+    font-size: 1.8rem;
+    color:#fff;
+    margin-top: 20%;
+}
+.pro li div{
+    color: #eee;
+}
+.pro li i{
+	background: url(../images/arrow-left.png) no-repeat;
+    width: 30px;
+    height: 40px;
+    display: inline-block;
+    vertical-align: middle;
+    background-size: 40px;
+    margin: 0 10px;
 }
 /*consultant*/
 .choose_btn{
 	margin: 20px auto;
 	text-align: center;
 	color:#fff;
-	background:#ED9E9C;
+	background:#4489DA;
 	padding:15px 0;
-	border:1px solid #EA837F;
+	border:1px solid #3179CE;
 	border-radius: 4px;
 	display: block;
 }
@@ -80,9 +98,9 @@ a{text-decoration: none;color:#333;}
 	margin-top: 20px;
 	text-align: center;
 	color:#fff;
-	background:#ED9E9C;
+	background:#4489DA;
 	padding:10px 0;
-	border:1px solid #EA837F;
+	border:1px solid #3179CE;
 	border-radius: 2px;
 	display: block;
 }

@@ -574,6 +574,10 @@ fieldset div {
 	margin-top:4px;
 	cursor:pointer;
 }
+.con_admin{
+	font-weight: bold;
+    color: #B11F25;
+}
 /*咨询详情*/
 .dialog_content ul{
 	overflow:scroll;

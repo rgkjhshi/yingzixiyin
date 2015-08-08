@@ -13,6 +13,7 @@ String session_phone = session.getAttribute("session_phone").toString(); //从se
                 <li><a><%=session_phone %></a></li>
                 <li><a>退出</a></li>
             <% } %>
+            <li class="con_admin">咨询师管理后台</li>
         </ul>
     </div>
 </div>

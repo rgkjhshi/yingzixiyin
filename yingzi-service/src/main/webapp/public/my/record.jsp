@@ -33,36 +33,6 @@
 	    			<div><strong>状态：</strong>${r.isCompleted.value==0?"未结束":"已结束" }</div>
     			</li>
     		</c:forEach>
-    		<!-- <li class="record">
-    			<div class="sub">时间：2015-04-23</div>
-    			<div>
-    				<span class="half"><strong>咨询师：</strong>张三</span><span class="half"><strong>消费：</strong>59元</span></div>
-    			<div><strong>咨询方式：</strong>面对面咨询</div>
-    			<div><strong>状态：</strong>已结束</div>
-    		</li>
-    		<li class="record">
-    			<div class="sub">时间：2015-04-23</div>
-    			<div>
-    				<span class="half"><strong>咨询师：</strong>张三</span><span class="half"><strong>消费：</strong>300元</span></div>
-    			<div><strong>咨询方式：</strong>线上谘询</div>
-    			<div><strong>状态：</strong>咨询中</div>
-    		</li>
-
-    		<li class="record">
-    			<div class="sub">时间：2015-04-23</div>
-    			<div>
-    				<span class="half"><strong>咨询师：</strong>张三</span><span class="half"><strong>消费：</strong>400元</span></div>
-    			<div><strong>咨询方式：</strong>面对面咨询</div>
-    			<div><strong>状态：</strong>已结束</div>
-    		</li>
-
-    		<li class="record">
-    			<div class="sub">时间：2015-04-23</div>
-    			<div>
-    				<span class="half"><strong>咨询师：</strong>张三</span><span class="half"><strong>消费：</strong>519元</span></div>
-    			<div><strong>咨询方式：</strong>面对面咨询</div>
-    			<div><strong>状态：</strong>已结束</div>
-    		</li> -->
     	</ul>
     </div>
 <script type="text/javascript" src="<%=path%>/js/main_wechat.js"></script>

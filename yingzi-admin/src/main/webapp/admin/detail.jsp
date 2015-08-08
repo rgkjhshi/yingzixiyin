@@ -50,7 +50,7 @@
         <script>
             $(".detail").addClass("cur");
             var status = $.trim($("#status").attr("data-status"));
-            if (status == '1'||status==1){
+            if (status != '0'&&status!=0){
                 // <a class='edit'>编辑</a>
                 var btn = $("<div data-id='${cinfo.id}' class='checkbtns'><a class='accept'>保存并审核通过</a><a class='refuse'>审核不通过</a></div>");
                 $(".maincontent").append(btn);
