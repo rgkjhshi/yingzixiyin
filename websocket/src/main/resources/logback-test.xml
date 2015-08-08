@@ -20,7 +20,7 @@
         </rollingPolicy>
     </appender>
 
-    <logger name="com.yingzixiyin.websocket" level="debug" />
+    <logger name="com.yingzixiyin" level="debug" />
 
     <logger name="com.ibatis" level="DEBUG" />
     <logger name="java.sql" level="DEBUG" />

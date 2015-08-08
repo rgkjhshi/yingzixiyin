@@ -1,9 +1,5 @@
 package com.yingzixiyin.websocket.service;
 
-import com.yingzixiyin.api.dto.ConsultantInfo;
-import com.yingzixiyin.api.dto.ConsultantQueryRequestDto;
-import com.yingzixiyin.api.dto.RecordInfo;
-import com.yingzixiyin.api.dto.RecordQueryRequestDto;
 import com.yingzixiyin.api.facade.ConsultantFacade;
 import com.yingzixiyin.api.facade.RecordFacade;
 import org.slf4j.Logger;
@@ -26,13 +22,4 @@ public class ChatService {
     @Resource
     private ConsultantFacade consultantFacade;
 
-    public String getToUserPhoneByRecordId(Long recordId) {
-        RecordQueryRequestDto recordQueryRequestDto = new RecordQueryRequestDto();
-        recordQueryRequestDto.setId(recordId);
-        RecordInfo recordInfo = recordFacade.queryOne(recordQueryRequestDto);
-        ConsultantQueryRequestDto consultantQueryRequestDto = new ConsultantQueryRequestDto();
-        consultantQueryRequestDto.setId(recordInfo.getConsultantId());
-        ConsultantInfo consultantInfo = consultantFacade.queryOne(consultantQueryRequestDto);
-        return consultantInfo.getPhone();
-    }
 }

@@ -25,10 +25,10 @@
                 AND record_id = #{recordId}
             </if>
             <if test="fromPhone != null">
-                from_phone = #{formPhone},
+                AND from_phone = #{formPhone}
             </if>
             <if test="toPhone != null">
-                to_phone = #{toPhone},
+                AND to_phone = #{toPhone}
             </if>
         </where>
     </sql>

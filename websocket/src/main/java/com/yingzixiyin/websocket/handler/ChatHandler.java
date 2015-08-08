@@ -1,9 +1,10 @@
 package com.yingzixiyin.websocket.handler;
 
-import com.yingzixiyin.api.dto.*;
+import com.yingzixiyin.api.dto.MessageInfo;
+import com.yingzixiyin.api.dto.MessageQueryRequestDto;
+import com.yingzixiyin.api.dto.MessageQueryResponseDto;
 import com.yingzixiyin.api.enums.YesOrNoEnum;
 import com.yingzixiyin.api.facade.MessageFacade;
-import com.yingzixiyin.api.facade.UserFacade;
 import com.yingzixiyin.websocket.service.ChatService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +17,7 @@ import javax.annotation.Resource;
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -33,8 +35,6 @@ public class ChatHandler extends TextWebSocketHandler {
     private ChatService chatService;
     @Resource
     private MessageFacade messageFacade;
-    @Resource
-    private UserFacade userFacade;
 
 
     public ChatHandler() {
@@ -47,9 +47,11 @@ public class ChatHandler extends TextWebSocketHandler {
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
         logger.info("connect to the websocket success......");
         logger.info("session attributes: {}", session.getAttributes());
-        String phone = (String) session.getAttributes().get("session_phone");
-        if (null == phone) {
+        String phone = (String) session.getAttributes().get("phone");
+        String toPhone = (String) session.getAttributes().get("toPhone");
+        if (null == phone || null == toPhone) {
             logger.error("未获取到session_phone...");
+            session.close();
             return;
         }
         userMap.put(phone, session);
@@ -59,6 +61,7 @@ public class ChatHandler extends TextWebSocketHandler {
         } catch (IOException e) {
             logger.error("发送离线消息出错, {}", e);
         }
+
     }
 
     /**
@@ -66,25 +69,27 @@ public class ChatHandler extends TextWebSocketHandler {
      */
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-        String phone = (String) session.getAttributes().get("session_phone");
-        Long recordId = (Long) session.getAttributes().get("session_recordId");
-        // 查数据库，找to
-        String toPhone = chatService.getToUserPhoneByRecordId(recordId);
+        String phone = (String) session.getAttributes().get("phone");
+        String toPhone = (String) session.getAttributes().get("toPhone");
+        Long recordId = (Long) session.getAttributes().get("recordId");
+        // 找to
         WebSocketSession toSession = userMap.get(toPhone);
-        // 存消息
+        // 消息
         MessageInfo messageInfo = new MessageInfo();
         messageInfo.setRecordId(recordId);
-        messageInfo.setMessage(message.toString());
+        messageInfo.setMessage(message.getPayload());
         messageInfo.setFromPhone(phone);
         messageInfo.setToPhone(toPhone);
         messageInfo.setCreateTime(new Date());
         messageInfo.setIsRead(YesOrNoEnum.NO);
         // to在线，发送
-        if (toSession.isOpen()) {
+        if (null != toSession && toSession.isOpen()) {
             Boolean result = sendMessageToUser(toSession, message);
             if (result) {
                 messageInfo.setIsRead(YesOrNoEnum.YES);
             }
+        } else {
+            logger.info("{}离线，消息已经保存到数据库", toPhone);
         }
         // 消息入库
         messageFacade.add(messageInfo);
@@ -107,31 +112,38 @@ public class ChatHandler extends TextWebSocketHandler {
     }
 
     private void sendUnReadMessage(WebSocketSession session) throws IOException {
-        String phone = (String) session.getAttributes().get("session_phone");
-        Long recordId = (Long) session.getAttributes().get("session_recordId");
+        logger.info("推送离线消息...");
+        String phone = (String) session.getAttributes().get("phone");
+        Long recordId = (Long) session.getAttributes().get("recordId");
         // 查询该用户的所有未读消息
         MessageQueryRequestDto requestDto = new MessageQueryRequestDto();
+        requestDto.setRecordId(recordId);
         requestDto.setToPhone(phone);
         requestDto.setIsRead(YesOrNoEnum.NO);
         MessageQueryResponseDto responseDto = messageFacade.query(requestDto);
-        for (MessageInfo messageInfo : responseDto.getMessageInfoList()) {
-            // 发送
-            session.sendMessage(new TextMessage(messageInfo.getMessage()));
-            // 更新为已读
-            MessageInfo info = new MessageInfo();
-            info.setIsRead(YesOrNoEnum.YES);
-            messageFacade.update(info);
+        List<MessageInfo> messageInfoList = responseDto.getMessageInfoList();
+        if (null != messageInfoList) {
+            for (MessageInfo messageInfo : responseDto.getMessageInfoList()) {
+                // 发送
+                session.sendMessage(new TextMessage(messageInfo.getMessage()));
+                // 更新为已读
+                MessageInfo info = new MessageInfo();
+                info.setId(messageInfo.getId());
+                info.setIsRead(YesOrNoEnum.YES);
+                messageFacade.update(info);
+            }
         }
+        logger.info("离线消息推送完毕...");
     }
 
     @Override
     public void handleTransportError(WebSocketSession session, Throwable exception) throws Exception {
         if (session.isOpen()) {
-            String phone = (String) session.getAttributes().get("session_phone");
+            String phone = (String) session.getAttributes().get("phone");
             userMap.remove(phone);
             session.close();
         }
-        logger.info("websocket connection closed......");
+        logger.info("websocket connection closed because of error......");
     }
 
     @Override

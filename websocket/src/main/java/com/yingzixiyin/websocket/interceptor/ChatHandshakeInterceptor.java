@@ -34,9 +34,9 @@ public class ChatHandshakeInterceptor extends HttpSessionHandshakeInterceptor {
                     logger.info("name={}, value={}", name, session.getAttribute(name));
                 }
                 //使用userName区分WebSocketHandler，以便定向发送消息
-                String phone = (String) session.getAttribute("session_phone");
-                Long recordId = (Long) session.getAttribute("session_recordId");
-                logger.info("获取session_phone={}, session_recordId={}", phone, recordId);
+//                String phone = (String) session.getAttribute("session_phone");
+//                Long recordId = (Long) session.getAttribute("session_recordId");
+//                logger.info("获取session_phone={}, session_recordId={}", phone, recordId);
             }
         }
         return super.beforeHandshake(request, response, wsHandler, attributes);

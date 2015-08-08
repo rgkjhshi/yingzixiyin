@@ -54,6 +54,8 @@ public class MessageBizImpl implements MessageBiz {
         if (!CollectionUtils.isEmpty(messageInfoList)) {
             responseDto.setMessageInfoList(messageInfoList);
             responseDto.setCount(messageInfoList.size());
+        } else {
+            responseDto.setCount(0);
         }
 		return responseDto;
     }
