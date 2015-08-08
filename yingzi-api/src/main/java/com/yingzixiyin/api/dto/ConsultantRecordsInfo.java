@@ -24,6 +24,7 @@ public class ConsultantRecordsInfo implements Serializable{
     //咨询师信息
     private String consultantName;		//咨询师名称
     private BigDecimal price;      // 咨询单价
+    private String phone;
     private String introduce;      // 个人简介
     private String signature;      // 个性签名
     private RangeTypeEnum rangeType;     // 咨询类型
@@ -113,17 +114,22 @@ public class ConsultantRecordsInfo implements Serializable{
 		this.avatar = avatar;
 	}
 	
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 	@Override
 	public String toString() {
-		return "ConsumeRecordsInfo [id=" + id + ", userId=" + userId
+		return "ConsultantRecordsInfo [id=" + id + ", userId=" + userId
 				+ ", consultantId=" + consultantId + ", consultType="
 				+ consultType + ", isPaid=" + isPaid + ", isReplied="
 				+ isReplied + ", isCompleted=" + isCompleted + ", createTime="
 				+ createTime + ", consultantName=" + consultantName
-				+ ", price=" + price + ", introduce=" + introduce
-				+ ", signature=" + signature + ", rangeType=" + rangeType
-				+ ", avatar=" + avatar + "]";
+				+ ", price=" + price + ", phone=" + phone + ", introduce="
+				+ introduce + ", signature=" + signature + ", rangeType="
+				+ rangeType + ", avatar=" + avatar + "]";
 	}
 	
-	    
 }

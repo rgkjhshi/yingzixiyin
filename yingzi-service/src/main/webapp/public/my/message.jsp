@@ -26,7 +26,7 @@
     		<c:forEach items="${myMessages}" var="m">
     		<c:out value="${m[\"completed\"]}"></c:out>
     			<li class='record unend <c:out value="${m[\"is_read\"]==0 ?\"new_ms\":\"\"}"></c:out>'>
-	        		<a href="getmessages.do?consultantId=<c:out value='${m[\"consultant_id\"]}'></c:out>">
+	        		<a href="${ chaturl}?recordId=<c:out value='${m[\"record_id\"]}'></c:out>&to_phone=<c:out value='${m[\"phone\"]}'></c:out>&phone=<c:out value='${WX_LOGIN_USER.phone}'></c:out>">
 	        			<div class="message">
 		        			来自<span class="red_font">
 		        				<c:out value="${m[\"name\"]}"></c:out>

@@ -70,6 +70,8 @@ import com.yingzixiyin.api.facade.UserFacade;
 public class UserCenterController {
 	private static Logger logger = LoggerFactory.getLogger(UserCenterController.class);
 	
+	private static final String CHAT_URL="http://localhost:8080/websocket/chat.do";
+	
 	@Resource
 	private ConsultantFacade consultantFacade;
 	@Resource
@@ -274,6 +276,7 @@ public class UserCenterController {
 			List<Map<String,Object>> message=messageFacade.queryConsultantAndMessageCountByUserId(user.getId());
 			if(message!=null){
 				request.setAttribute("myMessages", message);
+				request.setAttribute("chaturl", CHAT_URL);
 			}
 		}
 		return response_page;

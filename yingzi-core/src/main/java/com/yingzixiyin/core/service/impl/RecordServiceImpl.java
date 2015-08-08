@@ -105,6 +105,7 @@ public class RecordServiceImpl implements RecordService {
 		cinfo.setRangeType(RangeTypeEnum.toEnum((Integer)bean.get("rangeType")));
 		cinfo.setSignature(bean.get("signature")+"");
 		cinfo.setUserId((Long)bean.get("userId"));
+		cinfo.setPhone(bean.get("phone")+"");
 //		logger.info("转换实体类："+cinfo);
 		return cinfo;
 	}

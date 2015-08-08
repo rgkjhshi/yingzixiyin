@@ -145,7 +145,7 @@
 	t.is_paid as isPaid,
 	t.is_replied as isReplied,
 	t.is_completed as isCompleted,
-	t.create_time as createTime,c.name as consultantName,c.price as price,c.introduce as
+	t.create_time as createTime,c.phone as phone,c.name as consultantName,c.price as price,c.introduce as
 	introduce, c.signature as signature,c.range_type as rangeType,c.avatar
 	as avatar from record t,consultant c where c.id=t.consultant_id
 	<if test="id != null">

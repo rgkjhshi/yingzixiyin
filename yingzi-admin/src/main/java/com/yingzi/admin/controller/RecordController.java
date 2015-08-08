@@ -50,7 +50,7 @@ public class RecordController {
 	@RequestMapping(value="query_records.do")
 	@PowerCheck
 	public String getConsultantInfor(HttpServletRequest request,
-			HttpServletResponse response, Integer status, Integer pageNum)
+			HttpServletResponse response, Integer status, Integer isPaid,Integer pageNum)
 			throws IOException {
 		logger.info("---系统后台调用咨询记录接口页面----");
 		String response_page = "admin/record";
@@ -65,6 +65,10 @@ public class RecordController {
 					response_page = "admin/record_end";
 				}
 			}
+		    if(isPaid!=null){
+				YesOrNoEnum st = YesOrNoEnum.toEnum(isPaid);
+				requestDto.setIsPaid(st);
+			}
 			if (pageNum == null) {
 				pageNum = 1;
 			}
@@ -73,6 +77,9 @@ public class RecordController {
 			page.setMaxCountAndCurrentPage(count, pageNum);
 			if(status!=null){
 				page.putParams("status", status);
+			}
+			if(isPaid!=null){
+				page.putParams("isPaid", isPaid);
 			}
 			page.setUrl(request.getContextPath()+"/record/query_records.do");
 			RecordQueryResponseDto responseDto = recordFacade.queryPage(requestDto,page);
