@@ -23,10 +23,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.common.util.concurrent.ExecutionError;
 import com.gson.oauth.Oauth;
 import com.yingzi.web.annotation.PowerCheck;
@@ -37,6 +41,8 @@ import com.yingzi.web.utils.JsonUtil;
 import com.yingzi.web.utils.ResponseUtils;
 import com.yingzi.web.utils.SessionUtil;
 import com.yingzi.web.views.ConsumeRecordsInfo;
+import com.yingzixiyin.api.dto.BaseResponseDto;
+import com.yingzixiyin.api.dto.CodeInfo;
 import com.yingzixiyin.api.dto.ConsultantInfo;
 import com.yingzixiyin.api.dto.ConsultantQueryRequestDto;
 import com.yingzixiyin.api.dto.ConsultantQueryResponseDto;
@@ -49,6 +55,7 @@ import com.yingzixiyin.api.dto.UserQueryRequestDto;
 import com.yingzixiyin.api.enums.GenderTypeEnum;
 import com.yingzixiyin.api.enums.RangeTypeEnum;
 import com.yingzixiyin.api.enums.YesOrNoEnum;
+import com.yingzixiyin.api.facade.CodeFacade;
 import com.yingzixiyin.api.facade.ConsultantFacade;
 import com.yingzixiyin.api.facade.MessageFacade;
 import com.yingzixiyin.api.facade.RecordFacade;
@@ -71,6 +78,8 @@ public class UserCenterController {
 	private RecordFacade recordFacade;
 	@Resource
 	private MessageFacade messageFacade;
+	@Resource
+	private CodeFacade codeFacade;
 	@Resource
 	private WeixinOauthHelper weixinOauthHelper;
 	/**
@@ -269,4 +278,52 @@ public class UserCenterController {
 		}
 		return response_page;
 	}
+	 // 获取验证码
+    @RequestMapping("getCheckCodeApi.do")
+    @PowerCheck
+    public ModelAndView getCheckCode(@RequestParam(value = "phone", required = true) String phone) {
+        logger.info("getCheckCodeApi.do, phone={}", phone);
+        // 获取验证码
+        BaseResponseDto responseDto = codeFacade.sendCode(phone);
+        Map<String, Object> map = Maps.newHashMap();
+        map.put("status", responseDto.getReturnCode());
+        map.put("message", responseDto.getReturnMessage());
+        return new ModelAndView(new MappingJackson2JsonView(), map);
+    }
+
+	@RequestMapping("bindPhone.do")
+	@PowerCheck
+	public ModelAndView bindPhone(
+			HttpServletRequest request,
+			HttpServletResponse response,
+			@RequestParam(value = "checkCode", required = true) String checkCode,
+			@RequestParam(value = "phone", required = true) String phone) {
+		
+		logger.info("bindPhone.do,phone={},checkCode={}", phone, checkCode);
+		CodeInfo codeInfo = new CodeInfo();
+		codeInfo.setCode(checkCode);
+		codeInfo.setPhone(phone);
+		Map<String, Object> map = Maps.newHashMap();
+		BaseResponseDto responseDto = codeFacade.checkCode(codeInfo);
+		if (!responseDto.isSuccess()) {
+			map.put("status", responseDto.getReturnCode());
+			map.put("message", responseDto.getReturnMessage());
+			return new ModelAndView(new MappingJackson2JsonView(), map);
+
+		}
+		logger.info("----用户绑定手机，验证码通过---");
+		UserInfo user = SessionUtil.getLoginUserToSession(request);
+		if (user == null) {
+			map.put("status", -1);
+			map.put("message", "用户未登录或登录超时");
+			return new ModelAndView(new MappingJackson2JsonView(), map);
+		}
+		user.setPhone(phone);
+		user.setIsBind(YesOrNoEnum.YES);
+		responseDto = userFacade.update(user);
+		map.put("status", responseDto.getReturnCode());
+		map.put("message", responseDto.getReturnMessage());
+		return new ModelAndView(new MappingJackson2JsonView(), map);
+	}
+
 }
