@@ -155,14 +155,9 @@
         if (check("nickname") && check("name") && check("age") && check("email") && check("alipay") && check("professional") && check("background") && check("price") && check("bookTime") && check("address") && check("introduce") && check("signature")) {
 
             //格式化数据
-            var _data = decodeURIComponent("{'" + $("#infoform").serialize() + "'}");
-            //将form serialize格式转换为json
-            var reg1 = new RegExp("=", "g");
-            var reg2 = new RegExp("&", "g");
-            var _newdata = _data.replace(reg1, "':'").replace(reg2, "','");
-
+            var _data = $("#infoform").serialize();                     
             //提交数据
-            $.post(updateInfoURL,_newdata,function(data){
+            $.post(updateInfoURL,_data,function(data){
                 if(data.status=="0"||data.status==0){
                     $("input").attr("disabled","disabled");
                     $("textarea").attr("disabled","disabled");
@@ -218,7 +213,7 @@
                         if(v==1){
                             $("#male i").show();
                             $("#female i").hide();
-                        }else{
+                        }else if(v==2){
                             $("#male i").hide();
                             $("#female i").show();
                         }
