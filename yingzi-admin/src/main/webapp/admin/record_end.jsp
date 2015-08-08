@@ -35,11 +35,11 @@
                             	<!-- <td>${cinfo.isCompleted.value==0?"咨询中":"已结束" }</td> -->
                                 <td>${cinfo.consultType }</td>
                             	<td class='func ${cinfo.isCompleted.value==0?"tooff":"toon" }'>
-                            		<c:if test="${ cinfo.isCompleted.value==0}">
-                            			<a id='endRecord' data-id="{cinfo.id}" data-status="1">结束</a>
+                            		<c:if test="${cinfo.isCompleted.value==0}">
+                            			<a id='endRecord' data-id="${cinfo.id}" data-status="1">结束</a>
                             		</c:if>
-                            		<c:if test="${ cinfo.isCompleted.value==1}">
-                            			<a id="startRecord" data-id="{cinfo.id}" data-status="0">重新开启</a>
+                            		<c:if test="${cinfo.isCompleted.value==1}">
+                            			<a id="startRecord" data-id="${cinfo.id}" data-status="0">重新开启</a>
                             		</c:if>
                             	</td>
                         	</tr>
