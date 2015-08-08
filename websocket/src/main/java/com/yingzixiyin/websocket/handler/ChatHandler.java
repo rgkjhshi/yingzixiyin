@@ -15,6 +15,7 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import javax.annotation.Resource;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -84,7 +85,9 @@ public class ChatHandler extends TextWebSocketHandler {
         messageInfo.setIsRead(YesOrNoEnum.NO);
         // to在线，发送
         if (null != toSession && toSession.isOpen()) {
-            Boolean result = sendMessageToUser(toSession, message);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            TextMessage messageWithTime = new TextMessage(sdf.format(messageInfo.getCreateTime()) + ";" + message.getPayload());
+            Boolean result = sendMessageToUser(toSession, messageWithTime);
             if (result) {
                 messageInfo.setIsRead(YesOrNoEnum.YES);
             }
@@ -125,7 +128,9 @@ public class ChatHandler extends TextWebSocketHandler {
         if (null != messageInfoList) {
             for (MessageInfo messageInfo : responseDto.getMessageInfoList()) {
                 // 发送
-                session.sendMessage(new TextMessage(messageInfo.getMessage()));
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                TextMessage messageWithTime = new TextMessage(sdf.format(messageInfo.getCreateTime()) + ";" + messageInfo.getMessage());
+                sendMessageToUser(session, messageWithTime);
                 // 更新为已读
                 MessageInfo info = new MessageInfo();
                 info.setId(messageInfo.getId());
