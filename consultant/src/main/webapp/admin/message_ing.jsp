@@ -45,15 +45,15 @@
     //聊天跳转
     function showDialog(phone,tophone,id){//传入弹窗类型：咨询详情   mid：咨询id
         var url = "http://" + window.location.host + "/websocket/chat.do";
-        $.post(url,{'phone':phone,'tophone':tophone,'id':id},function(){
+        $.post(url,{'phone':phone,'toPhone':tophone,'recordId':id},function(){
 
         });
     }
     //打开咨询详情弹窗
     $(".message_item").on("click",function(){
         var phone = '13167394537';
-        var toPhone = '13504330637';
-        var recordId = '1';
+        var tophone = '13504330637';
+        var id = '1';
         showDialog(phone,tophone,id);
     });
     </script>
