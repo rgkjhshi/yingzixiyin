@@ -41,7 +41,7 @@
         <%@ include file="../parts/foot.jsp" %> 
     <script src="../js/chat.js"></script>
     <script>
-        $("#message").addClass("cur");
+        $("#messagebtn").addClass("cur");
         $("#message_all").show();
         $("#sms_end").addClass("active");
     </script>
