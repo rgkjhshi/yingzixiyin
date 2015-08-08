@@ -52,8 +52,8 @@
     //打开咨询详情弹窗
     $(".message_item").on("click",function(){
         var phone = '13167394537';
-        var tophone = '13504330637';
-        var id = '1';
+        var toPhone = '13504330637';
+        var recordId = '1';
         showDialog(phone,tophone,id);
     });
     </script>
