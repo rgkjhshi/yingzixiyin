@@ -23,13 +23,13 @@
             		   	<c:forEach items="${recordsList}" var="r">
             		   		<div class="message_item" node-type="item">
                             <div class="ms_header">
-                                <div class="ms_name">${r.name }</div>
+                                <div class="ms_name">${r.consultantName }</div>
                                 <div class="ms_time"><fmt:formatDate value="${ r.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/></div>
                             </div>
                             <div class="ms_content">
                                 <div>哈哈，这里是发送的信息噢</div>
                                 <div class="ms_new">new</div>
-                                <div class="ms_ing">${r.isCompleted.value==0?"进行中"："已结束" }</div>
+                                <div class="ms_ing">${r.isCompleted.value==0?"进行中":"已结束" }</div>
                             </div>
                         	</div>
             		   	</c:forEach>
