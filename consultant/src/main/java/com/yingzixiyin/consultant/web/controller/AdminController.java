@@ -147,6 +147,12 @@ public class AdminController {
         try {
             YesOrNoEnum st = YesOrNoEnum.toEnum(status);
             requestDto.setIsCompleted(st);
+            HttpSession session = request.getSession();
+            String phone = (String)session.getAttribute("session_phone");
+            ConsultantQueryRequestDto consultantQueryRequestDto = new ConsultantQueryRequestDto();
+            consultantQueryRequestDto.setPhone(phone);
+            ConsultantInfo consultantInfo = consultantFacade.queryOne(consultantQueryRequestDto);
+            requestDto.setConsultantId(consultantInfo.getId());
             if (status == 0) {
                 mav = new ModelAndView("message_ing.jsp");
             } else {
