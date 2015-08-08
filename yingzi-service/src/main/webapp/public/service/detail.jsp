@@ -6,6 +6,9 @@
 	String path=request.getContextPath();   
 	request.setAttribute("path", path);
 %>
+<%
+	String isbind = ""+session.getAttribute("isbind");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -85,15 +88,13 @@
         var type = $(this).attr("data-type");
         var url = "";
         var to = "consultant_"+type+".do?consultant_id="+id;
-
-        // $.get(url,function(data){
-        //  if(data.stasuts == 0){
-        //      window.location.href = to;
-        //  }else{
-        //      window.location.href = "/weixin/public/service/bind.jsp?id="+id+"&type="+type;
-        //  }
-        // });
-        window.location.href = "/weixin/public/service/bind.jsp?id="+id+"&type="+type;
+        var isbind = "<%=isbind %>";
+        console.log(isbind);
+        if(isbind!=""&&isbind!=null&&!isbind){
+            window.location.href = to;
+        }else{
+            window.location.href = "/weixin/public/service/bind.jsp?id="+id+"&type="+type;
+        }
     }
 
     $("#onlinebtn,#offlinebtn").on("click",isbind);

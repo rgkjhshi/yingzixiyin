@@ -9,7 +9,7 @@
 		$("#choose_layer").show();
 		$("#choose_dialog").show();
 	});
-	$("#choose_close").on("click",function(){
+	$(".choose_close").on("click",function(){
 		$("#choose_layer").hide();
 		$("#choose_dialog").hide();
 	});
