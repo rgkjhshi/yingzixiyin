@@ -42,6 +42,7 @@ import com.yingzi.web.utils.NetUtils;
 import com.yingzi.web.utils.RandomUtil;
 import com.yingzi.web.utils.ResponseUtils;
 import com.yingzi.web.utils.SessionUtil;
+import com.yingzixiyin.api.dto.BaseResponseDto;
 import com.yingzixiyin.api.dto.ConsultantInfo;
 import com.yingzixiyin.api.dto.ConsultantQueryRequestDto;
 import com.yingzixiyin.api.dto.ConsultantQueryResponseDto;
@@ -174,6 +175,42 @@ public class ConsultantController {
 			request.setAttribute("consultant", cqrDto);
 		}
 		return response_page;
+	}
+	/**
+	 * 收藏某个咨询师功能接口
+	 * @param request
+	 * @param response
+	 * @param id
+	 * @return
+	 * @throws IOException
+	 */
+	@RequestMapping(value="collect_consultant.do")
+	@PowerCheck
+	public void collectConsultantInfor(HttpServletRequest request,HttpServletResponse response,Long id) throws IOException{
+		logger.info("---用户调用咨询师详细信息接口页面----");
+		BaseResponseDto responseDto=new BaseResponseDto();
+		if(id==null){
+			responseDto.setReturnCode(-1);
+			responseDto.setReturnMessage("咨询师收藏ID为空");
+			ResponseUtils.renderJsonText(response, JsonUtil.getJsonText(responseDto));
+			return;
+		}
+		UserInfo user=SessionUtil.getLoginUserToSession(request);
+		
+		if(user==null){
+			responseDto.setReturnCode(-1);
+			responseDto.setReturnMessage("用户未登录或登录超时");
+			ResponseUtils.renderJsonText(response, JsonUtil.getJsonText(responseDto));
+			return;
+		}
+		if(StringUtils.isNotEmpty(user.getCollected())){
+			user.setCollected(user.getCollected()+","+id);
+		}
+		else{
+			user.setCollected(id+"");
+		}
+		responseDto=userFacade.update(user);
+		ResponseUtils.renderJsonText(response, JsonUtil.getJsonText(responseDto));
 	}
 	@RequestMapping(value="consultant_yingzi.do")
 	public String weixinToYingziCounsultant(HttpServletRequest request,HttpServletResponse response,String code) throws IOException{
