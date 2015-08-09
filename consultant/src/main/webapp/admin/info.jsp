@@ -17,7 +17,7 @@
         <div class="info">
             <div class="layout">
                 <%@ include file="../parts/left.jsp" %> 
-            	<div class="maincontent">
+            	<div class="maincontent" style="padding-bottom:100px;">
             		<div class="subtitle">完善个人信息</div>
                     <div class="uc-tips">
                         <div class="bd">
@@ -28,13 +28,6 @@
                         </div>
                     </div>
                     <form id="infoform">
-                        <!-- <div>
-                            <div class="sign_title">昵称：</div>
-                            <div class="sign_content">
-                                <input type="text" data-validate="notnull" data-tip="昵称" name="nickname" id="nickname" />
-                                <span class="tips"></span>
-                            </div>
-                        </div> -->
                         <div>
                             <div class="sign_title">真实姓名：</div>
                             <div class="sign_content">
@@ -183,6 +176,15 @@
         $("#info").addClass("cur");
         $("#info_all").show();
         $("#baseinfo").addClass("active");
+        //检查是否更改价格、地址信息
+        $("#videoprice,#faceprice,#address").change(function(){
+            if($("#status").val()=="2"){
+                $("#status").val("1");
+                alert("您修改了价格或地址信息，需要管理员重新审核");
+            }else if($("#status").val()=="0"){
+                $("#status").val("1");
+            }
+        });
     </script>
     </body>
 </html>

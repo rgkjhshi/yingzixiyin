@@ -161,25 +161,33 @@
             $(".gender_tips").text("请选择您的性别");
             return;
         }
-        //检查是否更改价格、地址信息
-        $("#videoprice,#faceprice,#address").on("change",function(){
-            $("#status").val("1");
-            alert("您修改了价格或地址信息，需要管理员重新审核，请耐心等待");
-        });
+        
         //检查数据
-        if (check("nickname") && check("name") && check("age") && check("email") && check("alipay") && check("professional") && check("background") && check("price") && check("bookTime") && check("address") && check("introduce") && check("signature")) {
+        if (check("nickname") && check("name") && check("age") && check("email") && check("alipay") && check("professional") && check("background") && check("price") && check("bookTime") && check("address") && check("introduce") && check("signature")&&check("videoprice")&&check("faceprice")) {
+
+             
+            var newstatus = $("#status").val();
+            if(newstatus!="2"){
+                $("#status").val("1");
+            }             
 
             //格式化数据
-            var _data = $("#infoform").serialize();                     
+            var _data = $("#infoform").serialize();  
+
             //提交数据
             $.post(updateInfoURL,_data,function(data){
 
                 if(data.status=="0"||data.status==0){
-                    $("input").attr("disabled","disabled");
-                    $("textarea").attr("disabled","disabled");
-                    $("select").attr("disabled","disabled");
-                    $("#moreinfo").remove();
-                    var tips = $("<div class='fdtips successtip'>提交成功，等待审核！</div>");
+                    if(newstatus=="2"||newstatus==2){
+                        var tips = $("<div class='fdtips successtip'>修改成功！</div>");
+                    }else{
+                        $("input").attr("disabled","disabled");
+                        $("textarea").attr("disabled","disabled");
+                        $("select").attr("disabled","disabled");
+                        $("#moreinfo").remove();
+                        $(".uc-tips-ctn").text("您的信息正在由管理员审核中");
+                        var tips = $("<div class='fdtips successtip'>提交成功，等待审核！</div>");
+                    }
                 }else{
                     var tips = $("<div class='fdtips errortip'>" + data.message + "</div>");
                 }
