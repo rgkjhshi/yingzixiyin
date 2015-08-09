@@ -134,7 +134,7 @@ public class WCryptUtil {
 		// 字符串排序
 		Arrays.sort(array);
 		String str = StringUtils.join(array, "");
-		return DigestUtils.sha1Hex(str);
+		return DigestUtils.shaHex(str);
 	}
 
 	/**

@@ -93,14 +93,12 @@ public class UserCenterController {
 	 */
 	
 	@RequestMapping(value="collected_consultants.do")
-	@PowerCheck
-	public void collectedConsultant(HttpServletRequest request,HttpServletResponse response) throws IOException{
+	public void collectedConsultant(HttpServletRequest request,HttpServletResponse response,String openId) throws IOException{
 		logger.info("---用户收藏过的咨询师页面----");
 		//重新从数据库查询一遍，防止刚登陆用户看不到收藏过的咨询师数据
-		UserInfo user=SessionUtil.getLoginUserToSession(request);
 		UserQueryRequestDto uqrDto=new UserQueryRequestDto();
-		uqrDto.setOpenId(user.getOpenId());
-		user=userFacade.queryOne(uqrDto);
+		uqrDto.setOpenId(openId);
+		UserInfo user=userFacade.queryOne(uqrDto);
 		ConsultantQueryResponseDto  cqrDto=consultantFacade.queryByIds(user.getCollected());
 		try{
 			String res=JsonUtil.getJsonByConsultantQueryResponseDto(cqrDto, "password","alipay");
@@ -282,51 +280,54 @@ public class UserCenterController {
 		return response_page;
 	}
 	 // 获取验证码
-    @RequestMapping("getCheckCodeApi.do")
-    @PowerCheck
-    public ModelAndView getCheckCode(@RequestParam(value = "phone", required = true) String phone) {
-        logger.info("getCheckCodeApi.do, phone={}", phone);
-        // 获取验证码
-        BaseResponseDto responseDto = codeFacade.sendCode(phone);
-        Map<String, Object> map = Maps.newHashMap();
-        map.put("status", responseDto.getReturnCode());
-        map.put("message", responseDto.getReturnMessage());
-        return new ModelAndView(new MappingJackson2JsonView(), map);
-    }
+//	@PowerCheck(type=PowerCheckEnum.LOGIN)
+    @RequestMapping(value="getCheckCodeApi.do")
+	public ModelAndView getCheckCode(HttpServletRequest request,
+			HttpServletResponse response, String phone) throws IOException {
+		logger.info("--获取验证码getCheckCodeApi.do, phone={}", phone);
+		// 获取验证码
+		BaseResponseDto responseDto = codeFacade.sendCode(phone);
+		logger.info("--调用发送短信结果：" + responseDto.getReturnCode());
+//		ResponseUtils.renderJsonText(response,
+//				JsonUtil.getJsonText(responseDto));
+		Map<String,Object> map=Maps.newHashMap();
+		map.put("returnCode", responseDto.getReturnCode());
+		map.put("returnMessage", responseDto.getReturnMessage());
+		return new ModelAndView(new MappingJackson2JsonView(),map);
+	}
+//    @PowerCheck
+	@RequestMapping(value="bindPhone.do")
+	public ModelAndView bindPhone(HttpServletRequest request,
+			HttpServletResponse response, String checkCode, String phone,String openId)
+			throws IOException {
 
-	@RequestMapping("bindPhone.do")
-	@PowerCheck
-	public ModelAndView bindPhone(
-			HttpServletRequest request,
-			HttpServletResponse response,
-			@RequestParam(value = "checkCode", required = true) String checkCode,
-			@RequestParam(value = "phone", required = true) String phone) {
-		
-		logger.info("bindPhone.do,phone={},checkCode={}", phone, checkCode);
+		logger.info("bindPhone.do,phone={},checkCode={},openId={}", phone, checkCode,openId);
 		CodeInfo codeInfo = new CodeInfo();
 		codeInfo.setCode(checkCode);
 		codeInfo.setPhone(phone);
 		Map<String, Object> map = Maps.newHashMap();
 		BaseResponseDto responseDto = codeFacade.checkCode(codeInfo);
 		if (!responseDto.isSuccess()) {
-			map.put("status", responseDto.getReturnCode());
-			map.put("message", responseDto.getReturnMessage());
-			return new ModelAndView(new MappingJackson2JsonView(), map);
+			map.put("returnCode", responseDto.getReturnCode());
+			map.put("returnMessage", responseDto.getReturnMessage());
+			return new ModelAndView(new MappingJackson2JsonView(),map);
 
 		}
 		logger.info("----用户绑定手机，验证码通过---");
-		UserInfo user = SessionUtil.getLoginUserToSession(request);
+		UserQueryRequestDto uqrDto = new UserQueryRequestDto();
+		uqrDto.setOpenId(openId);
+		UserInfo user = userFacade.queryOne(uqrDto);
 		if (user == null) {
-			map.put("status", -1);
-			map.put("message", "用户未登录或登录超时");
-			return new ModelAndView(new MappingJackson2JsonView(), map);
+			map.put("returnCode", responseDto.getReturnCode());
+			map.put("returnMessage", responseDto.getReturnMessage());
+			return new ModelAndView(new MappingJackson2JsonView(),map);
 		}
 		user.setPhone(phone);
 		user.setIsBind(YesOrNoEnum.YES);
 		responseDto = userFacade.update(user);
-		map.put("status", responseDto.getReturnCode());
-		map.put("message", responseDto.getReturnMessage());
-		return new ModelAndView(new MappingJackson2JsonView(), map);
+		map.put("returnCode", responseDto.getReturnCode());
+		map.put("returnMessage", responseDto.getReturnMessage());
+		return new ModelAndView(new MappingJackson2JsonView(),map);
 	}
 
 }

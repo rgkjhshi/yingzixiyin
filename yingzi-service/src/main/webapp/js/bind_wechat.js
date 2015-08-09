@@ -7,20 +7,23 @@
 (function(){
 	var checkPhone = function(phone){
 		var reg = /^1\d{10}$/;
-
-		if(!re.test(phone)){
+		if(!reg.test(phone)){
 			return false;
 		}else{
 			return true;
 		}
+		
 	}
 
 	var getCode = function(phone) {
-		var phone = '';
-		var url = '<%=path %>/user/getCheckCodeApi.do';
+		var phone = $.trim($("#phone").val());
+		var url = $(this).attr("data-url");
+//		alert("phone:"+phone+"\nurl="+url);
 		if(checkPhone(phone)){
-			$.post(url,{'phone':phone},function(data){
-				if(data.status == 0){
+			$.post(url,{'phone':phone},function(_data){
+				var data=$.parseJSON(_data);
+				if(data.returnCode == 0||data.returnCode == "0"){
+					
 					// 按钮处理
 					$("#phone").attr("disabled", "disabled");
         			$("#getcode").html("<span id='count'>60</span> 秒后重新获取").unbind("click");
@@ -37,7 +40,7 @@
 			        var countdown = setInterval(timedown, "1000");
 					// alert("已发送");
 				}else{
-					alert(data.message);
+					alert(data.returnMessage);
 					$("#phone").val("");
 				}
 			});
@@ -49,21 +52,25 @@
 	var bindPhone = function(){
 		var phone = $.trim($("#phone").val());
 		var code = $.trim($("#code").val());
+		var openId = $.trim($("#openId").val());
 		var url = window.location.href;
+		alert(url);
 		var para = url.split('?')[1].split('&');
+		var postUrl = $(this).attr("data-url");
 		var l = para.length;
-		var obj;
+		var obj={};
 		for(var i = 0;i<l;i++){
 			obj[para[i].split('=')[0]] = para[i].split('=')[1];
 		}
-		var to = "consultant_"+obj["type"]+".do?consultant_id="+obj["id"]; 
+		var to = "/consultant_"+obj["type"]+".do?consultant_id="+obj["id"]; 
 		if(checkPhone(phone)){
-			$.post("<%=path %>/user/bindPhone.do",{'phone':phone,'checkCode':code},function(data){
-				if(data.status == 0){
+			$.post(postUrl,{'phone':phone,'checkCode':code,'openId':openId},function(_data){
+				var data=$.parseJSON(_data);
+				if(data.returnCode == 0||data.returnCode == "0"){
 					alert("绑定成功，正在为您跳转");
 					window.location.href = to;
 				}else{
-					alert(data.message);
+					alert(data.returnMessage);
 				}
 			});
 		}else{

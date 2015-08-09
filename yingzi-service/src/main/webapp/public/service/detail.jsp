@@ -86,11 +86,10 @@
         var url = "";
         var to = "consultant_"+type+".do?consultant_id="+id;
         var isbind = "${WX_LOGIN_USER.isBind.value}";
-        console.log(isbind);
-        if(isbind!=""&&isbind!=null&&isbind){
+        if(isbind=="1"){
             window.location.href = to;
         }else{
-            window.location.href = "/weixin/public/service/bind.jsp?id="+id+"&type="+type;
+            window.location.href = "/weixin/public/service/bind.jsp?id="+id+"&type="+type+"&openId=${WX_LOGIN_USER.openId}";
         }
     }
 

@@ -51,10 +51,11 @@ public class PowerCheckInterceptor extends HandlerInterceptorAdapter {
 				UserInfo user = SessionUtil.getLoginUserToSession(request);
 				if (user == null) {
 					BaseResponseDto brDto = new BaseResponseDto();
-					brDto.setReturnCode(0);
+					brDto.setReturnCode(-1);
 					brDto.setReturnMessage("未登录，请从微信客户端访问");
 					String res = JsonUtil.getJsonText(brDto);
 					ResponseUtils.renderJsonText(response, res);
+					logger.info("----用户微信登录为空，进行拦截--");
 					return false;
 				}
 			} else if (pce.getId() == PowerCheckEnum.POWER.getId()) {
