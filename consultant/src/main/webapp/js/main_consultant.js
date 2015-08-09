@@ -25,6 +25,7 @@
             "tel": [/^1\d{10}$/, "请输入正确的" + tip],
             "pwd": [/^[\d_a-zA-Z]{6,12}$/, "请输入6-12位包含数字、字母或下划线的密码"],
             "notnull": [/\S+/, tip + "不能为空"],
+            "tooless": [/\S+/, tip + "不能为空"],
             "email": [/^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$/, tip + "格式不正确"],
             "number": [/^\d+(\.\d+)?$/, "请输入正确的" + tip],
             "default": [/\S+/, "不能为空"]
@@ -36,6 +37,15 @@
                 $("#pwd2").siblings(".tips").text("两次输入的密码不一致");
                 return false;
             } else {
+                return true;
+            }
+        } else if(vid == "introduce"){
+            var content = $.trim($("#introduce").val());
+            var l = content.length;
+            if(l<150){
+                alert("个人简介不得少于150字！");
+                return false;
+            }else{
                 return true;
             }
         } else {

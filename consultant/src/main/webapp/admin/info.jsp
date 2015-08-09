@@ -28,13 +28,13 @@
                         </div>
                     </div>
                     <form id="infoform">
-                        <div>
+                        <!-- <div>
                             <div class="sign_title">昵称：</div>
                             <div class="sign_content">
                                 <input type="text" data-validate="notnull" data-tip="昵称" name="nickname" id="nickname" />
                                 <span class="tips"></span>
                             </div>
-                        </div>
+                        </div> -->
                         <div>
                             <div class="sign_title">真实姓名：</div>
                             <div class="sign_content">
@@ -97,20 +97,6 @@
                             </div>
                         </div>
                         <div>
-                            <div class="sign_title">专业背景：</div>
-                            <div class="sign_content">
-                                <textarea class="form_border" name="professional" data-validate="notnull" data-tip="专业背景" id="professional"></textarea>
-                                <span class="tips"></span>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="sign_title">受训背景：</div>
-                            <div class="sign_content">
-                                <textarea class="form_border" name="background" data-validate="notnull" data-tip="受训背景" id="background"></textarea>
-                                <span class="tips"></span>
-                            </div>
-                        </div>
-                        <div>
                             <div class="sign_title">咨询范围：</div>
                             <div class="sign_content">
                                 <select name="rangeType">
@@ -121,9 +107,37 @@
                             </div>
                         </div>
                         <div>
-                            <div class="sign_title">咨询单价：</div>
+                            <div class="sign_title">文字咨询：</div>
+                            <div class="sign_content" style="font-size:0.85rem;">
+                                <input id="price" name="price" readonly="readonly" disabled="disabled" type="text" data-validate="number" data-tip="咨询单价" style="width:20px;"/>&nbsp;&nbsp;元/次
+                                <span class="tips"></span>
+                            </div>
+                        </div>
+                        <!--<div>
+                            <div class="sign_title">视频咨询：</div>
+                            <div class="sign_content" style="font-size:0.85rem;">
+                                <input id="videoprice" name="videoprice" type="text" data-validate="number" data-tip="视频咨询单价" style="width:40px;"/>&nbsp;&nbsp;元/次
+                                <span class="tips"></span>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="sign_title">面对面咨询：</div>
+                            <div class="sign_content" style="font-size:0.85rem;">
+                                <input id="faceprice" name="faceprice" type="text" data-validate="number" data-tip="面对面咨询单价" style="width:40px;"/>&nbsp;&nbsp;元/次
+                                <span class="tips"></span>
+                            </div>
+                        </div>-->
+                        <div>
+                            <div class="sign_title">专业背景：</div>
                             <div class="sign_content">
-                                <input id="price" name="price" type="text" data-validate="number" data-tip="咨询单价" />
+                                <textarea class="form_border" name="professional" data-validate="notnull" data-tip="专业背景" id="professional"></textarea>
+                                <span class="tips"></span>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="sign_title">受训背景：</div>
+                            <div class="sign_content">
+                                <textarea class="form_border" name="background" data-validate="notnull" data-tip="受训背景" id="background"></textarea>
                                 <span class="tips"></span>
                             </div>
                         </div>
@@ -144,7 +158,7 @@
                         <div>
                             <div class="sign_title">个人简介：</div>
                             <div class="sign_content">
-                                <textarea class="form_border" name="introduce" data-validate="notnull" data-tip="个人简介" id="introduce"></textarea>
+                                <textarea class="form_border" name="introduce" data-validate="notnull" data-tip="个人简介" id="introduce" style="height:13em;"></textarea>
                                 <span class="tips"></span>
                             </div>
                         </div>
