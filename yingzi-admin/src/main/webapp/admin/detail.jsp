@@ -28,13 +28,15 @@
                         <tr><th>姓名</th><td>${cinfo.name }</td></tr>
                         <tr><th>性别</th><td>${cinfo.gender.desc }</td></tr>
                         <tr><th>手机号码</th><td>${cinfo.phone }</td></tr>
-                        <tr><th>昵称</th><td>${cinfo.nickname }</td></tr>
-                     <!--    <tr><th>真实姓名</th><td></td></tr> -->
+                        <!-- <tr><th>昵称</th><td>${cinfo.nickname }</td></tr> -->
+                        <!-- <tr><th>真实姓名</th><td></td></tr> -->
                         <tr><th>年龄</th><td>${cinfo.age }</td></tr>
                         <tr><th>E-mail</th><td>${cinfo.email }</td></tr>
                         <tr><th>支付宝账号</th><td>${cinfo.alipay }</td></tr>
                         <tr><th>咨询范围</th><td>${cinfo.rangeType.desc }</td></tr>
-                        <tr><th>咨询单价</th><td><fmt:formatNumber value="${cinfo.price }" pattern="##.##" minFractionDigits="2"></fmt:formatNumber></td></tr>
+                        <tr><th>聊天咨询</th><td><fmt:formatNumber value="${cinfo.price }" pattern="##.##" minFractionDigits="2"></fmt:formatNumber></td></tr>
+                        <tr><th>视频咨询</th><td><fmt:formatNumber value="${cinfo.videoprice }" pattern="##.##" minFractionDigits="2"></fmt:formatNumber></td></tr>
+                        <tr><th>面对面咨询</th><td><fmt:formatNumber value="${cinfo.faceprice }" pattern="##.##" minFractionDigits="2"></fmt:formatNumber></td></tr>
                         <tr><th>专业背景</th><td><textarea id="professional">${cinfo.professional }</textarea></td></tr>
                         <tr><th>受训背景</th><td><textarea id="background">${cinfo.background }</textarea></td></tr>
                         <tr><th>可预约时间</th><td><textarea id="bookTime">${cinfo.bookTime}</textarea></td></tr>
