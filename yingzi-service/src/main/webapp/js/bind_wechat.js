@@ -17,14 +17,28 @@
 
 	var getCode = function(phone) {
 		var phone = '';
+		var url = '<%=path %>/user/getCheckCodeApi.do';
 		if(checkPhone(phone)){
 			$.post(url,{'phone':phone},function(data){
 				if(data.status == 0){
 					// 按钮处理
-					// ……
-					alert("已发送");
+					$("#phone").attr("disabled", "disabled");
+        			$("#getcode").html("<span id='count'>60</span> 秒后重新获取").unbind("click");
+					// 倒计时
+			        var count = $("#count");
+			        var timedown = function () {
+			            var text = Number(count.text()) - 1;
+			            count.text(text);
+			            if (text == 0) {
+			                clearInterval(countdown);
+			                $("#getcode").html("获取验证码").bind("click", getCode);
+			            }
+			        }
+			        var countdown = setInterval(timedown, "1000");
+					// alert("已发送");
 				}else{
 					alert(data.message);
+					$("#phone").val("");
 				}
 			});
 		}else{
@@ -33,8 +47,8 @@
 	}
 
 	var bindPhone = function(){
-		var phone = '';
-		var code = '';
+		var phone = $.trim($("#phone").val());
+		var code = $.trim($("#code").val());
 		var url = window.location.href;
 		var para = url.split('?')[1].split('&');
 		var l = para.length;
@@ -44,7 +58,7 @@
 		}
 		var to = "consultant_"+obj["type"]+".do?consultant_id="+obj["id"]; 
 		if(checkPhone(phone)){
-			$.post(url,{'phone':phone,'code':code},function(data){
+			$.post("<%=path %>/user/bindPhone.do",{'phone':phone,'checkCode':code},function(data){
 				if(data.status == 0){
 					alert("绑定成功，正在为您跳转");
 					window.location.href = to;

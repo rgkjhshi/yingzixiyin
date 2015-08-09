@@ -25,7 +25,7 @@
 </head>
 <body>
     <c:if test="${consultant!=null}">
-    	<div class="main">
+    	<div class="main" style="padding-bottom:50px;">
 	        <ul class="consultants layout">
 	            <li class="items">
 	            	<a href="#">

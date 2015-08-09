@@ -27,7 +27,7 @@
 	<div class="main">
 		<div class="warntips"><i></i>您还未绑定手机</div>
 		<div class="bind_input">
-			<input type="text" placeholder="11位手机号码" maxlength="11"/>
+			<input type="text" id="phone" placeholder="11位手机号码" maxlength="11"/>
 			<span id="getcode">获取验证码</span>
 		</div>
 		<div class="bind_input">
