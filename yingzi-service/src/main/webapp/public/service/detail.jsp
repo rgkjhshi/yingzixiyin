@@ -89,7 +89,7 @@
         if(isbind=="1"){
             window.location.href = to;
         }else{
-            window.location.href = "/weixin/public/service/bind.jsp?id="+id+"&type="+type+"&openId=${WX_LOGIN_USER.openId}";
+            window.location.href = "<%=path%>/public/service/bind.jsp?id="+id+"&type="+type+"&openId=${WX_LOGIN_USER.openId}";
         }
     }
 

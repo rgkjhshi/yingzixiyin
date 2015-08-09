@@ -280,7 +280,7 @@ public class UserCenterController {
 		return response_page;
 	}
 	 // 获取验证码
-//	@PowerCheck(type=PowerCheckEnum.LOGIN)
+	@PowerCheck(type=PowerCheckEnum.LOGIN)
     @RequestMapping(value="getCheckCodeApi.do")
 	public ModelAndView getCheckCode(HttpServletRequest request,
 			HttpServletResponse response, String phone) throws IOException {
@@ -295,7 +295,7 @@ public class UserCenterController {
 		map.put("returnMessage", responseDto.getReturnMessage());
 		return new ModelAndView(new MappingJackson2JsonView(),map);
 	}
-//    @PowerCheck
+    @PowerCheck
 	@RequestMapping(value="bindPhone.do")
 	public ModelAndView bindPhone(HttpServletRequest request,
 			HttpServletResponse response, String checkCode, String phone,String openId)
