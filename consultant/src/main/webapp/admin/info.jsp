@@ -169,13 +169,8 @@
                                 <span class="tips"></span>
                             </div>
                         </div>
-                        <div style="display:none">
-                            <div class="sign_title">审核状态：</div>
-                            <div class="sign_content">
-                                <input class="form_border" name="status" id="status" value="" />
-                                <!-- <span class="tips"></span> -->
-                            </div>
-                        </div>
+                        <input class="form_border" name="status" type="hidden" id="status" />
+                        
 
                     </form>
                     <div class="btn" id="moreinfo">保存</div>

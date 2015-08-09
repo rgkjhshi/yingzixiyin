@@ -233,6 +233,7 @@
                 } else if(_data.status=="3"||_data.status==3){
                     $(".uc-tips-ctn").text("抱歉，您的信息审核未通过，请联系客服");
                 }
+                $("#status").val(_data.status);
                 for(var i in _data){
                     if(i=="gender"){
                         $("input[name=gender][value="+_data[i]+"]").attr("checked","checked");
@@ -247,7 +248,8 @@
                     }else if(i=="rangeType"){
                         $("select[name=rangeType] option[value="+_data[i]+"]").attr("selected",true);
                     }else if(i=="status"){
-                        $("#status").val(_data["status"]);
+                    	console.log(_data.status);
+                        
                     }else{
                         if($("#"+i)&&$("#"+i).length>0){
                             $("#"+i).val(_data[i]);

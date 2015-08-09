@@ -19,6 +19,8 @@
             background          AS background,
             book_time           AS bookTime,
             price               AS price,
+            faceprice           AS faceprice,
+            videoprice          AS videoprice,
             introduce           AS introduce,
             signature           AS signature,
             range_type          AS rangeType,

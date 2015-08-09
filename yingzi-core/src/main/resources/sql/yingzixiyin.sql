@@ -38,7 +38,7 @@ CREATE TABLE `consultant` (
   `faceprice` decimal(13,2) DEFAULT NULL COMMENT '线下咨询价格',
   `videoprice` decimal(13,2) DEFAULT NULL COMMENT '视频咨询价格',
   `price` decimal(13,2) NOT NULL DEFAULT '59.00' COMMENT '咨询单价',
-  `introduce` varchar(255) NOT NULL DEFAULT '' COMMENT '个人简介',
+  `introduce` varchar(1024) NOT NULL DEFAULT '' COMMENT '个人简介',
   `signature` varchar(255) NOT NULL DEFAULT '' COMMENT '个人签名',
   `avatar` varchar(255) NOT NULL DEFAULT '' COMMENT '头像url',
   `range_type` tinyint(4) NOT NULL DEFAULT '0' COMMENT '咨询师可咨询的范围类型',
