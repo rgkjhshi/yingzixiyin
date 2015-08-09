@@ -28,6 +28,7 @@
 			type:"post",
 			data:{"gender":gender,"age":age,"ctype":ctype},
 			success:function(data){
+				$("#choose_layer").hide();
 				$("#choose_dialog").hide();
 				data = $.parseJSON(data);
 				if(data.returnCode==0){
@@ -52,6 +53,7 @@
 				}
 			},
 			error:function(){
+				$("#choose_layer").hide();
 				$("#choose_dialog").hide();
 				alert("对不起，出错啦！");
 			}
