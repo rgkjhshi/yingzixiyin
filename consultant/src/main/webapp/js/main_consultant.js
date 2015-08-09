@@ -161,6 +161,11 @@
             $(".gender_tips").text("请选择您的性别");
             return;
         }
+        //检查是否更改价格、地址信息
+        $("#videoprice,#faceprice,#address").on("change",function(){
+            $("#status").val("1");
+            alert("您修改了价格或地址信息，需要管理员重新审核，请耐心等待");
+        });
         //检查数据
         if (check("nickname") && check("name") && check("age") && check("email") && check("alipay") && check("professional") && check("background") && check("price") && check("bookTime") && check("address") && check("introduce") && check("signature")) {
 
@@ -242,7 +247,7 @@
                     }else if(i=="rangeType"){
                         $("select[name=rangeType] option[value="+_data[i]+"]").attr("selected",true);
                     }else if(i=="status"){
-                        console.log(_data[i]);
+                        $("#status").val(_data["status"]);
                     }else{
                         if($("#"+i)&&$("#"+i).length>0){
                             $("#"+i).val(_data[i]);

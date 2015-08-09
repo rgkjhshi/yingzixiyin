@@ -170,9 +170,9 @@
                             </div>
                         </div>
                         <div style="display:none">
-                            <div class="sign_title">个性签名：</div>
+                            <div class="sign_title">审核状态：</div>
                             <div class="sign_content">
-                                <input class="form_border" name="status" id="status" value="1" />
+                                <input class="form_border" name="status" id="status" value="" />
                                 <!-- <span class="tips"></span> -->
                             </div>
                         </div>
