@@ -275,4 +275,17 @@
         infoQuery();
     }
 
+    // 头像上传
+    var uploadimg = function(){
+        var path = console.log($("#filepath").val());
+        if(path!=""){
+            document.getElementById("avatarform").submit();
+        }else{
+            console.log("头像不能为空");
+        }
+    }
+
+    $("#upload_btn").on("click",uploadimg);
+
+
 })();

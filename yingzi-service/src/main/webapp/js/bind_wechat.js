@@ -26,7 +26,7 @@
 					
 					// 按钮处理
 					$("#phone").attr("disabled", "disabled");
-        			$("#getcode").html("<span id='count'>60</span> 秒后重新获取").unbind("click");
+        			$("#getcode").html("<i id='count'>60</i> 秒后重新获取").unbind("click");
 					// 倒计时
 			        var count = $("#count");
 			        var timedown = function () {

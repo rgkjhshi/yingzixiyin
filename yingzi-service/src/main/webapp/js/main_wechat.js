@@ -22,40 +22,30 @@
 		var gender = $("input[name='gender']:checked").val();
 		var age = $("input[name='age']:checked").val();
 		var ctype = $("#ctype").val();
-		$.ajax({
-			url:"query_consultants.do",
-			async:true,
-			type:"post",
-			data:{"gender":gender,"age":age,"ctype":ctype},
-			success:function(data){
-				$("#choose_layer").hide();
-				$("#choose_dialog").hide();
-				data = $.parseJSON(data);
-				if(data.returnCode==0){
-					$("#consultant_list").empty();
-					if((!data.list)||data.list.length==0){
-						$("#consultant_list").append("没有符合条件的咨询师噢！");
-					}else{
-						var l = data.list.length;
-						var tpl = "";
-						for(var i = 0;i<l;i++){
-							var _data = data.list[i];
-							var _avatar = _data.avatar;
-							if(_avatar==""||_avatar==null){
-								_avatar = "../images/test.png";
-							}
-							tpl += '<li class="items"><a href="consultant_deatil.do?id='+_data.id+'"><img src="'+_avatar+'"><div class="info"><div class="name nameall">'+_data.name+'</div><div class="desc descall">'+_data.introduce+'</div></div></a></li>'
-						}
-						$("#consultant_list").append(tpl);
-					}
+		$.post("query_consultants.do",{"gender":gender,"age":age,"ctype":ctype},function(data){
+			$("#choose_layer").hide();
+			$("#choose_dialog").hide();
+			data = $.parseJSON(data);
+			if(data.returnCode==0||data.returnCode=="0"){
+				console.log("gaga");
+				$("#consultant_list").empty();
+				if((!data.list)||data.list.length==0){
+					$("#consultant_list").append("没有符合条件的咨询师噢！");
 				}else{
-					alert("查询异常，请重试。");
+					var l = data.list.length;
+					var tpl = "";
+					for(var i = 0;i<l;i++){
+						var _data = data.list[i];
+						var _avatar = _data.avatar;
+						if(_avatar==""||_avatar==null){
+							_avatar = "../images/test.png";
+						}
+						tpl += '<li class="items"><a href="consultant_deatil.do?id='+_data.id+'"><img src="'+_avatar+'"><div class="info"><div class="name nameall">'+_data.name+'</div><div class="desc descall">'+_data.age+'岁，¥ '+_data.videoprice+'元/次，地址：'+_data.address+'</div></div><div class="sig">签名：'+_data.signature+'</div></a></li>'
+					}
+					$("#consultant_list").append(tpl);
 				}
-			},
-			error:function(){
-				$("#choose_layer").hide();
-				$("#choose_dialog").hide();
-				alert("对不起，出错啦！");
+			}else{
+				alert("查询异常，请重试。");
 			}
 		});
 	});

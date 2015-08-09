@@ -41,7 +41,7 @@
                         <tr><th>受训背景</th><td><textarea id="background">${cinfo.background }</textarea></td></tr>
                         <tr><th>可预约时间</th><td><textarea id="bookTime">${cinfo.bookTime}</textarea></td></tr>
                         <tr><th>地址</th><td><textarea id="address">${cinfo.address }</textarea></td></tr>
-                        <tr><th>个人简介</th><td><textarea id="introduce">${cinfo.introduce }</textarea></td></tr>
+                        <tr><th>个人简介</th><td><textarea id="introduce" style="height:13em">${cinfo.introduce }</textarea></td></tr>
                         <tr><th>个性签名</th><td><textarea id="signature">${cinfo.signature }</textarea></td></tr>
                         <tr><th>状态</th><td id="status" data-status="${cinfo.status.value }">${cinfo.status.desc }</td></tr>
                     </table>

@@ -40,14 +40,29 @@
 	            		<div class="info">
 	            			<div class="name">${consultant.name }</div>
 	            			<div class="desc">
-	            				${consultant.signature}
+	            				地址：${consultant.address}<br/>¥ ${consultant.videoprice} 元/次
 	            			</div>
 	            		</div>
+	            		<div class="sig">这里是咨询特长</div>
 	            	</a>
 	            </li>
 	            <li>
 	            	<div class="sub">个人简介</div>
-	            	<div class="moreinfo">${consultant.introduce}</div>
+	            	<div class="moreinfo" style="height:9em;overflow:hidden;">${consultant.introduce}</div>
+	            	<div id="showmore" style="color:#307CD6;" data-type="more">阅读更多</div>
+	            	<script>
+	            		function showmore(){
+	            			var type = $(this).attr("data-type");
+	            			if(type=="more"){
+	            				$(".moreinfo").css("height","auto");
+	            				$("#showmore").text("收起").attr("data-type","less");
+	            			}else if(type=="less"){
+	            				$(".moreinfo").css("height","9em");
+	            				$("#showmore").text("阅读更多").attr("data-type","more");
+	            			}
+	            		}
+	            		$("#showmore").on("click",showmore);
+	            	</script>
 	            </li>
 	            <li>
 	            	<div class="sub">咨询类型</div>
@@ -67,11 +82,15 @@
 	            </li>
 	            <li>
 	            	<div class="sub">咨询价格</div>
-	            	<div class="moreinfo">线上聊天咨询：${consultant.price} 元/次</div>
+	            	<div class="moreinfo">线上聊天咨询：${consultant.price} 元/次<br/>视频咨询：${consultant.videoprice} 元/次<br/>面对面咨询：${consultant.faceprice} 元/次</div>
+	            </li>
+	            <li>
+	            	<div class="sub">个性签名</div>
+	            	<div class="moreinfo">${consultant.signature}</div>
 	            </li>
 	            <li style="margin:40px 0;">
-	    			<a class="choose_btn" id="onlinebtn" data-type="online" data-id="${consultant.id}">发起咨询</a>
-	    			<a class="choose_btn" id="offlinebtn" data-type="offline" data-id="${consultant.id}">面对面咨询</a>
+	    			<a class="choose_btn" id="onlinebtn" data-type="online" data-id="${consultant.id}">线上聊天咨询</a>
+	    			<a class="choose_btn" id="offlinebtn" data-type="offline" data-id="${consultant.id}">预约面对面</a>
 	    		</li>
 	        </ul>
 	    </div> 

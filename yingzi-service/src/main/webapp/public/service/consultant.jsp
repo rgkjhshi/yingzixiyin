@@ -41,8 +41,9 @@
             	' />
             		<div class="info">
             			<div class="name nameall">${cinfo.name }</div>
-            			<div class="desc descall">${cinfo.introduce}</div>
+            			<div class="desc descall">${cinfo.age}岁，¥ ${cinfo.videoprice}&nbsp;元/次，地址：${cinfo.address}</div>
             		</div>
+                    <div class="sig">签名：${cinfo.signature}</div>
             	</a>
             </li>
         </c:forEach>

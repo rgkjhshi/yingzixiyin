@@ -104,11 +104,14 @@ a{text-decoration: none;color:#333;}
 	border-radius: 2px;
 	display: block;
 }
-.consultants .items{
+.consultants li{
+	margin:30px 0;
+}
+.consultants li.items{
 	overflow: hidden;
-    margin-bottom: 30px;
-    height: 100px;
-    border-bottom: 1px dashed #1D71D5;
+    margin-bottom: 0;
+    min-height: 100px;
+    /*border-bottom: 1px dashed #1D71D5;*/
     padding-bottom: 20px;
     box-sizing: content-box;
 }
@@ -120,7 +123,7 @@ a{text-decoration: none;color:#333;}
 .consultants a .info{
 	padding-left: 114px;
 	/*font-size: 0.85rem;*/
-	height:100px;
+	min-height:100px;
 }
 .consultants a .name{
 	font-size: 1.4rem;
@@ -132,16 +135,26 @@ a{text-decoration: none;color:#333;}
 	height:20px;line-height:20px;font-size:1em;margin-bottom:10px;
 }
 .consultants a .desc{
-	height:49px;
+	min-height:49px;
 	overflow:hidden;
 	color:#777;
 	font-size: 15px;
 }
-.consultants a .descall{
-	height:72px;line-height:24px;
+.consultants a .sig{
+	margin-top: 10px;
+    color: #777;
+    font-size: 15px;
+    line-height: 24px;
+    padding: 5px 0;
+    border-top: 1px solid #999;
+    border-bottom: 1px solid #999;
+    max-height: 48px;
+    overflow: hidden;
+    word-wrap: break-word;
+    word-break: break-all;
 }
-.consultants li{
-	margin:30px 0;
+.consultants a .descall{
+	min-height:72px;line-height:24px;
 }
 .choose_dialog{
 	position: fixed;
