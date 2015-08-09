@@ -1,5 +1,7 @@
 package com.yingzixiyin.core.facade;
 
+import java.math.BigDecimal;
+
 import com.yingzixiyin.api.dto.BaseResponseDto;
 import com.yingzixiyin.api.dto.ConsultantInfo;
 import com.yingzixiyin.api.dto.ConsultantQueryRequestDto;
@@ -27,7 +29,7 @@ public class ConsultantFacadeTest extends BaseTest {
     @Resource
     ConsultantFacade consultantFacade;
 
-/*    @Test
+   @Test
     public void addTest() {
 //        ConsultantInfo info = new ConsultantInfo();
 //        info.setPhone("13121435540");
@@ -41,7 +43,8 @@ public class ConsultantFacadeTest extends BaseTest {
     public void updateTest() {
         ConsultantInfo info = new ConsultantInfo();
         info.setId(1L);
-        info.setStatus(StatusEnum.ACCEPTED);
+        info.setVideoprice(new BigDecimal("150"));
+        info.setFaceprice(new BigDecimal("300"));
         BaseResponseDto responseDto =  consultantFacade.update(info);
         logger.info(responseDto.toString());
     }
@@ -56,10 +59,10 @@ public class ConsultantFacadeTest extends BaseTest {
 
     @Test
     public void getConsultantListByIdsTest() {
-        String ids = "1 ,2, ,4 ,";
+        String ids = "1 ,2, 3,4 ,5";
         ConsultantQueryResponseDto responseDto =  consultantFacade.queryByIds(ids);
         logger.info(responseDto.toString());
-    }*/
+    }
     @Test
     public void queryPage(){
     	logger.info("-----查询分页结果---");

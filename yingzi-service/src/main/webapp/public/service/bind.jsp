@@ -35,7 +35,7 @@
 			<input type="text" id="code" placeholder="输入短信验证码" />
 		</div>
 		<div class="bind_btn">
-			<a id="bindphone" data-url="<%=path %>/user/bindPhone.do">绑定手机</a>
+			<a id="bindphone" data-url="<%=path %>/user/bindPhone.do" data-goto="<%=path %>/consultant/consultant_">绑定手机</a>
 			<input id="openId" type="hidden" value="<%=openId%>">
 		</div>
     </div>

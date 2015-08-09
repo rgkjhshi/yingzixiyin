@@ -95,6 +95,12 @@
         <if test="price != null">
             ,price
         </if>
+        <if test="faceprice != null">
+            ,faceprice
+        </if>
+        <if test="videoprice != null">
+            ,videoprice
+        </if>
         <if test="introduce != null">
             ,introduce
         </if>
@@ -151,6 +157,12 @@
         </if>
         <if test="price != null">
             ,#{price}
+        </if>
+        <if test="faceprice != null">
+            ,#{faceprice}
+        </if>
+         <if test="videoprice != null">
+            ,#{videoprice}
         </if>
         <if test="introduce != null">
             ,#{introduce}
@@ -211,6 +223,12 @@
             </if>
             <if test="price != null">
                 price = #{price},
+            </if>
+            <if test="faceprice != null">
+                faceprice = #{faceprice},
+            </if>
+            <if test="videoprice != null">
+                videoprice = #{videoprice},
             </if>
             <if test="introduce != null">
                 introduce = #{introduce},

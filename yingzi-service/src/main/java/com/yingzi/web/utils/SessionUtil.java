@@ -19,6 +19,6 @@ public class SessionUtil {
 	}
 
 	public static UserInfo getLoginUserToSession(HttpServletRequest request) {
-		return (UserInfo) request.getSession().getAttribute(LOGIN_USER_KEY);
+		return (UserInfo) request.getSession(false).getAttribute(LOGIN_USER_KEY);
 	}
 }

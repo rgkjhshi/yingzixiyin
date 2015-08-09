@@ -54,7 +54,7 @@
 		var code = $.trim($("#code").val());
 		var openId = $.trim($("#openId").val());
 		var url = window.location.href;
-		alert(url);
+//		alert(url);
 		var para = url.split('?')[1].split('&');
 		var postUrl = $(this).attr("data-url");
 		var l = para.length;
@@ -62,7 +62,7 @@
 		for(var i = 0;i<l;i++){
 			obj[para[i].split('=')[0]] = para[i].split('=')[1];
 		}
-		var to = "/consultant_"+obj["type"]+".do?consultant_id="+obj["id"]; 
+		var to = $("#bindphone").attr("data-goto")+obj["type"]+".do?consultant_id="+obj["id"]+"&openId="+openId; 
 		if(checkPhone(phone)){
 			$.post(postUrl,{'phone':phone,'checkCode':code,'openId':openId},function(_data){
 				var data=$.parseJSON(_data);

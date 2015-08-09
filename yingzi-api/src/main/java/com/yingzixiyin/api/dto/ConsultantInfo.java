@@ -31,6 +31,8 @@ public class ConsultantInfo implements Serializable {
     private String background;     // 受训背景
     private String bookTime;       // 可预定时间
     private BigDecimal price;      // 咨询单价
+    private BigDecimal faceprice;      // 咨询单价
+    private BigDecimal videoprice;      // 咨询单价
     private String introduce;      // 个人简介
     private String signature;      // 个性签名
     private RangeTypeEnum rangeType;     // 咨询类型
@@ -189,7 +191,23 @@ public class ConsultantInfo implements Serializable {
         this.status = status;
     }
 
-    public static Map<String, Object> toMap(ConsultantInfo info) {
+    public BigDecimal getFaceprice() {
+		return faceprice;
+	}
+
+	public void setFaceprice(BigDecimal faceprice) {
+		this.faceprice = faceprice;
+	}
+
+	public BigDecimal getVideoprice() {
+		return videoprice;
+	}
+
+	public void setVideoprice(BigDecimal videoprice) {
+		this.videoprice = videoprice;
+	}
+
+	public static Map<String, Object> toMap(ConsultantInfo info) {
         if (null == info) {
             return null;
         }
@@ -207,6 +225,8 @@ public class ConsultantInfo implements Serializable {
         map.put("background", info.getBackground());
         map.put("bookTime", info.getBookTime());
         map.put("price", info.getPrice());
+        map.put("videoprice", info.getVideoprice());
+        map.put("faceprice", info.getFaceprice());
         map.put("introduce", info.getIntroduce());
         map.put("signature", info.getSignature());
         map.put("rangeType", null == info.getRangeType() ? 0 : info.getRangeType().getValue());
@@ -215,7 +235,21 @@ public class ConsultantInfo implements Serializable {
         return map;
     }
 
-    @Override
+	@Override
+	public String toString() {
+		return "ConsultantInfo [id=" + id + ", phone=" + phone + ", email="
+				+ email + ", password=" + password + ", alipay=" + alipay
+				+ ", nickname=" + nickname + ", name=" + name + ", gender="
+				+ gender + ", age=" + age + ", address=" + address
+				+ ", professional=" + professional + ", background="
+				+ background + ", bookTime=" + bookTime + ", price=" + price
+				+ ", faceprice=" + faceprice + ", videoprice=" + videoprice
+				+ ", introduce=" + introduce + ", signature=" + signature
+				+ ", rangeType=" + rangeType + ", avatar=" + avatar
+				+ ", status=" + status + "]";
+	}
+
+    /*@Override
     public String toString() {
         return "ConsultantInfo{" +
                 "id=" + id +
@@ -237,5 +271,7 @@ public class ConsultantInfo implements Serializable {
                 ", rangeType=" + (null == rangeType ? null : rangeType.getDesc()) +
                 ", status=" + (null == status ? null : status.getDesc()) +
                 '}';
-    }
+    }*/
+	
+    
 }

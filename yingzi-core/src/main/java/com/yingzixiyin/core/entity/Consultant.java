@@ -36,6 +36,8 @@ public class Consultant {
     private String background;     // 受训背景
     private String bookTime;       // 可预定时间
     private BigDecimal price;      // 咨询单价
+    private BigDecimal faceprice;      // 咨询单价
+    private BigDecimal videoprice;      // 咨询单价
     private String introduce;      // 个人简介
     private String signature;      // 个性签名
     private Integer rangeType;     // 咨询类型
@@ -61,6 +63,8 @@ public class Consultant {
         consultant.setBackground(info.getBackground());
         consultant.setBookTime(info.getBookTime());
         consultant.setPrice(info.getPrice());
+        consultant.setFaceprice(info.getFaceprice());
+        consultant.setVideoprice(info.getVideoprice());
         consultant.setIntroduce(info.getIntroduce());
         consultant.setSignature(info.getSignature());
         consultant.setRangeType(null == info.getRangeType() ? null : info.getRangeType().getValue());
@@ -109,6 +113,8 @@ public class Consultant {
         consultantInfo.setBackground(consultant.getBackground());
         consultantInfo.setBookTime(consultant.getBookTime());
         consultantInfo.setPrice(consultant.getPrice());
+        consultantInfo.setFaceprice(consultant.getFaceprice());
+        consultantInfo.setVideoprice(consultant.getVideoprice());
         consultantInfo.setIntroduce(consultant.getIntroduce());
         consultantInfo.setSignature(consultant.getSignature());
         consultantInfo.setAvatar(consultant.getAvatar());
@@ -286,28 +292,35 @@ public class Consultant {
         this.status = status;
     }
 
-    @Override
-    public String toString() {
-        return "Consultant{" +
-                "id=" + id +
-                ", phone='" + phone + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", nickname='" + nickname + '\'' +
-                ", name='" + name + '\'' +
-                ", gender=" + gender +
-                ", age=" + age +
-                ", address='" + address + '\'' +
-                ", alipay='" + alipay + '\'' +
-                ", professional='" + professional + '\'' +
-                ", background='" + background + '\'' +
-                ", bookTime='" + bookTime + '\'' +
-                ", price=" + price +
-                ", introduce='" + introduce + '\'' +
-                ", signature='" + signature + '\'' +
-                ", rangeType=" + rangeType +
-                ", avatar='" + avatar + '\'' +
-                ", status=" + status +
-                '}';
-    }
+    public BigDecimal getFaceprice() {
+		return faceprice;
+	}
+
+	public void setFaceprice(BigDecimal faceprice) {
+		this.faceprice = faceprice;
+	}
+
+	public BigDecimal getVideoprice() {
+		return videoprice;
+	}
+
+	public void setVideoprice(BigDecimal videoprice) {
+		this.videoprice = videoprice;
+	}
+
+	@Override
+	public String toString() {
+		return "Consultant [id=" + id + ", phone=" + phone + ", email=" + email
+				+ ", password=" + password + ", nickname=" + nickname
+				+ ", name=" + name + ", gender=" + gender + ", age=" + age
+				+ ", address=" + address + ", alipay=" + alipay
+				+ ", professional=" + professional + ", background="
+				+ background + ", bookTime=" + bookTime + ", price=" + price
+				+ ", faceprice=" + faceprice + ", videoprice=" + videoprice
+				+ ", introduce=" + introduce + ", signature=" + signature
+				+ ", rangeType=" + rangeType + ", avatar=" + avatar
+				+ ", status=" + status + "]";
+	}
+
+	
 }
