@@ -113,7 +113,7 @@
                                 <span class="tips"></span>
                             </div>
                         </div>
-                        <!--<div>
+                        <div>
                             <div class="sign_title">视频咨询：</div>
                             <div class="sign_content" style="font-size:0.85rem;">
                                 <input id="videoprice" name="videoprice" type="text" data-validate="number" data-tip="视频咨询单价" style="width:40px;"/>&nbsp;&nbsp;元/次
@@ -126,7 +126,7 @@
                                 <input id="faceprice" name="faceprice" type="text" data-validate="number" data-tip="面对面咨询单价" style="width:40px;"/>&nbsp;&nbsp;元/次
                                 <span class="tips"></span>
                             </div>
-                        </div>-->
+                        </div>
                         <div>
                             <div class="sign_title">专业背景：</div>
                             <div class="sign_content">
@@ -169,6 +169,14 @@
                                 <span class="tips"></span>
                             </div>
                         </div>
+                        <div style="display:none">
+                            <div class="sign_title">个性签名：</div>
+                            <div class="sign_content">
+                                <input class="form_border" name="status" id="status" value="1" />
+                                <!-- <span class="tips"></span> -->
+                            </div>
+                        </div>
+
                     </form>
                     <div class="btn" id="moreinfo">保存</div>
             	</div>

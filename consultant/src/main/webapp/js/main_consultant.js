@@ -214,9 +214,20 @@
     var infoQuery = function (){
         $.post(infoURL,function(data){
             if(data.status==0||data.status=="0"){
-                $(".uc-tips").hide();
+
                 var _data = data.data;
                 var l = _data.length;
+                if(_data.status=="1"||_data.status==1){
+                    $("input").attr("disabled","disabled");
+                    $("textarea").attr("disabled","disabled");
+                    $("select").attr("disabled","disabled");
+                    $("#moreinfo").remove();
+                    $(".uc-tips-ctn").text("您的信息正在由管理员审核中");
+                } else if(_data.status=="2"||_data.status==2){
+                    $(".uc-tips-ctn").text("恭喜您，您的信息已经审核通过");
+                } else if(_data.status=="3"||_data.status==3){
+                    $(".uc-tips-ctn").text("抱歉，您的信息审核未通过，请联系客服");
+                }
                 for(var i in _data){
                     if(i=="gender"){
                         $("input[name=gender][value="+_data[i]+"]").attr("checked","checked");

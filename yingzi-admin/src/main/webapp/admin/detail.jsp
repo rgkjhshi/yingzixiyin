@@ -35,8 +35,8 @@
                         <tr><th>支付宝账号</th><td>${cinfo.alipay }</td></tr>
                         <tr><th>咨询范围</th><td>${cinfo.rangeType.desc }</td></tr>
                         <tr><th>聊天咨询</th><td><fmt:formatNumber value="${cinfo.price }" pattern="##.##" minFractionDigits="2"></fmt:formatNumber></td></tr>
-                        <!--<tr><th>视频咨询</th><td><fmt:formatNumber value="${cinfo.videoprice }" pattern="##.##" minFractionDigits="2"></fmt:formatNumber></td></tr>
-                        <tr><th>面对面咨询</th><td><fmt:formatNumber value="${cinfo.faceprice }" pattern="##.##" minFractionDigits="2"></fmt:formatNumber></td></tr>-->
+                        <tr><th>视频咨询</th><td><fmt:formatNumber value="${cinfo.videoprice }" pattern="##.##" minFractionDigits="2"></fmt:formatNumber></td></tr>
+                        <tr><th>面对面咨询</th><td><fmt:formatNumber value="${cinfo.faceprice }" pattern="##.##" minFractionDigits="2"></fmt:formatNumber></td></tr>
                         <tr><th>专业背景</th><td><textarea id="professional">${cinfo.professional }</textarea></td></tr>
                         <tr><th>受训背景</th><td><textarea id="background">${cinfo.background }</textarea></td></tr>
                         <tr><th>可预约时间</th><td><textarea id="bookTime">${cinfo.bookTime}</textarea></td></tr>
