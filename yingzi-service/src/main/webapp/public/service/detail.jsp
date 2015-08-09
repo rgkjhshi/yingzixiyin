@@ -6,9 +6,6 @@
 	String path=request.getContextPath();   
 	request.setAttribute("path", path);
 %>
-<%
-	String isbind = ""+session.getAttribute("isbind");
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,7 +51,7 @@
 	            </li>
 	            <li>
 	            	<div class="sub">咨询类型</div>
-	            	<div class="moreinfo">${consultant.rangeType}</div>
+	            	<div class="moreinfo">${consultant.rangeType.desc}</div>
 	            </li>
 	            <li>
 	            	<div class="sub">专业背景</div>
@@ -88,9 +85,9 @@
         var type = $(this).attr("data-type");
         var url = "";
         var to = "consultant_"+type+".do?consultant_id="+id;
-        var isbind = "<%=isbind %>";
+        var isbind = "${WX_LOGIN_USER.isBind.value}";
         console.log(isbind);
-        if(isbind!=""&&isbind!=null&&!isbind){
+        if(isbind!=""&&isbind!=null&&isbind){
             window.location.href = to;
         }else{
             window.location.href = "/weixin/public/service/bind.jsp?id="+id+"&type="+type;
