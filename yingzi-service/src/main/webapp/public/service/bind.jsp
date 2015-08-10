@@ -5,6 +5,7 @@
 <%
 	String path=request.getContextPath();   
 	request.setAttribute("path", path);
+	String openId=request.getParameter("openId");
 %>
 <!DOCTYPE html>
 <html>
@@ -27,14 +28,15 @@
 	<div class="main">
 		<div class="warntips"><i></i>您还未绑定手机</div>
 		<div class="bind_input">
-			<input type="text" placeholder="11位手机号码" maxlength="11"/>
-			<span id="getcode">获取验证码</span>
+			<input type="text" id="phone" placeholder="11位手机号码" maxlength="11"/>
+			<span id="getcode" data-url="<%=path %>/user/getCheckCodeApi.do">获取验证码</span>
 		</div>
 		<div class="bind_input">
-			<input type="text" placeholder="输入短信验证码" />
+			<input type="text" id="code" placeholder="输入短信验证码" />
 		</div>
 		<div class="bind_btn">
-			<a id="bindphone">绑定手机</a>
+			<a id="bindphone" data-url="<%=path %>/user/bindPhone.do" data-goto="<%=path %>/consultant/consultant_">绑定手机</a>
+			<input id="openId" type="hidden" value="<%=openId%>">
 		</div>
     </div>
 <script type="text/javascript" src="<%=path %>/js/bind_wechat.js"></script>

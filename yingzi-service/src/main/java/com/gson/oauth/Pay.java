@@ -125,7 +125,7 @@ public class Pay {
         paras.put("appkey", ConfKit.get("paySignKey"));
         // appid、timestamp、noncestr、package 以及 appkey。
         String string1 = createSign(paras, false);
-        String paySign = DigestUtils.sha1Hex(string1);
+        String paySign = DigestUtils.shaHex(string1);
         return paySign;
     }
     
@@ -150,7 +150,7 @@ public class Pay {
         paras.put("issubscribe", String.valueOf(issubscribe));
         // appid、appkey、productid、timestamp、noncestr、openid、issubscribe
         String string1 = createSign(paras, false);
-        String paySign = DigestUtils.sha1Hex(string1);
+        String paySign = DigestUtils.shaHex(string1);
         return paySign.equalsIgnoreCase(appsignature);
     }
     
@@ -165,7 +165,7 @@ public class Pay {
     private static String deliverSign(Map<String, String> paras) throws UnsupportedEncodingException {
         paras.put("appkey", ConfKit.get("paySignKey"));
         String string1 = createSign(paras, false);
-        String paySign = DigestUtils.sha1Hex(string1);
+        String paySign = DigestUtils.shaHex(string1);
         return paySign;
     }
     

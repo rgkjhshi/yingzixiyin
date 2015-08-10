@@ -56,29 +56,5 @@
         </ul>
     </div>
 <script type="text/javascript" src="<%=path %>/js/main_wechat.js"></script>
-<script type="text/javascript">
-    //检测是否绑定手机号
-    var isbind = function(type){//type：咨询类型（线上or线下）
-        var id = $("this").attr("data-id");
-        var url = "";
-        var to = "";
-        if(type=="online"){
-            to = "consultant_online.do?consultant_id="+id;
-        }else{
-            to = "consultant_offline.do?consultant_id="+id;
-        }
-        // $.get(url,function(data){
-        //  if(data.stasuts == 0){
-        //      window.location.href = to;
-        //  }else{
-        //      window.location.href = "bind.jsp?id="+id+"&type="+type;
-        //  }
-        // });
-        window.location.href = "bind.jsp&id="+id+"&type="+type;
-    }
-
-    $("#onlinebtn").on("click",isbind("online"));
-    $("#offlinebtn").on("click",isbind("offline"));
-</script>
 </body>
 </html>

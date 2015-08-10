@@ -25,6 +25,7 @@
             "tel": [/^1\d{10}$/, "请输入正确的" + tip],
             "pwd": [/^[\d_a-zA-Z]{6,12}$/, "请输入6-12位包含数字、字母或下划线的密码"],
             "notnull": [/\S+/, tip + "不能为空"],
+            "tooless": [/\S+/, tip + "不能为空"],
             "email": [/^(\w)+(\.\w+)*@(\w)+((\.\w+)+)$/, tip + "格式不正确"],
             "number": [/^\d+(\.\d+)?$/, "请输入正确的" + tip],
             "default": [/\S+/, "不能为空"]
@@ -36,6 +37,15 @@
                 $("#pwd2").siblings(".tips").text("两次输入的密码不一致");
                 return false;
             } else {
+                return true;
+            }
+        } else if(vid == "introduce"){
+            var content = $.trim($("#introduce").val());
+            var l = content.length;
+            if(l<150){
+                alert("个人简介不得少于150字！");
+                return false;
+            }else{
                 return true;
             }
         } else {
@@ -151,20 +161,33 @@
             $(".gender_tips").text("请选择您的性别");
             return;
         }
+        
         //检查数据
-        if (check("nickname") && check("name") && check("age") && check("email") && check("alipay") && check("professional") && check("background") && check("price") && check("bookTime") && check("address") && check("introduce") && check("signature")) {
+        if (check("nickname") && check("name") && check("age") && check("email") && check("alipay") && check("professional") && check("background") && check("price") && check("bookTime") && check("address") && check("introduce") && check("signature")&&check("videoprice")&&check("faceprice")) {
+
+             
+            var newstatus = $("#status").val();
+            if(newstatus!="2"){
+                $("#status").val("1");
+            }             
 
             //格式化数据
-            var _data = $("#infoform").serialize();                     
+            var _data = $("#infoform").serialize();  
+
             //提交数据
             $.post(updateInfoURL,_data,function(data){
 
                 if(data.status=="0"||data.status==0){
-                    $("input").attr("disabled","disabled");
-                    $("textarea").attr("disabled","disabled");
-                    $("select").attr("disabled","disabled");
-                    $("#moreinfo").remove();
-                    var tips = $("<div class='fdtips successtip'>提交成功，等待审核！</div>");
+                    if(newstatus=="2"||newstatus==2){
+                        var tips = $("<div class='fdtips successtip'>修改成功！</div>");
+                    }else{
+                        $("input").attr("disabled","disabled");
+                        $("textarea").attr("disabled","disabled");
+                        $("select").attr("disabled","disabled");
+                        $("#moreinfo").remove();
+                        $(".uc-tips-ctn").text("您的信息正在由管理员审核中");
+                        var tips = $("<div class='fdtips successtip'>提交成功，等待审核！</div>");
+                    }
                 }else{
                     var tips = $("<div class='fdtips errortip'>" + data.message + "</div>");
                 }
@@ -204,9 +227,21 @@
     var infoQuery = function (){
         $.post(infoURL,function(data){
             if(data.status==0||data.status=="0"){
-                $(".uc-tips").hide();
+
                 var _data = data.data;
                 var l = _data.length;
+                if(_data.status=="1"||_data.status==1){
+                    $("input").attr("disabled","disabled");
+                    $("textarea").attr("disabled","disabled");
+                    $("select").attr("disabled","disabled");
+                    $("#moreinfo").remove();
+                    $(".uc-tips-ctn").text("您的信息正在由管理员审核中");
+                } else if(_data.status=="2"||_data.status==2){
+                    $(".uc-tips-ctn").text("恭喜您，您的信息已经审核通过");
+                } else if(_data.status=="3"||_data.status==3){
+                    $(".uc-tips-ctn").text("抱歉，您的信息审核未通过，请联系客服");
+                }
+                $("#status").val(_data.status);
                 for(var i in _data){
                     if(i=="gender"){
                         $("input[name=gender][value="+_data[i]+"]").attr("checked","checked");
@@ -221,7 +256,8 @@
                     }else if(i=="rangeType"){
                         $("select[name=rangeType] option[value="+_data[i]+"]").attr("selected",true);
                     }else if(i=="status"){
-                        console.log(_data[i]);
+                    	console.log(_data.status);
+                        
                     }else{
                         if($("#"+i)&&$("#"+i).length>0){
                             $("#"+i).val(_data[i]);
@@ -238,5 +274,18 @@
     if(currentURL.indexOf('admin/info')>0){
         infoQuery();
     }
+
+    // 头像上传
+    var uploadimg = function(){
+        var path = console.log($("#filepath").val());
+        if(path!=""){
+            document.getElementById("avatarform").submit();
+        }else{
+            console.log("头像不能为空");
+        }
+    }
+
+    $("#upload_btn").on("click",uploadimg);
+
 
 })();

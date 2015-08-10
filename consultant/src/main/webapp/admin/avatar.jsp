@@ -38,7 +38,7 @@
                     status =('rect:'+rect.top+','+rect.left+','+rect.width+','+rect.height);
                     div.innerHTML = "<div id=divhead style='width:"+rect.width+"px;height:"+rect.height+"px;margin-top:"+rect.top+"px;"+sFilter+src+"\"'></div>";
                 }catch(err){
-                    alert("IE浏览器下不支持图片预览");
+                    alert("IE浏览器下不支持图片预览，推荐使用chrome浏览器");
                 }
             }
             $("#upload_btn").css("display","inline-block");
@@ -82,7 +82,7 @@
                                 建议上传头像长宽比例为1:1。上传图片大小不能超过1M。
                             </li>
                         </ul>
-                        <form enctype="multipart/form-data">
+                        <form id="avatarform" enctype="multipart/form-data" action="/consultant/admin/uploadPicApi.htm">
                             <div class="sign_content file_upload"><span id="chooseImgText">选择图片</span>
                                 <input type="file" id="filepath" name="img" onchange="previewImage(this)"/>
                             </div>

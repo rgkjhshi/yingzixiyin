@@ -60,6 +60,7 @@ public class PowerCheckInterceptor extends HandlerInterceptorAdapter {
 					else{
 						response.sendRedirect(request.getContextPath()+"/"+LoginConstant.NO_LOGIN_URL);
 					}
+					logger.info("--用户未登录，进行拦截--");
 //					response.sendRedirect(request.getContextPath()+"/"+LoginConstant.NO_LOGIN_URL);
 					return false;
 				}

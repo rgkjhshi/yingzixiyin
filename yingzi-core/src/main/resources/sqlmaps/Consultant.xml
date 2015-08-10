@@ -18,8 +18,9 @@
             professional        AS professional,
             background          AS background,
             book_time           AS bookTime,
-            on_line_price       AS onLinePrice,
-            off_line_price      AS off_Line_Price,
+            price               AS price,
+            face_price          AS facePrice,
+            video_price         AS videoPrice,
             introduce           AS introduce,
             signature           AS signature,
             range_type          AS rangeType,
@@ -93,11 +94,14 @@
         <if test="bookTime != null">
             ,book_time
         </if>
-        <if test="onLinePrice != null">
-            ,on_line_price
+        <if test="price != null">
+            ,price
         </if>
-        <if test="offLinePrice != null">
-            ,off_line_price
+        <if test="facePrice != null">
+            ,face_price
+        </if>
+        <if test="videoPrice != null">
+            ,video_price
         </if>
         <if test="introduce != null">
             ,introduce
@@ -153,11 +157,14 @@
         <if test="bookTime != null">
             ,#{bookTime}
         </if>
-        <if test="onLinePrice != null">
-            ,#{onLinePrice}
+        <if test="price != null">
+            ,#{price}
         </if>
-        <if test="offLinePrice != null">
-            ,#{offLinePrice}
+        <if test="facePrice != null">
+            ,#{facePrice}
+        </if>
+         <if test="videoPrice != null">
+            ,#{videoPrice}
         </if>
         <if test="introduce != null">
             ,#{introduce}
@@ -216,14 +223,14 @@
             <if test="bookTime != null">
                 book_time = #{bookTime},
             </if>
-            <if test="onLinePrice != null">
-                on_line_price = #{onLinePrice},
-            </if>
-            <if test="offLinePrice != null">
-                off_line_price = #{offLinePrice},
-            </if>
             <if test="price != null">
                 price = #{price},
+            </if>
+            <if test="facePrice != null">
+                face_price = #{facePrice},
+            </if>
+            <if test="videoPrice != null">
+                video_price = #{videoPrice},
             </if>
             <if test="introduce != null">
                 introduce = #{introduce},

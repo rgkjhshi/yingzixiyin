@@ -29,23 +29,26 @@ CREATE TABLE `consultant` (
   `alipay` varchar(100) NOT NULL DEFAULT '' COMMENT '支付宝账号',
   `nickname` varchar(50) NOT NULL DEFAULT '' COMMENT '昵称',
   `name` varchar(10) NOT NULL DEFAULT '' COMMENT '姓名',
-  `gender` tinyint(4) NOT NULL DEFAULT 0 COMMENT '性别, 0:未知, 1:男, 2:女',
-  `age` int(4) NOT NULL DEFAULT 25 COMMENT '年龄',
+  `gender` tinyint(4) NOT NULL DEFAULT '0' COMMENT '性别, 0:未知, 1:男, 2:女',
+  `age` int(4) NOT NULL DEFAULT '25' COMMENT '年龄',
   `address` varchar(100) NOT NULL DEFAULT '' COMMENT '地址',
   `professional` varchar(255) NOT NULL DEFAULT '' COMMENT '专业背景',
   `background` varchar(255) NOT NULL DEFAULT '' COMMENT '受训背景',
   `book_time` varchar(100) NOT NULL DEFAULT '' COMMENT '可预约时间',
-  `on_line_price` decimal(13, 2) NOT NULL DEFAULT 59.00 COMMENT '咨询单价',
-  `off_line_price` decimal(13, 2) NOT NULL DEFAULT 100.00 COMMENT '线下咨询单价',
-  `introduce` varchar(255) NOT NULL DEFAULT '' COMMENT '个人简介',
+  `price` decimal(13,2) NOT NULL DEFAULT '59.00' COMMENT '咨询单价',
+  `face_price` decimal(13,2) NOT NULL DEFAULT '59.00' COMMENT '线下咨询价格',
+  `video_price` decimal(13,2) NOT NULL DEFAULT '59.00' COMMENT '视频咨询价格',
+  `introduce` varchar(1024) NOT NULL DEFAULT '' COMMENT '个人简介',
   `signature` varchar(255) NOT NULL DEFAULT '' COMMENT '个人签名',
   `avatar` varchar(255) NOT NULL DEFAULT '' COMMENT '头像url',
-  `range_type` tinyint(4) NOT NULL DEFAULT 0 COMMENT '咨询师可咨询的范围类型',
-  `status` tinyint(4) NOT NULL DEFAULT 0 COMMENT '咨询师状态，0:初始状态, 1:申请 2:审核通过, 3:审核不通过',
+  `range_type` tinyint(4) NOT NULL DEFAULT '0' COMMENT '咨询师可咨询的范围类型',
+  `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '咨询师状态，0:初始状态, 1:申请 2:审核通过, 3:审核不通过',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `idx_phone` (phone),
-  UNIQUE KEY `idx_email` (email)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='咨询师信息';
+  UNIQUE KEY `idx_phone` (`phone`),
+  UNIQUE KEY `idx_email` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='咨询师信息';
+
+
 
 CREATE TABLE `record` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键id',
@@ -85,7 +88,7 @@ CREATE TABLE `code` (
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='验证码表';
 
 
-INSERT INTO `consultant` (`id`, `phone`, `email`, `password`, `alipay`, `nickname`, `name`, `gender`, `age`, `address`, `professional`, `background`, `book_time`, `on_line_price`, `introduce`, `signature`, `avatar`, `range_type`, `status`) VALUES
+INSERT INTO `consultant` (`id`, `phone`, `email`, `password`, `alipay`, `nickname`, `name`, `gender`, `age`, `address`, `professional`, `background`, `book_time`, `price`, `introduce`, `signature`, `avatar`, `range_type`, `status`) VALUES
   (1, '13121435540', '313832830@qq.com', '123456', '313832830@qq.com', 'nickname', 'name', 0, 18, 'address', 'professional', 'background', 'bookTime', '59.00', 'introduce', 'signature', '', 1, 2);
 
 
