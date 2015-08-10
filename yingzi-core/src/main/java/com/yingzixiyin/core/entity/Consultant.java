@@ -63,8 +63,8 @@ public class Consultant {
         consultant.setBackground(info.getBackground());
         consultant.setBookTime(info.getBookTime());
         consultant.setPrice(info.getPrice());
-        consultant.setFacePrice(info.getFaceprice());
-        consultant.setVideoPrice(info.getVideoprice());
+        consultant.setFacePrice(info.getFacePrice());
+        consultant.setVideoPrice(info.getVideoPrice());
         consultant.setIntroduce(info.getIntroduce());
         consultant.setSignature(info.getSignature());
         consultant.setRangeType(null == info.getRangeType() ? null : info.getRangeType().getValue());
@@ -113,8 +113,8 @@ public class Consultant {
         consultantInfo.setBackground(consultant.getBackground());
         consultantInfo.setBookTime(consultant.getBookTime());
         consultantInfo.setPrice(consultant.getPrice());
-        consultantInfo.setFaceprice(consultant.getFacePrice());
-        consultantInfo.setVideoprice(consultant.getVideoPrice());
+        consultantInfo.setFacePrice(consultant.getFacePrice());
+        consultantInfo.setVideoPrice(consultant.getVideoPrice());
         consultantInfo.setIntroduce(consultant.getIntroduce());
         consultantInfo.setSignature(consultant.getSignature());
         consultantInfo.setAvatar(consultant.getAvatar());

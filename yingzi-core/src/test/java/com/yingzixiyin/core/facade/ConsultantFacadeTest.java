@@ -1,22 +1,19 @@
 package com.yingzixiyin.core.facade;
 
-import java.math.BigDecimal;
-
 import com.yingzixiyin.api.dto.BaseResponseDto;
 import com.yingzixiyin.api.dto.ConsultantInfo;
 import com.yingzixiyin.api.dto.ConsultantQueryRequestDto;
 import com.yingzixiyin.api.dto.ConsultantQueryResponseDto;
 import com.yingzixiyin.api.enums.RangeTypeEnum;
-import com.yingzixiyin.api.enums.StatusEnum;
 import com.yingzixiyin.api.facade.ConsultantFacade;
 import com.yingzixiyin.core.BaseTest;
 import com.yingzixiyin.page.Pagination;
-
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 
 /**
  * @author song.shi
@@ -43,8 +40,8 @@ public class ConsultantFacadeTest extends BaseTest {
     public void updateTest() {
         ConsultantInfo info = new ConsultantInfo();
         info.setId(1L);
-        info.setVideoprice(new BigDecimal("150"));
-        info.setFaceprice(new BigDecimal("300"));
+        info.setVideoPrice(new BigDecimal("150"));
+        info.setFacePrice(new BigDecimal("300"));
         BaseResponseDto responseDto =  consultantFacade.update(info);
         logger.info(responseDto.toString());
     }
