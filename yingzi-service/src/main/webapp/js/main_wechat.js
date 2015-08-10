@@ -40,7 +40,7 @@
 						if(_avatar==""||_avatar==null){
 							_avatar = "../images/test.png";
 						}
-						tpl += '<li class="items"><a href="consultant_deatil.do?id='+_data.id+'"><img src="'+_avatar+'"><div class="info"><div class="name nameall">'+_data.name+'</div><div class="desc descall">'+_data.age+'岁，¥ '+_data.videoprice+'元/次，地址：'+_data.address+'</div></div><div class="sig">签名：'+_data.signature+'</div></a></li>'
+						tpl += '<li class="items"><a href="consultant_deatil.do?id='+_data.id+'"><img src="'+_avatar+'"><div class="info"><div class="name nameall">'+_data.name+'</div><div class="desc descall">'+_data.age+'岁，¥ '+_data.videoPrice+'元/次，地址：'+_data.address+'</div></div><div class="sig">签名：'+_data.signature+'</div></a></li>'
 					}
 					$("#consultant_list").append(tpl);
 				}

@@ -1,27 +1,27 @@
 
 #咨询师数据构造
 
-INSERT INTO `consultant` (`id`, `phone`, `email`, `password`, `alipay`, `nickname`, `name`, `gender`, `age`, `address`, `professional`, `background`, `book_time`, `price`, `introduce`, `signature`, `avatar`, `range_type`, `status`) VALUES
-(1, '13121435540', '313832830@qq.com', '123456', '313832830@qq.com', '会飞的猪', '张大梅', 0, 18, '北京市海淀区西土城路1号', '北大青鸟出身', '专治各种不服，心里变态狂', '每周六 13:00-15:00', 59.00, '咨询师来自牛逼天堂', '活着不如死了', '', 1, 2);
+INSERT INTO `consultant` (`id`, `phone`, `email`, `password`, `alipay`, `nickname`, `name`, `gender`, `age`, `address`, `professional`, `background`, `book_time`, `price`,`video_price`,`face_price`, `introduce`, `signature`,`speciality`, `avatar`, `range_type`, `status`) VALUES
+(1, '13121435540', '313832830@qq.com', '123456', '313832830@qq.com', '会飞的猪', '张大梅', 0, 18, '北京市海淀区西土城路1号', '北大青鸟出身', '专治各种不服，心里变态狂', '每周六 13:00-15:00', 59.00, '', '', '咨询师来自牛逼天堂', '这里是个性签名', '', '', 1, 2);
 
-INSERT INTO `consultant` (`id`, `phone`, `email`, `password`, `alipay`, `nickname`, `name`, `gender`, `age`, `address`, `professional`, `background`, `book_time`, `price`, `introduce`, `signature`, `avatar`, `range_type`, `status`) VALUES
-(2, '13121455545', '313832831@qq.com', '123456', '313832831@qq.com', '会飞的<。)#)))≦', '张大梅', 0, 18, '北京市海淀区西土城路1号', '北大青鸟出身', '专治各种不服，心里变态狂', '每周六 13:00-15:00', 59.00, '咨询师来自牛逼天堂', '活着不如死了', '', 1, 2);
+INSERT INTO `consultant` (`id`, `phone`, `email`, `password`, `alipay`, `nickname`, `name`, `gender`, `age`, `address`, `professional`, `background`, `book_time`, `price`, `video_price`,`face_price`,`introduce`, `signature`, `speciality`,`avatar`, `range_type`, `status`) VALUES
+(2, '13167394537', '313832831@qq.com', '123456', '313832831@qq.com', '会飞的<。)#)))≦', '张大梅', 0, 18, '北京市海淀区西土城路1号', '北大青鸟出身', '专治各种不服，心里变态狂', '每周六 13:00-15:00', 59.00, '', '', '咨询师来自牛逼天堂', '这里是个性签名', '', '', 1, 2);
 
-INSERT INTO `consultant` (`id`, `phone`, `email`, `password`, `alipay`, `nickname`, `name`, `gender`, `age`, `address`, `professional`, `background`, `book_time`, `price`, `introduce`, `signature`, `avatar`, `range_type`, `status`) VALUES
-(3, '13126143554', '313832832@qq.com', '123456', '313832832@qq.com', '会飞的大梅', '张大梅', 0, 18, '北京市海淀区西土城路1号', '北大青鸟出身', '专治各种不服，心里变态狂', '每周六 13:00-15:00', 59.00, '咨询师来自牛逼天堂', '活着不如死了', '', 1, 2);
+INSERT INTO `consultant` (`id`, `phone`, `email`, `password`, `alipay`, `nickname`, `name`, `gender`, `age`, `address`, `professional`, `background`, `book_time`, `price`,`video_price`,`face_price`, `introduce`, `signature`, `speciality`,`avatar`, `range_type`, `status`) VALUES
+(3, '13126143554', '313832832@qq.com', '123456', '313832832@qq.com', '会飞的大梅', '张大梅', 0, 18, '北京市海淀区西土城路1号', '北大青鸟出身', '专治各种不服，心里变态狂', '每周六 13:00-15:00', 59.00, '', '', '咨询师来自牛逼天堂', '这里是个性签名', '', '', 1, 2);
 
-INSERT INTO `consultant` (`id`, `phone`, `email`, `password`, `alipay`, `nickname`, `name`, `gender`, `age`, `address`, `professional`, `background`, `book_time`, `price`, `introduce`, `signature`, `avatar`, `range_type`, `status`) VALUES
-(4, '13125435547', '313832833@qq.com', '123456', '313832833@qq.com', '骑着猪去赶集', '张大梅', 0, 18, '北京市海淀区西土城路1号', '北大青鸟出身', '专治各种不服，心里变态狂', '每周六 13:00-15:00', 59.00, '咨询师来自牛逼天堂', '活着不如死了', '', 1, 2);
+INSERT INTO `consultant` (`id`, `phone`, `email`, `password`, `alipay`, `nickname`, `name`, `gender`, `age`, `address`, `professional`, `background`, `book_time`, `price`,`video_price`,`face_price`, `introduce`, `signature`,`speciality`, `avatar`, `range_type`, `status`) VALUES
+(4, '13125435547', '313832833@qq.com', '123456', '313832833@qq.com', '骑着猪去赶集', '张大梅', 0, 18, '北京市海淀区西土城路1号', '北大青鸟出身', '专治各种不服，心里变态狂', '每周六 13:00-15:00', 59.00, '', '', '咨询师来自牛逼天堂', '这里是个性签名', '', '', 1, 2);
 
-INSERT INTO `consultant` (`id`, `phone`, `email`, `password`, `alipay`, `nickname`, `name`, `gender`, `age`, `address`, `professional`, `background`, `book_time`, `price`, `introduce`, `signature`, `avatar`, `range_type`, `status`) VALUES
-(5, '13127435548', '313832834@qq.com', '123456', '313832834@qq.com', '狗的寂寞', '张大梅', 0, 18, '北京市海淀区西土城路1号', '北大青鸟出身', '专治各种不服，心里变态狂', '每周六 13:00-15:00', 59.00, '咨询师来自牛逼天堂', '活着不如死了', '', 1, 2);
+INSERT INTO `consultant` (`id`, `phone`, `email`, `password`, `alipay`, `nickname`, `name`, `gender`, `age`, `address`, `professional`, `background`, `book_time`, `price`,`video_price`,`face_price`, `introduce`, `signature`, `speciality`,`avatar`, `range_type`, `status`) VALUES
+(5, '13127435548', '313832834@qq.com', '123456', '313832834@qq.com', '狗的寂寞', '张大梅', 0, 18, '北京市海淀区西土城路1号', '北大青鸟出身', '专治各种不服，心里变态狂', '每周六 13:00-15:00', 59.00, '', '', '咨询师来自牛逼天堂', '这里是个性签名', '', '', 1, 2);
 
 #管理员数据构造
 
 INSERT INTO `admin` VALUES (1, '13718340933', 'lee123');
 INSERT INTO `admin` VALUES (2, '13718340934', 'lee123');
 INSERT INTO `admin` VALUES (3, '13718340935', 'lee123');
-INSERT INTO `admin` VALUES (4, '13718340936', 'lee123');
+INSERT INTO `admin` VALUES (4, '13167394537', '123456');
 
 #构造咨询记录
 
