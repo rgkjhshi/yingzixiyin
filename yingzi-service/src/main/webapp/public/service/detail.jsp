@@ -38,12 +38,12 @@
 				        </c:if>
 	            	' />
 	            		<div class="info">
-	            			<div class="name">${consultant.name }</div>
+	            			<div class="name">${consultant.name }<span><img src="../images/star.png" />收藏</span></div>
 	            			<div class="desc">
 	            				地址：${consultant.address}<br/>¥ ${consultant.videoPrice} 元/次
 	            			</div>
 	            		</div>
-	            		<div class="sig">这里是咨询特长</div>
+	            		<div class="sig">${consultant.speciality}</div>
 	            	</a>
 	            </li>
 	            <li>

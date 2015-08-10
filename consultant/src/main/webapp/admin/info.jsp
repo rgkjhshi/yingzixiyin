@@ -109,14 +109,21 @@
                         <div>
                             <div class="sign_title">视频咨询：</div>
                             <div class="sign_content" style="font-size:0.85rem;">
-                                <input id="videoprice" name="videoprice" type="text" data-validate="number" data-tip="视频咨询单价" style="width:40px;"/>&nbsp;&nbsp;元/次
+                                <input id="videoPrice" name="videoPrice" type="text" data-validate="number" data-tip="视频咨询单价" style="width:40px;"/>&nbsp;&nbsp;元/次
                                 <span class="tips"></span>
                             </div>
                         </div>
                         <div>
                             <div class="sign_title">面对面咨询：</div>
                             <div class="sign_content" style="font-size:0.85rem;">
-                                <input id="faceprice" name="faceprice" type="text" data-validate="number" data-tip="面对面咨询单价" style="width:40px;"/>&nbsp;&nbsp;元/次
+                                <input id="facePrice" name="facePrice" type="text" data-validate="number" data-tip="面对面咨询单价" style="width:40px;"/>&nbsp;&nbsp;元/次
+                                <span class="tips"></span>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="sign_title">咨询特长：</div>
+                            <div class="sign_content">
+                                <textarea class="form_border" name="speciality" data-validate="notnull" data-tip="咨询特长" id="speciality"></textarea>
                                 <span class="tips"></span>
                             </div>
                         </div>
@@ -177,7 +184,7 @@
         $("#info_all").show();
         $("#baseinfo").addClass("active");
         //检查是否更改价格、地址信息
-        $("#videoprice,#faceprice,#address").change(function(){
+        $("#videoPrice,#facePrice,#address").change(function(){
             if($("#status").val()=="2"){
                 $("#status").val("1");
                 alert("您修改了价格或地址信息，需要管理员重新审核");

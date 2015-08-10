@@ -146,6 +146,7 @@
             "bookTime":$("#bookTime").val(),
             "address":$("#address").val(),
             "introduce":$("#introduce").val(),
+            "speciality":$("#speciality").val(),
             "signature":$("#signature").val(),
             "status":type 
         };

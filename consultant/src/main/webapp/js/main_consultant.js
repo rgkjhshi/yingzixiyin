@@ -163,7 +163,7 @@
         }
         
         //检查数据
-        if (check("nickname") && check("name") && check("age") && check("email") && check("alipay") && check("professional") && check("background") && check("price") && check("bookTime") && check("address") && check("introduce") && check("signature")&&check("videoprice")&&check("faceprice")) {
+        if (check("nickname") && check("name") && check("age") && check("email") && check("alipay") && check("professional") && check("background") && check("price") && check("bookTime") && check("address") && check("introduce")&&check("speciality")&& check("signature")&&check("videoPrice")&&check("facePrice")) {
 
              
             var newstatus = $("#status").val();
