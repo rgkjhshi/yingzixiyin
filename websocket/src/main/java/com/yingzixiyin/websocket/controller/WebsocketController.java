@@ -31,7 +31,7 @@ public class WebsocketController {
         session.setAttribute("toPhone", toPhone);
         logger.info("recordId={}", session.getAttribute("recordId"));
         logger.info("phone={}, toPhone={}", session.getAttribute("phone"), session.getAttribute("toPhone"));
-        response.sendRedirect("/websocket/echo.html");
+        response.sendRedirect("/websocket/consultant/chat.jsp");
     }
 
 }

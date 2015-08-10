@@ -18,7 +18,8 @@
             professional        AS professional,
             background          AS background,
             book_time           AS bookTime,
-            price               AS price,
+            on_line_price       AS onLinePrice,
+            off_line_price      AS off_Line_Price,
             introduce           AS introduce,
             signature           AS signature,
             range_type          AS rangeType,
@@ -72,7 +73,7 @@
             ,name
         </if>
         <if test="gender != null">
-            gender
+            ,gender
         </if>
         <if test="age != null">
             ,age
@@ -92,8 +93,11 @@
         <if test="bookTime != null">
             ,book_time
         </if>
-        <if test="price != null">
-            ,price
+        <if test="onLinePrice != null">
+            ,on_line_price
+        </if>
+        <if test="offLinePrice != null">
+            ,off_line_price
         </if>
         <if test="introduce != null">
             ,introduce
@@ -149,8 +153,11 @@
         <if test="bookTime != null">
             ,#{bookTime}
         </if>
-        <if test="price != null">
-            ,#{price}
+        <if test="onLinePrice != null">
+            ,#{onLinePrice}
+        </if>
+        <if test="offLinePrice != null">
+            ,#{offLinePrice}
         </if>
         <if test="introduce != null">
             ,#{introduce}
@@ -208,6 +215,12 @@
             </if>
             <if test="bookTime != null">
                 book_time = #{bookTime},
+            </if>
+            <if test="onLinePrice != null">
+                on_line_price = #{onLinePrice},
+            </if>
+            <if test="offLinePrice != null">
+                off_line_price = #{offLinePrice},
             </if>
             <if test="price != null">
                 price = #{price},

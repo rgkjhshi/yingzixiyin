@@ -35,7 +35,8 @@ public class Consultant {
     private String professional;   // 专业背景
     private String background;     // 受训背景
     private String bookTime;       // 可预定时间
-    private BigDecimal price;      // 咨询单价
+    private BigDecimal onLinePrice;      // 线上咨询单价
+    private BigDecimal offLinePrice;      // 线下咨询单价
     private String introduce;      // 个人简介
     private String signature;      // 个性签名
     private Integer rangeType;     // 咨询类型
@@ -60,7 +61,8 @@ public class Consultant {
         consultant.setProfessional(info.getProfessional());
         consultant.setBackground(info.getBackground());
         consultant.setBookTime(info.getBookTime());
-        consultant.setPrice(info.getPrice());
+        consultant.setOnLinePrice(info.getOnLinePrice());
+        consultant.setOffLinePrice(info.getOffLinePrice());
         consultant.setIntroduce(info.getIntroduce());
         consultant.setSignature(info.getSignature());
         consultant.setRangeType(null == info.getRangeType() ? null : info.getRangeType().getValue());
@@ -108,7 +110,8 @@ public class Consultant {
         consultantInfo.setProfessional(consultant.getProfessional());
         consultantInfo.setBackground(consultant.getBackground());
         consultantInfo.setBookTime(consultant.getBookTime());
-        consultantInfo.setPrice(consultant.getPrice());
+        consultantInfo.setOnLinePrice(consultant.getOnLinePrice());
+        consultantInfo.setOffLinePrice(consultant.getOffLinePrice());
         consultantInfo.setIntroduce(consultant.getIntroduce());
         consultantInfo.setSignature(consultant.getSignature());
         consultantInfo.setAvatar(consultant.getAvatar());
@@ -238,12 +241,20 @@ public class Consultant {
         this.bookTime = bookTime;
     }
 
-    public BigDecimal getPrice() {
-        return price;
+    public BigDecimal getOnLinePrice() {
+        return onLinePrice;
     }
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
+    public void setOnLinePrice(BigDecimal onLinePrice) {
+        this.onLinePrice = onLinePrice;
+    }
+
+    public BigDecimal getOffLinePrice() {
+        return offLinePrice;
+    }
+
+    public void setOffLinePrice(BigDecimal offLinePrice) {
+        this.offLinePrice = offLinePrice;
     }
 
     public String getIntroduce() {
@@ -302,7 +313,8 @@ public class Consultant {
                 ", professional='" + professional + '\'' +
                 ", background='" + background + '\'' +
                 ", bookTime='" + bookTime + '\'' +
-                ", price=" + price +
+                ", onLinePrice=" + onLinePrice +
+                ", offLinePrice=" + offLinePrice +
                 ", introduce='" + introduce + '\'' +
                 ", signature='" + signature + '\'' +
                 ", rangeType=" + rangeType +

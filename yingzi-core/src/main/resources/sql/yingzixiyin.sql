@@ -35,7 +35,8 @@ CREATE TABLE `consultant` (
   `professional` varchar(255) NOT NULL DEFAULT '' COMMENT '专业背景',
   `background` varchar(255) NOT NULL DEFAULT '' COMMENT '受训背景',
   `book_time` varchar(100) NOT NULL DEFAULT '' COMMENT '可预约时间',
-  `price` decimal(13, 2) NOT NULL DEFAULT 59.00 COMMENT '咨询单价',
+  `on_line_price` decimal(13, 2) NOT NULL DEFAULT 59.00 COMMENT '咨询单价',
+  `off_line_price` decimal(13, 2) NOT NULL DEFAULT 100.00 COMMENT '线下咨询单价',
   `introduce` varchar(255) NOT NULL DEFAULT '' COMMENT '个人简介',
   `signature` varchar(255) NOT NULL DEFAULT '' COMMENT '个人签名',
   `avatar` varchar(255) NOT NULL DEFAULT '' COMMENT '头像url',
@@ -84,7 +85,7 @@ CREATE TABLE `code` (
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='验证码表';
 
 
-INSERT INTO `consultant` (`id`, `phone`, `email`, `password`, `alipay`, `nickname`, `name`, `gender`, `age`, `address`, `professional`, `background`, `book_time`, `price`, `introduce`, `signature`, `avatar`, `range_type`, `status`) VALUES
+INSERT INTO `consultant` (`id`, `phone`, `email`, `password`, `alipay`, `nickname`, `name`, `gender`, `age`, `address`, `professional`, `background`, `book_time`, `on_line_price`, `introduce`, `signature`, `avatar`, `range_type`, `status`) VALUES
   (1, '13121435540', '313832830@qq.com', '123456', '313832830@qq.com', 'nickname', 'name', 0, 18, 'address', 'professional', 'background', 'bookTime', '59.00', 'introduce', 'signature', '', 1, 2);
 
 

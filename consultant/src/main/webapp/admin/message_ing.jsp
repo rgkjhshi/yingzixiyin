@@ -44,10 +44,11 @@
     <script>
     //聊天跳转
     function showDialog(phone,tophone,id){//传入弹窗类型：咨询详情   mid：咨询id
-        var url = "http://" + window.location.host + "/websocket/chat.do";
-        $.post(url,{'phone':phone,'toPhone':tophone,'recordId':id},function(){
+        var url = "http://" + window.location.host + "/websocket/chat.do?phone="+phone+"&toPhone="+tophone+"&recordId="+id;
+        /*$.post(url,{'phone':phone,'toPhone':tophone,'recordId':id},function(){
 
-        });
+        });*/
+        window.location.href = url;
     }
     //打开咨询详情弹窗
     $(".message_item").on("click",function(){

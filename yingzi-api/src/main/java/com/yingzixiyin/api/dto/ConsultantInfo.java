@@ -30,7 +30,8 @@ public class ConsultantInfo implements Serializable {
     private String professional;   // 专业背景
     private String background;     // 受训背景
     private String bookTime;       // 可预定时间
-    private BigDecimal price;      // 咨询单价
+    private BigDecimal onLinePrice;      // 咨询单价
+    private BigDecimal offLinePrice;      // 咨询单价
     private String introduce;      // 个人简介
     private String signature;      // 个性签名
     private RangeTypeEnum rangeType;     // 咨询类型
@@ -141,12 +142,20 @@ public class ConsultantInfo implements Serializable {
         this.bookTime = bookTime;
     }
 
-    public BigDecimal getPrice() {
-        return price;
+    public BigDecimal getOnLinePrice() {
+        return onLinePrice;
     }
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
+    public void setOnLinePrice(BigDecimal onLinePrice) {
+        this.onLinePrice = onLinePrice;
+    }
+
+    public BigDecimal getOffLinePrice() {
+        return offLinePrice;
+    }
+
+    public void setOffLinePrice(BigDecimal offLinePrice) {
+        this.offLinePrice = offLinePrice;
     }
 
     public String getIntroduce() {
@@ -206,7 +215,8 @@ public class ConsultantInfo implements Serializable {
         map.put("professional", info.getProfessional());
         map.put("background", info.getBackground());
         map.put("bookTime", info.getBookTime());
-        map.put("price", info.getPrice());
+        map.put("onLinePrice", info.getOnLinePrice());
+        map.put("offLinePrice", info.getOffLinePrice());
         map.put("introduce", info.getIntroduce());
         map.put("signature", info.getSignature());
         map.put("rangeType", null == info.getRangeType() ? 0 : info.getRangeType().getValue());
@@ -230,7 +240,8 @@ public class ConsultantInfo implements Serializable {
                 ", professional='" + professional + '\'' +
                 ", background='" + background + '\'' +
                 ", bookTime='" + bookTime + '\'' +
-                ", price=" + price +
+                ", onLinePrice=" + onLinePrice +
+                ", offLinePrice=" + offLinePrice +
                 ", introduce='" + introduce + '\'' +
                 ", signature='" + signature + '\'' +
                 ", avatar='" + avatar + '\'' +
