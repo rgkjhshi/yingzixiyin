@@ -31,6 +31,7 @@ public class Consultant {
     private Integer gender;        // 性别
     private Integer age;           // 年龄
     private String address;        // 咨询地址
+    private String speciality;     // 特长
     private String alipay;         // 支付宝账号
     private String professional;   // 专业背景
     private String background;     // 受训背景
@@ -58,6 +59,7 @@ public class Consultant {
         consultant.setGender(null == info.getGender() ? null : info.getGender().getValue());
         consultant.setAge(info.getAge());
         consultant.setAddress(info.getAddress());
+        consultant.setSpeciality(info.getSpeciality());
         consultant.setAlipay(info.getAlipay());
         consultant.setProfessional(info.getProfessional());
         consultant.setBackground(info.getBackground());
@@ -109,6 +111,7 @@ public class Consultant {
         consultantInfo.setGender(null == consultant.getGender() ? GenderTypeEnum.UNKNOWN : GenderTypeEnum.toEnum(consultant.getGender()));
         consultantInfo.setAge(consultant.getAge());
         consultantInfo.setAddress(consultant.getAddress());
+        consultantInfo.setSpeciality(consultant.getSpeciality());
         consultantInfo.setProfessional(consultant.getProfessional());
         consultantInfo.setBackground(consultant.getBackground());
         consultantInfo.setBookTime(consultant.getBookTime());
@@ -210,6 +213,14 @@ public class Consultant {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getSpeciality() {
+        return speciality;
+    }
+
+    public void setSpeciality(String speciality) {
+        this.speciality = speciality;
     }
 
     public String getAlipay() {
@@ -320,6 +331,7 @@ public class Consultant {
                 ", gender=" + gender +
                 ", age=" + age +
                 ", address='" + address + '\'' +
+                ", speciality='" + speciality + '\'' +
                 ", alipay='" + alipay + '\'' +
                 ", professional='" + professional + '\'' +
                 ", background='" + background + '\'' +

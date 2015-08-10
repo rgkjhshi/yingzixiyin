@@ -32,6 +32,7 @@ CREATE TABLE `consultant` (
   `gender` tinyint(4) NOT NULL DEFAULT '0' COMMENT '性别, 0:未知, 1:男, 2:女',
   `age` int(4) NOT NULL DEFAULT '25' COMMENT '年龄',
   `address` varchar(100) NOT NULL DEFAULT '' COMMENT '地址',
+  `speciality` varchar(255) NOT NULL DEFAULT '' COMMENT '特长',
   `professional` varchar(255) NOT NULL DEFAULT '' COMMENT '专业背景',
   `background` varchar(255) NOT NULL DEFAULT '' COMMENT '受训背景',
   `book_time` varchar(100) NOT NULL DEFAULT '' COMMENT '可预约时间',

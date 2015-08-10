@@ -27,6 +27,7 @@ public class ConsultantInfo implements Serializable {
     private GenderTypeEnum gender; // 性别
     private Integer age;           // 年龄
     private String address;        // 咨询地址
+    private String speciality;     // 特长
     private String professional;   // 专业背景
     private String background;     // 受训背景
     private String bookTime;       // 可预定时间
@@ -117,6 +118,14 @@ public class ConsultantInfo implements Serializable {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getSpeciality() {
+        return speciality;
+    }
+
+    public void setSpeciality(String speciality) {
+        this.speciality = speciality;
     }
 
     public String getProfessional() {
@@ -221,6 +230,7 @@ public class ConsultantInfo implements Serializable {
         map.put("gender", null == info.getGender() ? 0 : info.getGender().getValue());
         map.put("age", info.getAge());
         map.put("address", info.getAddress());
+        map.put("speciality", info.getSpeciality());
         map.put("professional", info.getProfessional());
         map.put("background", info.getBackground());
         map.put("bookTime", info.getBookTime());
@@ -248,6 +258,7 @@ public class ConsultantInfo implements Serializable {
                 ", gender=" + gender +
                 ", age=" + age +
                 ", address='" + address + '\'' +
+                ", speciality='" + speciality + '\'' +
                 ", professional='" + professional + '\'' +
                 ", background='" + background + '\'' +
                 ", bookTime='" + bookTime + '\'' +

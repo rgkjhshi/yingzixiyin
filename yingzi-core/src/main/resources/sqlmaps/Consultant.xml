@@ -14,6 +14,7 @@
             gender              AS gender,
             age                 AS age,
             address             AS address,
+            speciality          AS speciality,
             alipay              AS alipay,
             professional        AS professional,
             background          AS background,
@@ -82,6 +83,9 @@
         <if test="address != null">
             ,address
         </if>
+        <if test="speciality != null">
+            ,speciality
+        </if>
         <if test="alipay != null">
             ,alipay
         </if>
@@ -144,6 +148,9 @@
         </if>
         <if test="address != null">
             ,#{address}
+        </if>
+        <if test="speciality != null">
+            ,#{speciality}
         </if>
         <if test="alipay != null">
             ,#{alipay}
@@ -213,6 +220,9 @@
             </if>
             <if test="alipay != null">
                 alipay = #{alipay},
+            </if>
+            <if test="speciality != null">
+                speciality = #{speciality},
             </if>
             <if test="professional != null">
                 professional = #{professional},
