@@ -325,6 +325,7 @@ public class UserCenterController {
 		user.setPhone(phone);
 		user.setIsBind(YesOrNoEnum.YES);
 		responseDto = userFacade.update(user);
+		SessionUtil.setLoginUserToSession(request, user);
 		map.put("returnCode", responseDto.getReturnCode());
 		map.put("returnMessage", responseDto.getReturnMessage());
 		return new ModelAndView(new MappingJackson2JsonView(),map);
