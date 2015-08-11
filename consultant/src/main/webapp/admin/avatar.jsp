@@ -82,7 +82,7 @@
                                 建议上传头像长宽比例为1:1。上传图片大小不能超过1M。
                             </li>
                         </ul>
-                        <form id="avatarform" enctype="multipart/form-data" action="/consultant/admin/uploadPicApi.htm">
+                        <form id="avatarform" method="post" enctype="multipart/form-data" action="/consultant/admin/uploadPicApi.htm">
                             <div class="sign_content file_upload"><span id="chooseImgText">选择图片</span>
                                 <input type="file" id="filepath" name="img" onchange="previewImage(this)"/>
                             </div>

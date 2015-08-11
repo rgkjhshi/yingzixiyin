@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.util.MultiValueMap;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -174,19 +175,27 @@ public class AdminController {
         }
         return mav;
     }
-    @RequestMapping(value = "uploadPicApi.htm")
+    @RequestMapping(value = "uploadPicApi.htm",method=RequestMethod.POST)
 	public ModelAndView uploadPic(HttpServletRequest request,
 			HttpServletResponse response, String callback) {
+    	Map<String, Object> map = Maps.newHashMap();
+    	logger.info("--图片上传---");
+    	if(!(request instanceof DefaultMultipartHttpServletRequest)){
+    		map.put("status", -1);
+			map.put("message", "图片上传失败");
+			return new ModelAndView(new MappingJackson2JsonView(), map);
+    	}
 		DefaultMultipartHttpServletRequest mulRequest = (DefaultMultipartHttpServletRequest) request;
 		MultiValueMap<String, MultipartFile> multiFileMap = mulRequest
 				.getMultiFileMap();
 		List<MultipartFile> uploadFile = multiFileMap.get("img");
 		String iconUrl = null;
+		
 		if (uploadFile != null) {
 			iconUrl = PictureUtil.savePicture(request,(CommonsMultipartFile) uploadFile
 					.get(0));
 		}
-		Map<String, Object> map = Maps.newHashMap();
+		logger.debug("---得到图片信息："+uploadFile+"|imageurl:"+iconUrl);
 		if(StringUtils.isEmpty(iconUrl)){
 			map.put("status", -1);
 			map.put("message", "图片上传失败");
@@ -196,8 +205,9 @@ public class AdminController {
 		logger.info("---上传图片得到url："+iconUrl);
 		HttpSession session = request.getSession(false);
 		String phone = (String) session.getAttribute("session_phone");
-		ConsultantInfo consultantInfo=new ConsultantInfo();
-		consultantInfo.setPhone(phone);
+		ConsultantQueryRequestDto requestDto=new ConsultantQueryRequestDto();
+		requestDto.setPhone(phone);
+		ConsultantInfo consultantInfo=consultantFacade.queryOne(requestDto);
 		consultantInfo.setAvatar(iconUrl);
 		BaseResponseDto responseDto=   consultantFacade.update(consultantInfo);
 		if(!responseDto.isSuccess()){

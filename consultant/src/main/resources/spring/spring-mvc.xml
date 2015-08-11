@@ -21,6 +21,15 @@
     <mvc:annotation-driven/>
     <!-- 自动扫描Bean注解 -->
     <context:component-scan base-package="com.yingzixiyin.consultant.web"/>
-
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- set the max upload size100MB -->
+		<property name="maxUploadSize">
+			<value>2097152</value>
+		</property>
+		<property name="maxInMemorySize">
+			<value>4096</value>
+		</property>
+	</bean>
 
 </beans>

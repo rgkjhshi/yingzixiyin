@@ -25,6 +25,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.collect.Maps;
@@ -256,6 +258,29 @@ public class ConsultantController {
 		String ip =NetUtils.getRemoteHost(request);
 		logger.info("得到用户IP："+ip);
 		return response_page;
+	}
+	@RequestMapping(value="isCollected.do")
+	@PowerCheck(type=PowerCheckEnum.LOGIN)
+	public ModelAndView isCollectConsultant(HttpServletRequest request,HttpServletResponse response,String id) throws IOException{
+		logger.info("---用户调用咨询师是否收藏接口页面----");
+		Map<String,Object> map=Maps.newHashMap();
+		UserInfo user=SessionUtil.getLoginUserToSession(request);
+		if(user==null){
+			map.put("returnCode", -1);
+			map.put("returnMessage", "用户未登录或登录超时");
+			return new ModelAndView(new MappingJackson2JsonView(),map);
+		}
+		String collects=user.getCollected();
+		if(StringUtils.isEmpty(collects)||collects.contains(id)){
+			map.put("returnCode", 0);
+			map.put("returnMessage", "未收藏该咨询师");
+			map.put("isColllect",0);
+			return new ModelAndView(new MappingJackson2JsonView(),map);
+		}
+		map.put("returnCode", 0);
+		map.put("returnMessage", "已收藏该咨询师");
+		map.put("isColllect",1);
+		return new ModelAndView(new MappingJackson2JsonView(),map);
 	}
 	private PreOrder buildPreOrderVo(HttpServletRequest request,ConsultantInfo cinfo) throws UnsupportedEncodingException{
 		String appid=WeChat.getAppId();
