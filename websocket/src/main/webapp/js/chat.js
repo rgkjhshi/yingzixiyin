@@ -9,23 +9,10 @@
 (function(){
 
 	//格式化时间
-	Date.prototype.Format = function (fmt) { //author: meizz 
-	    var o = {
-	        "M+": this.getMonth() + 1, //月份 
-	        "d+": this.getDate(), //日 
-	        "h+": this.getHours(), //小时 
-	        "m+": this.getMinutes(), //分 
-	        "s+": this.getSeconds(), //秒 
-	        "q+": Math.floor((this.getMonth() + 3) / 3), //季度 
-	        "S": this.getMilliseconds() //毫秒 
-	    };
-    	if (/(y+)/.test(fmt)){
-    		fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
-    	}
-	    for (var k in o){
-	    	if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
-	    	return fmt;
-	    }
+	Date.prototype.Format = function(){
+        var now = new Date();
+        var date = now.getFullYear()+"-"+(now.getMonth()+1)+"-"+now.getDate()+" "+now.getHours()+":"+now.getMinutes()+":"+now.getSeconds();
+        return date;
 	}
 	
 
@@ -55,14 +42,14 @@
 
         ws.onopen = function () {
             setConnected(true);
-            log('info','connection opened.');
+            log('infomation','现在您可以进行聊天了！');
         };
         ws.onmessage = function (event) {
             log('user',event.data);
         };
         ws.onclose = function (event) {
             setConnected(false);
-            log('info','connection closed.');
+            log('infomation','对话已关闭！');
             log(event);
         };
     }
@@ -83,7 +70,7 @@
             log('me',message);
             ws.send(message);
         } else {
-            alert('connection not established, please connect.');
+            alert('未建立对话连接，请重试！');
         }
     }
 
@@ -91,18 +78,18 @@
         var console = document.getElementById('console');
         var time = "";
         if(author == 'me'){
-        	time = new Date().Format("yyyy-MM-dd HH:mm:ss"); 
+        	time = new Date().Format(); 
         }else if(author == 'user'){
         	var i = message.indexOf(';');
         	time = message.substring(0,i);
         	message = message.substring(i);
         }
-//        var li = document.cre
+
         $("#console").append("<li class='"+author+"'><span>"+time+"</span><div>"+message+"</div></li>");
-//        console.appendChild("<li class='"+author+"'><span>"+time+"</span><div>"+message+"</div></li>");
-        while (console.childNodes.length > 25) {
-            console.removeChild(console.firstChild);
-        }
+        $("#message").val("");
+        // while (console.childNodes.length > 25) {
+        //     console.removeChild(console.firstChild);
+        // }
         console.scrollTop = console.scrollHeight;
     }
 

@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%
+String session_toPhone = "" + session.getAttribute("toPhone"); //从session里把a拿出来，并赋值给phone
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -21,10 +24,10 @@
                 <div class="maincontent">
                     <div class="detail_box">
                         <!-- <i id="closeDialogBtn"></i> -->
-                        <div class="dialog_header" node-type="header">来自&nbsp;<strong>张三</strong>&nbsp;的咨询</div>
+                        <div class="dialog_header" node-type="header">来自&nbsp;<strong><%=session_toPhone %></strong>&nbsp;的咨询</div>
                         <div class="dialog_body">
                             <div class="dialog_content">
-                                <ul id="console"> <!--id="ms_inner"-->
+                                <ul id="console">
                                 </ul>
                             </div>
                             <div class="dialog_reply">
@@ -43,7 +46,6 @@
     <script>
         $("#message").addClass("cur");
         $("#message_all").show();
-        $("#sms_all").addClass("active");
     </script>
     </body>
 </html>
