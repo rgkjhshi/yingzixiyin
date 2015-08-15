@@ -212,6 +212,7 @@ public class ConsultantController {
 			user.setCollected(id+"");
 		}
 		responseDto=userFacade.update(user);
+		SessionUtil.setLoginUserToSession(request, user);
 		ResponseUtils.renderJsonText(response, JsonUtil.getJsonText(responseDto));
 	}
 	@RequestMapping(value="consultant_yingzi.do")
@@ -265,21 +266,27 @@ public class ConsultantController {
 		logger.info("---用户调用咨询师是否收藏接口页面----");
 		Map<String,Object> map=Maps.newHashMap();
 		UserInfo user=SessionUtil.getLoginUserToSession(request);
+		UserQueryRequestDto requestDto=new UserQueryRequestDto();
+		requestDto.setId(user.getId());
+		requestDto.setOpenId(user.getOpenId());
+		requestDto.setPhone(user.getPhone());
+		user=userFacade.queryOne(requestDto);
 		if(user==null){
 			map.put("returnCode", -1);
 			map.put("returnMessage", "用户未登录或登录超时");
 			return new ModelAndView(new MappingJackson2JsonView(),map);
 		}
 		String collects=user.getCollected();
+//		logger.info("咨询师收藏的咨询师id："+id+"|collects："+collects);
 		if(StringUtils.isEmpty(collects)||collects.contains(id)){
 			map.put("returnCode", 0);
 			map.put("returnMessage", "未收藏该咨询师");
-			map.put("isColllect",0);
+			map.put("isCollect",0);
 			return new ModelAndView(new MappingJackson2JsonView(),map);
 		}
 		map.put("returnCode", 0);
 		map.put("returnMessage", "已收藏该咨询师");
-		map.put("isColllect",1);
+		map.put("isCollect",1);
 		return new ModelAndView(new MappingJackson2JsonView(),map);
 	}
 	private PreOrder buildPreOrderVo(HttpServletRequest request,ConsultantInfo cinfo) throws UnsupportedEncodingException{

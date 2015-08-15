@@ -83,7 +83,7 @@ public class RecordController {
 			page.setUrl(request.getContextPath()+"/record/query_records.do");
 			RecordQueryResponseDto responseDto = recordFacade.queryPage(requestDto,page);
 			if (responseDto != null) {
-				request.setAttribute("recordsList", responseDto.getConsultantRecordList());
+				request.setAttribute("recordsList", responseDto.getRecordInfoExtendList());
 				request.setAttribute("page", page);
 			}
 		} catch (Exception e) {
