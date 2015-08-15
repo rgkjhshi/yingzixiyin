@@ -685,3 +685,17 @@ fieldset div {
 	list-style: none;
 	margin-bottom: 30px;
 }
+/*page*/
+.pagediv{
+	text-align: right;
+    width: 98%;
+    font-size: 0.85rem;
+}
+.pagediv a{
+	background-color: #FD9C9C;
+    display: inline-block;
+    line-height: 1.5em;
+    padding: 0 10px;
+    color: #fff;
+    margin-left: 8px;
+}
