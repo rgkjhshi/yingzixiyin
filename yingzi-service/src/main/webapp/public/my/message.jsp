@@ -24,7 +24,7 @@
     <div class="main layout">
     	<ul class="consultants ms_record">
     		<c:forEach items="${myMessages}" var="m">
-    		<c:out value="${m[\"completed\"]}"></c:out>
+    		<c:out value="${m[\"is_completed\"]}"></c:out>
     			<li class='record unend <c:out value="${m[\"is_read\"]==0 ?\"new_ms\":\"\"}"></c:out>'>
     				<form id="chatform" method="post" name="chatform" action="${ chaturl}">
                         <input type="hidden" name="phone" value="${WX_LOGIN_USER.phone}" />

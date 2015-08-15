@@ -40,9 +40,9 @@ public class MenuOperationHelper {
 		return WeChat.menu.deleteMenu(access_token);
 	}
 	public static void main(String[] args) throws Exception {
-//		boolean flag=createMenuByConfig();
-//		LOG.info("创建菜单结果："+flag);
-		boolean dflag=deleteMenuByConfig();
-		LOG.info("删除菜单结果："+dflag);
+		boolean flag=createMenuByConfig();
+		LOG.info("创建菜单结果："+flag);
+//		boolean dflag=deleteMenuByConfig();
+//		LOG.info("删除菜单结果："+dflag);
 	}
 }
