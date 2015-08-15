@@ -72,7 +72,7 @@
         // var tophone = '13504330637';
         // var id = '1';
         // showDialog(phone,tophone,id);
-        $(this).find("form").submit();
+        $(this).find("form")[0].submit();
     });
     </script>
     <script>
