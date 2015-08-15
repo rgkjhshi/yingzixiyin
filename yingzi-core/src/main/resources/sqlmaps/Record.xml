@@ -156,27 +156,27 @@
     u.phone as userPhone,
     u.open_id as openId
     from `record` r, `consultant` c, `user` u
-    where t.consultant_id=c.id and t.user_id=u.id
+    where r.consultant_id=c.id and r.user_id=u.id
 	<if test="id != null">
-		and t.id = #{id}
+		and r.id = #{id}
 	</if>
 	<if test="userId != null">
-		AND t.user_id = #{userId}
+		AND r.user_id = #{userId}
 	</if>
 	<if test="consultantId != null">
-		AND t.consultant_id = #{consultantId}
+		AND r.consultant_id = #{consultantId}
 	</if>
 	<if test="consultType != null">
-		AND t.consult_type = #{consultType}
+		AND r.consult_type = #{consultType}
 	</if>
 	<if test="isPaid != null">
-		AND t.is_paid = #{isPaid}
+		AND r.is_paid = #{isPaid}
 	</if>
 	<if test="isReplied != null">
-		AND t.is_replied = #{isReplied}
+		AND r.is_replied = #{isReplied}
 	</if>
 	<if test="isCompleted != null">
-		AND t.is_completed = #{isCompleted}
+		AND r.is_completed = #{isCompleted}
 	</if>
 	limit #{offset},#{size}
 </select>
