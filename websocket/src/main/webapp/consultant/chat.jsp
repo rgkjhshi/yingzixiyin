@@ -11,7 +11,7 @@
         <link href="../favicon.ico" rel="shortcut icon">
         <link href="../css/base.css" rel="stylesheet" type="text/css">
         <script src="../js/jquery-1.9.1.min.js"></script>
-        <script src="http://cdn.sockjs.org/sockjs-0.3.min.js"></script>
+        <script src="../js/sockjs-0.3.min.js"></script>
     </head>
     <body>
         <%@ include file="../parts/head.jsp" %> 

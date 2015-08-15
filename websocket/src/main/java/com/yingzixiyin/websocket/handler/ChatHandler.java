@@ -51,7 +51,7 @@ public class ChatHandler extends TextWebSocketHandler {
         String phone = (String) session.getAttributes().get("phone");
         String toPhone = (String) session.getAttributes().get("toPhone");
         if (null == phone || null == toPhone) {
-            logger.error("未获取到session_phone...");
+            logger.error("未获取到session中的phone...");
             session.close();
             return;
         }
@@ -105,15 +105,22 @@ public class ChatHandler extends TextWebSocketHandler {
         Boolean result = false;
         try {
             if (toSession.isOpen()) {
+                String phone = (String) toSession.getAttributes().get("phone");
+                logger.info("发送消息给用户:{}", phone);
                 toSession.sendMessage(message);
                 result = true;
             }
         } catch (IOException e) {
-            logger.error("发送消息失败:{}", e);
+            logger.error("发送消息失败:", e);
         }
         return result;
     }
 
+    /**
+     * 发送未读消息
+     * @param session  连接
+     * @throws IOException
+     */
     private void sendUnReadMessage(WebSocketSession session) throws IOException {
         logger.info("推送离线消息...");
         String phone = (String) session.getAttributes().get("phone");
@@ -153,8 +160,8 @@ public class ChatHandler extends TextWebSocketHandler {
 
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus closeStatus) throws Exception {
-        logger.info("websocket connection closed......");
-        String phone = (String) session.getAttributes().get("session_phone");
+        String phone = (String) session.getAttributes().get("phone");
+        logger.info("websocket connection closed, remove {}", phone);
         userMap.remove(phone);
     }
 

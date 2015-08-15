@@ -30,6 +30,9 @@
             <if test="toPhone != null">
                 AND to_phone = #{toPhone}
             </if>
+            <if test="isRead != null">
+                AND is_read = #{isRead}
+            </if>
         </where>
     </sql>
 

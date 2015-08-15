@@ -47,7 +47,6 @@
     	console.log("connected successtip");
         if ('WebSocket' in window) {
             ws = new WebSocket(webSocketURL);
-            alert(webSocketURL);
         } else if ('MozWebSocket' in window) {
             ws = new MozWebSocket(webSocketURL);
         } else {
