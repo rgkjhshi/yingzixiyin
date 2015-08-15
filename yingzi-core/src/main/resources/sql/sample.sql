@@ -26,25 +26,18 @@ INSERT INTO `admin` VALUES (4, '13167394537', '123456');
 #构造咨询记录
 
 INSERT INTO `record` VALUES (1, 1, 1, 1, 1, 1, 0, '2015-8-8 14:56:08');
-INSERT INTO `record` VALUES (2, 1, 2, 1, 1, 1, 0, '2015-8-8 14:56:08');
-INSERT INTO `record` VALUES (3, 1, 1, 1, 1, 1, 0, '2015-8-8 14:56:08');
-INSERT INTO `record` VALUES (4, 2, 3, 1, 1, 1, 0, '2015-8-8 14:56:08');
-INSERT INTO `record` VALUES (5, 1, 1, 1, 1, 1, 1, '2015-8-8 14:56:08');
-INSERT INTO `record` VALUES (6, 2, 4, 1, 1, 1, 1, '2015-8-8 14:56:08');
-INSERT INTO `record` VALUES (7, 1, 1, 1, 1, 1, 1, '2015-8-8 14:56:08');
+INSERT INTO `record` VALUES (2, 3, 2, 1, 1, 1, 0, '2015-8-8 14:56:08');
+
 
 #构造用户记录
-INSERT INTO `user` VALUES (1, 'oGBeWt-feUNN9UJzt7YHJM3VnzKc', '13718340933', '', 0, '1,2', '2,3,4');
-INSERT INTO `user` VALUES (2, 'oGBeWt3HkUfi3C0k7kCVNpGdv6Kf', '13718340934', '', 0, '', '');
-INSERT INTO `user` VALUES (3, 'oGBeWt-feUNN9UJzt7YHJM3VnzKd', '13718340935', '', 0, '', '');
-INSERT INTO `user` VALUES (4, 'oGBeWt3HlUfi3C0k7pCVNpGmv6Kg', '13718340936', '', 0, '', '');
-
+INSERT INTO `user` VALUES (2, 'oGBeWt-feUNN9UJzt7YHJM3VnzKc', '18510483012', '', 1, '1', '');
+INSERT INTO `user` VALUES (3, 'oGBeWt3HkUfi3C0k7oCVNpGmv6Kw', '', '', 0, '1,2', '3,4');
 
 #构造消息数据记录
 
 INSERT INTO `message` VALUES (1, 1, ' 你好啊，有什么可以帮助你的吗？', '13121435540', '13718340933', '2015-8-8 15:02:01', 0);
-INSERT INTO `message` VALUES (2, 2, ' 你好啊，有什么可以帮助你的吗？', '13718340933', '13121455545', '2015-8-8 15:02:01', 0);
-INSERT INTO `message` VALUES (3, 3, ' 你好啊，有什么可以帮助你的吗？', '13121435540', '131261435546', '2015-8-8 15:02:01', 0);
-INSERT INTO `message` VALUES (4, 1, ' 你好啊，有什么可以帮助你的吗？', '13718340933', '13121435540', '2015-8-8 15:02:01', 0);
-INSERT INTO `message` VALUES (5, 1, ' 你好啊，有什么可以帮助你的吗？', '13121435540', '13718340933', '2015-8-8 15:02:01', 0);
+INSERT INTO `message` VALUES (2, 1, ' 你好啊，有什么可以帮助你的吗？', '13718340933', '13121455545', '2015-8-8 15:02:01', 0);
+INSERT INTO `message` VALUES (3, 1, ' 你好啊，有什么可以帮助你的吗？', '13121435540', '131261435546', '2015-8-8 15:02:01', 0);
+INSERT INTO `message` VALUES (4, 2, ' 你好啊，有什么可以帮助你的吗？', '13718340933', '13121435540', '2015-8-8 15:02:01', 0);
+INSERT INTO `message` VALUES (5, 2, ' 你好啊，有什么可以帮助你的吗？', '13121435540', '13718340933', '2015-8-8 15:02:01', 0);
 INSERT INTO `message` VALUES (6, 2, ' 你好啊，有什么可以帮助你的吗？', '13718340933', '13121455545', '2015-8-8 15:02:01', 0);

@@ -32,6 +32,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.util.concurrent.ExecutionError;
+import com.gson.WeChat;
 import com.gson.oauth.Oauth;
 import com.yingzi.web.annotation.PowerCheck;
 import com.yingzi.web.enums.AgeEnum;
@@ -70,7 +71,7 @@ import com.yingzixiyin.api.facade.UserFacade;
 public class UserCenterController {
 	private static Logger logger = LoggerFactory.getLogger(UserCenterController.class);
 	
-	private static final String CHAT_URL="http://localhost:8080/websocket/chat.do";
+//	private static final String CHAT_URL="http://localhost:8080/websocket/chat.do";
 	
 	@Resource
 	private ConsultantFacade consultantFacade;
@@ -153,6 +154,7 @@ public class UserCenterController {
 		UserInfo user = SessionUtil.getLoginUserToSession(request);
 		RecordQueryRequestDto rqrDto = new RecordQueryRequestDto();
 		rqrDto.setUserId(user.getId());
+		rqrDto.setIsPaid(YesOrNoEnum.YES);
 		RecordQueryResponseDto resqrDto = recordFacade.query(rqrDto);
 		return resqrDto;
 	}
@@ -274,7 +276,7 @@ public class UserCenterController {
 			List<Map<String,Object>> message=messageFacade.queryConsultantAndMessageCountByUserId(user.getId());
 			if(message!=null){
 				request.setAttribute("myMessages", message);
-				request.setAttribute("chaturl", CHAT_URL);
+				request.setAttribute("chaturl", WeChat.getChatUrl());
 			}
 		}
 		return response_page;

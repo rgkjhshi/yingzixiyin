@@ -341,4 +341,8 @@ public class WeChat {
 		String mch_id = ConfKit.get("notify_url");
 		return mch_id;
 	}
+	public static String getChatUrl() {
+		String chat_url = ConfKit.get("CHAT_URL");
+		return chat_url;
+	}
 }
