@@ -136,18 +136,27 @@
        	select count(1) from record
         <include refid="where_condition" />
     </select>
-	<select id="queryConsultantRecordsListPage" parameterType="map"
-	resultType="map">
-	select t.id as id,
-	t.user_id as userId,
-	t.consultant_id as consultantId,
-	t.consult_type as consultType,
-	t.is_paid as isPaid,
-	t.is_replied as isReplied,
-	t.is_completed as isCompleted,
-	t.create_time as createTime,c.phone as phone,c.name as consultantName,c.price as price,c.introduce as
-	introduce, c.signature as signature,c.range_type as rangeType,c.avatar
-	as avatar from record t,consultant c where c.id=t.consultant_id
+
+	<select id="queryConsultantRecordsListPage" parameterType="map" resultType="map">
+	select r.id as id,
+	r.user_id as userId,
+	r.consultant_id as consultantId,
+	r.consult_type as consultType,
+	r.is_paid as isPaid,
+	r.is_replied as isReplied,
+	r.is_completed as isCompleted,
+	r.create_time as createTime,
+    c.phone as consultantPhone,
+    c.name as consultantName,
+    c.price as price,
+    c.face_price as facePrice,
+    c.video_price as videoPrice,
+    c.range_type as rangeType,
+    c.avatar as consultantAvatar,
+    u.phone as userPhone,
+    u.open_id as openId
+    from `record` r, `consultant` c, `user` u
+    where t.consultant_id=c.id and t.user_id=u.id
 	<if test="id != null">
 		and t.id = #{id}
 	</if>

@@ -1,6 +1,6 @@
 package com.yingzixiyin.core.service;
 
-import com.yingzixiyin.api.dto.ConsultantRecordsInfo;
+import com.yingzixiyin.api.dto.RecordInfoExtend;
 import com.yingzixiyin.api.dto.RecordInfo;
 import com.yingzixiyin.core.entity.Record;
 
@@ -44,6 +44,6 @@ public interface RecordService {
 
 	public Long queryCount(Record bean);
 
-	public List<ConsultantRecordsInfo> queryConsultantRecordsListPage(
+	public List<RecordInfoExtend> queryConsultantRecordsListPage(
 			Map<String, Object> map);
 }

@@ -45,8 +45,12 @@ public interface RecordFacade {
      */
     public RecordQueryResponseDto query(RecordQueryRequestDto requestDto);
 
+    /**
+     * 查询数量
+     * @param requestDto 查询条件
+     * @return 数量
+     */
 	public Long queryCount(RecordQueryRequestDto requestDto);
 
-	public RecordQueryResponseDto queryPage(RecordQueryRequestDto requestDto,
-			Pagination page);
+	public RecordQueryResponseDto queryPage(RecordQueryRequestDto requestDto, Pagination page);
 }

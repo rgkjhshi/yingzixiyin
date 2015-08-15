@@ -12,18 +12,9 @@ public class RecordQueryResponseDto extends BaseResponseDto {
 
     private Integer count;    // list中元素个数
     private List<RecordInfo> recordInfoList;
-    private List<ConsultantRecordsInfo> consultantRecordList;
-    
-    public List<ConsultantRecordsInfo> getConsultantRecordList() {
-		return consultantRecordList;
-	}
+    private List<RecordInfoExtend> recordInfoExtendList;
 
-	public void setConsultantRecordList(
-			List<ConsultantRecordsInfo> consultantRecordList) {
-		this.consultantRecordList = consultantRecordList;
-	}
-
-	public Integer getCount() {
+    public Integer getCount() {
         return count;
     }
 
@@ -39,12 +30,20 @@ public class RecordQueryResponseDto extends BaseResponseDto {
         this.recordInfoList = recordInfoList;
     }
 
-	@Override
-	public String toString() {
-		return "RecordQueryResponseDto [count=" + count + ", recordInfoList="
-				+ recordInfoList + ", consultantRecordList="
-				+ consultantRecordList + "]";
-	}
+    public List<RecordInfoExtend> getRecordInfoExtendList() {
+        return recordInfoExtendList;
+    }
 
-  
+    public void setRecordInfoExtendList(List<RecordInfoExtend> recordInfoExtendList) {
+        this.recordInfoExtendList = recordInfoExtendList;
+    }
+
+    @Override
+    public String toString() {
+        return "RecordQueryResponseDto{" +
+                "count=" + count +
+                ", recordInfoList=" + recordInfoList +
+                ", recordInfoExtendList=" + recordInfoExtendList +
+                '}';
+    }
 }

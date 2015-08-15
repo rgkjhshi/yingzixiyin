@@ -1,7 +1,7 @@
 package com.yingzixiyin.core.biz.impl;
 
 import com.google.common.collect.Maps;
-import com.yingzixiyin.api.dto.ConsultantRecordsInfo;
+import com.yingzixiyin.api.dto.RecordInfoExtend;
 import com.yingzixiyin.api.dto.RecordInfo;
 import com.yingzixiyin.api.dto.RecordQueryRequestDto;
 import com.yingzixiyin.api.dto.RecordQueryResponseDto;
@@ -62,34 +62,31 @@ public class RecordBizImpl implements RecordBiz {
         return responseDto;
     }
 
-	@Override
-	public Long queryCount(RecordQueryRequestDto requestDto) {
-		return recordService.queryCount(Record.getBean(requestDto));
-	}
+    @Override
+    public Long queryCount(RecordQueryRequestDto requestDto) {
+        return recordService.queryCount(Record.getBean(requestDto));
+    }
 
-	@Override
-	public RecordQueryResponseDto queryRecordListPage(
-			RecordQueryRequestDto requestDto, Pagination page) {
-		Map<String, Object> map = Maps.newHashMap();
-		map.put("offset", page.getOffset());
-		map.put("size", page.getLimit());
-		map.put("consultantId", null == requestDto.getConsultantId() ? null
-				: requestDto.getConsultantId());
-		map.put("consultType", null == requestDto.getConsultType() ? null
-				: requestDto.getConsultType().getValue());
-		map.put("isCompleted", null == requestDto.getIsCompleted() ? null
-				: requestDto.getIsCompleted().getValue());
-		map.put("isPaid", null==requestDto.getIsPaid()?null:requestDto.getIsPaid().getValue());
-		map.put("isReplied", null==requestDto.getIsReplied()?null:requestDto.getIsReplied().getValue());
-		map.put("userId", null==requestDto.getUserId()?null:requestDto.getUserId());
-		List<ConsultantRecordsInfo> list=recordService.queryConsultantRecordsListPage(map);
-		logger.info("后台查询得到咨询记录");
-		// 返回responseDto
-		RecordQueryResponseDto responseDto = new RecordQueryResponseDto();
+    @Override
+    public RecordQueryResponseDto queryRecordListPage(RecordQueryRequestDto requestDto, Pagination page) {
+        Map<String, Object> map = Maps.newHashMap();
+        map.put("id", requestDto.getId());
+        map.put("userId", requestDto.getUserId());
+        map.put("consultantId", requestDto.getConsultantId());
+        map.put("consultType", null == requestDto.getConsultType() ? null : requestDto.getConsultType().getValue());
+        map.put("isCompleted", null == requestDto.getIsCompleted() ? null : requestDto.getIsCompleted().getValue());
+        map.put("isPaid", null == requestDto.getIsPaid() ? null : requestDto.getIsPaid().getValue());
+        map.put("isReplied", null == requestDto.getIsReplied() ? null : requestDto.getIsReplied().getValue());
+        map.put("offset", page.getOffset());
+        map.put("size", page.getLimit());
+        List<RecordInfoExtend> list = recordService.queryConsultantRecordsListPage(map);
+        logger.info("后台查询得到咨询记录");
+        // 返回responseDto
+        RecordQueryResponseDto responseDto = new RecordQueryResponseDto();
         if (!CollectionUtils.isEmpty(list)) {
-            responseDto.setConsultantRecordList(list);
+            responseDto.setRecordInfoExtendList(list);
             responseDto.setCount(list.size());
         }
         return responseDto;
-	}
+    }
 }

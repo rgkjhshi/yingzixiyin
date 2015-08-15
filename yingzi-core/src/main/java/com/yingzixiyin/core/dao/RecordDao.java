@@ -44,7 +44,6 @@ public interface RecordDao {
 
 	public Long queryCount(Record bean);
 
-	public List<Map<String, Object>> queryConsultantRecordsListPage(
-			Map<String, Object> map);
+	public List<Map<String, Object>> queryConsultantRecordsListPage(Map<String, Object> map);
 
 }

@@ -1,22 +1,18 @@
 package com.yingzixiyin.core.service.impl;
 
 import com.google.common.collect.Lists;
-import com.yingzixiyin.api.dto.ConsultantRecordsInfo;
 import com.yingzixiyin.api.dto.RecordInfo;
+import com.yingzixiyin.api.dto.RecordInfoExtend;
 import com.yingzixiyin.api.enums.ConsultTypeEnum;
-import com.yingzixiyin.api.enums.RangeTypeEnum;
 import com.yingzixiyin.api.enums.YesOrNoEnum;
 import com.yingzixiyin.core.dao.RecordDao;
 import com.yingzixiyin.core.entity.Record;
 import com.yingzixiyin.core.service.RecordService;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -35,7 +31,7 @@ public class RecordServiceImpl implements RecordService {
 
     @Override
     public Integer insert(Record record) {
-        if (null == record || null == record.getUserId() || null == record.getConsultantId() ) {
+        if (null == record || null == record.getUserId() || null == record.getConsultantId()) {
             logger.info("record内容不能为空");
             return null;
         }
@@ -46,7 +42,7 @@ public class RecordServiceImpl implements RecordService {
     public void update(Record record) {
         if (null == record || null == record.getId()) {
             logger.info("id不能为空");
-            return ;
+            return;
         }
         recordDao.update(record);
     }
@@ -71,42 +67,41 @@ public class RecordServiceImpl implements RecordService {
         return Record.translateBeanList(consultantList);
     }
 
-	@Override
-	public Long queryCount(Record bean) {
-		return recordDao.queryCount(bean);
-	}
+    @Override
+    public Long queryCount(Record bean) {
+        return recordDao.queryCount(bean);
+    }
 
-	@Override
-	public List<ConsultantRecordsInfo> queryConsultantRecordsListPage(
-			Map<String, Object> map) {
-		List<Map<String, Object>> list=recordDao.queryConsultantRecordsListPage(map);
+    @Override
+    public List<RecordInfoExtend> queryConsultantRecordsListPage(Map<String, Object> map) {
+        List<Map<String, Object>> list = recordDao.queryConsultantRecordsListPage(map);
 //		logger.info("得到查询咨询记录结果:"+list);
-		List<ConsultantRecordsInfo> resList=Lists.newArrayList();
-		for(Map<String,Object> bean:list){
-			resList.add(translateBean(bean));
-		}
+        List<RecordInfoExtend> resList = Lists.newArrayList();
+        for (Map<String, Object> bean : list) {
+            resList.add(translateBean(bean));
+        }
 //		logger.info("得到list:"+resList);
-		return resList;
-	}
+        return resList;
+    }
 
-	private ConsultantRecordsInfo translateBean(Map<String, Object> bean) {
-		ConsultantRecordsInfo cinfo=new ConsultantRecordsInfo();
-		cinfo.setAvatar(bean.get("avatar")+"");
-		cinfo.setConsultantId(Long.parseLong(bean.get("consultantId")+""));
-		cinfo.setConsultantName(bean.get("consultantName")+"");
-		cinfo.setConsultType(ConsultTypeEnum.toEnum((Integer)bean.get("consultType")));
-		cinfo.setCreateTime((Date)bean.get("createTime"));
-		cinfo.setId(Long.parseLong(bean.get("id")+""));
-		cinfo.setIntroduce(bean.get("introduce")+"");
-		cinfo.setIsCompleted(YesOrNoEnum.toEnum((Integer)bean.get("isCompleted")));
-		cinfo.setIsPaid(YesOrNoEnum.toEnum((Integer)bean.get("isPaid")));
-		cinfo.setIsReplied(YesOrNoEnum.toEnum((Integer)bean.get("isReplied")));
-		cinfo.setPrice(new BigDecimal(bean.get("price")+""));
-		cinfo.setRangeType(RangeTypeEnum.toEnum((Integer)bean.get("rangeType")));
-		cinfo.setSignature(bean.get("signature")+"");
-		cinfo.setUserId((Long)bean.get("userId"));
-		cinfo.setPhone(bean.get("phone")+"");
-//		logger.info("转换实体类："+cinfo);
-		return cinfo;
-	}
+    private RecordInfoExtend translateBean(Map<String, Object> map) {
+        RecordInfoExtend recordInfoExtend = new RecordInfoExtend();
+
+        recordInfoExtend.setId((Long)map.get("id"));
+        recordInfoExtend.setUserId((Long)map.get("userId"));
+        recordInfoExtend.setConsultantId((Long)map.get("consultantId"));
+        recordInfoExtend.setConsultType(ConsultTypeEnum.toEnum((Integer)map.get("consultType")));
+        recordInfoExtend.setIsCompleted(YesOrNoEnum.toEnum((Integer) map.get("isCompleted")));
+        recordInfoExtend.setIsPaid(YesOrNoEnum.toEnum((Integer) map.get("isPaid")));
+        recordInfoExtend.setIsReplied(YesOrNoEnum.toEnum((Integer) map.get("isReplied")));
+        recordInfoExtend.setCreateTime((Date) map.get("createTime"));
+        // consultant 扩展
+        recordInfoExtend.setConsultantPhone(map.get("consultantPhone") + "");
+        recordInfoExtend.setConsultantName(map.get("consultantName") + "");
+        recordInfoExtend.setConsultantAvatar(map.get("consultantAvatar") + "");
+        // user 扩展
+        recordInfoExtend.setUserPhone(map.get("userPhone") + "");
+        recordInfoExtend.setOpenId(map.get("openId") + "");
+        return recordInfoExtend;
+    }
 }

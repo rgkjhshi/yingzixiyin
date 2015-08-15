@@ -168,7 +168,7 @@ public class AdminController {
             page.setUrl(request.getRequestURL().toString());
             RecordQueryResponseDto responseDto = recordFacade.queryPage(requestDto, page);
             if (responseDto != null) {
-                request.setAttribute("recordsList", responseDto.getConsultantRecordList());
+                request.setAttribute("recordList", responseDto.getConsultantRecordList());
                 request.setAttribute("page", page);
             }
         } catch (Exception e) {
@@ -176,6 +176,7 @@ public class AdminController {
         }
         return mav;
     }
+
     @RequestMapping(value = "uploadPicApi.htm",method=RequestMethod.POST)
 	public ModelAndView uploadPic(HttpServletRequest request,
 			HttpServletResponse response, String callback) {
@@ -219,6 +220,5 @@ public class AdminController {
 		map.put("message", "图片上传成功");
 		map.put("imgurl", iconUrl);
 		return new ModelAndView(new MappingJackson2JsonView(), map);
-	
 	}
 }

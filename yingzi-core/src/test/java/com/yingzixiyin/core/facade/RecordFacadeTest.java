@@ -1,7 +1,5 @@
 package com.yingzixiyin.core.facade;
 
-import com.yingzixiyin.api.dto.BaseResponseDto;
-import com.yingzixiyin.api.dto.RecordInfo;
 import com.yingzixiyin.api.dto.RecordQueryRequestDto;
 import com.yingzixiyin.api.dto.RecordQueryResponseDto;
 import com.yingzixiyin.api.enums.ConsultTypeEnum;
@@ -9,7 +7,6 @@ import com.yingzixiyin.api.enums.YesOrNoEnum;
 import com.yingzixiyin.api.facade.RecordFacade;
 import com.yingzixiyin.core.BaseTest;
 import com.yingzixiyin.page.Pagination;
-
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -77,6 +74,6 @@ public class RecordFacadeTest extends BaseTest {
     	logger.info("--查询得到数目："+count);
     	page.setMaxCountAndCurrentPage(count, 1);
     	RecordQueryResponseDto responseDto=recordFacade.queryPage(requestDto, page);
-    	logger.info("查询结果："+responseDto.getConsultantRecordList());
+    	logger.info("查询结果："+responseDto.getRecordInfoExtendList());
     }
 }
