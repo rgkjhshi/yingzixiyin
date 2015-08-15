@@ -16,7 +16,10 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Map;
@@ -114,5 +117,16 @@ public class ConsultantController {
         return new ModelAndView(new MappingJackson2JsonView(), map);
     }
 
+    @RequestMapping("/test/testApi.htm")
+    public ModelAndView test(ServletRequest servletRequest, ServletResponse servletResponse) {
+        HttpServletRequest request = (HttpServletRequest) servletRequest;
+        HttpServletResponse response = (HttpServletResponse) servletResponse;
+        Map<String, Object> map = Maps.newHashMap();
+        map.put("getRequestURL", request.getRequestURL());
+        map.put("getRequestURI", request.getRequestURI());
+        map.put("getContextPath", request.getContextPath());
+        map.put("getServletPath", request.getServletPath());
+        return new ModelAndView(new MappingJackson2JsonView(), map);
+    }
 
 }

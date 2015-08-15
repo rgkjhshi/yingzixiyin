@@ -46,6 +46,20 @@ public class AdminController {
     @Resource
     private RecordFacade recordFacade;
 
+    @RequestMapping("/logoutApi.htm")
+    public ModelAndView logout(HttpSession session) {
+        logger.info("logoutApi.htm");
+        Map<String, Object> map = Maps.newHashMap();
+        try {
+            session.removeAttribute("session_phone");
+        } catch (IllegalStateException e) {
+            logger.info("invalid session");
+        }
+        map.put("status", 0);
+        map.put("message", "退出登陆");
+        return new ModelAndView(new MappingJackson2JsonView(), map);
+    }
+
     @RequestMapping("/updateInfoApi.htm")
     public ModelAndView updateInfo(HttpSession session, Consultant entity) {
         logger.info("updateInfoApi.htm, consultant={}", entity);
@@ -122,19 +136,6 @@ public class AdminController {
         return new ModelAndView(new MappingJackson2JsonView(), map);
     }
 
-    @RequestMapping("/chatApi.htm")
-    public void chat(HttpServletRequest request, HttpServletResponse response,
-                     @RequestParam(value = "recordId", required = true) Long recordId) throws Exception {
-        HttpSession session = request.getSession(false);
-        if (null == session || null == session.getAttribute("session_phone")) {
-            logger.error("chatApi.htm, 无法获取session_phone, recordId={}", recordId);
-            return;
-        }
-        session.setAttribute("session_recordId", recordId);
-        logger.info("chatApi.htm, phone={}, recordId={}", session.getAttribute("session_phone"), recordId);
-        response.sendRedirect("http://localhost:8080/websocket/login.do");
-    }
-
     /**
      * 咨询管理
      */
@@ -200,7 +201,6 @@ public class AdminController {
 			map.put("status", -1);
 			map.put("message", "图片上传失败");
 			return new ModelAndView(new MappingJackson2JsonView(), map);
-			
 		}
 		logger.info("---上传图片得到url："+iconUrl);
 		HttpSession session = request.getSession(false);
