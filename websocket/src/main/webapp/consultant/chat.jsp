@@ -24,7 +24,7 @@
                         <div class="dialog_header" node-type="header">来自&nbsp;<strong>张三</strong>&nbsp;的咨询</div>
                         <div class="dialog_body">
                             <div class="dialog_content">
-                                <ul id="ms_inner" id="console">
+                                <ul id="console"> <!--id="ms_inner"-->
                                 </ul>
                             </div>
                             <div class="dialog_reply">

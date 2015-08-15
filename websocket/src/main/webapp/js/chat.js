@@ -98,7 +98,9 @@
         	time = message.substring(0,i);
         	message = message.substring(i);
         }
-        console.appendChild("<li class='"+author+"'><span>"+time+"</span><div>"+message+"</div></li>");
+//        var li = document.cre
+        $("#console").append("<li class='"+author+"'><span>"+time+"</span><div>"+message+"</div></li>");
+//        console.appendChild("<li class='"+author+"'><span>"+time+"</span><div>"+message+"</div></li>");
         while (console.childNodes.length > 25) {
             console.removeChild(console.firstChild);
         }
