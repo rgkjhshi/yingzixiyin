@@ -2,6 +2,10 @@
 <%
 String session_phone = session.getAttribute("session_phone").toString(); //从session里把a拿出来，并赋值给phone
 %>
+<%
+    String path=request.getContextPath();
+    request.setAttribute("path", path);
+%>
 <div class="header" role="navigation">
     <div class="layout">
         <img height="20" alt="Brand" src="../images/logo.png">
@@ -11,9 +15,16 @@ String session_phone = session.getAttribute("session_phone").toString(); //从se
                 <li><a href="../signup.jsp">注册</a></li>
             <% }else{ %>
                 <li><a><%=session_phone %></a></li>
-                <li><a>退出</a></li>
+                <li class="logout"><a>退出</a></li>
             <% } %>
             <li class="con_admin">咨询师管理后台</li>
         </ul>
     </div>
 </div>
+<script type="text/javascript">
+    $(".logout").on("click",function(){
+        $.get("<%=path %>/admin/logoutApi.htm",function(data){
+            console.log(data);
+        });
+    });
+</script>
