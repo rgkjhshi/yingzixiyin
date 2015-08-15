@@ -38,7 +38,7 @@
 				        </c:if>
 	            	' />
 	            		<div class="info">
-	            			<div class="name">${consultant.name }<span><img src="../images/star.png" />收藏</span></div>
+	            			<div class="name">${consultant.name }<span><img src="../images/star.png" /><span id="favor" style="margin-left:0;" data-favor="">收藏</span></span></div>
 	            			<div class="desc">
 	            				地址：${consultant.address}<br/>¥ ${consultant.videoPrice} 元/次
 	            			</div>
@@ -97,6 +97,40 @@
     </c:if>
     
 <script type="text/javascript" src="<%=path %>/js/main_wechat.js"></script>
+<script type="text/javascript">
+	//检测是否收藏咨询师
+	var isfavor = function(){
+		$.get("<%=path %>/consultant/isCollected.do?"+$("#onlinebtn").attr("data-id"),function(data){
+			if(data.returnCode==0){
+				if(data.isColllect==1){//已收藏
+					$("#favor").text("已收藏");
+					$("#favor").attr("data-favor","2");
+				}else{
+					$("#favor").attr("data-favor","1");
+				}
+			}else{
+				alert(data.returnMessage);
+			}
+		});		
+	}
+	isfavor();
+	//收藏咨询师
+	$("#favor").on("click",function(){
+		//判断是否已咨询师
+		var favor = $("#favor").attr("data-favor");
+		if(favor=="1"){
+			$.get("<%=path %>/consultant/collect_consultant.do?id="+$("#onlinebtn").attr("data-id"),function(data){
+				console.log(data);
+				if(data.returnCode==0){
+					$("#favor").text("已收藏");
+					$("#favor").attr("data-favor","2");
+				}else{
+					alert(data.returnMessage);
+				}
+			});
+		}	
+	});
+</script>
 <script type="text/javascript">
     //检测是否绑定手机号
     var isbind = function(){//type：咨询类型（线上or线下）
