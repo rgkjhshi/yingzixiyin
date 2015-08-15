@@ -20,7 +20,7 @@ public class WebsocketController {
     private static final Logger logger = LoggerFactory.getLogger(WebsocketController.class);
 
     @RequestMapping("/chat.do")
-    public void login(HttpServletRequest request, HttpServletResponse response,
+    public void consultantChat(HttpServletRequest request, HttpServletResponse response,
                       @RequestParam(value="recordId", required = true) Long recordId,
                       @RequestParam(value="phone", required = true) String phone,
                       @RequestParam(value="toPhone", required = true) String toPhone) throws Exception {
@@ -33,6 +33,22 @@ public class WebsocketController {
         logger.info("phone={}, toPhone={}", session.getAttribute("phone"), session.getAttribute("toPhone"));
 //        return new ModelAndView("/consultant/chat.jsp");
         response.sendRedirect("/websocket/consultant/chat.jsp");
+    }
+
+    @RequestMapping("/wxChat.do")
+    public void weixinChat(HttpServletRequest request, HttpServletResponse response,
+                      @RequestParam(value="recordId", required = true) Long recordId,
+                      @RequestParam(value="phone", required = true) String phone,
+                      @RequestParam(value="toPhone", required = true) String toPhone) throws Exception {
+        // 创建一个session
+        HttpSession session = request.getSession();
+        session.setAttribute("recordId", recordId);
+        session.setAttribute("phone", phone);
+        session.setAttribute("toPhone", toPhone);
+        logger.info("recordId={}", session.getAttribute("recordId"));
+        logger.info("phone={}, toPhone={}", session.getAttribute("phone"), session.getAttribute("toPhone"));
+//        return new ModelAndView("/consultant/chat.jsp");
+        response.sendRedirect("/websocket/weixin/chat.jsp");
     }
 
 }
