@@ -1,51 +1,43 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%
-String session_toPhone = "" + session.getAttribute("toPhone"); //从session里把a拿出来，并赋值给phone
+    String path=request.getContextPath();
+    String session_toPhone = "" + session.getAttribute("toPhone"); //从session里把a拿出来，并赋值给phone
 %>
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>消息管理-英姿吸引</title>
-        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="keywords" content="">
-        <meta name="description" content="">
-        <link href="../favicon.ico" rel="shortcut icon">
-        <link href="../css/base.css" rel="stylesheet" type="text/css">
-        <script src="../js/jquery-1.9.1.min.js"></script>
-        <script src="../js/sockjs-0.3.min.js"></script>
-    </head>
-    <body>
-        <%@ include file="../parts/head.jsp" %> 
-        <div class="info">
-            <div class="layout">
-                <%@ include file="../parts/left.jsp" %> 
-                <div class="maincontent">
-                    <div class="detail_box">
-                        <!-- <i id="closeDialogBtn"></i> -->
-                        <div class="dialog_header" node-type="header">来自&nbsp;<strong><%=session_toPhone %></strong>&nbsp;的咨询</div>
-                        <div class="dialog_body">
-                            <div class="dialog_content">
-                                <ul id="console">
-                                </ul>
-                            </div>
-                            <div class="dialog_reply">
-                                <div class="reply_inner">
-                                    <textarea class="reply_content" id="message"></textarea>
-                                    <a class="send_btn" id='echo'>发送</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+<meta name="format-detection"content="telephone=no">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<title>消息详情</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<link rel="stylesheet" href="../css/weixin.css">
+<link href="../favicon.ico" rel="shortcut icon"></head>
+<script type="text/javascript" src="../js/zepto.min.js"></script>
+<script src="../js/sockjs-0.3.min.js"></script>
+<body>
+    <div class="main layout">
+        <ul class="consultants ms_detail" id="console">
+            <!-- <li class="ms_my">
+                <div class="ms_name">我</div>
+                <div class="ms_content">咨询师您好。</div>
+            </li>
+            <li class="ms_rp">
+                <div class="ms_name">咨询师张三</div>
+                <div class="ms_content">您好，很高兴为您解决问题。</div>
+            </li>
+ -->        </ul>
+        <div class="ms_send">
+            <input class="ms_send_content" type="text" id="message" placeholder="请输入您的问题" /><span class="ms_send_btn" id='echo'>发送</span>
+            <!-- 
+            咨询已结束
+            -->         
         </div>
-        <%@ include file="../parts/foot.jsp" %> 
-    <script src="../js/chat.js"></script>
-    <script>
-        $("#message").addClass("cur");
-        $("#message_all").show();
-    </script>
-    </body>
+    </div>
+<script type="text/javascript" src="../js/wechat.js"></script>
+</body>
 </html>

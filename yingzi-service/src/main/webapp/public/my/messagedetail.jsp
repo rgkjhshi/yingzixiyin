@@ -3,6 +3,9 @@
 <%
 	String path=request.getContextPath();    
 %>
+<%
+    String session_toPhone = "" + session.getAttribute("toPhone"); //从session里把a拿出来，并赋值给phone
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +21,6 @@
 <link rel="stylesheet" href="<%=path%>/css/base.css">
 <link href="<%=path%>/favicon.ico" rel="shortcut icon"></head>
 <script type="text/javascript" src="<%=path%>/js/zepto.min.js"></script>
-<%-- <script type="text/javascript" src="<%=path%>/js/touch.js"></script> --%>
 <body>
     <div class="main layout">
     	<ul class="consultants ms_detail">
@@ -26,45 +28,9 @@
     			<div class="ms_name">我</div>
     			<div class="ms_content">咨询师您好。</div>
     		</li>
-    		<li class="ms_my">
-    			<div class="ms_name">我</div>
-    			<div class="ms_content">我想咨询一个问题。</div>
-    		</li>
     		<li class="ms_rp">
     			<div class="ms_name">咨询师张三</div>
     			<div class="ms_content">您好，很高兴为您解决问题。</div>
-    		</li>
-    		<li class="ms_my">
-    			<div class="ms_name">我</div>
-    			<div class="ms_content">我最近心情不好，常常对周围的人发火，自己也找不到原因，我这到底是怎么了呢，请您帮我分析一下。</div>
-    		</li>
-    		<li class="ms_rp">
-    			<div class="ms_name">咨询师张三</div>
-    			<div class="ms_content">你这叫没事儿闲的。</div>
-    		</li>
-    		<li class="ms_rp">
-    			<div class="ms_name">咨询师张三</div>
-    			<div class="ms_content">是不是傻。</div>
-    		</li>
-    		<li class="ms_my">
-    			<div class="ms_name">我</div>
-    			<div class="ms_content">我想咨询一个问题。</div>
-    		</li>
-    		<li class="ms_rp">
-    			<div class="ms_name">咨询师张三</div>
-    			<div class="ms_content">您好，很高兴为您解决问题。</div>
-    		</li>
-    		<li class="ms_my">
-    			<div class="ms_name">我</div>
-    			<div class="ms_content">我最近心情不好，常常对周围的人发火，自己也找不到原因，我这到底是怎么了呢，请您帮我分析一下。</div>
-    		</li>
-    		<li class="ms_rp">
-    			<div class="ms_name">咨询师张三</div>
-    			<div class="ms_content">你这叫没事儿闲的。</div>
-    		</li>
-    		<li class="ms_rp">
-    			<div class="ms_name">咨询师张三</div>
-    			<div class="ms_content">是不是傻。</div>
     		</li>
        	</ul>
        	<div class="ms_send">

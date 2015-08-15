@@ -26,7 +26,13 @@
     		<c:forEach items="${myMessages}" var="m">
     		<c:out value="${m[\"completed\"]}"></c:out>
     			<li class='record unend <c:out value="${m[\"is_read\"]==0 ?\"new_ms\":\"\"}"></c:out>'>
-	        		<a href="${ chaturl}?recordId=<c:out value='${m[\"record_id\"]}'></c:out>&to_phone=<c:out value='${m[\"phone\"]}'></c:out>&phone=<c:out value='${WX_LOGIN_USER.phone}'></c:out>">
+    				<form id="chatform" method="post" name="chatform" action="${ chaturl}">
+                        <input type="hidden" name="phone" value="${WX_LOGIN_USER.phone}" />
+                        <input type="hidden" name="toPhone" value="{m[\"phone\"]}" />
+                        <input type="hidden" name="recordId" value="$${m[\"record_id\"]}" />
+                    </form>
+	        		<a>
+	        			<!-- href="${ chaturl}?recordId=<c:out value='${m[\"record_id\"]}'></c:out>&to_phone=<c:out value='${m[\"phone\"]}'></c:out>&phone=<c:out value='${WX_LOGIN_USER.phone}'></c:out>" -->
 	        			<div class="message">
 		        			来自<span class="red_font">
 		        				<c:out value="${m[\"name\"]}"></c:out>
@@ -39,44 +45,14 @@
 		        	</a>
     			</li>
     		</c:forEach>
-    		<!-- <li class="record unend">
-        		<a href="messagedetail.html">
-        			<div class="message">
-	        			来自<span class="red_font">张三</span>的消息
-	        			<span class="ms_status">咨询中</span>
-	        		</div>
-	        		<i></i>
-	        	</a>
-    		</li>
-    		<li class="record">
-        		<a href="messagedetail.html">        			
-        			<div class="message">
-	        			来自<span class="red_font">张三</span>的消息
-	        			<span class="ms_status">已结束</span>
-	        		</div>
-	        		<i></i>
-	        	</a>    		
-	        </li>
-    		<li class="record">
-        		<a href="messagedetail.html">
-        			<div class="message">
-	        			来自<span class="red_font">张三</span>的消息
-	        			<span class="ms_status">已结束</span>
-	        		</div>
-	        		<i></i>
-	        	</a>
-    		</li>
-    		<li class="record">
-        		<a href="messagedetail.html">        			
-        			<div class="message">
-	        			来自<span class="red_font">张三</span>的消息
-	        			<span class="ms_status">已结束</spa已结束n>
-	        		</div>
-	        		<i></i>
-	        	</a>
-    		</li> -->
        	</ul>
     </div>
 <script type="text/javascript" src="<%=path%>/js/main_wechat.js"></script>
+<script>
+    //打开咨询详情弹窗
+    $(".unend").on("click",function(){
+        $(this).find("form")[0].submit();
+    });
+</script>
 </body>
 </html>
