@@ -46,6 +46,7 @@ public class AdminController {
     @Resource
     private RecordFacade recordFacade;
 
+    // 退出登录
     @RequestMapping("/logoutApi.htm")
     public ModelAndView logout(HttpSession session) {
         logger.info("logoutApi.htm");
@@ -60,12 +61,12 @@ public class AdminController {
         return new ModelAndView(new MappingJackson2JsonView(), map);
     }
 
+    // 更新个人信息
     @RequestMapping("/updateInfoApi.htm")
     public ModelAndView updateInfo(HttpSession session, Consultant entity) {
         logger.info("updateInfoApi.htm, consultant={}", entity);
         Map<String, Object> map = Maps.newHashMap();
         String phone = (String) session.getAttribute("session_phone");
-
         // 查询
         ConsultantQueryRequestDto queryRequestDto = new ConsultantQueryRequestDto();
         queryRequestDto.setPhone(phone);
@@ -86,6 +87,7 @@ public class AdminController {
         return new ModelAndView(new MappingJackson2JsonView(), map);
     }
 
+    // 修改密码
     @RequestMapping("/changePasswordApi.htm")
     public ModelAndView changePassword(HttpSession session,
                                        @RequestParam(value = "oldPassword", required = true) String oldPassword,
@@ -114,6 +116,33 @@ public class AdminController {
         return new ModelAndView(new MappingJackson2JsonView(), map);
     }
 
+    // 结束咨询
+    @RequestMapping("/endChatApi.htm")
+    public ModelAndView endChat(Long recordId) {
+        logger.info("endChatApi.htm, recordId={}", recordId);
+        Map<String, Object> map = Maps.newHashMap();
+
+        // 查询
+        RecordQueryRequestDto queryRequestDto = new RecordQueryRequestDto();
+        queryRequestDto.setId(recordId);
+        RecordInfo info = recordFacade.queryOne(queryRequestDto);
+        if (null == info) {
+            map.put("status", -1);
+            map.put("message", "未找到咨询纪录");
+            logger.info("未找到咨询纪录");
+        } else {
+            RecordInfo updateInfo = new RecordInfo();
+            updateInfo.setId(info.getId());
+            updateInfo.setIsCompleted(YesOrNoEnum.YES);
+            BaseResponseDto responseDto = recordFacade.update(updateInfo);
+            map.put("status", responseDto.getReturnCode());
+            map.put("message", responseDto.getReturnMessage());
+            logger.info(responseDto.getReturnMessage());
+        }
+        return new ModelAndView(new MappingJackson2JsonView(), map);
+    }
+
+    // 查询个人信息
     @RequestMapping("/queryInfoApi.htm")
     public ModelAndView queryInfo(HttpSession session) {
         Map<String, Object> map = Maps.newHashMap();
@@ -136,9 +165,7 @@ public class AdminController {
         return new ModelAndView(new MappingJackson2JsonView(), map);
     }
 
-    /**
-     * 咨询管理
-     */
+    // 咨询列表
     @RequestMapping(value = "queryRecordApi.htm")
     public ModelAndView getConsultantInfor(HttpServletRequest request,
                                            @RequestParam(value = "status", defaultValue = "1", required = false) Integer status,
@@ -177,6 +204,7 @@ public class AdminController {
         return mav;
     }
 
+    // 上传头像
     @RequestMapping(value = "uploadPicApi.htm",method=RequestMethod.POST)
 	public ModelAndView uploadPic(HttpServletRequest request,
 			HttpServletResponse response, String callback) {
