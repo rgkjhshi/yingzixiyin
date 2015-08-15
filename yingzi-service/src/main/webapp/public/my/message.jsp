@@ -28,8 +28,8 @@
     			<li class='record unend <c:out value="${m[\"is_read\"]==0 ?\"new_ms\":\"\"}"></c:out>'>
     				<form id="chatform" method="post" name="chatform" action="${ chaturl}">
                         <input type="hidden" name="phone" value="${WX_LOGIN_USER.phone}" />
-                        <input type="hidden" name="toPhone" value="{m[\"phone\"]}" />
-                        <input type="hidden" name="recordId" value="$${m[\"record_id\"]}" />
+                        <input type="hidden" name="toPhone" value="${m[\"phone\"]}" />
+                        <input type="hidden" name="recordId" value="${m[\"record_id\"]}" />
                     </form>
 	        		<a>
 	        			<!-- href="${ chaturl}?recordId=<c:out value='${m[\"record_id\"]}'></c:out>&to_phone=<c:out value='${m[\"phone\"]}'></c:out>&phone=<c:out value='${WX_LOGIN_USER.phone}'></c:out>" -->

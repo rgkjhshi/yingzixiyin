@@ -61,6 +61,51 @@
             <version>2.5.4</version>
         </dependency>
 	</dependencies>
+	 <!-- profiles -->
+    <properties>
+        <profiles.dir>src/profiles</profiles.dir>
+    </properties>
+	<profiles>
+        <profile>
+            <id>local</id>
+            <properties>
+            	<env.resource.dir>${profiles.dir}/local</env.resource.dir>
+            </properties>
+            <build>
+                <resources>
+                    <resource>
+                        <directory>${profiles.dir}/local</directory>
+                    </resource>
+                </resources>
+            </build>
+            <activation>
+            	<activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+		<profile>
+            <id>online</id>
+            <properties>
+            	<env.resource.dir>${profiles.dir}/online</env.resource.dir>
+            </properties>
+            <build>
+                <resources>
+                    <resource>
+                        <directory>${profiles.dir}/online</directory>
+                    </resource>
+                </resources>
+            </build>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <build>
+                <resources>
+                    <resource>
+                        <directory>${profiles.dir}/prod</directory>
+                    </resource>
+                </resources>
+            </build>
+        </profile>
+    </profiles>
 	<build>
 		<finalName>yingzi-admin</finalName>
 		<plugins>
@@ -75,8 +120,8 @@
                             <directory>src/main/resources</directory>
                             <targetPath>WEB-INF/classes</targetPath>
                         </resource>
-                        <resource>
-                            <directory>src/profiles/local</directory>
+                         <resource>
+                            <directory>${env.resource.dir}</directory>
                             <targetPath>WEB-INF/classes</targetPath>
                         </resource>
                     </webResources>

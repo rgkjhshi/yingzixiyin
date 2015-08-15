@@ -93,6 +93,9 @@
     <profiles>
         <profile>
             <id>local</id>
+            <properties>
+            	<env.resource.dir>${profiles.dir}/local</env.resource.dir>
+            </properties>
             <build>
                 <resources>
                     <resource>
@@ -104,7 +107,19 @@
             	<activeByDefault>true</activeByDefault>
             </activation>
         </profile>
-
+		<profile>
+            <id>online</id>
+            <properties>
+            	<env.resource.dir>${profiles.dir}/online</env.resource.dir>
+            </properties>
+            <build>
+                <resources>
+                    <resource>
+                        <directory>${profiles.dir}/online</directory>
+                    </resource>
+                </resources>
+            </build>
+        </profile>
         <profile>
             <id>prod</id>
             <build>
@@ -127,11 +142,11 @@
                     <!--将资源文件打到classes目录下-->
                     <webResources>
                         <resource>
-                            <directory>src/profiles/local</directory>
+                            <directory>src/main/resources</directory>
                             <targetPath>WEB-INF/classes</targetPath>
                         </resource>
-                        <resource>
-                            <directory>src/main/resources</directory>
+                         <resource>
+                            <directory>${env.resource.dir}</directory>
                             <targetPath>WEB-INF/classes</targetPath>
                         </resource>
                     </webResources>
