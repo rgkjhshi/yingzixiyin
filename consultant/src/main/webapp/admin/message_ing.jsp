@@ -22,11 +22,11 @@
             	<div class="maincontent">
             		<div class="subtitle">进行中的咨询</div>
             		   <div class="message_box">
-            		   	<c:forEach items="${recordsList}" var="r">
+            		   	<c:forEach items="${recordList}" var="r">
             		   		<div class="message_item" node-type="item">
                                 <form id="chatform" method="post" name="chatform" action="/websocket/chat.do">
-                                    <input type="hidden" name="phone" value="${r.consultantId}" />
-                                    <input type="hidden" name="toPhone" value="${r.userId}" />
+                                    <input type="hidden" name="phone" value="${r.consultantPhone}" />
+                                    <input type="hidden" name="toPhone" value="${r.userPhone}" />
                                     <input type="hidden" name="recordId" value="${r.id}" />
                                 </form>
                                 <div class="ms_header">

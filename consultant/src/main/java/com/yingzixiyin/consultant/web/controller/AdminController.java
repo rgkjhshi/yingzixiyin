@@ -168,7 +168,7 @@ public class AdminController {
             page.setUrl(request.getRequestURL().toString());
             RecordQueryResponseDto responseDto = recordFacade.queryPage(requestDto, page);
             if (responseDto != null) {
-                request.setAttribute("recordList", responseDto.getConsultantRecordList());
+                request.setAttribute("recordList", responseDto.getRecordInfoExtendList());
                 request.setAttribute("page", page);
             }
         } catch (Exception e) {

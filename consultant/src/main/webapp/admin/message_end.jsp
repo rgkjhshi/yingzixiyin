@@ -22,7 +22,7 @@
             	<div class="maincontent">
             		<div class="subtitle">已结束的咨询</div>
             		 <div class="message_box">
-            		   	<c:forEach items="${recordsList}" var="r">
+            		   	<c:forEach items="${recordList}" var="r">
             		   		<div class="message_item" node-type="item">
                             <div class="ms_header">
                                 <div class="ms_name">${r.consultantName }</div>
