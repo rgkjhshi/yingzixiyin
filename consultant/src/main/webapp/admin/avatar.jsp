@@ -11,6 +11,7 @@
         <link href="../favicon.ico" rel="shortcut icon">
         <link href="../css/base.css" rel="stylesheet" type="text/css">
         <script src="../js/jquery-1.9.1.min.js"></script>
+        <script src="http://cdn.bootcss.com/jquery.form/3.51/jquery.form.min.js"></script>
     </head>
     <body>
         <script>

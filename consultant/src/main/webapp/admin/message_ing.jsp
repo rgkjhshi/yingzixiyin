@@ -25,9 +25,9 @@
             		   	<c:forEach items="${recordsList}" var="r">
             		   		<div class="message_item" node-type="item">
                                 <form id="chatform" method="post" name="chatform" action="/websocket/chat.do">
-                                    <input type="text" type="hidden" name="phone" value="13167394537" />
-                                    <input type="text" type="hidden" name="toPhone" value="13504330637" />
-                                    <input type="text" type="hidden" name="recordId" value="1" />
+                                    <input type="hidden" name="phone" value="13167394537" />
+                                    <input type="hidden" name="toPhone" value="13504330637" />
+                                    <input type="hidden" name="recordId" value="1" />
                                 </form>
                                 <div class="ms_header">
                                     <div class="ms_name">${r.consultantName }</div>

@@ -156,7 +156,6 @@
     //完善个人信息
     var moreinfo = function () {
         var gender = $("input[name=gender]:checked").val();
-        console.log(gender);
         if (!gender) {
             $(".gender_tips").text("请选择您的性别");
             return;
@@ -279,7 +278,18 @@
     var uploadimg = function(){
         var path = console.log($("#filepath").val());
         if(path!=""){
-            document.getElementById("avatarform").submit();
+            // document.getElementById("avatarform").submit();
+            $("#avatarform").ajaxSubmit({
+                success:function(data){
+                    console.log(data);
+                    alert("上传成功");
+                },
+                error:function(data){
+                    console.log(data);
+                    alert("上传失败")
+                }
+            });
+
         }else{
             console.log("头像不能为空");
         }
