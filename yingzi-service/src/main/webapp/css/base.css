@@ -145,7 +145,7 @@ a{text-decoration: none;color:#333;}
 	width: 24px;
     height: 24px;
     float: none;
-    vertical-align: text-top;
+    vertical-align: middle;
     margin-right: 5px;
     display: inline-block;
 }

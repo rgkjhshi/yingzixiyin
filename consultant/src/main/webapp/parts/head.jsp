@@ -3,8 +3,7 @@
 String session_phone = session.getAttribute("session_phone").toString(); //从session里把a拿出来，并赋值给phone
 %>
 <%
-    String path=request.getContextPath();
-    request.setAttribute("path", path);
+    String head_path=request.getContextPath();
 %>
 <div class="header" role="navigation">
     <div class="layout">
@@ -23,8 +22,11 @@ String session_phone = session.getAttribute("session_phone").toString(); //从se
 </div>
 <script type="text/javascript">
     $(".logout").on("click",function(){
-        $.get("<%=path %>/admin/logoutApi.htm",function(data){
-            console.log(data);
+        $.get("<%=head_path %>/admin/logoutApi.htm",function(data){
+            if(data.status==0){
+            	alert('退出成功！');
+            	window.location.href="/consultant/signin.jsp";
+            }
         });
     });
 </script>

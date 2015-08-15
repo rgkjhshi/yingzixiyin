@@ -100,8 +100,9 @@
 <script type="text/javascript">
 	//检测是否收藏咨询师
 	var isfavor = function(){
-		$.get("<%=path %>/consultant/isCollected.do?"+$("#onlinebtn").attr("data-id"),function(data){
+		$.get("<%=path %>/consultant/isCollected.do?id="+$("#onlinebtn").attr("data-id"),function(data){
 			if(data.returnCode==0){
+				alert(data.isColllect);
 				if(data.isColllect==1){//已收藏
 					$("#favor").text("已收藏");
 					$("#favor").attr("data-favor","2");
@@ -116,8 +117,8 @@
 	isfavor();
 	//收藏咨询师
 	$("#favor").on("click",function(){
-		//判断是否已咨询师
 		var favor = $("#favor").attr("data-favor");
+		//判断是否已收藏咨询师
 		if(favor=="1"){
 			$.get("<%=path %>/consultant/collect_consultant.do?id="+$("#onlinebtn").attr("data-id"),function(data){
 				console.log(data);
