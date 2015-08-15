@@ -24,15 +24,20 @@
             		   <div class="message_box">
             		   	<c:forEach items="${recordsList}" var="r">
             		   		<div class="message_item" node-type="item">
-                            <div class="ms_header">
-                                <div class="ms_name">${r.consultantName }</div>
-                                <div class="ms_time"><fmt:formatDate value="${ r.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/></div>
-                            </div>
-                            <div class="ms_content">
-                                <div>哈哈，这里是发送的信息噢</div>
-                                <div class="ms_new">new</div>
-                                <div class="ms_ing">${r.isCompleted.value==0?"进行中":"已结束" }</div>
-                            </div>
+                                <form id="chatform" method="post" name="chatform" action="/websocket/chat.do">
+                                    <input type="text" type="hidden" name="phone" value="13167394537" />
+                                    <input type="text" type="hidden" name="toPhone" value="13504330637" />
+                                    <input type="text" type="hidden" name="recordId" value="1" />
+                                </form>
+                                <div class="ms_header">
+                                    <div class="ms_name">${r.consultantName }</div>
+                                    <div class="ms_time"><fmt:formatDate value="${ r.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/></div>
+                                </div>
+                                <div class="ms_content">
+                                    <div>哈哈，这里是发送的信息噢</div>
+                                    <div class="ms_new">new</div>
+                                    <div class="ms_ing">${r.isCompleted.value==0?"进行中":"已结束" }</div>
+                                </div>
                         	</div>
             		   	</c:forEach>
               			${page}
@@ -44,18 +49,30 @@
     <script>
     //聊天跳转
     function showDialog(phone,tophone,id){//传入弹窗类型：咨询详情   mid：咨询id
-        var url = "http://" + window.location.host + "/websocket/chat.do?phone="+phone+"&toPhone="+tophone+"&recordId="+id;
-        /*$.post(url,{'phone':phone,'toPhone':tophone,'recordId':id},function(){
-
-        });*/
-        window.location.href = url;
+        // var url = "http://" + window.location.host + "/websocket/chat.do?phone="+phone+"&toPhone="+tophone+"&recordId="+id;
+        var url = "http://" + window.location.host + "/websocket/chat.do";
+        // $.post(url,{'phone':phone,'toPhone':tophone,'recordId':id},function(){
+        console.log("xixi");
+        // });
+        $.ajax({
+          type: "POST",
+          url: url,
+          data: {'phone':phone,'toPhone':tophone,'recordId':id},
+          async: false,
+          success: function(){
+                console.log("success oo");
+          }
+        });
+        // window.location.href = url;
     }
     //打开咨询详情弹窗
     $(".message_item").on("click",function(){
-        var phone = '13167394537';
-        var tophone = '13504330637';
-        var id = '1';
-        showDialog(phone,tophone,id);
+        console.log("click");
+        // var phone = '13167394537';
+        // var tophone = '13504330637';
+        // var id = '1';
+        // showDialog(phone,tophone,id);
+        $(this).find("form").submit();
     });
     </script>
     <script>

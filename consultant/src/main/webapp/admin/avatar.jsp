@@ -79,7 +79,7 @@
                             <li class="uc-tips">
                                 IE浏览器下无法进行头像实时预览，建议您使用chrome、firefox等浏览器上传。
                                 <br/>
-                                建议上传头像长宽比例为1:1。上传图片大小不能超过1M。
+                                建议上传头像长宽比例为1:1。最佳尺寸为100*100。上传图片大小不能超过1M。
                             </li>
                         </ul>
                         <form id="avatarform" method="post" enctype="multipart/form-data" action="/consultant/admin/uploadPicApi.htm">

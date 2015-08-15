@@ -11,6 +11,23 @@
         <link href="../favicon.ico" rel="shortcut icon">
         <link href="../css/base.css" rel="stylesheet" type="text/css">
         <script src="../js/jquery-1.9.1.min.js"></script>
+        <style>
+            .sign_title{
+                vertical-align: top;
+            }
+            .exg_div{
+                line-height: 2em;
+                font-size: 12px;
+            }
+            .exg_btn{
+                color:blue;
+                cursor: pointer;
+            }
+            .exg{
+                display: none;
+                color:#999;
+            }
+        </style>
     </head>
     <body>
         <%@ include file="../parts/head.jsp" %> 
@@ -123,43 +140,67 @@
                         <div>
                             <div class="sign_title">咨询特长：</div>
                             <div class="sign_content">
-                                <textarea class="form_border" name="speciality" data-validate="notnull" data-tip="咨询特长" id="speciality"></textarea>
+                                <textarea class="form_border" name="speciality" data-validate="notnull" data-tip="咨询特长" id="speciality" placeholder="单身情感问题，婚恋情感，失恋，离婚，家暴"></textarea>
                                 <span class="tips"></span>
+                                <div class="exg_div">
+                                    <div class="exg_btn">查看示例</div>
+                                    <div class="exg">单身情感问题，婚恋情感，失恋，离婚，家暴</div>
+                                </div>
                             </div>
                         </div>
                         <div>
                             <div class="sign_title">专业背景：</div>
                             <div class="sign_content">
-                                <textarea class="form_border" name="professional" data-validate="notnull" data-tip="专业背景" id="professional"></textarea>
+                                <textarea class="form_border" name="professional" data-validate="notnull" data-tip="专业背景" id="professional" placeholder="情感咨询，恋爱咨询，婚姻咨询，婚姻与性咨询，艾瑞克森催眠疗法，人本疗法"></textarea>
                                 <span class="tips"></span>
+                                <div class="exg_div">
+                                    <div class="exg_btn">查看示例</div>
+                                    <div class="exg">情感咨询，恋爱咨询，婚姻咨询，婚姻与性咨询，艾瑞克森催眠疗法，人本疗法</div>
+                                </div>
                             </div>
                         </div>
                         <div>
                             <div class="sign_title">受训背景：</div>
                             <div class="sign_content">
-                                <textarea class="form_border" name="background" data-validate="notnull" data-tip="受训背景" id="background"></textarea>
+                                <textarea class="form_border" name="background" data-validate="notnull" data-tip="受训背景" id="background" placeholder="中科院心理所临床心理学在职研究生，国家注册二级心理咨询师，国家注册婚姻家庭咨询师"></textarea>
                                 <span class="tips"></span>
+                                <div class="exg_div">
+                                    <div class="exg_btn">查看示例</div>
+                                    <div class="exg">中科院心理所临床心理学在职研究生，国家注册二级心理咨询师，国家注册婚姻家庭咨询师</div>
+                                </div>
                             </div>
                         </div>
                         <div>
                             <div class="sign_title">可预约时间：</div>
                             <div class="sign_content">
-                                <textarea class="form_border" name="bookTime" data-validate="notnull" data-tip="可预约时间" id="bookTime"></textarea>
+                                <textarea class="form_border" name="bookTime" data-validate="notnull" data-tip="可预约时间" id="bookTime" placeholder="周六、周日"></textarea>
                                 <span class="tips"></span>
+                                <div class="exg_div">
+                                    <div class="exg_btn">查看示例</div>
+                                    <div class="exg">周六、周日</div>
+                                </div>
                             </div>
                         </div>
                         <div>
                             <div class="sign_title">地址：</div>
                             <div class="sign_content">
-                                <textarea class="form_border" name="address" data-validate="notnull" data-tip="地址" id="address"></textarea>
+                                <textarea class="form_border" name="address" data-validate="notnull" data-tip="地址" id="address" placeholder="北京市朝阳区朝外大街10号"></textarea>
                                 <span class="tips"></span>
+                                <div class="exg_div">
+                                    <div class="exg_btn">查看示例</div>
+                                    <div class="exg">北京市朝阳区朝外大街10号</div>
+                                </div>
                             </div>
                         </div>
                         <div>
                             <div class="sign_title">个人简介：</div>
                             <div class="sign_content">
-                                <textarea class="form_border" name="introduce" data-validate="notnull" data-tip="个人简介" id="introduce" style="height:13em;"></textarea>
+                                <textarea class="form_border" name="introduce" data-validate="notnull" data-tip="个人简介" id="introduce" style="height:13em;" placeholder="中科院心理所临床心理学在职研究生，国家注册二级心理咨询师，国家注册婚姻家庭咨询师（不得少于150字）"></textarea>
                                 <span class="tips"></span>
+                                <div class="exg_div">
+                                    <div class="exg_btn">查看示例</div>
+                                    <div class="exg">中科院心理所临床心理学在职研究生，国家注册二级心理咨询师，国家注册婚姻家庭咨询师（不得少于150字）</div>
+                                </div>
                             </div>
                         </div>
                         <div>
@@ -191,6 +232,16 @@
             }else if($("#status").val()=="0"){
                 $("#status").val("1");
             }
+        });
+        //示例显示与隐藏
+        $(".exg_btn").on("click",function(){
+            var txt = $(this).text();
+            if (txt=="查看示例"){
+                $(this).text("收起");
+            }else{
+                $(this).text("查看示例");
+            }
+            $(this).siblings(".exg").toggle();
         });
     </script>
     </body>
