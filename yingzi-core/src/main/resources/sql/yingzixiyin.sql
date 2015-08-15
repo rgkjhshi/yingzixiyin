@@ -89,9 +89,14 @@ CREATE TABLE `code` (
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='验证码表';
 
 
-INSERT INTO `consultant` (`id`, `phone`, `email`, `password`, `alipay`, `nickname`, `name`, `gender`, `age`, `address`, `professional`, `background`, `book_time`, `price`, `introduce`, `signature`, `avatar`, `range_type`, `status`) VALUES
-  (1, '13121435540', '313832830@qq.com', '123456', '313832830@qq.com', 'nickname', 'name', 0, 18, 'address', 'professional', 'background', 'bookTime', '59.00', 'introduce', 'signature', '', 1, 2);
+INSERT INTO `consultant` (`id`, `phone`, `email`, `password`, `alipay`, `nickname`, `name`, `gender`, `age`, `address`, `speciality`, `professional`, `background`, `book_time`, `price`, `introduce`, `signature`, `avatar`, `range_type`, `status`) VALUES
+  (1, '13121435540', '313832830@qq.com', '123456', '313832830@qq.com', 'nickname', 'name', 0, 18, 'address', 'speciality','professional', 'background', 'bookTime', '59.00', 'introduce', 'signature', '', 1, 2);
 
 
 INSERT INTO `user` (`id`, `open_id`, `phone`, `password`, `is_bind`, `collected`, `visited`) VALUES
-  (1, '123123', '13121435540', '123456', 1, '', '');
+  (1, '123123', '13121435541', '123456', 1, '', '');
+
+
+INSERT INTO `record` (`id`, `user_id`, `consultant_id`, `consult_type`, `is_paid`, `is_replied`, `is_completed`, `create_time`) VALUES
+  (1, 1, 1, 1, 1, 0, 0, '2015-08-15 06:13:39');
+
