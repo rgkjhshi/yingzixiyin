@@ -27,7 +27,7 @@ public class ChatHandshakeInterceptor extends HttpSessionHandshakeInterceptor {
             ServletServerHttpRequest servletRequest = (ServletServerHttpRequest) request;
             HttpSession session = servletRequest.getServletRequest().getSession(false);
             if (session != null) {
-                logger.info("session不为null, 下面是session中的键值对:");
+                logger.info("session is not null, key-value in session:");
                 Enumeration<String> names = session.getAttributeNames();
                 while (names.hasMoreElements()) {
                     String name = names.nextElement();

@@ -82,7 +82,7 @@
         }else if(author == 'user'){
         	var i = message.indexOf(';');
         	time = message.substring(0,i);
-        	message = message.substring(i);
+        	message = message.substring(i+1);
         }
 
         $("#console").append("<li class='"+author+"'><span>"+time+"</span><div>"+message+"</div></li>");
