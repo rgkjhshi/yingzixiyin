@@ -19,6 +19,7 @@ import javax.servlet.http.HttpSession;
 public class WebsocketController {
     private static final Logger logger = LoggerFactory.getLogger(WebsocketController.class);
 
+    // http://yingzixiyin.com/websocket/chat.do?phone=13121435540&toPhone=13121435541&recordId=1
     @RequestMapping("/chat.do")
     public void consultantChat(HttpServletRequest request, HttpServletResponse response,
                       @RequestParam(value="recordId", required = true) Long recordId,
