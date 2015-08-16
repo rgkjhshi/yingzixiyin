@@ -114,7 +114,7 @@
     count(1)-sum(m.is_read) as msgcount,
     case when count(1)>sum(m.is_read) then 0 else 1 end as is_read  
     from consultant c inner join record r on c.id = r.consultant_id 
-    left join message m  on r.id=m.record_id 
+    left join message m  on r.id=m.record_id and c.phone =m.from_phone
     where r.user_id=#{userId} and 
     r.is_paid=1 and 
     r.is_completed=0 
