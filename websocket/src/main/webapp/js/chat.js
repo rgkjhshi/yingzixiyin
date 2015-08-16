@@ -68,7 +68,9 @@
         if (ws != null) {
             var message = document.getElementById('message').value;
             log('me',message);
-            ws.send(message);
+            if($.trim(message)!=""){
+                ws.send(message);
+            }
         } else {
             alert('未建立对话连接，请重试！');
         }
