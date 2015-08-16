@@ -274,6 +274,26 @@
         infoQuery();
     }
 
+    //查询个人基本信息
+    var avatarQuery = function (){
+        $.post(infoURL,function(data){
+            if(data.status==0||data.status=="0"){
+                var _data = data.data;
+                var avatarurl = _data["avatar"];
+                if(avatarurl!=""){
+                    $(".avatar_preview").css("background-image","url("+avatarurl+")");
+                    $("#preview").show();
+                }
+            }else{
+                // var tips = $("<div class='fdtips errortip'>"+data.message+"</div>");
+                // $(tips).appendTo($("body")).fadeOut(3000);
+            }
+        });
+    }
+
+    if(currentURL.indexOf('admin/avatar')>0){
+        avatarQuery();
+    }
     // 头像上传
     var uploadimg = function(){
         var path = $("#filepath").val();
@@ -286,6 +306,7 @@
                     console.log(data);
                     if(data.status==0){
                         alert("上传成功");
+                        $("#upload_btn").hide();
                     }else{
                         alert(data.message);
                         window.location.reload();
