@@ -53,7 +53,7 @@ public class ConsultantController {
 			page.setMaxCountAndCurrentPage(count, pageNum);
 			page.setUrl(request.getContextPath()+"/consultant/query_consultants.do");
 			ConsultantQueryResponseDto responseDto=  consultantFacade.queryPage(requestDto,page); 
-			logger.info("--条件筛选得到的咨询师列表为："+responseDto.getConsultantInfoList());
+//			logger.info("--条件筛选得到的咨询师列表为："+responseDto.getConsultantInfoList());
 			request.setAttribute("list", responseDto.getConsultantInfoList());
 			request.setAttribute("page", page);
 		}catch(Exception e){

@@ -267,14 +267,14 @@ public class UserCenterController {
 	 */
 	@RequestMapping(value="wx_message_records.do")
 	public String messageRecord(HttpServletRequest request,HttpServletResponse response,String code) throws IOException{
-		logger.info("---用户咨询的消息记录页面----");
+		logger.info("---用户咨询的消息记录页面/|code="+code);
 		//用户未读信息
 		String response_page="public/my/message";
 		boolean flag=weixinOauthHelper.oauthAndLogin(request, code);
 		if(flag){
 			UserInfo user=SessionUtil.getLoginUserToSession(request);
 			List<Map<String,Object>> message=messageFacade.queryConsultantAndMessageCountByUserId(user.getId());
-			logger.info("---message:"+message);
+//			logger.info("---message:"+message);
 			if(message!=null){
 				request.setAttribute("myMessages", message);
 				request.setAttribute("chaturl", WeChat.getChatUrl());

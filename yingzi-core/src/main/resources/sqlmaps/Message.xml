@@ -111,7 +111,7 @@
     c.name as name,
     r.id as record_id,
     r.is_completed as is_completed,
-    count(1) as msgcount,
+    count(1)-sum(m.is_read) as msgcount,
     case when count(1)>sum(m.is_read) then 0 else 1 end as is_read  
     from consultant c inner join record r on c.id = r.consultant_id 
     left join message m  on r.id=m.record_id 
