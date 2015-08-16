@@ -278,7 +278,7 @@ public class ConsultantController {
 		}
 		String collects=user.getCollected();
 //		logger.info("咨询师收藏的咨询师id："+id+"|collects："+collects);
-		if(StringUtils.isEmpty(collects)||collects.contains(id)){
+		if(StringUtils.isEmpty(collects)||!collects.contains(id)){
 			map.put("returnCode", 0);
 			map.put("returnMessage", "未收藏该咨询师");
 			map.put("isCollect",0);
