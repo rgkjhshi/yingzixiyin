@@ -11,9 +11,19 @@ String session_phone = "" + session.getAttribute("phone"); //从session里把a�
                 <li><a href="../signup.jsp">注册</a></li>
             <% }else{ %>
                 <li><a><%=session_phone %></a></li>
-                <li><a>退出</a></li>
+                <li class="logout" style="cursor:pointer;"><a>退出</a></li>
             <% } %>
             <li class="con_admin">咨询师管理后台</li>
         </ul>
     </div>
 </div>
+<script type="text/javascript">
+    $(".logout").on("click",function(){
+        $.get("<%=head_path %>/admin/logoutApi.htm",function(data){
+            if(data.status==0){
+                alert('退出成功！');
+                window.location.href="/consultant/signin.jsp";
+            }
+        });
+    });
+</script>
