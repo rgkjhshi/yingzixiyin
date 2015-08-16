@@ -2,6 +2,7 @@ package com.yingzixiyin.consultant.web.controller;
 
 import com.google.common.collect.Maps;
 import com.yingzixiyin.api.dto.*;
+import com.yingzixiyin.api.enums.StatusEnum;
 import com.yingzixiyin.api.enums.YesOrNoEnum;
 import com.yingzixiyin.api.facade.ConsultantFacade;
 import com.yingzixiyin.api.facade.RecordFacade;
@@ -238,6 +239,7 @@ public class AdminController {
 		requestDto.setPhone(phone);
 		ConsultantInfo consultantInfo=consultantFacade.queryOne(requestDto);
 		consultantInfo.setAvatar(iconUrl);
+		consultantInfo.setStatus(StatusEnum.APPLIED);
 		BaseResponseDto responseDto=   consultantFacade.update(consultantInfo);
 		if(!responseDto.isSuccess()){
 			map.put("status", -1);
