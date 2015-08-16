@@ -23,7 +23,7 @@
 <body>
     <div class="main layout">
     	<div class="sub">我咨询过的咨询师</div>
-    	<ul class="consultants">
+    	<ul class="consultants" style="margin-bottom:50px;">
     	<c:forEach items="${ visited}" var="cinfo">
     		<li class="record">
     			<a href="<%=path%>/consultant/consultant_deatil.do?id=${cinfo.id}">
@@ -35,48 +35,20 @@
 				        	${cinfo.avatar}
 				        </c:if>
 	            	' />
-            		<div class="info">
+            		<!--<div class="info">
             			<div class="name">${cinfo.name }</div>
             			<div class="desc">
-            				${cinfo.introduce }
+            				${cinfo.speciality }
             			</div>
-            		</div>
+            		</div>-->
+                    <div class="info">
+                        <div class="name nameall">${cinfo.name }</div>
+                        <div class="desc descall">${cinfo.age}岁，¥ ${cinfo.videoPrice}&nbsp;元/次，地址：${cinfo.address}<br/>${cinfo.speciality}</div>
+                    </div>
+                    <div class="sig">签名：${cinfo.signature}</div>
             	</a>
     		</li>
     	</c:forEach>
-    		<%-- <li class="record">
-    			<a href="consultant_deatil.do?id=${cinfo.id}">
-            		<img src="<%=path%>/images/test.png" />
-            		<div class="info">
-            			<div class="name">张三</div>
-            			<div class="desc">
-            				这里是咨询师的介绍，比如他的年龄、经历什么的，总之可以写好多好多东西，记得overflow。
-            			</div>
-            		</div>
-            	</a>
-    		</li>
-    		<li class="record">
-    			<a href="../service/detail.html">
-            		<img src="<%=path%>/images/test.png" />
-            		<div class="info">
-            			<div class="name">张三</div>
-            			<div class="desc">
-            				这里是咨询师的介绍，比如他的年龄、经历什么的，总之可以写好多好多东西，记得overflow。
-            			</div>
-            		</div>
-            	</a>
-    		</li>
-    		<li class="record">
-    			<a href="../service/detail.html">
-            		<img src="<%=path%>/images/test.png" />
-            		<div class="info">
-            			<div class="name">张三</div>
-            			<div class="desc">
-            				这里是咨询师的介绍，比如他的年龄、经历什么的，总之可以写好多好多东西，记得overflow。
-            			</div>
-            		</div>
-            	</a>
-    		</li> --%>
     	</ul>
 
 		<div class="sub">我收藏的咨询师</div>
@@ -93,58 +65,13 @@
 					        </c:if>
 	            		' />
 	            		<div class="info">
-	            			<div class="name">${cinfo.name }</div>
-	            			<div class="desc">
-	            				${cinfo.introduce }
-	            			</div>
-	            		</div>
+                            <div class="name nameall">${cinfo.name }</div>
+                            <div class="desc descall">${cinfo.age}岁，¥ ${cinfo.videoPrice}&nbsp;元/次，地址：${cinfo.address}<br/>${cinfo.speciality}</div>
+                        </div>
+                        <div class="sig">签名：${cinfo.signature}</div>
 	            	</a>
     			</li>
     		</c:forEach>
-    		<%-- <li class="record">
-    			<a href="../service/detail.html">
-            		<img src="<%=path%>/images/test.png" />
-            		<div class="info">
-            			<div class="name">张三</div>
-            			<div class="desc">
-            				这里是咨询师的介绍，比如他的年龄、经历什么的，总之可以写好多好多东西，记得overflow。
-            			</div>
-            		</div>
-            	</a>
-    		</li>
-    		<li class="record">
-    			<a href="../service/detail.html">
-            		<img src="<%=path%>/images/test.png" />
-            		<div class="info">
-            			<div class="name">张三</div>
-            			<div class="desc">
-            				这里是咨询师的介绍，比如他的年龄、经历什么的，总之可以写好多好多东西，记得overflow。
-            			</div>
-            		</div>
-            	</a>
-    		</li>
-    		<li class="record">
-    			<a href="../service/detail.html">
-            		<img src="<%=path%>/images/test.png" />
-            		<div class="info">
-            			<div class="name">张三</div>
-            			<div class="desc">
-            				这里是咨询师的介绍，比如他的年龄、经历什么的，总之可以写好多好多东西，记得overflow。
-            			</div>
-            		</div>
-            	</a>
-    		</li>
-    		<li class="record">
-    			<a href="../service/detail.html">
-               		<img src="<%=path%>/images/test.png" />
-            		<div class="info">
-            			<div class="name">张三</div>
-            			<div class="desc">
-            				这里是咨询师的介绍，比如他的年龄、经历什么的，总之可以写好多好多东西，记得overflow。
-            			</div>
-            		</div>
-            	</a>
-    		</li> --%>
     	</ul>    	
     </div>
 <script type="text/javascript" src="<%=path%>/js/main_wechat.js"></script>
