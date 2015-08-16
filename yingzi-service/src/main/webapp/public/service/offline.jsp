@@ -50,8 +50,11 @@
                 <div class="sub">收费标准</div>
                 <div class="dinfo"><fmt:formatNumber value="${cinfo.price }" pattern="##.##" minFractionDigits="2"></fmt:formatNumber>元／次</div>
             </li>
+            <li style="margin: 30px 0;line-height: 2em;color: #666;">
+                面对面咨询请您在线上付款预约，客服将在第一时间与您沟通具体时间地点。
+            </li>
             <li>
-                <div class="choose_btn">预约</div>
+                <div class="choose_btn">付款预约</div>
             </li>
         </ul>
     </div>
