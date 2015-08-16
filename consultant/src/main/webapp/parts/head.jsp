@@ -14,7 +14,7 @@ String session_phone = session.getAttribute("session_phone").toString(); //从se
                 <li><a href="../signup.jsp">注册</a></li>
             <% }else{ %>
                 <li><a><%=session_phone %></a></li>
-                <li class="logout"><a>退出</a></li>
+                <li class="logout" style="cursor:pointer;"><a>退出</a></li>
             <% } %>
             <li class="con_admin">咨询师管理后台</li>
         </ul>
