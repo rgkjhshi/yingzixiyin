@@ -276,22 +276,31 @@
 
     // 头像上传
     var uploadimg = function(){
-        var path = console.log($("#filepath").val());
+        var path = $("#filepath").val();
+        console.log(path);
+        
         if(path!=""){
             // document.getElementById("avatarform").submit();
             $("#avatarform").ajaxSubmit({
                 success:function(data){
                     console.log(data);
-                    alert("上传成功");
+                    if(data.status==0){
+                        alert("上传成功");
+                    }else{
+                        alert(data.message);
+                        window.location.reload();
+                    }
                 },
                 error:function(data){
                     console.log(data);
-                    alert("上传失败")
+                    alert("上传失败");
+                    window.location.reload();
                 }
             });
 
         }else{
-            console.log("头像不能为空");
+            alert("头像不能为空");
+            window.location.reload();
         }
     }
 

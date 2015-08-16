@@ -15,8 +15,31 @@
     </head>
     <body>
         <script>
+        function checkimgs(){
+            // 判断图片类别
+            var path = $("#filepath").val();
+            if (!/\.(gif|jpg|jpeg|png|GIF|JPG|PNG)$/.test(path)) {
+                alert("图像格式有误！");
+                return false;
+            }
+            // 判断图片大小
+            var input = $("body").find("input[type='file']")[0];
+            var size = input.files[0].size / 1024;
+            if (size > 1000) { //3M
+                alert("图片不得大于1M！");
+                return false;
+            }
+            return true;
+        }
+
         //头像上传 图片上传预览    IE是用了滤镜。
         function previewImage(file){
+            // $("#preview").css("background-image":"none");
+            var bo = checkimgs();
+            if(!bo){
+                // return;
+                window.location.reload();
+            }
             var MAXWIDTH  = 260; 
             var MAXHEIGHT = 180;
             var div = document.getElementById('preview');
