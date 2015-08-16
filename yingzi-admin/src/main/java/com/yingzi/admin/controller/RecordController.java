@@ -1,6 +1,7 @@
 package com.yingzi.admin.controller;
 
 import java.io.IOException;
+import java.util.Collections;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -9,8 +10,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.google.common.collect.Collections2;
 import com.yingzi.admin.annotation.PowerCheck;
 import com.yingzi.admin.utils.JsonUtil;
 import com.yingzi.admin.utils.ResponseUtils;
@@ -18,13 +21,17 @@ import com.yingzi.admin.view.ConsultantView;
 import com.yingzixiyin.api.dto.BaseResponseDto;
 import com.yingzixiyin.api.dto.ConsultantInfo;
 import com.yingzixiyin.api.dto.ConsultantQueryRequestDto;
+import com.yingzixiyin.api.dto.MessageQueryRequestDto;
+import com.yingzixiyin.api.dto.MessageQueryResponseDto;
 import com.yingzixiyin.api.dto.RecordInfo;
+import com.yingzixiyin.api.dto.RecordInfoExtend;
 import com.yingzixiyin.api.dto.RecordQueryRequestDto;
 import com.yingzixiyin.api.dto.RecordQueryResponseDto;
 import com.yingzixiyin.api.enums.StatusEnum;
 import com.yingzixiyin.api.enums.YesOrNoEnum;
 import com.yingzixiyin.api.facade.AdminFacade;
 import com.yingzixiyin.api.facade.ConsultantFacade;
+import com.yingzixiyin.api.facade.MessageFacade;
 import com.yingzixiyin.api.facade.RecordFacade;
 import com.yingzixiyin.page.Pagination;
 
@@ -39,6 +46,8 @@ public class RecordController {
 	Logger logger=LoggerFactory.getLogger(RecordController.class);
 	@Resource
 	private RecordFacade recordFacade ;
+	@Resource
+	private MessageFacade messageFacade;
 	/**
 	 * 咨询管理
 	 * @param request
@@ -83,6 +92,26 @@ public class RecordController {
 			page.setUrl(request.getContextPath()+"/record/query_records.do");
 			RecordQueryResponseDto responseDto = recordFacade.queryPage(requestDto,page);
 			if (responseDto != null) {
+				if(!CollectionUtils.isEmpty(responseDto.getRecordInfoExtendList())){
+					for(RecordInfoExtend rinfo:responseDto.getRecordInfoExtendList()){
+						if(rinfo.getIsReplied()!=null&&rinfo.getIsReplied().getValue()==1){
+							continue;
+						}
+						MessageQueryRequestDto requestDto2=new MessageQueryRequestDto();
+						requestDto2.setRecordId(rinfo.getId());
+						requestDto2.setFromPhone(rinfo.getConsultantPhone());
+						MessageQueryResponseDto responseDto2= messageFacade.query(requestDto2);
+						if(responseDto2!=null&&responseDto2.getMessageInfoList()!=null){
+							if(!CollectionUtils.isEmpty(responseDto2.getMessageInfoList())){
+								RecordInfo recordInfo=new RecordInfo();
+								recordInfo.setId(rinfo.getId());
+								recordInfo.setIsReplied(YesOrNoEnum.YES);
+								recordFacade.update(recordInfo);
+								rinfo.setIsReplied(YesOrNoEnum.YES);
+							}
+						}
+					}
+				}
 				request.setAttribute("recordsList", responseDto.getRecordInfoExtendList());
 				request.setAttribute("page", page);
 			}
