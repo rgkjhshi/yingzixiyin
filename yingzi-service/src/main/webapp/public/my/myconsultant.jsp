@@ -23,7 +23,7 @@
 <body>
     <div class="main layout">
     	<div class="sub">我咨询过的咨询师</div>
-    	<ul class="consultants" style="margin-bottom:10px;">
+    	<ul class="consultants" style="margin-bottom:50px;">
     	<c:forEach items="${ visited}" var="cinfo">
     		<li class="record">
     			<a href="<%=path%>/consultant/consultant_deatil.do?id=${cinfo.id}">
