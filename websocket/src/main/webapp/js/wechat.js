@@ -83,7 +83,7 @@
         	message = message.substring(i+1);
         }
 
-        $("#console").append("<li class='"+author+"'><span>"+time+"</span><div>"+message+"</div></li>");
+        $("#console").append("<li class='"+author+"'><span>"+time+"</span><div class='ms_content'>"+message+"</div></li>");
         $("#message").val("");
         console.scrollTop = console.scrollHeight;
     }
