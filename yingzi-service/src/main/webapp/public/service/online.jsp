@@ -22,10 +22,11 @@
 </head>
 <body>
     <div class="main layout">
-        <div>
-            <textarea class="contentform" placeholder="请输入您要咨询的内容（500）字以内"></textarea>
+        <div style="margin: 30px 0;line-height: 2em;color: #666;">
+            <!-- <textarea class="contentform" placeholder="请输入您要咨询的内容（500）字以内"></textarea> -->
+            您正在申请进行线上咨询。<br/>线上咨询统一收费为59元/次，请通过微信支付进行付费。
         </div>
-        <div class="choose_btn">付费并发送</div>
+        <div class="choose_btn">确定付费</div>
     </div>
 <script type="text/javascript" src="<%=path %>/js/main_wechat.js"></script>
 </body>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>  
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%
 	String path=request.getContextPath();    
 %>
@@ -31,7 +32,7 @@
                         	 <tr>
                             	<td>${cinfo.consultantName }</td>
                             	<td>${cinfo.userId }</td>
-                            	<td><fmt:formatDate value="${cinfo.createTime }" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+                            	<td><fmt:formatDate value="${ cinfo.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
                                 <td>${cinfo.consultType }</td>
                             	<td class='func ${cinfo.isCompleted.value==0?"tooff":"toon" }'>
                             		<c:if test="${cinfo.isCompleted.value==0}">
