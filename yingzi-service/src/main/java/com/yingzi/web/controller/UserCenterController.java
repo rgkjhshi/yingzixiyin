@@ -274,6 +274,7 @@ public class UserCenterController {
 		if(flag){
 			UserInfo user=SessionUtil.getLoginUserToSession(request);
 			List<Map<String,Object>> message=messageFacade.queryConsultantAndMessageCountByUserId(user.getId());
+			logger.info("---message:"+message);
 			if(message!=null){
 				request.setAttribute("myMessages", message);
 				request.setAttribute("chaturl", WeChat.getChatUrl());

@@ -19,7 +19,7 @@ String session_phone = "" + session.getAttribute("phone"); //从session里把a�
 </div>
 <script type="text/javascript">
     $(".logout").on("click",function(){
-        $.get("<%=head_path %>/admin/logoutApi.htm",function(data){
+        $.get("/consultant/admin/logoutApi.htm",function(data){
             if(data.status==0){
                 alert('退出成功！');
                 window.location.href="/consultant/signin.jsp";
