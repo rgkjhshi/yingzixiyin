@@ -102,7 +102,6 @@
 	var isfavor = function(){
 		$.get("<%=path %>/consultant/isCollected.do?id="+$("#onlinebtn").attr("data-id"),function(data){
 			if(data.returnCode==0){
-				alert(data.isCollect);
 				if(data.isCollect==1){//已收藏
 					$("#favor").text("已收藏");
 					$("#favor").attr("data-favor","2");
