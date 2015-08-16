@@ -34,9 +34,9 @@
 	        			<div class="message">
 		        			来自<span class="red_font">
 		        				<c:out value="${m[\"name\"]}"></c:out>
-		        			</span>的消息&nbsp;&nbsp;<c:out value="${m[\"msgcount\"]}"></c:out>
+		        			</span>的消息&nbsp;&nbsp;<c:out value="${m[\"msgcount\"]==0 ?\"\":\"${m[\"msgcount\"]\"}"></c:out>
 		        			<span class="ms_status">
-		        			<c:out value="${m[\"is_read\"]==0 ?\"未读\":\"&nbsp;\"}"></c:out>
+		        			<c:out value="${m[\"is_read\"]==0 ?\"未读\":\"\"}"></c:out>
 		        			</span>
 		        		</div>
 		        		<i></i>
