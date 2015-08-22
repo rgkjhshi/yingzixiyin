@@ -30,7 +30,6 @@
                             </div>
                             <div class="ms_content">
                                 <div>&nbsp;</div>
-                                <div class="ms_new">new</div>
                                 <div class="ms_ing">${r.isCompleted.value==0?"进行中":"已结束" }</div>
                             </div>
                         	</div>

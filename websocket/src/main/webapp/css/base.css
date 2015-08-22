@@ -553,7 +553,7 @@ fieldset div {
 	line-height: 1.5em;
 	height:4.5em;
 }
-.send_btn{
+.send_btn,.close_chat{
 	background: #f7671d;
 	border: 1px solid #f06923;
 	padding:4px 0;
@@ -569,6 +569,12 @@ fieldset div {
 	margin-top:4px;
 	cursor:pointer;
 }
+.close_chat{
+	float:left;
+	background:#666;
+	border-color: #444;
+	width:80px;
+}
 .con_admin{
 	font-weight: bold;
     color: #B11F25;
@@ -578,7 +584,10 @@ fieldset div {
 	overflow:scroll;
 	margin:0;
 	padding:10px 20px;
-
+	position: absolute;
+    width: 94%;
+    height: 94%;
+    bottom: 0;
 }
 .dialog_content li{
 	list-style: none;

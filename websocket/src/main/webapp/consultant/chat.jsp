@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%
 String session_toPhone = "" + session.getAttribute("toPhone"); //从session里把a拿出来，并赋值给phone
+String recordId = "" + session.getAttribute("recordId");
 %>
 <!DOCTYPE html>
 <html>
@@ -33,6 +34,7 @@ String session_toPhone = "" + session.getAttribute("toPhone"); //从session里�
                             <div class="dialog_reply">
                                 <div class="reply_inner">
                                     <textarea class="reply_content" id="message"></textarea>
+                                    <a class="close_chat" data-recordId="<%=recordId %>">结束咨询</a>
                                     <a class="send_btn" id='echo'>发送</a>
                                 </div>
                             </div>

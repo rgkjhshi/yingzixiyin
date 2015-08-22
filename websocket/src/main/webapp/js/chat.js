@@ -98,4 +98,15 @@
     //发送消息
     $("#echo").on("click",echo);
 
+    //结束咨询
+    $(".close_chat").on("click",function(){
+        var url = "/consultant/admin/endChatApi.htm";
+        $.get(url,{"recordId":$(this).attr("data-recordId")},function(data){
+            if(data.status==0){
+                alert("咨询已结束！");
+                window.location.href="/consultant/admin/queryRecordApi.htm?status=1";
+            }
+        });
+    });
+
 })();
