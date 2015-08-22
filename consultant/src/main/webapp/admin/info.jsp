@@ -119,7 +119,8 @@
                         <div>
                             <div class="sign_title">文字咨询：</div>
                             <div class="sign_content" style="font-size:0.85rem;">
-                                <input id="price" name="price" readonly="readonly" disabled="disabled" type="text" data-validate="number" data-tip="咨询单价" style="width:20px;"/>&nbsp;&nbsp;元/次
+                                <!-- readonly="readonly" disabled="disabled" -->
+                                <input id="price" name="price" type="text" data-validate="number" data-tip="咨询单价" style="width:20px;"/>&nbsp;&nbsp;元/次
                                 <span class="tips"></span>
                             </div>
                         </div>
@@ -225,7 +226,7 @@
         $("#info_all").show();
         $("#baseinfo").addClass("active");
         //检查是否更改价格、地址信息
-        $("#videoPrice,#facePrice,#address").change(function(){
+        $("#price,#videoPrice,#facePrice,#address").change(function(){
             if($("#status").val()=="2"){
                 $("#status").val("1");
                 alert("您修改了价格或地址信息，需要管理员重新审核");
