@@ -6,9 +6,11 @@ package com.yingzixiyin.api.enums;
  */
 public enum ConsultTypeEnum {
 
-    ON_LINE(1, "线上咨询"),
+    CHAT(1, "聊天咨询"),
 
-    OFF_LINE(2, "线下咨询");
+    FACE_TO_FACE(2, "面对面咨询"),
+
+    VIDEO(3, "视频咨询");
 
     private Integer value;
 
