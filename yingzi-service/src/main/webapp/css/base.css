@@ -428,7 +428,7 @@ a{text-decoration: none;color:#333;}
     top: 40%;
     width: 100%;
     text-align: center;
-    background: url(../images/tips.png);
-    padding-left: 24px;
+    /*background: url(../images/tips.png);*/
+    /*padding-left: 24px;*/
     line-height: 24px;
 }
