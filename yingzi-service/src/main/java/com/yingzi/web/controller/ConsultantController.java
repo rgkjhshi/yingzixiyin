@@ -267,6 +267,22 @@ public class ConsultantController {
 		}
 		return response_page;
 	}
+	@RequestMapping(value="consultant_video.do")
+	@PowerCheck(type=PowerCheckEnum.LOGIN)
+	public String consultantByVideo(HttpServletRequest request,HttpServletResponse response,Long consultant_id) throws IOException{
+		logger.info("---用户调用咨询师进行线下视频咨询信息接口页面----");
+		String response_page="public/service/video";
+//		String ip =NetUtils.getRemoteHost(request);
+//		logger.info("得到用户IP："+ip);
+		ConsultantQueryRequestDto cqrDto=new ConsultantQueryRequestDto();
+		cqrDto.setId(consultant_id);
+		cqrDto.setStatus(StatusEnum.ACCEPTED);
+		ConsultantInfo cinfo=consultantFacade.queryOne(cqrDto);
+		if(cinfo!=null){
+			request.setAttribute("cinfo", cinfo);
+		}
+		return response_page;
+	}
 	@RequestMapping(value="isCollected.do")
 	@PowerCheck(type=PowerCheckEnum.LOGIN)
 	public ModelAndView isCollectConsultant(HttpServletRequest request,HttpServletResponse response,String id) throws IOException{
