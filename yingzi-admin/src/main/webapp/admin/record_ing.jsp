@@ -26,16 +26,16 @@
             		<div class="subtitle">进行中的咨询</div>
                     <table>
                         <tr>
-                            <th>咨询师</th><th>用户ID</th><th>开始时间</th><th>是否付款</th><th>是否回复</th><th>咨询类型</th><th>操作</th>
+                            <th>咨询师</th><th>用户</th><th>开始时间</th><th>是否付款</th><th>是否回复</th><th>咨询类型</th><th>操作</th>
                         </tr>
                         <c:forEach items="${recordsList}" var="cinfo">
                         	 <tr>
                             	<td>${cinfo.consultantName }</td>
-                            	<td>${cinfo.userId }</td>
+                            	<td>${cinfo.userPhone }</td>
                             	<td><fmt:formatDate value="${ cinfo.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
                                 <td>${cinfo.isPaid }</td>
                                 <td>${cinfo.isReplied }</td>
-                                <td>${cinfo.consultType }</td>
+                                <td>${cinfo.consultType.desc }</td>
                             	<td class='func ${cinfo.isCompleted.value==0?"tooff":"toon" }'>
                             		<c:if test="${cinfo.isCompleted.value==0}">
                             			<a id='endRecord' data-id="${cinfo.id}" data-status="1">结束</a>
