@@ -1,10 +1,10 @@
 package com.yingzixiyin.websocket.service;
 
-import com.yingzixiyin.api.dto.*;
+import com.yingzixiyin.api.dto.MessageInfo;
+import com.yingzixiyin.api.dto.MessageQueryRequestDto;
+import com.yingzixiyin.api.dto.MessageQueryResponseDto;
 import com.yingzixiyin.api.enums.YesOrNoEnum;
-import com.yingzixiyin.api.facade.ConsultantFacade;
 import com.yingzixiyin.api.facade.MessageFacade;
-import com.yingzixiyin.api.facade.RecordFacade;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -99,10 +99,12 @@ public class ChatService {
     public void sendUnReadMessage(WebSocketSession session) throws IOException {
         logger.info("push unread message...");
         String phone = (String) session.getAttributes().get("phone");
+        String toPhone = (String) session.getAttributes().get("toPhone");
         Long recordId = (Long) session.getAttributes().get("recordId");
         // 查询该用户的所有未读消息
         MessageQueryRequestDto requestDto = new MessageQueryRequestDto();
         requestDto.setRecordId(recordId);
+        requestDto.setFromPhone(toPhone); //这个用户发来的消息
         requestDto.setToPhone(phone);
         requestDto.setIsRead(YesOrNoEnum.NO);
         MessageQueryResponseDto responseDto = messageFacade.query(requestDto);
