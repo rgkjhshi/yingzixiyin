@@ -12,7 +12,7 @@
     <appender name="File" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <File>${catalina.base}/logs/consultant.log</File>
         <encoder charset="UTF-8">
-            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger{0}#%M - %msg%n</pattern>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger{80}#%M - %msg%n</pattern>
         </encoder>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <FileNamePattern>${catalina.base}/logs/consultant.%d{yyyy-MM-dd}.log </FileNamePattern>
@@ -26,7 +26,7 @@
     <logger name="java.sql" level="DEBUG" />
 
     <root level="info">
-        <appender-ref ref="Console" />
+        <!--<appender-ref ref="Console" />-->
         <appender-ref ref="File" />
     </root>
 </configuration>
