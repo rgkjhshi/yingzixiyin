@@ -9,7 +9,7 @@
             id                  AS id,
             record_id           AS recordId,
             message             AS message,
-            from_phone          AS formPhone,
+            from_phone          AS fromPhone,
             to_phone            AS toPhone,
             create_time         AS createTime,
             is_read				AS isRead 
@@ -25,7 +25,7 @@
                 AND record_id = #{recordId}
             </if>
             <if test="fromPhone != null">
-                AND from_phone = #{formPhone}
+                AND from_phone = #{fromPhone}
             </if>
             <if test="toPhone != null">
                 AND to_phone = #{toPhone}
@@ -53,7 +53,7 @@
                 message = #{message},
             </if>
             <if test="fromPhone != null">
-                from_phone = #{formPhone},
+                from_phone = #{fromPhone},
             </if>
             <if test="toPhone != null">
                 to_phone = #{toPhone},
@@ -93,7 +93,7 @@
                 AND record_id = #{recordId}
             </if>
             <if test="from_phone != null">
-                from_phone = #{formPhone},
+                from_phone = #{fromPhone},
             </if>
             <if test="to_phone != null">
                 to_phone = #{toPhone},
