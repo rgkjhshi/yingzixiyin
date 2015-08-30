@@ -70,7 +70,7 @@
             log('me',message);
             if($.trim(message)!=""){
                 ws.send(message);
-                $("#message").val("");
+                $("#message").val("").focus();
             }
         } else {
             alert('未建立对话连接，请重试！');
