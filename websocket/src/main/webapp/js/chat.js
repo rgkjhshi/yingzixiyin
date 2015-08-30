@@ -67,9 +67,10 @@
     function echo() {
         if (ws != null) {
             var message = document.getElementById('message').value;
-            log('me',message);
+            // log('me',message);
             if($.trim(message)!=""){
                 ws.send(message);
+                log('me',message);
                 $("#message").val("").focus();
             }
         } else {
