@@ -16,7 +16,7 @@
 <meta name="format-detection"content="telephone=no">
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-<title>线下咨询</title>
+<title>视频咨询</title>
 <meta name="description" content="">
 <meta name="keywords" content="">
 <link rel="stylesheet" href="<%=path %>/css/base.css">
@@ -51,10 +51,10 @@
             	<div class="sub">咨询地点</div>
                 <div class="dinfo">${cinfo.address }</div>
                 <div class="sub">收费标准</div>
-                <div class="dinfo"><fmt:formatNumber value="${cinfo.facePrice }" pattern="##.##" minFractionDigits="2"></fmt:formatNumber>元／次</div>
+                <div class="dinfo"><fmt:formatNumber value="${cinfo.videoPrice }" pattern="##.##" minFractionDigits="2"></fmt:formatNumber>元／次</div>
             </li>
             <li style="margin: 30px 0;line-height: 2em;color: #666;">
-                面对面咨询请您在线上付款预约，客服将在第一时间与您沟通具体时间地点。
+                视频咨询请您在线上付款预约，客服将在第一时间与您沟通具体时间地点。
             </li>
             <li>
                 <div class="choose_btn">付款预约</div>

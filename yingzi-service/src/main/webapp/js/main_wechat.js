@@ -27,7 +27,7 @@
 			$("#choose_dialog").hide();
 			data = $.parseJSON(data);
 			if(data.returnCode==0||data.returnCode=="0"){
-				console.log("gaga");
+				// console.log("gaga");
 				$("#consultant_list").empty();
 				if((!data.list)||data.list.length==0){
 					$("#consultant_list").append("没有符合条件的咨询师噢！");
