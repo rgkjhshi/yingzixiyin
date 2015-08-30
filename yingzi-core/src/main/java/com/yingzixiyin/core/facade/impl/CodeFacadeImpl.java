@@ -27,6 +27,7 @@ public class CodeFacadeImpl implements CodeFacade {
     @Resource
     CodeBiz codeBiz;
 
+    // 测试时写的函数
     public void sendMessage() {
         Random random = new Random();
         Integer randomInteger = random.nextInt(900000)+100000;
