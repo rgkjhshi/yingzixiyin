@@ -36,11 +36,13 @@ public class ChatService {
      * @param message 待发消息
      */
     public void sendAndSaveMessage(WebSocketSession session, WebSocketSession toSession, TextMessage message) {
+        logger.info("session phone={}", session.getAttributes().get("phone"));
         String toPhone = (String) session.getAttributes().get("toPhone");
         // 创建消息
         MessageInfo messageInfo = createMessage(session, message);
         // to在线，发送
         if (null != toSession && toSession.isOpen()) {
+            logger.info("toSession phone={}", toSession.getAttributes().get("phone"));
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             TextMessage messageWithTime = new TextMessage(sdf.format(messageInfo.getCreateTime()) + ";" + message.getPayload());
             Boolean result = sendMessageToUser(toSession, messageWithTime);
@@ -48,7 +50,7 @@ public class ChatService {
                 messageInfo.setIsRead(YesOrNoEnum.YES);
             }
         } else {
-            logger.info("{}offline, saved message into db", toPhone);
+            logger.info("{} offline, saved message into db", toPhone);
         }
         // 消息入库
         messageFacade.add(messageInfo);

@@ -27,10 +27,6 @@ public class ChatHandler extends TextWebSocketHandler {
     @Resource
     private ChatService chatService;
 
-    private String fromKey;
-    private String toKey;
-
-
     public ChatHandler() {
     }
 
@@ -48,9 +44,9 @@ public class ChatHandler extends TextWebSocketHandler {
             session.close();
             return;
         }
-        fromKey = phone + toPhone;
-        toKey = toPhone + phone;
+        String fromKey = phone + "#" + toPhone;
         userMap.put(fromKey, session);
+        logger.info("{} login in", fromKey);
         // 当用户登录后，把离线消息推送给用户
         try {
             chatService.sendUnReadMessage(session);
@@ -65,7 +61,11 @@ public class ChatHandler extends TextWebSocketHandler {
      */
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
+        String phone = (String) session.getAttributes().get("phone");
+        String toPhone = (String) session.getAttributes().get("toPhone");
+        String toKey = toPhone + "#" + phone;
         // 找to
+        logger.info("找to:{}", toKey);
         WebSocketSession toSession = userMap.get(toKey);
         chatService.sendAndSaveMessage(session, toSession, message);
     }
@@ -73,6 +73,9 @@ public class ChatHandler extends TextWebSocketHandler {
     @Override
     public void handleTransportError(WebSocketSession session, Throwable exception) throws Exception {
         if (session.isOpen()) {
+            String phone = (String) session.getAttributes().get("phone");
+            String toPhone = (String) session.getAttributes().get("toPhone");
+            String fromKey = phone + "#" + toPhone;
             userMap.remove(fromKey);
             session.close();
         }
@@ -82,28 +85,15 @@ public class ChatHandler extends TextWebSocketHandler {
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus closeStatus) throws Exception {
         String phone = (String) session.getAttributes().get("phone");
-        logger.info("websocket connection closed, remove {}", phone);
+        String toPhone = (String) session.getAttributes().get("toPhone");
+        String fromKey = phone + "#" + toPhone;
+        userMap.remove(fromKey);
+        logger.info("websocket connection closed, remove {}", fromKey);
         userMap.remove(fromKey);
     }
 
     @Override
     public boolean supportsPartialMessages() {
         return false;
-    }
-
-    public String getFromKey() {
-        return fromKey;
-    }
-
-    public void setFromKey(String fromKey) {
-        this.fromKey = fromKey;
-    }
-
-    public String getToKey() {
-        return toKey;
-    }
-
-    public void setToKey(String toKey) {
-        this.toKey = toKey;
     }
 }
