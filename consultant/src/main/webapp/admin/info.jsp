@@ -110,9 +110,9 @@
                             <div class="sign_title">咨询范围：</div>
                             <div class="sign_content">
                                 <select name="rangeType">
-                                    <option value="0">解救单身状态</option>
-                                    <option value="1">让恋爱更幸福</option>
-                                    <option value="2">夫妻那点事儿</option>
+                                    <option value="1">解救单身状态</option>
+                                    <option value="2">让恋爱更幸福</option>
+                                    <option value="3">夫妻那点事儿</option>
                                 </select>
                             </div>
                         </div>
