@@ -9,6 +9,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -34,6 +35,7 @@ import com.gson.WeChat;
 import com.gson.bean.PreOrder;
 import com.gson.oauth.Oauth;
 import com.gson.oauth.Pay;
+import com.gson.util.HttpKit;
 import com.yingzi.web.annotation.PowerCheck;
 import com.yingzi.web.enums.AgeEnum;
 import com.yingzi.web.enums.PowerCheckEnum;
@@ -48,12 +50,16 @@ import com.yingzixiyin.api.dto.BaseResponseDto;
 import com.yingzixiyin.api.dto.ConsultantInfo;
 import com.yingzixiyin.api.dto.ConsultantQueryRequestDto;
 import com.yingzixiyin.api.dto.ConsultantQueryResponseDto;
+import com.yingzixiyin.api.dto.RecordInfo;
 import com.yingzixiyin.api.dto.UserInfo;
 import com.yingzixiyin.api.dto.UserQueryRequestDto;
+import com.yingzixiyin.api.enums.ConsultTypeEnum;
 import com.yingzixiyin.api.enums.GenderTypeEnum;
 import com.yingzixiyin.api.enums.RangeTypeEnum;
 import com.yingzixiyin.api.enums.StatusEnum;
+import com.yingzixiyin.api.enums.YesOrNoEnum;
 import com.yingzixiyin.api.facade.ConsultantFacade;
+import com.yingzixiyin.api.facade.RecordFacade;
 import com.yingzixiyin.api.facade.UserFacade;
 /***
  * 咨询师相关接口业务类
@@ -69,6 +75,8 @@ public class ConsultantController {
 	private ConsultantFacade consultantFacade;
 	@Resource
 	private UserFacade userFacade;
+	@Resource
+	private RecordFacade recordFacade;
 	@Resource
 	private WeixinOauthHelper weixinOauthHelper;
 	/**
@@ -242,27 +250,50 @@ public class ConsultantController {
 		}
 		return response_page;
 	}
-	@RequestMapping(value="pay_online.do")
-	@PowerCheck(type=PowerCheckEnum.LOGIN)
-	public String payByOnline(HttpServletRequest request,HttpServletResponse response,Long consultant_id) throws IOException{
-		logger.info("---用户线上支付接口页面----");
-		String response_page="public/service/pay";
-		ConsultantQueryRequestDto cqrDto=new ConsultantQueryRequestDto();
+
+	@RequestMapping(value = "prepay.do")
+	@PowerCheck(type = PowerCheckEnum.LOGIN)
+	public String payByOnline(HttpServletRequest request,
+			HttpServletResponse response, Long consultant_id,
+			Integer counsultantType, String payType) throws IOException {
+		logger.info("---用户支付接口页面----");
+		String response_page = "public/service/pay";
+		ConsultantQueryRequestDto cqrDto = new ConsultantQueryRequestDto();
 		cqrDto.setId(consultant_id);
 		cqrDto.setStatus(StatusEnum.ACCEPTED);
-		ConsultantInfo cinfo=consultantFacade.queryOne(cqrDto);
-		if(cinfo==null){
-			//做异常处理
-			PreOrder pro=buildPreOrderVo(request, cinfo);
-			String xml="";
-			try {
-				xml = pro.serializeToXml();
-			} catch (IllegalArgumentException | IllegalAccessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			logger.info("得到预下单请求微信xml："+xml);
+		ConsultantInfo cinfo = consultantFacade.queryOne(cqrDto);
+		if (cinfo == null) {
+			logger.error("咨询师不存在，请检查你的参数");
+			return "public/service/sort";
+
 		}
+		UserInfo user = SessionUtil.getLoginUserToSession(request);
+		if (user == null) {
+			logger.error("用户登录超时不存在，请重新打开微信客户端");
+			return "public/service/sort";
+		}
+		RecordInfo recordInfo = new RecordInfo();
+		recordInfo.setConsultantId(consultant_id);
+		recordInfo.setConsultType(ConsultTypeEnum
+				.toEnum(counsultantType == null ? -1 : counsultantType));
+		recordInfo.setCreateTime(new Date());
+		recordInfo.setIsCompleted(YesOrNoEnum.NO);
+		recordInfo.setIsPaid(YesOrNoEnum.NO);
+		recordInfo.setIsReplied(YesOrNoEnum.NO);
+		recordInfo.setUserId(user.getId());
+		// 添加 咨询记录
+		recordFacade.add(recordInfo);
+		// 做异常处理
+		PreOrder pro = buildPreOrderVo(request, cinfo);
+		String xml = "";
+		try {
+			xml = pro.serializeToXml();
+//			HttpKit.post(url, s)
+		} catch (IllegalArgumentException | IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		logger.info("得到预下单请求微信xml：" + xml);
 		return response_page;
 	}
 	@RequestMapping(value="consultant_offline.do")
