@@ -41,7 +41,7 @@
 					// alert("已发送");
 				}else{
 					alert(data.returnMessage);
-					$("#phone").val("");
+					//$("#phone").val("");
 				}
 			});
 		}else{
