@@ -178,7 +178,7 @@ public class AdminController {
             YesOrNoEnum st = YesOrNoEnum.toEnum(status);
             requestDto.setIsCompleted(st);
             HttpSession session = request.getSession();
-            String phone = (String)session.getAttribute("session_phone");
+            String phone = (String) session.getAttribute("session_phone");
             ConsultantQueryRequestDto consultantQueryRequestDto = new ConsultantQueryRequestDto();
             consultantQueryRequestDto.setPhone(phone);
             ConsultantInfo consultantInfo = consultantFacade.queryOne(consultantQueryRequestDto);
@@ -206,49 +206,47 @@ public class AdminController {
     }
 
     // 上传头像
-    @RequestMapping(value = "uploadPicApi.htm",method=RequestMethod.POST)
-	public ModelAndView uploadPic(HttpServletRequest request,
-			HttpServletResponse response, String callback) {
-    	Map<String, Object> map = Maps.newHashMap();
-    	logger.info("--图片上传---");
-    	if(!(request instanceof DefaultMultipartHttpServletRequest)){
-    		map.put("status", -1);
-			map.put("message", "图片上传失败");
-			return new ModelAndView(new MappingJackson2JsonView(), map);
-    	}
-		DefaultMultipartHttpServletRequest mulRequest = (DefaultMultipartHttpServletRequest) request;
-		MultiValueMap<String, MultipartFile> multiFileMap = mulRequest
-				.getMultiFileMap();
-		List<MultipartFile> uploadFile = multiFileMap.get("img");
-		String iconUrl = null;
-		
-		if (uploadFile != null) {
-			iconUrl = PictureUtil.savePicture(request,(CommonsMultipartFile) uploadFile
-					.get(0));
-		}
-		logger.debug("---得到图片信息："+uploadFile+"|imageurl:"+iconUrl);
-		if(StringUtils.isEmpty(iconUrl)){
-			map.put("status", -1);
-			map.put("message", "图片上传失败");
-			return new ModelAndView(new MappingJackson2JsonView(), map);
-		}
-		logger.info("---上传图片得到url："+iconUrl);
-		HttpSession session = request.getSession(false);
-		String phone = (String) session.getAttribute("session_phone");
-		ConsultantQueryRequestDto requestDto=new ConsultantQueryRequestDto();
-		requestDto.setPhone(phone);
-		ConsultantInfo consultantInfo=consultantFacade.queryOne(requestDto);
-		consultantInfo.setAvatar(iconUrl);
-		consultantInfo.setStatus(StatusEnum.APPLIED);
-		BaseResponseDto responseDto=   consultantFacade.update(consultantInfo);
-		if(!responseDto.isSuccess()){
-			map.put("status", -1);
-			map.put("message", "图片上传失败");
-			return new ModelAndView(new MappingJackson2JsonView(), map);
-		}
-		map.put("status", 0);
-		map.put("message", "图片上传成功");
-		map.put("imgurl", iconUrl);
-		return new ModelAndView(new MappingJackson2JsonView(), map);
-	}
+    @RequestMapping(value = "uploadPicApi.htm", method = RequestMethod.POST)
+    public ModelAndView uploadPic(HttpServletRequest request,
+                                  HttpServletResponse response, String callback) {
+        Map<String, Object> map = Maps.newHashMap();
+        logger.info("--图片上传---");
+        if (!(request instanceof DefaultMultipartHttpServletRequest)) {
+            map.put("status", -1);
+            map.put("message", "图片上传失败");
+            return new ModelAndView(new MappingJackson2JsonView(), map);
+        }
+        DefaultMultipartHttpServletRequest mulRequest = (DefaultMultipartHttpServletRequest) request;
+        MultiValueMap<String, MultipartFile> multiFileMap = mulRequest.getMultiFileMap();
+        List<MultipartFile> uploadFile = multiFileMap.get("img");
+        String iconUrl = null;
+
+        if (uploadFile != null) {
+            iconUrl = PictureUtil.savePicture(request, (CommonsMultipartFile) uploadFile.get(0));
+        }
+        logger.debug("---得到图片信息：" + uploadFile + "|imageurl:" + iconUrl);
+        if (StringUtils.isEmpty(iconUrl)) {
+            map.put("status", -1);
+            map.put("message", "图片上传失败");
+            return new ModelAndView(new MappingJackson2JsonView(), map);
+        }
+        logger.info("---上传图片得到url：" + iconUrl);
+        HttpSession session = request.getSession(false);
+        String phone = (String) session.getAttribute("session_phone");
+        ConsultantQueryRequestDto requestDto = new ConsultantQueryRequestDto();
+        requestDto.setPhone(phone);
+        ConsultantInfo consultantInfo = consultantFacade.queryOne(requestDto);
+        consultantInfo.setAvatar(iconUrl);
+        consultantInfo.setStatus(StatusEnum.APPLIED);
+        BaseResponseDto responseDto = consultantFacade.update(consultantInfo);
+        if (!responseDto.isSuccess()) {
+            map.put("status", -1);
+            map.put("message", "图片上传失败");
+            return new ModelAndView(new MappingJackson2JsonView(), map);
+        }
+        map.put("status", 0);
+        map.put("message", "图片上传成功");
+        map.put("imgurl", iconUrl);
+        return new ModelAndView(new MappingJackson2JsonView(), map);
+    }
 }

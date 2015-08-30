@@ -24,7 +24,7 @@
     <div class="main layout">
     	<ul class="consultants ms_record">
     		<c:if test="${empty myMessages}">
-    			暂无任何记录
+    			<li class="none_tips">暂无任何记录</li>
     		</c:if>
     		<c:forEach items="${myMessages}" var="m">
     			<li class='record unend <c:out value="${m[\"is_read\"]==0 ?\"new_ms\":\"\"}"></c:out>'>

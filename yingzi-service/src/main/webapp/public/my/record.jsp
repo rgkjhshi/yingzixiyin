@@ -23,6 +23,9 @@
 <body>
     <div class="main">
     	<ul class="layout">
+            <c:if test="${empty userRecords}">
+                <li class="none_tips">暂无任何记录</li>
+            </c:if>
     		<c:forEach items="${userRecords}" var="r">
     			<li class="record">
 	    			<div class="sub">时间：<fmt:formatDate value="${r.createTime}" pattern="yyyy-MM-dd"/></div>
