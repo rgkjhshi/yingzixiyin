@@ -21,7 +21,7 @@
 <script src="../js/sockjs-0.3.min.js"></script>
 <body>
     <div class="main layout" style="position: relative;width: 100%;height: 100%;">
-        <ul class="consultants ms_detail" id="console" style="position: absolute;bottom: 0;overflow: scroll;height: 100%;padding: 20px 15px 50px 15px;">
+        <ul class="consultants ms_detail" id="console" style="position: absolute;bottom: 0;overflow: scroll;height: 100%;padding: 20px 15px 50px 15px;width: 100%;box-sizing: border-box;">
             <!-- <li class="ms_my">
                 <div class="ms_name">我</div>
                 <div class="ms_content">咨询师您好。</div>

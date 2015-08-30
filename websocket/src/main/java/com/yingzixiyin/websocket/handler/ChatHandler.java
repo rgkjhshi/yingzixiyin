@@ -27,6 +27,9 @@ public class ChatHandler extends TextWebSocketHandler {
     @Resource
     private ChatService chatService;
 
+    private String fromKey;
+    private String toKey;
+
 
     public ChatHandler() {
     }
@@ -45,7 +48,9 @@ public class ChatHandler extends TextWebSocketHandler {
             session.close();
             return;
         }
-        userMap.put(phone, session);
+        fromKey = phone + toPhone;
+        toKey = toPhone + phone;
+        userMap.put(fromKey, session);
         // 当用户登录后，把离线消息推送给用户
         try {
             chatService.sendUnReadMessage(session);
@@ -60,17 +65,15 @@ public class ChatHandler extends TextWebSocketHandler {
      */
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-        String toPhone = (String) session.getAttributes().get("toPhone");
         // 找to
-        WebSocketSession toSession = userMap.get(toPhone);
+        WebSocketSession toSession = userMap.get(toKey);
         chatService.sendAndSaveMessage(session, toSession, message);
     }
 
     @Override
     public void handleTransportError(WebSocketSession session, Throwable exception) throws Exception {
         if (session.isOpen()) {
-            String phone = (String) session.getAttributes().get("phone");
-            userMap.remove(phone);
+            userMap.remove(fromKey);
             session.close();
         }
         logger.info("websocket connection closed because of error......");
@@ -80,11 +83,27 @@ public class ChatHandler extends TextWebSocketHandler {
     public void afterConnectionClosed(WebSocketSession session, CloseStatus closeStatus) throws Exception {
         String phone = (String) session.getAttributes().get("phone");
         logger.info("websocket connection closed, remove {}", phone);
-        userMap.remove(phone);
+        userMap.remove(fromKey);
     }
 
     @Override
     public boolean supportsPartialMessages() {
         return false;
+    }
+
+    public String getFromKey() {
+        return fromKey;
+    }
+
+    public void setFromKey(String fromKey) {
+        this.fromKey = fromKey;
+    }
+
+    public String getToKey() {
+        return toKey;
+    }
+
+    public void setToKey(String toKey) {
+        this.toKey = toKey;
     }
 }

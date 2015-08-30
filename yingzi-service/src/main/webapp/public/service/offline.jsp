@@ -58,7 +58,7 @@
                 面对面咨询请您在线上付款预约，客服将在第一时间与您沟通具体时间地点。
             </li>
             <li>
-                <div class="choose_btn">付款预约</div>
+                <div class="choose_btn" data-type="offline" data-price='<fmt:formatNumber value="${cinfo.facePrice }" pattern="##.##" minFractionDigits="2"></fmt:formatNumber>'>付款预约</div>
             </li>
         </ul>
     </div>
