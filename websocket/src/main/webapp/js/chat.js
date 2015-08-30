@@ -70,6 +70,7 @@
             log('me',message);
             if($.trim(message)!=""){
                 ws.send(message);
+                $("#message").val("");
             }
         } else {
             alert('未建立对话连接，请重试！');
@@ -88,7 +89,7 @@
         }
 
         $("#console").append("<li class='"+author+"'><span>"+time+"</span><div>"+message+"</div></li>");
-        $("#message").val("");
+        // $("#message").val("");
         // while (console.childNodes.length > 25) {
         //     console.removeChild(console.firstChild);
         // }

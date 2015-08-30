@@ -91,7 +91,7 @@
 	            <li style="margin:40px 0;">
 	    			<a class="choose_btn" id="onlinebtn" data-type="online" data-id="${consultant.id}">线上聊天咨询</a>
 	    			<a class="choose_btn" id="offlinebtn" data-type="offline" data-id="${consultant.id}">预约面对面</a>
-	    			<a class="choose_btn" id="videobtn" data-type="video" data-id="${consultant.id}">预约面对面</a>
+	    			<a class="choose_btn" id="videobtn" data-type="video" data-id="${consultant.id}">视频咨询</a>
 	    		</li>
 	        </ul>
 	    </div> 

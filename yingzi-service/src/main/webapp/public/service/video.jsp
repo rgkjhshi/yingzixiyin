@@ -26,7 +26,7 @@
 </head>
 <body>
     <div class="main">
-        <ul class="consultants layout">
+        <ul class="consultants layout" style="padding-bottom:50px;">
             <li class="items">
             	<a href="detail.html">
             		<img src='

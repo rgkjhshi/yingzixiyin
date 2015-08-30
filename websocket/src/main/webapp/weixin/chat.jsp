@@ -20,8 +20,8 @@
 <script type="text/javascript" src="../js/zepto.min.js"></script>
 <script src="../js/sockjs-0.3.min.js"></script>
 <body>
-    <div class="main layout">
-        <ul class="consultants ms_detail" id="console">
+    <div class="main layout" style="position: relative;width: 100%;height: 100%;">
+        <ul class="consultants ms_detail" id="console" style="position: absolute;bottom: 0;overflow: scroll;height: 100%;padding: 20px 15px 50px 15px;">
             <!-- <li class="ms_my">
                 <div class="ms_name">我</div>
                 <div class="ms_content">咨询师您好。</div>
