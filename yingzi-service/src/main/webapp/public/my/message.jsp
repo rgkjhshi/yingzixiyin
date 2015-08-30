@@ -23,6 +23,9 @@
 <body>
     <div class="main layout">
     	<ul class="consultants ms_record">
+    		<c:if test="${empty myMessages}">
+    			暂无任何记录
+    		</c:if>
     		<c:forEach items="${myMessages}" var="m">
     			<li class='record unend <c:out value="${m[\"is_read\"]==0 ?\"new_ms\":\"\"}"></c:out>'>
     				<form id="chatform" method="post" name="chatform" action='${ chaturl}'>
