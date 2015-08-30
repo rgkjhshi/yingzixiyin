@@ -240,15 +240,29 @@ public class ConsultantController {
 		if(cinfo==null){
 			//做异常处理
 		}
-		PreOrder pro=buildPreOrderVo(request, cinfo);
-		String xml="";
-		try {
-			xml = pro.serializeToXml();
-		} catch (IllegalArgumentException | IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		return response_page;
+	}
+	@RequestMapping(value="pay_online.do")
+	@PowerCheck(type=PowerCheckEnum.LOGIN)
+	public String payByOnline(HttpServletRequest request,HttpServletResponse response,Long consultant_id) throws IOException{
+		logger.info("---用户线上支付接口页面----");
+		String response_page="public/service/pay";
+		ConsultantQueryRequestDto cqrDto=new ConsultantQueryRequestDto();
+		cqrDto.setId(consultant_id);
+		cqrDto.setStatus(StatusEnum.ACCEPTED);
+		ConsultantInfo cinfo=consultantFacade.queryOne(cqrDto);
+		if(cinfo==null){
+			//做异常处理
+			PreOrder pro=buildPreOrderVo(request, cinfo);
+			String xml="";
+			try {
+				xml = pro.serializeToXml();
+			} catch (IllegalArgumentException | IllegalAccessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			logger.info("得到预下单请求微信xml："+xml);
 		}
-		logger.info("得到预下单请求微信xml："+xml);
 		return response_page;
 	}
 	@RequestMapping(value="consultant_offline.do")
@@ -256,8 +270,6 @@ public class ConsultantController {
 	public String consultantByOffline(HttpServletRequest request,HttpServletResponse response,Long consultant_id) throws IOException{
 		logger.info("---用户调用咨询师进行线下咨询信息接口页面----");
 		String response_page="public/service/offline";
-		String ip =NetUtils.getRemoteHost(request);
-		logger.info("得到用户IP："+ip);
 		ConsultantQueryRequestDto cqrDto=new ConsultantQueryRequestDto();
 		cqrDto.setId(consultant_id);
 		cqrDto.setStatus(StatusEnum.ACCEPTED);
@@ -272,8 +284,6 @@ public class ConsultantController {
 	public String consultantByVideo(HttpServletRequest request,HttpServletResponse response,Long consultant_id) throws IOException{
 		logger.info("---用户调用咨询师进行线下视频咨询信息接口页面----");
 		String response_page="public/service/video";
-//		String ip =NetUtils.getRemoteHost(request);
-//		logger.info("得到用户IP："+ip);
 		ConsultantQueryRequestDto cqrDto=new ConsultantQueryRequestDto();
 		cqrDto.setId(consultant_id);
 		cqrDto.setStatus(StatusEnum.ACCEPTED);
