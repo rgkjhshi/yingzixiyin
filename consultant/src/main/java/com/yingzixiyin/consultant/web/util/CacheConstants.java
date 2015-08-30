@@ -8,10 +8,14 @@ public class CacheConstants {
 	public static Set<String> extensionList=new HashSet<String>();
 	
 	static {
-		extensionList.add("jpg");
-		extensionList.add("jpeg");
-		extensionList.add("png");
-		extensionList.add("bmp");
+        extensionList.add("jpg");
+        extensionList.add("jpeg");
+        extensionList.add("png");
+        extensionList.add("bmp");
+        extensionList.add("JPG");
+        extensionList.add("JPEG");
+        extensionList.add("PNG");
+        extensionList.add("BMP");
 	}
 	
 	public static Set<String> videoExtensionList=new HashSet<String>();
