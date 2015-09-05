@@ -23,20 +23,21 @@
 <style>
 .endchat{
     display: inline-block;
-    padding: 4px 10px;
+    padding: 10px 20px;
     background: #666;
-    color:#fff;
+    color: #fff;
     border-radius: 18px;
     font-size: 14px;
     margin-top: -10px;
-    margin-bottom: 15px;
-    position: absolute;
-    right:0;
+}
+.consultants li {
+    margin: 30px 0 20px 0;
+    text-align: left;
 }
 </style>
 <body>
     <div class="main layout">
-    	<ul class="consultants ms_record" style="position:relative;">
+    	<ul class="consultants ms_record" style="text-align:right;">
     		<c:if test="${empty myMessages}">
     			<li class="none_tips">暂无任何记录</li>
     		</c:if>
