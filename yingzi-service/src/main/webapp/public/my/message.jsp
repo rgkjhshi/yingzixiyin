@@ -20,6 +20,16 @@
 <link href="<%=path%>/favicon.ico" rel="shortcut icon"></head>
 <script type="text/javascript" src="<%=path%>/js/zepto.min.js"></script>
 <%-- <script type="text/javascript" src="<%=path%>/js/touch.js"></script> --%>
+<style>
+.endchat{
+    display: inline-block;
+    padding: 2px 10px;
+    background: #666;
+    color:#fff;
+    border-radius: 18px;
+    margin-top: 20px;
+}
+</style>
 <body>
     <div class="main layout">
     	<ul class="consultants ms_record">
@@ -57,7 +67,7 @@
     });
     $(".endchat").on("click",function(){
         //结束咨询
-        var url = "<%=path %>/consultant/endChatApi.do?recordId";
+        var url = "<%=path %>/user/endChatApi.do?recordId";
         var r=confirm("是否要结束咨询？结束后，咨询费将转入咨询师账户！如有问题，可直接回复公众账号，给我们提宝贵的意见！");
         if(r){
             $.get(url,{"recordId":$(this).attr("data-recordid")},function(data){
