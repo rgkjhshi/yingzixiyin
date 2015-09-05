@@ -104,7 +104,7 @@
 		$.get("<%=path %>/consultant/isCollected.do?id="+$("#onlinebtn").attr("data-id"),function(data){
 			if(data.returnCode==0){
 				if(data.isCollect==1){//已收藏
-					$("#favor").text("已收藏");
+					$("#favor").html("已收藏<span id='cancelfavor'>取消</span>");
 					$("#favor").attr("data-favor","2");
 				}else{
 					$("#favor").attr("data-favor","1");
@@ -123,13 +123,25 @@
 			$.get("<%=path %>/consultant/collect_consultant.do?id="+$("#onlinebtn").attr("data-id"),function(data){
 				console.log(data);
 				if(data.returnCode==0){
-					$("#favor").text("已收藏");
+					$("#favor").html("已收藏<span id='cancelfavor'>取消</span>");
 					$("#favor").attr("data-favor","2");
 				}else{
 					alert(data.returnMessage);
 				}
 			});
 		}	
+	});
+	//取消收藏
+	$("#favor").on("click","#cancelfavor",function(){
+		$.get("<%=path %>/consultant/cancel_consultant.do?id="+$("#onlinebtn").attr("data-id"),function(data){
+			console.log(data);
+			if(data.returnCode==0){
+				$("#favor").html("收藏");
+				$("#favor").attr("data-favor","1");
+			}else{
+				alert(data.returnMessage);
+			}
+		});
 	});
 </script>
 <script type="text/javascript">

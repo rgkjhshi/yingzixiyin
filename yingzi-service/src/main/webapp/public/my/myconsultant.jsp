@@ -22,7 +22,7 @@
 <%-- <script type="text/javascript" src="<%=path%>/js/touch.js"></script> --%>
 <body>
     <div class="main layout">
-    	<div class="sub">我咨询过的咨询师</div>
+    	<!-- <div class="sub">我咨询过的咨询师</div>
     	<ul class="consultants" style="margin-bottom:50px;">
         <c:if test="${empty visited}">
             <li class="">暂无任何记录</li>
@@ -38,12 +38,6 @@
 				        	${cinfo.avatar}
 				        </c:if>
 	            	' />
-            		<!--<div class="info">
-            			<div class="name">${cinfo.name }</div>
-            			<div class="desc">
-            				${cinfo.speciality }
-            			</div>
-            		</div>-->
                     <div class="info">
                         <div class="name nameall">${cinfo.name }</div>
                         <div class="desc descall">${cinfo.age}岁，¥ ${cinfo.videoPrice}&nbsp;元/次，地址：${cinfo.address}<br/>${cinfo.speciality}</div>
@@ -52,10 +46,13 @@
             	</a>
     		</li>
     	</c:forEach>
-    	</ul>
+    	</ul> -->
 
 		<div class="sub">我收藏的咨询师</div>
     	<ul class="consultants">
+            <c:if test="${empty collected}">
+                <li class="">暂无任何记录</li>
+            </c:if>
     		<c:forEach items="${ collected }" var="cinfo">
     			<li class="record">
 	    			<a href="<%=path%>/consultant/consultant_deatil.do?id=${cinfo.id}">
