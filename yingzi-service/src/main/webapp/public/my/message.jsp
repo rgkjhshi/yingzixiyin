@@ -27,13 +27,13 @@
     			<li class="none_tips">暂无任何记录</li>
     		</c:if>
     		<c:forEach items="${myMessages}" var="m">
-    			<li class='record unend <c:out value="${m[\"is_read\"]==0 ?\"new_ms\":\"\"}"></c:out>'>
+    			<li class='record <c:out value="${m[\"is_read\"]==0 ?\"new_ms\":\"\"}"></c:out>'>
     				<form id="chatform" method="post" name="chatform" action='${ chaturl}'>
                         <input type="hidden" name="phone" value="${WX_LOGIN_USER.phone}" />
                         <input type="hidden" name="toPhone" value='<c:out value="${m[\"phone\"]}"></c:out>' />
                         <input type="hidden" name="recordId" value='<c:out value="${m[\"record_id\"]}"></c:out>' />
                     </form>
-	        		<a>
+	        		<a class="unend">
 	        			<div class="message">
 		        			来自<span class="red_font">
 		        				<c:out value="${m[\"name\"]}"></c:out>
@@ -41,10 +41,10 @@
 		        			<span class="ms_status">
 		        			<c:out value="${m[\"is_read\"]==0 ?\"未读\":\"\"}"></c:out>
 		        			</span>
-                            <div class="endchat" data-recordid='<c:out value="${m[\"record_id\"]}"></c:out>'>结束咨询</div>
 		        		</div>
 		        		<i></i>
 		        	</a>
+                    <div class="endchat" data-recordid='<c:out value="${m[\"record_id\"]}"></c:out>'>结束咨询</div>
     			</li>
     		</c:forEach>
        	</ul>
