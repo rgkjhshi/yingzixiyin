@@ -9,6 +9,7 @@ public class RecordInfoExtend extends RecordInfo implements Serializable{
     private String consultantPhone;     // 咨询师手机号
     private String consultantName;		// 咨询师名称
     private String consultantAvatar;    // 头像url
+    private int consultantUnReadMessageCount;  // 咨询师的未读消息条数
 
     // 用户信息
     private String userPhone;           // 用户手机号
@@ -38,6 +39,14 @@ public class RecordInfoExtend extends RecordInfo implements Serializable{
         this.consultantAvatar = consultantAvatar;
     }
 
+    public int getConsultantUnReadMessageCount() {
+        return consultantUnReadMessageCount;
+    }
+
+    public void setConsultantUnReadMessageCount(int consultantUnReadMessageCount) {
+        this.consultantUnReadMessageCount = consultantUnReadMessageCount;
+    }
+
     public String getUserPhone() {
         return userPhone;
     }
@@ -61,6 +70,7 @@ public class RecordInfoExtend extends RecordInfo implements Serializable{
                 "consultantPhone='" + consultantPhone + '\'' +
                 ", consultantName='" + consultantName + '\'' +
                 ", consultantAvatar='" + consultantAvatar + '\'' +
+                ", consultantUnReadMessageCount='" + consultantUnReadMessageCount + '\'' +
                 ", userPhone='" + userPhone + '\'' +
                 ", openId='" + openId + '\'' +
                 '}';

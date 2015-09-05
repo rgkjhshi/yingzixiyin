@@ -8,13 +8,11 @@ public enum RangeTypeEnum {
 
     UNKNOWN(0, "未知"),
 
-    ONE(1, "恋爱关系"),
+    ONE(1, "解救单身"),
 
-    TWO(2, "情侣关系"),
+    TWO(2, "恋爱情感"),
 
-    THREE(3, "婚前关系"),
-
-    FOUR(4, "夫妻关系");
+    THREE(3, "婚姻生活");
 
     private Integer value;
 

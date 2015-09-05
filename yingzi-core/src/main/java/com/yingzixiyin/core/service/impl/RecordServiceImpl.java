@@ -1,11 +1,14 @@
 package com.yingzixiyin.core.service.impl;
 
 import com.google.common.collect.Lists;
+import com.yingzixiyin.api.dto.MessageQueryRequestDto;
 import com.yingzixiyin.api.dto.RecordInfo;
 import com.yingzixiyin.api.dto.RecordInfoExtend;
 import com.yingzixiyin.api.enums.ConsultTypeEnum;
 import com.yingzixiyin.api.enums.YesOrNoEnum;
+import com.yingzixiyin.core.dao.MessageDao;
 import com.yingzixiyin.core.dao.RecordDao;
+import com.yingzixiyin.core.entity.Message;
 import com.yingzixiyin.core.entity.Record;
 import com.yingzixiyin.core.service.RecordService;
 import org.slf4j.Logger;
@@ -28,6 +31,8 @@ public class RecordServiceImpl implements RecordService {
 
     @Resource
     RecordDao recordDao;
+    @Resource
+    MessageDao messageDao;
 
     @Override
     public Integer insert(Record record) {
@@ -78,7 +83,16 @@ public class RecordServiceImpl implements RecordService {
 //		logger.info("得到查询咨询记录结果:"+list);
         List<RecordInfoExtend> resList = Lists.newArrayList();
         for (Map<String, Object> bean : list) {
-            resList.add(translateBean(bean));
+            RecordInfoExtend recordInfoExtend = translateBean(bean);
+            MessageQueryRequestDto messageQueryRequestDto = new MessageQueryRequestDto();
+            messageQueryRequestDto.setRecordId(recordInfoExtend.getId());  // recordId
+            messageQueryRequestDto.setIsRead(YesOrNoEnum.NO);  // 未读
+            messageQueryRequestDto.setFromPhone(recordInfoExtend.getUserPhone());  // 来自某个用户
+            messageQueryRequestDto.setToPhone(recordInfoExtend.getConsultantPhone());  // 到这个咨询师
+            List<Message> messageList =  messageDao.getMessageList(Message.getBean(messageQueryRequestDto));
+            int count = messageList.size();
+            recordInfoExtend.setConsultantUnReadMessageCount(count);
+            resList.add(recordInfoExtend);
         }
 //		logger.info("得到list:"+resList);
         return resList;
