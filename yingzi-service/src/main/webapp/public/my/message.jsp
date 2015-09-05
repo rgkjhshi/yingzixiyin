@@ -39,10 +39,11 @@
     <div class="main layout">
     	<ul class="consultants ms_record" style="text-align:right;">
     		<c:if test="${empty myMessages}">
-    			<li class="none_tips">暂无任何记录</li>
+    			<li class="none_tips" style="text-align:center;">暂无任何记录</li>
     		</c:if>
     		<c:forEach items="${myMessages}" var="m">
-    			<li class='record unend <c:out value="${m[\"is_read\"]==0 ?\"new_ms\":\"\"}"></c:out>'>
+    			<div>
+                <li class='record unend <c:out value="${m[\"is_read\"]==0 ?\"new_ms\":\"\"}"></c:out>'>
     				<form id="chatform" method="post" name="chatform" action='${ chaturl}'>
                         <input type="hidden" name="phone" value="${WX_LOGIN_USER.phone}" />
                         <input type="hidden" name="toPhone" value='<c:out value="${m[\"phone\"]}"></c:out>' />
@@ -50,7 +51,7 @@
                     </form>
 	        		<a class="">
 	        			<div class="message">
-		        			来自<span class="red_font">
+		        			&nbsp;&nbsp;来自<span class="red_font">
 		        				<c:out value="${m[\"name\"]}"></c:out>
 		        			</span>的消息
 		        			<span class="ms_status">
@@ -63,6 +64,7 @@
 		        	</a>
     			</li>
                 <div class="endchat" data-recordid='<c:out value="${m[\"record_id\"]}"></c:out>'>结束咨询</div>
+                </div>
     		</c:forEach>
        	</ul>
     </div>
@@ -75,6 +77,7 @@
     $(".endchat").on("click",function(){
         //结束咨询
         var recordid = $(this).attr("data-recordid");
+        var that = $(this);
         var url = "<%=path %>/user/endChatApi.do";
         var r=confirm("是否要结束咨询？结束后，咨询费将转入咨询师账户！如有问题，可直接回复公众账号，给我们提宝贵的意见！");
         if(r){
@@ -82,7 +85,7 @@
                 var _data = $.parseJSON(data);
                 if(_data.status==0){
                     alert("咨询已结束！");
-                    window.location.reload();
+                    that.parent("div").remove();
                 }
             });
         }
