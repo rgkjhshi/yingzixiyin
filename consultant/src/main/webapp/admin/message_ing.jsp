@@ -34,7 +34,11 @@
                                     <div class="ms_time"><fmt:formatDate value="${ r.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/></div>
                                 </div>
                                 <div class="ms_content">
-                                    <div>&nbsp;</div>
+                                    <div style="color:#ff0000;">
+                                        <c:if test="${r.consultantUnReadMessageCount>0}">
+                                            ${r.consultantUnReadMessageCount}条未读消息
+                                        </c:if>
+                                    </div>
                                     <div class="ms_ing">${r.isCompleted.value==0?"进行中":"已结束" }</div>
                                 </div>
                         	</div>

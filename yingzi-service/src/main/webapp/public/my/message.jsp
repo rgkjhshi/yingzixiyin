@@ -41,6 +41,7 @@
 		        			<span class="ms_status">
 		        			<c:out value="${m[\"is_read\"]==0 ?\"未读\":\"\"}"></c:out>
 		        			</span>
+                            <div class="endchat" data-recordid='<c:out value="${m[\"record_id\"]}"></c:out>'>结束咨询</div>
 		        		</div>
 		        		<i></i>
 		        	</a>
@@ -53,6 +54,18 @@
     //打开咨询详情弹窗
     $(".unend").on("click",function(){
         $(this).find("form")[0].submit();
+    });
+    $(".endchat").on("click",function(){
+        //结束咨询
+        var url = "<%=path %>/consultant/endChatApi.do?recordId";
+        var r=confirm("是否要结束咨询？结束后，咨询费将转入咨询师账户！如有问题，可直接回复公众账号，给我们提宝贵的意见！");
+        if(r){
+            $.get(url,{"recordId":$(this).attr("data-recordid")},function(data){
+                if(data.status==0){
+                    alert("咨询已结束！");
+                }
+            });
+        }
     });
 </script>
 </body>

@@ -39,11 +39,12 @@ String recordId = "" + session.getAttribute("recordId");
                             <div class="dialog_reply">
                                 <div class="reply_inner">
                                     <textarea class="reply_content" id="message"></textarea>
-                                    <a class="close_chat" data-recordId="<%=recordId %>">结束咨询</a>
+                                    <!-- <a class="close_chat" data-recordId="<%=recordId %>">结束咨询</a> -->
                                     <a class="send_btn" id='echo'>发送</a>
                                 </div>
                             </div>
                         </div>
+                        <div style="font-size: 12px;color: #ff0000;margin-left: 40px;">请主动提示咨询者点击结束按钮结束咨询，否则咨询费无法进入您的账户。</div>
                     </div>
                 </div>
             </div>

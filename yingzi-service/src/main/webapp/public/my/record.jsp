@@ -13,7 +13,7 @@
 <meta name="format-detection"content="telephone=no">
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-<title>消费记录</title>
+<title>咨询历史</title>
 <meta name="description" content="">
 <meta name="keywords" content="">
 <link rel="stylesheet" href="<%=path%>/css/base.css">
