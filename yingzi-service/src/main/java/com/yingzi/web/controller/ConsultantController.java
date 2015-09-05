@@ -223,18 +223,116 @@ public class ConsultantController {
 		SessionUtil.setLoginUserToSession(request, user);
 		ResponseUtils.renderJsonText(response, JsonUtil.getJsonText(responseDto));
 	}
-	@RequestMapping(value="consultant_yingzi.do")
-	public String weixinToYingziCounsultant(HttpServletRequest request,HttpServletResponse response,String code) throws IOException{
-		logger.info("---用户调用进入咨询师页面|code="+code);
-		String response_page="public/service/sort";
-		if(StringUtils.isEmpty(code)){
-			return response_page;
+	/**
+	 * 收藏某个咨询师功能接口
+	 * @param request
+	 * @param response
+	 * @param id
+	 * @return
+	 * @throws IOException
+	 */
+	@RequestMapping(value="cancel_consultant.do")
+	@PowerCheck
+	public void cancelConsultantInfor(HttpServletRequest request,HttpServletResponse response,Long id) throws IOException{
+		logger.info("---用户取消关注咨询师详细信息接口页面----");
+		BaseResponseDto responseDto=new BaseResponseDto();
+		if(id==null){
+			responseDto.setReturnCode(-1);
+			responseDto.setReturnMessage("咨询师收藏ID为空");
+			ResponseUtils.renderJsonText(response, JsonUtil.getJsonText(responseDto));
+			return;
 		}
+		UserInfo user=SessionUtil.getLoginUserToSession(request);
+		
+		if(user==null){
+			responseDto.setReturnCode(-1);
+			responseDto.setReturnMessage("用户未登录或登录超时");
+			ResponseUtils.renderJsonText(response, JsonUtil.getJsonText(responseDto));
+			return;
+		}
+		if(StringUtils.isNotEmpty(user.getCollected())&&user.getCollected().contains(id+"")){
+			String [] collects=user.getCollected().split(",");
+			StringBuilder sb=new StringBuilder();
+			for(int i=0;i<collects.length;i++){
+				if(i==0||i<collects.length-1){
+					sb.append(collects[i]+",");
+				}
+				else{
+					sb.append(collects[i]);
+				}
+			}
+			user.setCollected(sb.toString());
+		}
+		else{
+			responseDto.setReturnCode(-1);
+			responseDto.setReturnMessage("该咨询咨询师未收藏或不存在");
+			ResponseUtils.renderJsonText(response, JsonUtil.getJsonText(responseDto));
+			return;
+		}
+		responseDto=userFacade.update(user);
+		SessionUtil.setLoginUserToSession(request, user);
+		ResponseUtils.renderJsonText(response, JsonUtil.getJsonText(responseDto));
+	}
+	private String consultantPage(HttpServletRequest request,HttpServletResponse response,Integer ctype,String code){
+		logger.info("---用户调用进入咨询师页面|code="+code);
+		String response_page="public/service/consultant";
 		boolean flag=weixinOauthHelper.oauthAndLogin(request, code);
 		if(!flag){
 			logger.error("---微信调转consultant_yingzi.do页面，认证失败");
 		}
+		if(ctype==null){
+			return response_page;
+		}
+		RangeTypeEnum consultantType=RangeTypeEnum.toEnum(ctype);
+		if(consultantType==null){
+			return response_page;
+		}
+		ConsultantQueryRequestDto rcrDto=new ConsultantQueryRequestDto();
+		rcrDto.setRangeType(consultantType);
+		rcrDto.setStatus(StatusEnum.ACCEPTED);
+		ConsultantQueryResponseDto resDto=  consultantFacade.query(rcrDto); 
+		request.setAttribute("consultants", resDto.getConsultantInfoList());
+		request.setAttribute("ctype", ctype);
 		return response_page;
+	}
+	/***
+	 * 解救单身
+	 * @param request
+	 * @param response
+	 * @param ctype
+	 * @param code
+	 * @return
+	 * @throws IOException
+	 */
+	@RequestMapping(value="consultant_single.do")
+	public String weixinToYingziSingle(HttpServletRequest request,HttpServletResponse response,String code) throws IOException{
+		return consultantPage(request, response, RangeTypeEnum.ONE.getValue(), code);
+	}
+	/***
+	 * 恋爱情感
+	 * @param request
+	 * @param response
+	 * @param ctype
+	 * @param code
+	 * @return
+	 * @throws IOException
+	 */
+	@RequestMapping(value="consultant_love.do")
+	public String weixinToYingziLove(HttpServletRequest request,HttpServletResponse response,String code) throws IOException{
+		return consultantPage(request, response, RangeTypeEnum.TWO.getValue(), code);
+	}
+	/***
+	 * 婚姻生活
+	 * @param request
+	 * @param response
+	 * @param ctype
+	 * @param code
+	 * @return
+	 * @throws IOException
+	 */
+	@RequestMapping(value="consultant_life.do")
+	public String weixinToYingziLife(HttpServletRequest request,HttpServletResponse response,String code) throws IOException{
+		return consultantPage(request, response, RangeTypeEnum.THREE.getValue(), code);
 	}
 	@RequestMapping(value="consultant_online.do")
 	@PowerCheck(type=PowerCheckEnum.LOGIN)

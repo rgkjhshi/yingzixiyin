@@ -86,65 +86,6 @@ public class UserCenterController {
 	@Resource
 	private WeixinOauthHelper weixinOauthHelper;
 	/**
-	 * 根据咨询用户收藏的咨询师id获取咨询师列表
-	 * @param request
-	 * @param response
-	 * @return
-	 * @throws IOException
-	 */
-	
-	@RequestMapping(value="collected_consultants.do")
-	public void collectedConsultant(HttpServletRequest request,HttpServletResponse response,String openId) throws IOException{
-		logger.info("---用户收藏过的咨询师页面----");
-		//重新从数据库查询一遍，防止刚登陆用户看不到收藏过的咨询师数据
-		UserQueryRequestDto uqrDto=new UserQueryRequestDto();
-		uqrDto.setOpenId(openId);
-		UserInfo user=userFacade.queryOne(uqrDto);
-		ConsultantQueryResponseDto  cqrDto=consultantFacade.queryByIds(user.getCollected());
-		try{
-			String res=JsonUtil.getJsonByConsultantQueryResponseDto(cqrDto, "password","alipay");
-			ResponseUtils.renderJsonText(response, res);
-		} catch(Exception e){
-			logger.error("得到用户收藏列表异常",e);
-		}
-	}
-	/**
-	 * 根据咨询用户咨询过的的咨询师id获取咨询师列表
-	 * @param request
-	 * @param response
-	 * @return
-	 * @throws IOException
-	 */
-	@PowerCheck(type=PowerCheckEnum.LOGIN)
-	@RequestMapping(value="visited_consultants.do")
-	public void visitedConsultant(HttpServletRequest request,HttpServletResponse response) throws IOException{
-		logger.info("---用户咨询过的咨询师页面----");
-		//重新从数据库查询一遍，防止刚登陆用户看不到咨询过的咨询师数据
-		UserInfo user=SessionUtil.getLoginUserToSession(request);
-		UserQueryRequestDto uqrDto=new UserQueryRequestDto();
-		uqrDto.setOpenId(user.getOpenId());
-		user=userFacade.queryOne(uqrDto);
-		ConsultantQueryResponseDto  cqrDto=consultantFacade.queryByIds(user.getVisited());
-		try{
-			String res=JsonUtil.getJsonByConsultantQueryResponseDto(cqrDto, "password","alipay");
-			ResponseUtils.renderJsonText(response, res);
-		} catch(Exception e){
-			logger.error("得到用户咨询过的咨询师列表异常",e);
-		}
-	}
-	@PowerCheck(type=PowerCheckEnum.LOGIN)
-	@RequestMapping(value="consume_records.do")
-	public void consumeConsultantRecord(HttpServletRequest request,HttpServletResponse response) throws IOException{
-		logger.info("---用户咨询的消费记录页面----");
-		RecordQueryResponseDto resqrDto=queryUserConsumeRecords(request);
-		try{
-			String res=JsonUtil.getJsonByRecordQueryResponseDto(resqrDto);
-			ResponseUtils.renderJsonText(response, res);
-		} catch(Exception e){
-			logger.error("得到用户咨询消费记录列表异常",e);
-		}
-	}
-	/**
 	 * 提取查询用户消费记录公共代码
 	 * @param request
 	 * @return
@@ -238,16 +179,16 @@ public class UserCenterController {
 	 * @return
 	 * @throws IOException
 	 */
-	@RequestMapping(value="wx_consultant_records.do")
+	@RequestMapping(value="wx_collect_records.do")
 	public String wxToConsultantRecord(HttpServletRequest request,HttpServletResponse response,String code) throws IOException{
 		logger.info("---用户咨询收藏的咨询师和咨询过的咨询师记录页面----");
 		String response_page="public/my/myconsultant";
 		boolean flag=weixinOauthHelper.oauthAndLogin(request, code);
 		if(flag){
 			UserInfo user=queryUserInfo(request);
-			ConsultantQueryResponseDto  cqrDtoVisited=consultantFacade.queryByIds(user.getVisited());
+//			ConsultantQueryResponseDto  cqrDtoVisited=consultantFacade.queryByIds(user.getVisited());
 			ConsultantQueryResponseDto  cqrDtoCollected=consultantFacade.queryByIds(user.getCollected());
-			request.setAttribute("visited", cqrDtoVisited.getConsultantInfoList());
+//			request.setAttribute("visited", cqrDtoVisited.getConsultantInfoList());
 			request.setAttribute("collected", cqrDtoCollected.getConsultantInfoList());
 		}
 		return response_page;
