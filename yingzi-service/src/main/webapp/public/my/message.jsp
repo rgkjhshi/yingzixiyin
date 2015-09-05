@@ -76,7 +76,7 @@
         var r=confirm("是否要结束咨询？结束后，咨询费将转入咨询师账户！如有问题，可直接回复公众账号，给我们提宝贵的意见！");
         if(r){
             $.get(url,{"recordId":recordid},function(data){
-                var _data = $.parseJson(data);
+                var _data = $.parseJSON(data);
                 alert(url);
                 alert(_data.status);
                 alert(_data.message);
