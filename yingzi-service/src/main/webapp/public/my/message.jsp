@@ -23,11 +23,13 @@
 <style>
 .endchat{
     display: inline-block;
-    padding: 2px 10px;
+    padding: 4px 10px;
     background: #666;
     color:#fff;
     border-radius: 18px;
-    margin-top: 20px;
+    font-size: 14px;
+    margin-top: 10px;
+    margin-bottom: 20px;
 }
 </style>
 <body>
@@ -47,9 +49,11 @@
 	        			<div class="message">
 		        			来自<span class="red_font">
 		        				<c:out value="${m[\"name\"]}"></c:out>
-		        			</span>的消息&nbsp;&nbsp;<c:out value="${m[\"msgcount\"]==0?\"\":m[\"msgcount\"]}"></c:out>
+		        			</span>的消息
+                            <!-- <c:out value="${m[\"msgcount\"]==0?\"\":m[\"msgcount\"]}"></c:out> -->
 		        			<span class="ms_status">
-		        			<c:out value="${m[\"is_read\"]==0 ?\"未读\":\"\"}"></c:out>
+		        			<!-- <c:out value="${m[\"is_read\"]==0 ?\"未读\":\"\"}"></c:out> -->
+                            <c:out value="${m[\"msgcount\"]==0?\"\":m[\"msgcount\"]}条未读"></c:out>
 		        			</span>
 		        		</div>
 		        		<i></i>
