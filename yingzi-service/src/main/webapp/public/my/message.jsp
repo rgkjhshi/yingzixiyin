@@ -28,13 +28,15 @@
     color:#fff;
     border-radius: 18px;
     font-size: 14px;
-    margin-top: 0;
-    margin-bottom: 20px;
+    margin-top: -10px;
+    margin-bottom: 15px;
+    position: absolute;
+    right:0;
 }
 </style>
 <body>
     <div class="main layout">
-    	<ul class="consultants ms_record">
+    	<ul class="consultants ms_record" style="position:relative;">
     		<c:if test="${empty myMessages}">
     			<li class="none_tips">暂无任何记录</li>
     		</c:if>
@@ -51,7 +53,7 @@
 		        				<c:out value="${m[\"name\"]}"></c:out>
 		        			</span>的消息
 		        			<span class="ms_status">
-                            <c:if test="${m[\"msgcount\"]!=0}">
+                            <c:if test="${m[\"is_read\"]==0}">
                                 <c:out value="${m[\"msgcount\"]}"></c:out>条未读
                             </c:if>
 		        			</span>
@@ -77,11 +79,9 @@
         if(r){
             $.get(url,{"recordId":recordid},function(data){
                 var _data = $.parseJSON(data);
-                alert(url);
-                alert(_data.status);
-                alert(_data.message);
                 if(_data.status==0){
                     alert("咨询已结束！");
+                    window.location.reload();
                 }
             });
         }
