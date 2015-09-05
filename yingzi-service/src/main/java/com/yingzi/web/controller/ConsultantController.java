@@ -254,7 +254,10 @@ public class ConsultantController {
 			String [] collects=user.getCollected().split(",");
 			StringBuilder sb=new StringBuilder();
 			for(int i=0;i<collects.length;i++){
-				if(i==0||i<collects.length-1){
+				if(collects[i].equals(id+"")){
+					continue;
+				}
+				if(i<collects.length-1){
 					sb.append(collects[i]+",");
 				}
 				else{
