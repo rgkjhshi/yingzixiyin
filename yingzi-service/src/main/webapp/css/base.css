@@ -276,23 +276,23 @@ a{text-decoration: none;color:#333;}
 }
 /*message*/
 .ms_record i{
-	position:absolute;
+	/*position:absolute;
 	background:rgb(236, 33, 33);
 	width:10px;
 	height:10px;
     top:50%;
     left:4%;
     transform: translateY(-50%);
-    border-radius: 50%;
+    border-radius: 50%;*/
     display:none;
 }
 .new_ms{
 	position:relative;
 	background:rgb(255, 255, 200);
 }
-.ms_record .new_ms i{
+/*.ms_record .new_ms i{
 	display:block;
-}
+}*/
 .ms_status{
 	position:absolute;
     top:50%;

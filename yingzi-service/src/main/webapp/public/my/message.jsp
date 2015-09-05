@@ -51,7 +51,7 @@
                     </form>
 	        		<a class="">
 	        			<div class="message">
-		        			&nbsp;&nbsp;来自<span class="red_font">
+		        			来自<span class="red_font">
 		        				<c:out value="${m[\"name\"]}"></c:out>
 		        			</span>的消息
 		        			<span class="ms_status">
@@ -60,7 +60,7 @@
                             </c:if>
 		        			</span>
 		        		</div>
-		        		<i></i>
+		        		<!-- <i></i> -->
 		        	</a>
     			</li>
                 <div class="endchat" data-recordid='<c:out value="${m[\"record_id\"]}"></c:out>'>结束咨询</div>
