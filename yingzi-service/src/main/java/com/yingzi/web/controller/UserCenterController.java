@@ -247,6 +247,7 @@ public class UserCenterController {
             map.put("message", responseDto.getReturnMessage());
             logger.info(responseDto.getReturnMessage());
         }
+        logger.info("return map:{}",map);
         return new ModelAndView(new MappingJackson2JsonView(), map);
     }
 	 // 获取验证码
