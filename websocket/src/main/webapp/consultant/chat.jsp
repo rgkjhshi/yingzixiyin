@@ -25,7 +25,12 @@ String recordId = "" + session.getAttribute("recordId");
                 <div class="maincontent">
                     <div class="detail_box">
                         <!-- <i id="closeDialogBtn"></i> -->
-                        <div class="dialog_header" node-type="header">来自&nbsp;<strong><%=session_toPhone %></strong>&nbsp;的咨询</div>
+                        <div class="dialog_header" node-type="header" data-phone="<%=session_toPhone %>">来自&nbsp;<strong></strong>&nbsp;的咨询</div>
+                        <script>
+                            var a = $(".dialog_header").attr("data-phone");
+                            var a1 = a.substring(0,3)+"****"+a.substring(7);
+                            $(".dialog_header").find("strong").text(a1);
+                        </script>
                         <div class="dialog_body">
                             <div class="dialog_content">
                                 <ul id="console">

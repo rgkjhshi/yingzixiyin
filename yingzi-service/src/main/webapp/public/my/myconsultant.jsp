@@ -25,7 +25,7 @@
     	<div class="sub">我咨询过的咨询师</div>
     	<ul class="consultants" style="margin-bottom:50px;">
         <c:if test="${empty visited}">
-            <li class="none_tips">暂无任何记录</li>
+            <li class="">暂无任何记录</li>
         </c:if>
     	<c:forEach items="${ visited}" var="cinfo">
     		<li class="record">

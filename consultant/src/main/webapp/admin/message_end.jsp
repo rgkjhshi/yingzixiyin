@@ -5,7 +5,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>未读消息-英姿吸引</title>
+        <title>已结束的咨询-英姿吸引</title>
         <meta http-equiv="X-UA-Compatible" content="IE=Edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="keywords" content="">
@@ -25,7 +25,7 @@
             		   	<c:forEach items="${recordList}" var="r">
             		   		<div class="message_item" node-type="item">
                             <div class="ms_header">
-                                <div class="ms_name">${r.userPhone }</div>
+                                <div class="ms_name" data-phone="${r.userPhone }"></div>
                                 <div class="ms_time"><fmt:formatDate value="${ r.createTime}" pattern="yyyy-MM-dd HH:mm:ss"/></div>
                             </div>
                             <div class="ms_content">
@@ -36,6 +36,14 @@
             		   	</c:forEach>
               			${page}
                     </div>
+                    <script>
+                        var l = $(".ms_name").length;
+                        for(var i =0;i<l;i++){
+                            var a = $($(".ms_name")[i]).attr("data-phone");
+                            var a1 = a.substring(0,3)+"****"+a.substring(7);
+                            $($(".ms_name")[i]).text(a1);
+                        }
+                    </script>
             	</div>
             </div>
         </div>

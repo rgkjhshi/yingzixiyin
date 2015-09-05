@@ -49,8 +49,8 @@
         };
         ws.onclose = function (event) {
             setConnected(false);
-            log('infomation','对话已关闭！');
-            log(event);
+            // log('infomation','对话已关闭！');
+            // log("",event);
         };
     }
 
@@ -71,7 +71,7 @@
             if($.trim(message)!=""){
                 ws.send(message);
                 log('me',message);
-                $("#message").val("").focus();
+                $("#message").val("");//.focus();
             }
         } else {
             alert('未建立对话连接，请重试！');
