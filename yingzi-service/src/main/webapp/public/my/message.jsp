@@ -37,13 +37,13 @@
     			<li class="none_tips">暂无任何记录</li>
     		</c:if>
     		<c:forEach items="${myMessages}" var="m">
-    			<li class='record <c:out value="${m[\"is_read\"]==0 ?\"new_ms\":\"\"}"></c:out>'>
+    			<li class='record unend <c:out value="${m[\"is_read\"]==0 ?\"new_ms\":\"\"}"></c:out>'>
     				<form id="chatform" method="post" name="chatform" action='${ chaturl}'>
                         <input type="hidden" name="phone" value="${WX_LOGIN_USER.phone}" />
                         <input type="hidden" name="toPhone" value='<c:out value="${m[\"phone\"]}"></c:out>' />
                         <input type="hidden" name="recordId" value='<c:out value="${m[\"record_id\"]}"></c:out>' />
                     </form>
-	        		<a class="unend">
+	        		<a class="">
 	        			<div class="message">
 		        			来自<span class="red_font">
 		        				<c:out value="${m[\"name\"]}"></c:out>
@@ -54,8 +54,8 @@
 		        		</div>
 		        		<i></i>
 		        	</a>
-                    <div class="endchat" data-recordid='<c:out value="${m[\"record_id\"]}"></c:out>'>结束咨询</div>
     			</li>
+                <div class="endchat" data-recordid='<c:out value="${m[\"record_id\"]}"></c:out>'>结束咨询</div>
     		</c:forEach>
        	</ul>
     </div>
@@ -72,6 +72,9 @@
         var r=confirm("是否要结束咨询？结束后，咨询费将转入咨询师账户！如有问题，可直接回复公众账号，给我们提宝贵的意见！");
         if(r){
             $.get(url,{"recordId":recordid},function(data){
+                alert(url);
+                alert(data.status);
+                alert(data.message);
                 if(data.status==0){
                     alert("咨询已结束！");
                 }
