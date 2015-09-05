@@ -67,10 +67,11 @@
     });
     $(".endchat").on("click",function(){
         //结束咨询
-        var url = "<%=path %>/user/endChatApi.do?recordId";
+        var recordid = $(this).attr("data-recordid");
+        var url = "<%=path %>/user/endChatApi.do";
         var r=confirm("是否要结束咨询？结束后，咨询费将转入咨询师账户！如有问题，可直接回复公众账号，给我们提宝贵的意见！");
         if(r){
-            $.get(url,{"recordId":$(this).attr("data-recordid")},function(data){
+            $.get(url,{"recordId":recordid},function(data){
                 if(data.status==0){
                     alert("咨询已结束！");
                 }
