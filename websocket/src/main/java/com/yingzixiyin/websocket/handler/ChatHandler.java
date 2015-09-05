@@ -37,6 +37,7 @@ public class ChatHandler extends TextWebSocketHandler {
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
         logger.info("connect to the websocket success......");
         logger.info("session attributes: {}", session.getAttributes());
+        String recordId = (String) session.getAttributes().get("recordId");
         String phone = (String) session.getAttributes().get("phone");
         String toPhone = (String) session.getAttributes().get("toPhone");
         if (null == phone || null == toPhone) {
@@ -44,7 +45,7 @@ public class ChatHandler extends TextWebSocketHandler {
             session.close();
             return;
         }
-        String fromKey = phone + "#" + toPhone;
+        String fromKey = phone + "#" + recordId + "#" + toPhone;
         userMap.put(fromKey, session);
         logger.info("{} login in", fromKey);
         // 当用户登录后，把离线消息推送给用户
@@ -61,9 +62,7 @@ public class ChatHandler extends TextWebSocketHandler {
      */
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-        String phone = (String) session.getAttributes().get("phone");
-        String toPhone = (String) session.getAttributes().get("toPhone");
-        String toKey = toPhone + "#" + phone;
+        String toKey = getToKey(session);
         // 找to
         logger.info("找to:{}", toKey);
         WebSocketSession toSession = userMap.get(toKey);
@@ -73,9 +72,7 @@ public class ChatHandler extends TextWebSocketHandler {
     @Override
     public void handleTransportError(WebSocketSession session, Throwable exception) throws Exception {
         if (session.isOpen()) {
-            String phone = (String) session.getAttributes().get("phone");
-            String toPhone = (String) session.getAttributes().get("toPhone");
-            String fromKey = phone + "#" + toPhone;
+            String fromKey = getFromKey(session);
             userMap.remove(fromKey);
             session.close();
         }
@@ -84,9 +81,7 @@ public class ChatHandler extends TextWebSocketHandler {
 
     @Override
     public void afterConnectionClosed(WebSocketSession session, CloseStatus closeStatus) throws Exception {
-        String phone = (String) session.getAttributes().get("phone");
-        String toPhone = (String) session.getAttributes().get("toPhone");
-        String fromKey = phone + "#" + toPhone;
+        String fromKey = getFromKey(session);
         userMap.remove(fromKey);
         logger.info("websocket connection closed, remove {}", fromKey);
         userMap.remove(fromKey);
@@ -95,5 +90,25 @@ public class ChatHandler extends TextWebSocketHandler {
     @Override
     public boolean supportsPartialMessages() {
         return false;
+    }
+
+    private String getFromKey(WebSocketSession session){
+        String recordId = (String) session.getAttributes().get("recordId");
+        String phone = (String) session.getAttributes().get("phone");
+        String toPhone = (String) session.getAttributes().get("toPhone");
+        if (null == phone || null == toPhone || null == recordId) {
+            logger.error("从session中获取phone和recordId失败...");
+        }
+        return phone + "#" + recordId + "#" + toPhone;
+    }
+
+    private String getToKey(WebSocketSession session) {
+        String recordId = (String) session.getAttributes().get("recordId");
+        String phone = (String) session.getAttributes().get("phone");
+        String toPhone = (String) session.getAttributes().get("toPhone");
+        if (null == phone || null == toPhone || null == recordId) {
+            logger.error("从session中获取phone和recordId失败...");
+        }
+        return toPhone + "#" + recordId + "#" + phone;
     }
 }
