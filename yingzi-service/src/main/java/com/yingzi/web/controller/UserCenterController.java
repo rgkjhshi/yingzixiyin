@@ -223,6 +223,32 @@ public class UserCenterController {
 		}
 		return response_page;
 	}
+	 // 结束咨询
+	@PowerCheck(type=PowerCheckEnum.LOGIN)
+    @RequestMapping("/endChatApi.do")
+    public ModelAndView endChat(HttpServletRequest request,HttpServletResponse response,Long recordId) {
+        logger.info("endChatApi.do, recordId={}", recordId);
+        Map<String, Object> map = Maps.newHashMap();
+
+        // 查询
+        RecordQueryRequestDto queryRequestDto = new RecordQueryRequestDto();
+        queryRequestDto.setId(recordId);
+        RecordInfo info = recordFacade.queryOne(queryRequestDto);
+        if (null == info) {
+            map.put("status", -1);
+            map.put("message", "未找到咨询纪录");
+            logger.info("未找到咨询纪录");
+        } else {
+            RecordInfo updateInfo = new RecordInfo();
+            updateInfo.setId(info.getId());
+            updateInfo.setIsCompleted(YesOrNoEnum.YES);
+            BaseResponseDto responseDto = recordFacade.update(updateInfo);
+            map.put("status", responseDto.getReturnCode());
+            map.put("message", responseDto.getReturnMessage());
+            logger.info(responseDto.getReturnMessage());
+        }
+        return new ModelAndView(new MappingJackson2JsonView(), map);
+    }
 	 // 获取验证码
 	@PowerCheck(type=PowerCheckEnum.LOGIN)
     @RequestMapping(value="getCheckCodeApi.do")
