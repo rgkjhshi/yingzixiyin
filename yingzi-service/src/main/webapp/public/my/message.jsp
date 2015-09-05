@@ -28,7 +28,7 @@
     color:#fff;
     border-radius: 18px;
     font-size: 14px;
-    margin-top: 10px;
+    margin-top: 0;
     margin-bottom: 20px;
 }
 </style>
@@ -50,10 +50,10 @@
 		        			来自<span class="red_font">
 		        				<c:out value="${m[\"name\"]}"></c:out>
 		        			</span>的消息
-                            <!-- <c:out value="${m[\"msgcount\"]==0?\"\":m[\"msgcount\"]}"></c:out> -->
 		        			<span class="ms_status">
-		        			<!-- <c:out value="${m[\"is_read\"]==0 ?\"未读\":\"\"}"></c:out> -->
-                            <c:out value="${m[\"msgcount\"]==0?\"\":m[\"msgcount\"]}条未读"></c:out>
+                            <c:if test="${m[\"msgcount\"]!=0}">
+                                <c:out value="${m[\"msgcount\"]}"></c:out>条未读
+                            </c:if>
 		        			</span>
 		        		</div>
 		        		<i></i>
@@ -76,10 +76,11 @@
         var r=confirm("是否要结束咨询？结束后，咨询费将转入咨询师账户！如有问题，可直接回复公众账号，给我们提宝贵的意见！");
         if(r){
             $.get(url,{"recordId":recordid},function(data){
+                var _data = $.parseJson(data);
                 alert(url);
-                alert(data.status);
-                alert(data.message);
-                if(data.status==0){
+                alert(_data.status);
+                alert(_data.message);
+                if(_data.status==0){
                     alert("咨询已结束！");
                 }
             });
