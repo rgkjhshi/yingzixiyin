@@ -37,7 +37,7 @@ public class ChatHandler extends TextWebSocketHandler {
     public void afterConnectionEstablished(WebSocketSession session) throws Exception {
         logger.info("connect to the websocket success......");
         logger.info("session attributes: {}", session.getAttributes());
-        String recordId = (String) session.getAttributes().get("recordId");
+        Long recordId = (Long) session.getAttributes().get("recordId");
         String phone = (String) session.getAttributes().get("phone");
         String toPhone = (String) session.getAttributes().get("toPhone");
         if (null == phone || null == toPhone) {
@@ -93,7 +93,7 @@ public class ChatHandler extends TextWebSocketHandler {
     }
 
     private String getFromKey(WebSocketSession session){
-        String recordId = (String) session.getAttributes().get("recordId");
+        Long recordId = (Long)session.getAttributes().get("recordId");
         String phone = (String) session.getAttributes().get("phone");
         String toPhone = (String) session.getAttributes().get("toPhone");
         if (null == phone || null == toPhone || null == recordId) {
@@ -103,7 +103,7 @@ public class ChatHandler extends TextWebSocketHandler {
     }
 
     private String getToKey(WebSocketSession session) {
-        String recordId = (String) session.getAttributes().get("recordId");
+        Long recordId = (Long)session.getAttributes().get("recordId");
         String phone = (String) session.getAttributes().get("phone");
         String toPhone = (String) session.getAttributes().get("toPhone");
         if (null == phone || null == toPhone || null == recordId) {
