@@ -22,10 +22,15 @@
 		var gender = $("input[name='gender']:checked").val();
 		var age = $("input[name='age']:checked").val();
 		var ctype = $("#ctype").val();
+		alert("gender:"+gender+",age:"+age+",ctype:"+ctype);
+		alert("befor post");
 		$.post("/weixin/consultant/query_consultants.do",{"gender":gender,"age":age,"ctype":ctype},function(data){
+			
 			$("#choose_layer").hide();
 			$("#choose_dialog").hide();
+			alert("before parse");
 			data = $.parseJSON(data);
+			alert("after parse");
 			alert(typeof data + ", typeof data");
 			alert("returnCode:"+data.returnCode);
 			if(data.returnCode==0||data.returnCode=="0"){
