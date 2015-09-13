@@ -22,7 +22,7 @@
 		var gender = $("input[name='gender']:checked").val();
 		var age = $("input[name='age']:checked").val();
 		var ctype = $("#ctype").val();
-		$.post("query_consultants.do",{"gender":gender,"age":age,"ctype":ctype},function(data){
+		$.post("/weixin/consultant/query_consultants.do",{"gender":gender,"age":age,"ctype":ctype},function(data){
 			$("#choose_layer").hide();
 			$("#choose_dialog").hide();
 			data = $.parseJSON(data);
