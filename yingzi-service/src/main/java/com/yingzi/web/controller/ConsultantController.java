@@ -22,6 +22,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
@@ -171,34 +172,36 @@ public class ConsultantController {
 			responseDto.setReturnCode(resDto.getReturnCode());
 			responseDto.setReturnMessage(resDto.getReturnMessage());
 			List<ConsultantInfo> resList=resDto.getConsultantInfoList();
-			List<UserConsultantInfo> list=Lists.transform(resList, new Function<ConsultantInfo, UserConsultantInfo>() {
-				@Override
-				public UserConsultantInfo apply(ConsultantInfo cinfo) {
-					UserConsultantInfo uinfo=new UserConsultantInfo();
-					uinfo.setAddress(cinfo.getAddress());
-					uinfo.setAge(cinfo.getAge());
-					uinfo.setAvatar(cinfo.getAvatar());
-					uinfo.setBackground(cinfo.getBackground());
-					uinfo.setBookTime(cinfo.getBookTime());
-					uinfo.setEmail(cinfo.getEmail());
-					uinfo.setFacePrice(cinfo.getFacePrice());
-					uinfo.setGender(cinfo.getGender().getValue());
-					uinfo.setId(cinfo.getId());
-					uinfo.setIntroduce(cinfo.getIntroduce());
-					uinfo.setName(cinfo.getName());
-					uinfo.setNickname(cinfo.getNickname());
-					uinfo.setPhone(cinfo.getPhone());
-					uinfo.setPrice(cinfo.getPrice());
-					uinfo.setProfessional(cinfo.getProfessional());
-					uinfo.setRangeType(cinfo.getRangeType().getValue());
-					uinfo.setSignature(cinfo.getSignature());
-					uinfo.setSpeciality(cinfo.getSpeciality());
-					uinfo.setStatus(cinfo.getStatus().getValue());
-					uinfo.setVideoPrice(cinfo.getVideoPrice());
-					return uinfo;
-				}
-			});
-			responseDto.setList(list);
+			if(!CollectionUtils.isEmpty(resList)){
+					List<UserConsultantInfo> list=Lists.transform(resList, new Function<ConsultantInfo, UserConsultantInfo>() {
+					@Override
+					public UserConsultantInfo apply(ConsultantInfo cinfo) {
+						UserConsultantInfo uinfo=new UserConsultantInfo();
+						uinfo.setAddress(cinfo.getAddress());
+						uinfo.setAge(cinfo.getAge());
+						uinfo.setAvatar(cinfo.getAvatar());
+						uinfo.setBackground(cinfo.getBackground());
+						uinfo.setBookTime(cinfo.getBookTime());
+						uinfo.setEmail(cinfo.getEmail());
+						uinfo.setFacePrice(cinfo.getFacePrice());
+						uinfo.setGender(cinfo.getGender().getValue());
+						uinfo.setId(cinfo.getId());
+						uinfo.setIntroduce(cinfo.getIntroduce());
+						uinfo.setName(cinfo.getName());
+						uinfo.setNickname(cinfo.getNickname());
+						uinfo.setPhone(cinfo.getPhone());
+						uinfo.setPrice(cinfo.getPrice());
+						uinfo.setProfessional(cinfo.getProfessional());
+						uinfo.setRangeType(cinfo.getRangeType().getValue());
+						uinfo.setSignature(cinfo.getSignature());
+						uinfo.setSpeciality(cinfo.getSpeciality());
+						uinfo.setStatus(cinfo.getStatus().getValue());
+						uinfo.setVideoPrice(cinfo.getVideoPrice());
+						return uinfo;
+					}
+				});
+				responseDto.setList(list);
+			}
 //			String res=JsonUtil.getJsonByConsultantQueryResponseDto(resDto,"password","alipay");
 			Gson gson=new Gson();
 			String res=gson.toJson(responseDto);
