@@ -216,7 +216,7 @@ public class ConsultantController {
 	 * 根据咨询类型获取咨询师列表
 	 * @param request
 	 * @param response
-	 * @param ctype
+	 * @param id
 	 * @return
 	 * @throws IOException
 	 */
@@ -354,7 +354,6 @@ public class ConsultantController {
 	 * 解救单身
 	 * @param request
 	 * @param response
-	 * @param ctype
 	 * @param code
 	 * @return
 	 * @throws IOException
@@ -367,7 +366,6 @@ public class ConsultantController {
 	 * 恋爱情感
 	 * @param request
 	 * @param response
-	 * @param ctype
 	 * @param code
 	 * @return
 	 * @throws IOException
@@ -380,7 +378,6 @@ public class ConsultantController {
 	 * 婚姻生活
 	 * @param request
 	 * @param response
-	 * @param ctype
 	 * @param code
 	 * @return
 	 * @throws IOException
