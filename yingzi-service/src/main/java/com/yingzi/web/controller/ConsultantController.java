@@ -30,7 +30,10 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.google.common.base.Function;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.gson.Gson;
 import com.gson.WeChat;
 import com.gson.bean.PreOrder;
 import com.gson.oauth.Oauth;
@@ -50,7 +53,9 @@ import com.yingzixiyin.api.dto.BaseResponseDto;
 import com.yingzixiyin.api.dto.ConsultantInfo;
 import com.yingzixiyin.api.dto.ConsultantQueryRequestDto;
 import com.yingzixiyin.api.dto.ConsultantQueryResponseDto;
+import com.yingzixiyin.api.dto.ConsultantResponseDto;
 import com.yingzixiyin.api.dto.RecordInfo;
+import com.yingzixiyin.api.dto.UserConsultantInfo;
 import com.yingzixiyin.api.dto.UserInfo;
 import com.yingzixiyin.api.dto.UserQueryRequestDto;
 import com.yingzixiyin.api.enums.ConsultTypeEnum;
@@ -137,6 +142,14 @@ public class ConsultantController {
 	public void queryConsultantsByCondition(HttpServletRequest request,HttpServletResponse response,Integer ctype,Integer gender,Integer age) throws IOException{
 		logger.info("---用户调用条件筛选咨询师接口页面|ctype="+ctype+"|gender="+gender+"|age="+age);
 		if(!checkValidParams(ctype,gender,age)){
+			StringBuffer sb=new StringBuffer();
+			sb.append("{");
+			sb.append("\"returnCode\":-1,");
+			sb.append("\"returnMessage\":\"参数不合法\",");
+			sb.append("\"list\":[");
+			sb.append("]");
+			sb.append("}");
+			ResponseUtils.renderJsonText(response, sb.toString());
 			return ;
 		}
 		RangeTypeEnum consultantType=RangeTypeEnum.toEnum(ctype);
@@ -154,7 +167,41 @@ public class ConsultantController {
 		ConsultantQueryResponseDto resDto=  consultantFacade.query(rcrDto); 
 //		logger.info("--条件筛选得到的咨询师列表为："+resDto.getConsultantInfoList());
 		try{
-			String res=JsonUtil.getJsonByConsultantQueryResponseDto(resDto,"password","alipay");
+			ConsultantResponseDto responseDto=new ConsultantResponseDto();
+			responseDto.setReturnCode(resDto.getReturnCode());
+			responseDto.setReturnMessage(resDto.getReturnMessage());
+			List<ConsultantInfo> resList=resDto.getConsultantInfoList();
+			List<UserConsultantInfo> list=Lists.transform(resList, new Function<ConsultantInfo, UserConsultantInfo>() {
+				@Override
+				public UserConsultantInfo apply(ConsultantInfo cinfo) {
+					UserConsultantInfo uinfo=new UserConsultantInfo();
+					uinfo.setAddress(cinfo.getAddress());
+					uinfo.setAge(cinfo.getAge());
+					uinfo.setAvatar(cinfo.getAvatar());
+					uinfo.setBackground(cinfo.getBackground());
+					uinfo.setBookTime(cinfo.getBookTime());
+					uinfo.setEmail(cinfo.getEmail());
+					uinfo.setFacePrice(cinfo.getFacePrice());
+					uinfo.setGender(cinfo.getGender().getValue());
+					uinfo.setId(cinfo.getId());
+					uinfo.setIntroduce(cinfo.getIntroduce());
+					uinfo.setName(cinfo.getName());
+					uinfo.setNickname(cinfo.getNickname());
+					uinfo.setPhone(cinfo.getPhone());
+					uinfo.setPrice(cinfo.getPrice());
+					uinfo.setProfessional(cinfo.getProfessional());
+					uinfo.setRangeType(cinfo.getRangeType().getValue());
+					uinfo.setSignature(cinfo.getSignature());
+					uinfo.setSpeciality(cinfo.getSpeciality());
+					uinfo.setStatus(cinfo.getStatus().getValue());
+					uinfo.setVideoPrice(cinfo.getVideoPrice());
+					return null;
+				}
+			});
+			responseDto.setList(list);
+//			String res=JsonUtil.getJsonByConsultantQueryResponseDto(resDto,"password","alipay");
+			Gson gson=new Gson();
+			String res=gson.toJson(responseDto);
 			logger.info("---查询到的咨询师列表为："+res);
 			ResponseUtils.renderJsonText(response, res);
 		}catch(Exception e){
@@ -257,14 +304,16 @@ public class ConsultantController {
 				if(collects[i].equals(id+"")){
 					continue;
 				}
-				if(i<collects.length-1){
-					sb.append(collects[i]+",");
-				}
-				else{
-					sb.append(collects[i]);
-				}
+				sb.append(collects[i]+",");
 			}
-			user.setCollected(sb.toString());
+			String cols=sb.toString();
+			if(StringUtils.isNotBlank(cols)){
+				cols=cols.substring(0,cols.length()-1);
+			}
+			else{
+				cols="";
+			}
+			user.setCollected(cols);
 		}
 		else{
 			responseDto.setReturnCode(-1);
