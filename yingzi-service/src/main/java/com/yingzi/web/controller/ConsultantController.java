@@ -195,7 +195,7 @@ public class ConsultantController {
 					uinfo.setSpeciality(cinfo.getSpeciality());
 					uinfo.setStatus(cinfo.getStatus().getValue());
 					uinfo.setVideoPrice(cinfo.getVideoPrice());
-					return null;
+					return uinfo;
 				}
 			});
 			responseDto.setList(list);
