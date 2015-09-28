@@ -63,7 +63,7 @@ public class WeChatPayServlet extends HttpServlet {
 			String timeStamp = System.currentTimeMillis() + "";
 			
 			String nonceStr = RandomStringUtils.random(8, "123456789"); // 8位随机数
-			String packagestring = Pay.getPackage(params); //对参数打包
+			String packagestring = Pay.packageSign(params); //对参数打包
 			String paySign = Pay.paySign(timeStamp, nonceStr, packagestring); // 构造签名
 			
 			// appId
