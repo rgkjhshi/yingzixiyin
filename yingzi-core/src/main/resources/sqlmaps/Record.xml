@@ -12,7 +12,8 @@
             is_paid             AS isPaid,
             is_replied          AS isReplied,
             is_completed        AS isCompleted,
-            create_time         AS createTime
+            create_time         AS createTime,
+            record_nonce		AS recordNonce
         FROM record
     </sql>
 
@@ -39,6 +40,9 @@
             </if>
             <if test="isCompleted != null">
                 AND is_completed = #{isCompleted}
+            </if>
+            <if test="recordNonce != null">
+                AND record_nonce = #{recordNonce}
             </if>
         </where>
     </sql>
@@ -67,6 +71,9 @@
         <if test="createTime != null">
             ,create_time
         </if>
+        <if test="recordNonce != null">
+            ,record_nonce
+        </if>
         )
         values
         (
@@ -90,6 +97,9 @@
         </if>
         <if test="createTime != null">
             ,#{createTime}
+        </if>
+        <if test="recordNonce != null">
+            ,#{recordNonce}
         </if>
         )
     </insert>

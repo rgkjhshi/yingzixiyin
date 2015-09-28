@@ -1,5 +1,7 @@
 package com.yingzixiyin.core.facade;
 
+import com.yingzixiyin.api.dto.BaseResponseDto;
+import com.yingzixiyin.api.dto.RecordInfo;
 import com.yingzixiyin.api.dto.RecordQueryRequestDto;
 import com.yingzixiyin.api.dto.RecordQueryResponseDto;
 import com.yingzixiyin.api.enums.ConsultTypeEnum;
@@ -7,6 +9,7 @@ import com.yingzixiyin.api.enums.YesOrNoEnum;
 import com.yingzixiyin.api.facade.RecordFacade;
 import com.yingzixiyin.core.BaseTest;
 import com.yingzixiyin.page.Pagination;
+
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,16 +27,17 @@ public class RecordFacadeTest extends BaseTest {
     @Resource
     RecordFacade recordFacade;
 
-/*    @Test
+   @Test
     public void addTest() {
         RecordInfo info = new RecordInfo();
-        info.setUserId(1L);
-        info.setConsultantId(1L);
+        info.setId(1l);
+        info.setUserId(1000L);
+        info.setConsultantId(100L);
         BaseResponseDto responseDto =  recordFacade.add(info);
         logger.info(responseDto.toString());
     }
 
-    @Test
+   /* @Test
     public void updateTest() {
         RecordInfo info = new RecordInfo();
         info.setId(1L);

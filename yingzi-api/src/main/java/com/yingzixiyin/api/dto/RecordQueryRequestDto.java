@@ -20,7 +20,7 @@ public class RecordQueryRequestDto implements Serializable {
     private YesOrNoEnum isPaid;           // 是否付款, 0:未付款, 1:已付款
     private YesOrNoEnum isReplied;        // 是否回应，0:未回应, 1:已经回应
     private YesOrNoEnum isCompleted;      // 是否结束，0:未结束, 1:已结束
-
+    private String recordNonce;
     public Long getId() {
         return id;
     }
@@ -77,7 +77,15 @@ public class RecordQueryRequestDto implements Serializable {
         this.isCompleted = isCompleted;
     }
 
-    @Override
+    public String getRecordNonce() {
+		return recordNonce;
+	}
+
+	public void setRecordNonce(String recordNonce) {
+		this.recordNonce = recordNonce;
+	}
+
+	@Override
     public String toString() {
         return "RecordInfo{" +
                 "id=" + id +

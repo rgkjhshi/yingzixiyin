@@ -67,6 +67,6 @@ public class RandomUtil {
 		
 	}
 	public static void main(String[] args) {
-		System.out.println(generateCode());
+		System.out.println(generateOrderId().length());
 	}
 }

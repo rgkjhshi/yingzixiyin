@@ -36,7 +36,7 @@
                 <i></i>
                 <div style="color:#BF45C3;">夫妻情感咨询</div>
             </li>
-            <!-- <li><a href="<%=path %>/consultant/get_consultants.do?ctype=<%=RangeTypeEnum.FOUR.getValue()%>">夫妻关系困惑</a></li> -->
+            <%-- <li><a href="<%=path %>/consultant/get_consultants.do?ctype=<%=RangeTypeEnum.FOUR.getValue()%>">夫妻关系困惑</a></li> --%>
         </ul>
     </div>
 <script type="text/javascript" src="<%=path %>/js/main_wechat.js"></script>

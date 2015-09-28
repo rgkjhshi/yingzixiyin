@@ -28,7 +28,7 @@ public class Record {
     private Integer isReplied;     // 是否回应，0:未回应, 1:已经回应
     private Integer isCompleted;   // 是否结束，0:未结束, 1:已结束
     private Date createTime;       // 创建时间
-
+    private String recordNonce;	//咨询标记
 
     public static Record getBean(RecordQueryRequestDto requestDto) {
         if (null == requestDto) {
@@ -42,6 +42,7 @@ public class Record {
         record.setIsPaid(null == requestDto.getIsPaid() ? null : requestDto.getIsPaid().getValue());
         record.setIsReplied(null == requestDto.getIsReplied() ? null : requestDto.getIsReplied().getValue());
         record.setIsCompleted(null == requestDto.getIsCompleted() ? null : requestDto.getIsCompleted().getValue());
+        record.setRecordNonce(requestDto.getRecordNonce());
         return record;
     }
 
@@ -58,6 +59,7 @@ public class Record {
         record.setIsReplied(null == info.getIsReplied() ? null : info.getIsReplied().getValue());
         record.setIsCompleted(null == info.getIsCompleted() ? null : info.getIsCompleted().getValue());
         record.setCreateTime(info.getCreateTime());
+        record.setRecordNonce(info.getRecordNonce());
         return record;
     }
 
@@ -79,6 +81,7 @@ public class Record {
         info.setIsReplied(YesOrNoEnum.toEnum(record.getIsReplied()));
         info.setIsCompleted(YesOrNoEnum.toEnum(record.getIsCompleted()));
         info.setCreateTime(record.getCreateTime());
+        info.setRecordNonce(record.getRecordNonce());
         return info;
     }
 
@@ -162,4 +165,13 @@ public class Record {
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
+
+	public String getRecordNonce() {
+		return recordNonce;
+	}
+
+	public void setRecordNonce(String recordNonce) {
+		this.recordNonce = recordNonce;
+	}
+    
 }

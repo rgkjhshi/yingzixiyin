@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>  
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -11,10 +12,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<title>微信支付页面</title>
 	</head>
 	<body>
-	公众号：${appid}<br/>
+	公众号：${appId}<br/>
 	时间戳：${timeStamp}<br/>
 	随机串：${nonceStr}<br/>
-	扩展包：${package}<br/>
+	扩展包：${packageStr}<br/>
+	签名方式：${signType}<br/>
 	微信签名：${paySign}<br/>
 	</body>
 	<script type="text/javascript">
@@ -24,11 +26,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		//公众号支付
 		$('#getBrandWCPayRequest').click(function(e){
 			WeixinJSBridge.invoke('getBrandWCPayRequest',{
-				"appId" : "${appid}", //公众号名称，由商户传入
+				"appId" : "${appId}", //公众号名称，由商户传入
 				"timeStamp" : "${timeStamp}", //时间戳
 				"nonceStr" : "${nonceStr}", //随机串
-				"package" : "${package}", ////扩展包
-				"signType" : "sha1", //微信签名方式:1.sha1
+				"package" : "prepay_id=${packageStr}", ////扩展包
+				"signType" : "${signType}", //微信签名方式:1.sha1
 				"paySign" : "${paySign}" ////微信签名
 			},function(res){
 				// if(res.err_msg == get_brand_wcpay_request:ok ) {

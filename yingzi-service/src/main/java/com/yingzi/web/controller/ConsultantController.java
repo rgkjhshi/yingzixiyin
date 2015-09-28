@@ -10,13 +10,17 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.ExecutionException;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.RandomStringUtils;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,6 +34,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
+import ytx.org.apache.http.client.utils.HttpClientUtils;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
@@ -40,7 +46,10 @@ import com.gson.bean.PreOrder;
 import com.gson.oauth.Oauth;
 import com.gson.oauth.Pay;
 import com.gson.util.HttpKit;
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
 import com.yingzi.web.annotation.PowerCheck;
+import com.yingzi.web.dto.PayOrderResultDto;
 import com.yingzi.web.enums.AgeEnum;
 import com.yingzi.web.enums.PowerCheckEnum;
 import com.yingzi.web.helper.WeixinOauthHelper;
@@ -408,6 +417,11 @@ public class ConsultantController {
 			Integer counsultantType, String payType) throws IOException {
 		logger.info("---用户支付接口页面----");
 		String response_page = "public/service/pay";
+		response_page=doPayWeixin(request, consultant_id, counsultantType);
+		return response_page;
+	}
+	private String doPayWeixin(HttpServletRequest request, Long consultant_id,
+			Integer counsultantType) throws UnsupportedEncodingException {
 		ConsultantQueryRequestDto cqrDto = new ConsultantQueryRequestDto();
 		cqrDto.setId(consultant_id);
 		cqrDto.setStatus(StatusEnum.ACCEPTED);
@@ -431,20 +445,72 @@ public class ConsultantController {
 		recordInfo.setIsPaid(YesOrNoEnum.NO);
 		recordInfo.setIsReplied(YesOrNoEnum.NO);
 		recordInfo.setUserId(user.getId());
+//		recordInfo.setUserId(1l);
+		recordInfo.setRecordNonce(RandomUtil.generateOrderId());
 		// 添加 咨询记录
 		recordFacade.add(recordInfo);
 		// 做异常处理
-		PreOrder pro = buildPreOrderVo(request, cinfo);
-		String xml = "";
+		PreOrder preOrder = buildPreOrderVo(request, cinfo,recordInfo);
 		try {
-			xml = pro.serializeToXml();
-//			HttpKit.post(url, s)
-		} catch (IllegalArgumentException | IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			XStream xs=new XStream(new DomDriver());
+			xs.alias("xml", PreOrder.class);
+			
+			logger.info("@请求内容："+Pay.PRE_ORDER_URL+"?"+preOrder.serializeToXml());
+			String resultString=HttpKit.post(Pay.PRE_ORDER_URL,preOrder.serializeToXml());
+			xs.alias("xml", PayOrderResultDto.class);
+			PayOrderResultDto payResult=(PayOrderResultDto) xs.fromXML(resultString);
+			
+			logger.info("@微信下单，返回结果： "+payResult);
+			
+			// 参数
+			String timeStamp = System.currentTimeMillis() + "";
+			
+			Map<String,String> signMap=Maps.newHashMap();
+			signMap.put("timeStamp", timeStamp);
+			signMap.put("app_id", preOrder.getAppid());
+			signMap.put("package", "prepay_id="+payResult.getPrepay_id());
+			signMap.put("nonceStr", preOrder.getNonce_str());
+			signMap.put("signType", "MD5");
+			String paySign = Pay.packageSign(signMap); // 构造签名
+			request.setAttribute("appId", preOrder.getAppid());
+			request.setAttribute("timeStamp",timeStamp );
+			request.setAttribute("nonceStr",preOrder.getNonce_str());
+			request.setAttribute("packageStr", "prepay_id="+payResult.getPrepay_id());
+			request.setAttribute("signType", "MD5");
+			request.setAttribute("paySign", paySign);
+		}catch(Exception e){
+			logger.info("weixin 下单异常",e);
 		}
-		logger.info("得到预下单请求微信xml：" + xml);
-		return response_page;
+		return "public/service/pay";
+	}
+	/**
+	 * 获取ip
+	 * @param request
+	 * @return
+	 */
+	public static String getIp(HttpServletRequest request) {
+		if (request == null)
+			return "";
+		String ip = request.getHeader("X-Requested-For");
+		if (StringUtils.isEmpty(ip) || "unknown".equalsIgnoreCase(ip)) {
+			ip = request.getHeader("X-Forwarded-For");
+		}
+		if (StringUtils.isEmpty(ip) || "unknown".equalsIgnoreCase(ip)) {
+			ip = request.getHeader("Proxy-Client-IP");
+		}
+		if (StringUtils.isEmpty(ip) || "unknown".equalsIgnoreCase(ip)) {
+			ip = request.getHeader("WL-Proxy-Client-IP");
+		}
+		if (StringUtils.isEmpty(ip) || "unknown".equalsIgnoreCase(ip)) {
+			ip = request.getHeader("HTTP_CLIENT_IP");
+		}
+		if (StringUtils.isEmpty(ip) || "unknown".equalsIgnoreCase(ip)) {
+			ip = request.getHeader("HTTP_X_FORWARDED_FOR");
+		}
+		if (StringUtils.isEmpty(ip) || "unknown".equalsIgnoreCase(ip)) {
+			ip = request.getRemoteAddr();
+		}
+		return ip;
 	}
 	@RequestMapping(value="consultant_offline.do")
 	@PowerCheck(type=PowerCheckEnum.LOGIN)
@@ -503,38 +569,52 @@ public class ConsultantController {
 		map.put("isCollect",1);
 		return new ModelAndView(new MappingJackson2JsonView(),map);
 	}
-	private PreOrder buildPreOrderVo(HttpServletRequest request,ConsultantInfo cinfo) throws UnsupportedEncodingException{
-		String appid=WeChat.getAppId();
-		String mch_id=WeChat.getMch_id();
-		String device_info="WEB";
-		String nonce_str=RandomUtil.generateCode();
-		String body="线上情感咨询";
-		Map<String,String> signMap=Maps.newHashMap();
-		signMap.put("appid", appid);
-		signMap.put("mch_id", mch_id);
-		signMap.put("device_info", device_info);
-		signMap.put("nonce_str", nonce_str);
-		signMap.put("body", body);
-		String sign=MD5Utils.getMD5(Pay.createSign(signMap, true));
-		String detail="具体情感咨询用户线上和咨询师收费沟通";
-//		String attach="附加信息";
-		String out_trade_no=RandomUtil.generateOrderId();
+	private PreOrder buildPreOrderVo(HttpServletRequest request,ConsultantInfo cinfo,RecordInfo recordInfo) throws UnsupportedEncodingException{	
+		String out_trade_no=recordInfo.getRecordNonce();
 		String fee_type="CNY";
 		int total_fee= 0;
 		if(null==cinfo||null==cinfo.getPrice()){
 			return null;
 		}
-		total_fee=cinfo.getPrice().multiply(new BigDecimal(100)).intValue();
+		if(ConsultTypeEnum.CHAT.equals(recordInfo.getConsultType())){
+			total_fee=cinfo.getPrice().multiply(new BigDecimal(100)).intValue();
+		}
+		else if(ConsultTypeEnum.FACE_TO_FACE.equals(recordInfo.getConsultType())){
+			total_fee=cinfo.getFacePrice().multiply(new BigDecimal(100)).intValue();
+		}
+		else if(ConsultTypeEnum.VIDEO.equals(recordInfo.getConsultType())){
+			total_fee=cinfo.getVideoPrice().multiply(new BigDecimal(100)).intValue();
+		}
 		String spbill_create_ip=NetUtils.getRemoteHost(request);
 		String trade_type="JSAPI";
 		String notify_url=WeChat.getNotifyUrl();
 		String limit_pay="no_credit";
 		String openid=SessionUtil.getLoginUserToSession(request).getOpenId();
+//		String openid="oGBeWt-feUNN9UJzt7YHJM3VnzKc";
 		String product_id=RandomUtil.generateProductId();
-		PreOrder po=new PreOrder(appid, mch_id, device_info, nonce_str,
-								sign, body, out_trade_no, fee_type, total_fee, 
-								spbill_create_ip, notify_url, trade_type, product_id, 
-								limit_pay, openid);
+		
+		Map<String,String> signMap=Maps.newHashMap();
+		signMap.put("appid", WeChat.getAppId());
+		signMap.put("mch_id", WeChat.getMch_id());
+		signMap.put("device_info", "WEB");
+		String nonce_str=RandomUtil.generateCode();
+		signMap.put("nonce_str", nonce_str);
+		String body="情感咨询服务";
+		signMap.put("body", body);
+		signMap.put("out_trade_no",out_trade_no);
+		signMap.put("fee_type",fee_type);
+		signMap.put("out_trade_no",out_trade_no);
+		signMap.put("total_fee",total_fee+"");
+		signMap.put("spbill_create_ip",spbill_create_ip);
+		signMap.put("notify_url",notify_url);
+		signMap.put("trade_type",trade_type);
+		signMap.put("product_id",product_id);
+		signMap.put("limit_pay",limit_pay);
+		signMap.put("openid",openid);
+		String sign=Pay.packageSign(signMap);
+		PreOrder po=new PreOrder(WeChat.getAppId(),  WeChat.getMch_id(), "WEB", nonce_str,
+								sign, body, out_trade_no, total_fee, 
+								spbill_create_ip, notify_url, trade_type,openid);
 		return po;
 	}
 }

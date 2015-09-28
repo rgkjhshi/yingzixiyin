@@ -7,9 +7,16 @@ package com.gson.util;
 
 
 import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
@@ -197,4 +204,24 @@ public class HttpKit {
     	//Map<String, Object> mgs = WeChat.uploadMedia(accessToken, "image", new File("C:\\Users\\郭华\\Pictures\\13.jpg"));
     	//System.out.println(JSON.toJSONString(mgs));
     }
+
+	public static String postXml(String preOrderUrl, String xml) throws IOException {
+		URL url = new URL(preOrderUrl);
+		HttpURLConnection con = (HttpURLConnection) url.openConnection();
+		con.setRequestMethod("POST");
+		con.setDoOutput(true);
+		OutputStream os = con.getOutputStream();
+		os.write(xml.getBytes("utf-8"));
+		InputStream ins = con.getInputStream();
+		StringBuffer line = new StringBuffer();
+		byte[] buffer=new byte[1024];
+		int len=0;
+		while (true) {
+			len=ins.read(buffer, 0, 1024);
+			if(len<=0) break;
+			line.append(new String(buffer, "utf-8"));
+		}
+		System.out.println("--data result=" + line);
+		return line.toString();
+	}
 }

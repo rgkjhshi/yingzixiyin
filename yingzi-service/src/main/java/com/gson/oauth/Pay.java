@@ -21,8 +21,10 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang.StringUtils;
 
 import com.alibaba.fastjson.JSONObject;
+import com.gson.WeChat;
 import com.gson.util.ConfKit;
 import com.gson.util.HttpKit;
+import com.yingzi.web.utils.MD5Utils;
 
 /**
  * 支付相关方法
@@ -37,27 +39,8 @@ public class Pay {
     private static final String DELIVERNOTIFY_URL = "https://api.weixin.qq.com/pay/delivernotify?access_token=";
 
     //预下单接口
-    private static final String PRE_ORDER_URL="https://api.mch.weixin.qq.com/pay/unifiedorder";
+    public static final String PRE_ORDER_URL="https://api.mch.weixin.qq.com/pay/unifiedorder";
     //支付接口
-    /**
-     * 参与 paySign 签名的字段包括：appid、timestamp、noncestr、package 以及 appkey。
-     * 这里 signType 并不参与签名微信的Package参数
-     * @param params
-     * @return
-     * @throws UnsupportedEncodingException 
-     */
-    public static String getPackage(Map<String, String> params) throws UnsupportedEncodingException {
-        String partnerKey = ConfKit.get("partnerKey");
-        String partnerId = ConfKit.get("partnerId");
-        String notifyUrl = ConfKit.get("notify_url");
-        // 公共参数
-        params.put("bank_type", "WX");
-        params.put("attach", "yongle");
-        params.put("partner", partnerId);
-        params.put("notify_url", notifyUrl);
-        params.put("input_charset", "UTF-8");
-        return packageSign(params, partnerKey);
-    }
 
     /**
      * 构造签名
@@ -100,12 +83,11 @@ public class Pay {
      * @return
      * @throws UnsupportedEncodingException 
      */
-    private static String packageSign(Map<String, String> params, String paternerKey) throws UnsupportedEncodingException {
+    public static String packageSign(Map<String, String> params) throws UnsupportedEncodingException {
         String string1 = createSign(params, false);
-        String stringSignTemp = string1 + "&key=" + paternerKey;
+        String stringSignTemp = string1 + "&key=" + WeChat.getAppSercret();
         String signValue = DigestUtils.md5Hex(stringSignTemp).toUpperCase();
-        String string2 = createSign(params, true);
-        return string2 + "&sign=" + signValue;
+        return signValue;
     }
 
     /**
@@ -125,7 +107,8 @@ public class Pay {
         paras.put("appkey", ConfKit.get("paySignKey"));
         // appid、timestamp、noncestr、package 以及 appkey。
         String string1 = createSign(paras, false);
-        String paySign = DigestUtils.shaHex(string1);
+//        String paySign = DigestUtils.shaHex(string1);
+        String paySign =MD5Utils.getMD5(string1);
         return paySign;
     }
     
