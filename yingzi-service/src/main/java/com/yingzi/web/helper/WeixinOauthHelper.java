@@ -39,7 +39,9 @@ public class WeixinOauthHelper {
 				userInfo=new UserInfo();
 				userInfo.setOpenId(openId);
 				userFacade.add(userInfo);
+				userInfo=userFacade.queryOne(uqrDto);
 			}
+			userInfo=userFacade.queryOne(uqrDto);
 			SessionUtil.setLoginUserToSession(request, userInfo);
 			
 		} catch (Exception e) {

@@ -130,7 +130,7 @@ public class ConsultantController {
 					return false;
 				}
 			}
-			if(obj instanceof Integer){
+			else if(obj instanceof Integer){
 				Integer para=(Integer) obj;
 				if(para==null){
 					return false;
@@ -410,108 +410,6 @@ public class ConsultantController {
 		return response_page;
 	}
 
-	@RequestMapping(value = "prepay.do")
-	@PowerCheck(type = PowerCheckEnum.LOGIN)
-	public String payByOnline(HttpServletRequest request,
-			HttpServletResponse response, Long consultant_id,
-			Integer counsultantType, String payType) throws IOException {
-		logger.info("---用户支付接口页面----");
-		String response_page = "public/service/pay";
-		response_page=doPayWeixin(request, consultant_id, counsultantType);
-		return response_page;
-	}
-	private String doPayWeixin(HttpServletRequest request, Long consultant_id,
-			Integer counsultantType) throws UnsupportedEncodingException {
-		ConsultantQueryRequestDto cqrDto = new ConsultantQueryRequestDto();
-		cqrDto.setId(consultant_id);
-		cqrDto.setStatus(StatusEnum.ACCEPTED);
-		ConsultantInfo cinfo = consultantFacade.queryOne(cqrDto);
-		if (cinfo == null) {
-			logger.error("咨询师不存在，请检查你的参数");
-			return "public/service/sort";
-
-		}
-		UserInfo user = SessionUtil.getLoginUserToSession(request);
-		if (user == null) {
-			logger.error("用户登录超时不存在，请重新打开微信客户端");
-			return "public/service/sort";
-		}
-		RecordInfo recordInfo = new RecordInfo();
-		recordInfo.setConsultantId(consultant_id);
-		recordInfo.setConsultType(ConsultTypeEnum
-				.toEnum(counsultantType == null ? -1 : counsultantType));
-		recordInfo.setCreateTime(new Date());
-		recordInfo.setIsCompleted(YesOrNoEnum.NO);
-		recordInfo.setIsPaid(YesOrNoEnum.NO);
-		recordInfo.setIsReplied(YesOrNoEnum.NO);
-		recordInfo.setUserId(user.getId());
-//		recordInfo.setUserId(1l);
-		recordInfo.setRecordNonce(RandomUtil.generateOrderId());
-		// 添加 咨询记录
-		recordFacade.add(recordInfo);
-		// 做异常处理
-		PreOrder preOrder = buildPreOrderVo(request, cinfo,recordInfo);
-		try {
-			XStream xs=new XStream(new DomDriver());
-			xs.alias("xml", PreOrder.class);
-			
-			logger.info("@请求内容："+Pay.PRE_ORDER_URL+"?"+preOrder.serializeToXml());
-			String resultString=HttpKit.post(Pay.PRE_ORDER_URL,preOrder.serializeToXml());
-			xs.alias("xml", PayOrderResultDto.class);
-			PayOrderResultDto payResult=(PayOrderResultDto) xs.fromXML(resultString);
-			
-			logger.info("@微信下单，返回结果： "+payResult);
-			
-			// 参数
-			String timeStamp = System.currentTimeMillis() + "";
-			
-			Map<String,String> signMap=Maps.newHashMap();
-			signMap.put("timeStamp", timeStamp);
-			signMap.put("app_id", preOrder.getAppid());
-			signMap.put("package", "prepay_id="+payResult.getPrepay_id());
-			signMap.put("nonceStr", preOrder.getNonce_str());
-			signMap.put("signType", "MD5");
-			String paySign = Pay.packageSign(signMap); // 构造签名
-			request.setAttribute("appId", preOrder.getAppid());
-			request.setAttribute("timeStamp",timeStamp );
-			request.setAttribute("nonceStr",preOrder.getNonce_str());
-			request.setAttribute("packageStr", "prepay_id="+payResult.getPrepay_id());
-			request.setAttribute("signType", "MD5");
-			request.setAttribute("paySign", paySign);
-		}catch(Exception e){
-			logger.info("weixin 下单异常",e);
-		}
-		return "public/service/pay";
-	}
-	/**
-	 * 获取ip
-	 * @param request
-	 * @return
-	 */
-	public static String getIp(HttpServletRequest request) {
-		if (request == null)
-			return "";
-		String ip = request.getHeader("X-Requested-For");
-		if (StringUtils.isEmpty(ip) || "unknown".equalsIgnoreCase(ip)) {
-			ip = request.getHeader("X-Forwarded-For");
-		}
-		if (StringUtils.isEmpty(ip) || "unknown".equalsIgnoreCase(ip)) {
-			ip = request.getHeader("Proxy-Client-IP");
-		}
-		if (StringUtils.isEmpty(ip) || "unknown".equalsIgnoreCase(ip)) {
-			ip = request.getHeader("WL-Proxy-Client-IP");
-		}
-		if (StringUtils.isEmpty(ip) || "unknown".equalsIgnoreCase(ip)) {
-			ip = request.getHeader("HTTP_CLIENT_IP");
-		}
-		if (StringUtils.isEmpty(ip) || "unknown".equalsIgnoreCase(ip)) {
-			ip = request.getHeader("HTTP_X_FORWARDED_FOR");
-		}
-		if (StringUtils.isEmpty(ip) || "unknown".equalsIgnoreCase(ip)) {
-			ip = request.getRemoteAddr();
-		}
-		return ip;
-	}
 	@RequestMapping(value="consultant_offline.do")
 	@PowerCheck(type=PowerCheckEnum.LOGIN)
 	public String consultantByOffline(HttpServletRequest request,HttpServletResponse response,Long consultant_id) throws IOException{
@@ -568,53 +466,5 @@ public class ConsultantController {
 		map.put("returnMessage", "已收藏该咨询师");
 		map.put("isCollect",1);
 		return new ModelAndView(new MappingJackson2JsonView(),map);
-	}
-	private PreOrder buildPreOrderVo(HttpServletRequest request,ConsultantInfo cinfo,RecordInfo recordInfo) throws UnsupportedEncodingException{	
-		String out_trade_no=recordInfo.getRecordNonce();
-		String fee_type="CNY";
-		int total_fee= 0;
-		if(null==cinfo||null==cinfo.getPrice()){
-			return null;
-		}
-		if(ConsultTypeEnum.CHAT.equals(recordInfo.getConsultType())){
-			total_fee=cinfo.getPrice().multiply(new BigDecimal(100)).intValue();
-		}
-		else if(ConsultTypeEnum.FACE_TO_FACE.equals(recordInfo.getConsultType())){
-			total_fee=cinfo.getFacePrice().multiply(new BigDecimal(100)).intValue();
-		}
-		else if(ConsultTypeEnum.VIDEO.equals(recordInfo.getConsultType())){
-			total_fee=cinfo.getVideoPrice().multiply(new BigDecimal(100)).intValue();
-		}
-		String spbill_create_ip=NetUtils.getRemoteHost(request);
-		String trade_type="JSAPI";
-		String notify_url=WeChat.getNotifyUrl();
-		String limit_pay="no_credit";
-		String openid=SessionUtil.getLoginUserToSession(request).getOpenId();
-//		String openid="oGBeWt-feUNN9UJzt7YHJM3VnzKc";
-		String product_id=RandomUtil.generateProductId();
-		
-		Map<String,String> signMap=Maps.newHashMap();
-		signMap.put("appid", WeChat.getAppId());
-		signMap.put("mch_id", WeChat.getMch_id());
-		signMap.put("device_info", "WEB");
-		String nonce_str=RandomUtil.generateCode();
-		signMap.put("nonce_str", nonce_str);
-		String body="情感咨询服务";
-		signMap.put("body", body);
-		signMap.put("out_trade_no",out_trade_no);
-		signMap.put("fee_type",fee_type);
-		signMap.put("out_trade_no",out_trade_no);
-		signMap.put("total_fee",total_fee+"");
-		signMap.put("spbill_create_ip",spbill_create_ip);
-		signMap.put("notify_url",notify_url);
-		signMap.put("trade_type",trade_type);
-		signMap.put("product_id",product_id);
-		signMap.put("limit_pay",limit_pay);
-		signMap.put("openid",openid);
-		String sign=Pay.packageSign(signMap);
-		PreOrder po=new PreOrder(WeChat.getAppId(),  WeChat.getMch_id(), "WEB", nonce_str,
-								sign, body, out_trade_no, total_fee, 
-								spbill_create_ip, notify_url, trade_type,openid);
-		return po;
 	}
 }

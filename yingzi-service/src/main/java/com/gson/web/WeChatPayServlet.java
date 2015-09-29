@@ -64,7 +64,7 @@ public class WeChatPayServlet extends HttpServlet {
 			
 			String nonceStr = RandomStringUtils.random(8, "123456789"); // 8位随机数
 			String packagestring = Pay.packageSign(params); //对参数打包
-			String paySign = Pay.paySign(timeStamp, nonceStr, packagestring); // 构造签名
+//			String paySign = Pay.paySign(timeStamp, nonceStr, packagestring); // 构造签名
 			
 			// appId
 			req.setAttribute("appid", ConfKit.get("AppId"));
@@ -75,7 +75,7 @@ public class WeChatPayServlet extends HttpServlet {
 			// package
 			req.setAttribute("package", packagestring);
 			// paySign
-			req.setAttribute("paySign", paySign);
+//			req.setAttribute("paySign", paySign);
 			// 判定微信
 			req.setAttribute("isweixin", 1);
 			req.getRequestDispatcher("/pay.jsp").forward(req, resp);

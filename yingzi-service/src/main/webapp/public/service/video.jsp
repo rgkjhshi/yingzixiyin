@@ -1,4 +1,5 @@
 <%@ page import="java.util.List"%>
+<%@page import="com.yingzixiyin.api.enums.ConsultTypeEnum"%>
 <%@ page import="com.yingzixiyin.api.dto.*"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
@@ -58,7 +59,9 @@
                 视频咨询请您在线上付款预约，客服将在第一时间与您沟通具体时间地点。
             </li>
             <li>
-                <div class="choose_btn"  data-type="online" data-price='<fmt:formatNumber value="${cinfo.videoPrice }" pattern="##.##" minFractionDigits="2"></fmt:formatNumber>'>付款预约</div>
+                <div class="choose_btn"  data-type="online" data-price='<fmt:formatNumber value="${cinfo.videoPrice }" pattern="##.##" minFractionDigits="2"></fmt:formatNumber>'>
+                 <a href="<%=path%>/wxpay/prepay.do?consultant_id=1&counsultantType=<%=ConsultTypeEnum.VIDEO.getValue()%>">付款预约</a>
+                </div>
             </li>
         </ul>
     </div>

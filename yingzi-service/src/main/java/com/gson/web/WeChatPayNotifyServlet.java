@@ -63,11 +63,11 @@ public class WeChatPayNotifyServlet extends HttpServlet {
 			openid = postData.getOpenId();
 			int issubscribe  = postData.getIsSubscribe();
 			appsignature = postData.getAppSignature();
-			boolean temp = Pay.verifySign(timestamp, noncestr, openid, issubscribe, appsignature);
-			if (!temp) {
+//			boolean temp = Pay.verifySign(timestamp, noncestr, openid, issubscribe, appsignature);
+		/*	if (!temp) {
 				System.out.println("校验支付error！");
 				writeString(resp, STATUC_FAIL);
-			}
+			}*/
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

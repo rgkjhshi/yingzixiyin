@@ -24,6 +24,8 @@ public class ConsumeRecordsInfo implements Serializable{
     //咨询师信息
     private String consultantName;		//咨询师名称
     private BigDecimal price;      // 咨询单价
+    private BigDecimal facePrice; 
+    private BigDecimal videoPrice; 
     private String introduce;      // 个人简介
     private String signature;      // 个性签名
     private RangeTypeEnum rangeType;     // 咨询类型
@@ -112,6 +114,19 @@ public class ConsumeRecordsInfo implements Serializable{
 	public void setAvatar(String avatar) {
 		this.avatar = avatar;
 	}
+	
+	public BigDecimal getFacePrice() {
+		return facePrice;
+	}
+	public void setFacePrice(BigDecimal facePrice) {
+		this.facePrice = facePrice;
+	}
+	public BigDecimal getVideoPrice() {
+		return videoPrice;
+	}
+	public void setVideoPrice(BigDecimal videoPrice) {
+		this.videoPrice = videoPrice;
+	}
 	@Override
 	public String toString() {
 		return "ConsumeRecordsInfo [id=" + id + ", userId=" + userId
@@ -119,10 +134,9 @@ public class ConsumeRecordsInfo implements Serializable{
 				+ consultType + ", isPaid=" + isPaid + ", isReplied="
 				+ isReplied + ", isCompleted=" + isCompleted + ", createTime="
 				+ createTime + ", consultantName=" + consultantName
-				+ ", price=" + price + ", introduce=" + introduce
+				+ ", price=" + price + ", facePrice=" + facePrice
+				+ ", videoPrice=" + videoPrice + ", introduce=" + introduce
 				+ ", signature=" + signature + ", rangeType=" + rangeType
 				+ ", avatar=" + avatar + "]";
 	}
-	
-	    
 }

@@ -22,7 +22,7 @@ public class ResponseUtils {
 	}
 	public static void renderXMLText(HttpServletResponse response,String xml) throws IOException{
 		response.setHeader("Cache-Control", "no-cache");   
-        response.setContentType("text/xml;charset=UTF-8");  
+        response.setContentType("application/xml;charset=UTF-8");  
         response.setCharacterEncoding("UTF-8");  
         PrintWriter out = response.getWriter();  
         out.write(xml);

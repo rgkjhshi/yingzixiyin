@@ -345,4 +345,8 @@ public class WeChat {
 		String chat_url = ConfKit.get("CHAT_URL");
 		return chat_url;
 	}
+	public static String getPaySignKey() {
+		String paySignKey = ConfKit.get("paySignKey");
+		return paySignKey;
+	}
 }

@@ -1,4 +1,5 @@
 <%@ page import="java.util.List"%>
+<%@page import="com.yingzixiyin.api.enums.ConsultTypeEnum"%>
 <%@ page import="com.yingzixiyin.api.dto.*"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
@@ -30,7 +31,9 @@
             <!-- <textarea class="contentform" placeholder="请输入您要咨询的内容（500）字以内"></textarea> -->
             您正在申请进行线上咨询。<br/>请通过微信支付进行付费。
         </div>
-        <div class="choose_btn" data-type="online" data-price='<fmt:formatNumber value="${cinfo.price }" pattern="##.##" minFractionDigits="2"></fmt:formatNumber>'>确定付费</div>
+        <div class="choose_btn" data-type="online" data-price='<fmt:formatNumber value="${cinfo.price }" pattern="##.##" minFractionDigits="2"></fmt:formatNumber>'>
+        
+        <a href="<%=path%>/wxpay/prepay.do?consultant_id=1&counsultantType=<%=ConsultTypeEnum.CHAT.getValue()%>">确定付费</a></div>
     </div>
 <script type="text/javascript" src="<%=path %>/js/main_wechat.js"></script>
 </body>

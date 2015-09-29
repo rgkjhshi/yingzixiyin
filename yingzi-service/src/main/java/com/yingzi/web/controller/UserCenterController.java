@@ -156,6 +156,8 @@ public class UserCenterController {
 		crInfo.setSignature(cqrDto.getSignature());
 		crInfo.setRangeType(cqrDto.getRangeType());
 		crInfo.setIntroduce(cqrDto.getIntroduce());
+		crInfo.setFacePrice(cqrDto.getFacePrice());
+		crInfo.setVideoPrice(cqrDto.getVideoPrice());
 		return crInfo;
 	}
 	private UserInfo queryUserInfo(HttpServletRequest request){

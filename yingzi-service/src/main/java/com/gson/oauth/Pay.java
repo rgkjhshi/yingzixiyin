@@ -85,33 +85,13 @@ public class Pay {
      */
     public static String packageSign(Map<String, String> params) throws UnsupportedEncodingException {
         String string1 = createSign(params, false);
-        String stringSignTemp = string1 + "&key=" + WeChat.getAppSercret();
-        String signValue = DigestUtils.md5Hex(stringSignTemp).toUpperCase();
+        String stringSignTemp = string1 + "&key=" + WeChat.getPaySignKey();
+        System.out.println("@生成的签名参数："+stringSignTemp);
+        String signValue = MD5Utils.getMD5(stringSignTemp).toUpperCase();
+        System.out.println("@生成的签名："+signValue);
         return signValue;
     }
 
-    /**
-     * 支付签名
-     * @param timestamp
-     * @param noncestr
-     * @param packages
-     * @return
-     * @throws UnsupportedEncodingException 
-     */
-    public static String paySign(String timestamp, String noncestr,String packages) throws UnsupportedEncodingException {
-        Map<String, String> paras = new HashMap<String, String>();
-        paras.put("appid", ConfKit.get("AppId"));
-        paras.put("timestamp", timestamp);
-        paras.put("noncestr", noncestr);
-        paras.put("package", packages);
-        paras.put("appkey", ConfKit.get("paySignKey"));
-        // appid、timestamp、noncestr、package 以及 appkey。
-        String string1 = createSign(paras, false);
-//        String paySign = DigestUtils.shaHex(string1);
-        String paySign =MD5Utils.getMD5(string1);
-        return paySign;
-    }
-    
     /**
      * 支付回调校验签名
      * @param timestamp
@@ -122,19 +102,10 @@ public class Pay {
      * @return
      * @throws UnsupportedEncodingException 
      */
-    public static boolean verifySign(long timestamp,
-            String noncestr, String openid, int issubscribe, String appsignature) throws UnsupportedEncodingException {
-        Map<String, String> paras = new HashMap<String, String>();
-        paras.put("appid", ConfKit.get("AppId"));
-        paras.put("appkey", ConfKit.get("paySignKey"));
-        paras.put("timestamp", String.valueOf(timestamp));
-        paras.put("noncestr", noncestr);
-        paras.put("openid", openid);
-        paras.put("issubscribe", String.valueOf(issubscribe));
-        // appid、appkey、productid、timestamp、noncestr、openid、issubscribe
-        String string1 = createSign(paras, false);
-        String paySign = DigestUtils.shaHex(string1);
-        return paySign.equalsIgnoreCase(appsignature);
+    public static boolean verifySign( Map<String, String> paras ,String sign) throws UnsupportedEncodingException {
+        String paySign = packageSign(paras);;
+        System.out.println("校验签名是否正确,paySign="+paySign+",sign="+sign);
+        return paySign.equalsIgnoreCase(sign);
     }
     
     /**
