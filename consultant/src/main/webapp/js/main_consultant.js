@@ -85,7 +85,20 @@
             return;
         }
 
+        if(!check("yanzhengcode")){
+            return;
+        }
+
+        var yanzhengcode = $("#yanzheng_btn").text();
+        var yanzhenginput = $("#yanzhengcode").val();
+
+        if(yanzhenginput!=yanzhengcode){
+            alert("验证码错误");
+            return;
+        }
+
         $("#phone").attr("disabled", "disabled");
+        $("#yanzhengcode").attr("disabled", "disabled");
         $("#sms_btn").html("<span id='count'>60</span> 秒后重新获取").unbind("click");
 
         // 倒计时

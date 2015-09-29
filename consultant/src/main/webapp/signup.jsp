@@ -49,6 +49,14 @@
                             </div>
                         </div>
                         <div>
+                            <div class="sign_title">验证码：<span class="redstar">*</span></div>
+                            <div class="sign_content">
+                                <input type="text" data-tip="验证码" data-check="true" data-validate="default" id="yanzhengcode" />
+                                <a class="yanzheng_btn" id="yanzheng_btn"></a>
+                                <span class="tips"></span>
+                            </div>
+                        </div>
+                        <div>
                             <div class="sign_title">短信验证码：<span class="redstar">*</span></div>
                             <div class="sign_content">
                                 <input data-validate="notnull" data-tip="短信验证码" id="sms_code" type="text" />
@@ -81,6 +89,15 @@
             </div>
         </div>
         <%@ include file="../parts/foot.jsp" %> 
+    <script>
+        //yanzhengcode
+        var one = Math.floor(Math.random()*10).toString();
+        var two = Math.floor(Math.random()*10).toString();
+        var three = Math.floor(Math.random()*10).toString();
+        var four = Math.floor(Math.random()*10).toString();
+        var yanzhengcode = one+two+three+four;
+        $("#yanzheng_btn").text(yanzhengcode);
+    </script>
     <script src="js/main_consultant.js"></script>
     </body>
 </html>

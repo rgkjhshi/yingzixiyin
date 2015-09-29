@@ -171,7 +171,7 @@ fieldset div {
 .sms_code{
 	width:90px!important;
 }
-.sms_btn{
+.sms_btn,.yanzheng_btn{
 	display: inline-block;
 	width:106px;
 	text-align: center;
@@ -182,6 +182,10 @@ fieldset div {
 	border: 1px solid #ddd;
 	cursor: pointer;
 	line-height: 2rem;
+}
+.yanzheng_btn{
+	height:32px;
+	vertical-align: middle;
 }
 .sign_content .radio_la{
 	margin-right:20px;
