@@ -75,6 +75,23 @@
 
     // 咨询师注册
 
+
+    // 更换验证码
+    var changeCode = function(){
+        var _this = $("#yanzheng_btn");
+        var canClick = _this.attr("data-boo");
+        if(canClick==1){
+            var one = Math.floor(Math.random()*10).toString();
+            var two = Math.floor(Math.random()*10).toString();
+            var three = Math.floor(Math.random()*10).toString();
+            var four = Math.floor(Math.random()*10).toString();
+            var yanzhengcode = one+two+three+four;
+            $("#yanzheng_btn").text(yanzhengcode);
+        }
+    }
+
+    $("#yanzheng_btn").on("click",changeCode);
+
     // 短信验证码获取
     var getCode = function () {
         var phone = $.trim($("#phone").val());
@@ -97,6 +114,7 @@
             return;
         }
 
+        $("#yanzheng_btn").attr("data-boo","0");
         $("#phone").attr("disabled", "disabled");
         $("#yanzhengcode").attr("disabled", "disabled");
         $("#sms_btn").html("<span id='count'>60</span> 秒后重新获取").unbind("click");

@@ -52,7 +52,7 @@
                             <div class="sign_title">验证码：<span class="redstar">*</span></div>
                             <div class="sign_content">
                                 <input type="text" data-tip="验证码" data-check="true" data-validate="default" id="yanzhengcode" />
-                                <a class="yanzheng_btn" id="yanzheng_btn"></a>
+                                <a class="yanzheng_btn" id="yanzheng_btn" data-boo="1"></a>
                                 <span class="tips"></span>
                             </div>
                         </div>

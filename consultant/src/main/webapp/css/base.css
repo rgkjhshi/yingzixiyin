@@ -185,7 +185,13 @@ fieldset div {
 }
 .yanzheng_btn{
 	height:32px;
+	width:80px;
+	background-image:url(../images/codebg.jpg);
+	background-size:cover;
 	vertical-align: middle;
+	font-size: 24px;
+    font-weight: bold;
+    font-style: italic;
 }
 .sign_content .radio_la{
 	margin-right:20px;
