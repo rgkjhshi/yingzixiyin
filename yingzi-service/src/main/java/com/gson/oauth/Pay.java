@@ -86,9 +86,9 @@ public class Pay {
     public static String packageSign(Map<String, String> params) throws UnsupportedEncodingException {
         String string1 = createSign(params, false);
         String stringSignTemp = string1 + "&key=" + WeChat.getPaySignKey();
-        System.out.println("@生成的签名参数："+stringSignTemp);
+//        System.out.println("@生成的签名参数："+stringSignTemp);
         String signValue = MD5Utils.getMD5(stringSignTemp).toUpperCase();
-        System.out.println("@生成的签名："+signValue);
+//        System.out.println("@生成的签名："+signValue);
         return signValue;
     }
 
@@ -104,7 +104,7 @@ public class Pay {
      */
     public static boolean verifySign( Map<String, String> paras ,String sign) throws UnsupportedEncodingException {
         String paySign = packageSign(paras);;
-        System.out.println("校验签名是否正确,paySign="+paySign+",sign="+sign);
+//        System.out.println("校验签名是否正确,paySign="+paySign+",sign="+sign);
         return paySign.equalsIgnoreCase(sign);
     }
     
