@@ -9,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<head>
 		<base href="<%=basePath%>">
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>微信支付页面</title>
+		<title>微信支付</title>
 	</head>
 <%-- 	<body>
 	公众号：${appId}<br/>
@@ -31,15 +31,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		           "paySign":"${paySign}" //微信签名 
 		       },
 		       function(res){    
-		           if(res.err_msg == "get_brand_wcpay_request:ok" ) {
-		        	   alert("支付成功");
-		           }     // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。 
-		           else if(res.err_msg == "get_brand_wcpay_request:cancel" ){
+		            if(res.err_msg == "get_brand_wcpay_request:ok" ) {
+		        	    alert("支付成功！线上咨询请到咨询室开始咨询吧！线下咨询请联系客服。");
+		            }    // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。 
+		            else if(res.err_msg == "get_brand_wcpay_request:cancel" ){
 		        	   alert("支付取消");
-		           }
-		           else{
+		            }else{
 		        	   alert("支付失败");
-		           }
+		            }
+		        	WeixinJSBridge.call('closeWindow');
 		       }
 		   ); 
 		}

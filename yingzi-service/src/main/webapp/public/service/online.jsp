@@ -33,7 +33,7 @@
         </div>
         <div class="choose_btn" data-type="online" data-price='<fmt:formatNumber value="${cinfo.price }" pattern="##.##" minFractionDigits="2"></fmt:formatNumber>'>
         
-        <a href="<%=path%>/wxpay/prepay.do?consultant_id=1&counsultantType=<%=ConsultTypeEnum.CHAT.getValue()%>">确定付费</a></div>
+        <a href="<%=path%>/wxpay/prepay.do?consultant_id=1&counsultantType=<%=ConsultTypeEnum.CHAT.getValue()%>" style="color:#fff;">确定付费</a></div>
     </div>
 <script type="text/javascript" src="<%=path %>/js/main_wechat.js"></script>
 </body>
