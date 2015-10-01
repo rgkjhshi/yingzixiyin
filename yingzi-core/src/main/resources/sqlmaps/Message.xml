@@ -116,7 +116,7 @@
     from consultant c inner join record r on c.id = r.consultant_id 
     left join message m  on r.id=m.record_id and c.phone =m.from_phone
     where r.user_id=#{userId} and 
-    r.is_paid=1 and 
+    r.is_paid=1 and r.consult_type=1 and 
     r.is_completed=0 
     group by r.id,c.id 
     order by m.create_time desc
