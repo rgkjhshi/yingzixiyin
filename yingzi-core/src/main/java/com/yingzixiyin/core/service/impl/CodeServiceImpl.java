@@ -25,13 +25,13 @@ import java.util.Random;
 public class CodeServiceImpl implements CodeService {
     private static final Logger logger = LoggerFactory.getLogger(CodeServiceImpl.class.getName());
 
-    public static final Long INTERVAL = 10L;              // 发送短信的最短间隔, 单位min
-    public static final String TEMPLATE_ID = "1";                    // 发送短信的模板, 1: 测试模板
-    public static final String HOST_NAME = "sandboxapp.cloopen.com"; // 服务器地址,不需要写https://
+    public static final Long INTERVAL = 5L;              // 发送短信的最短间隔, 单位min
+    public static final String TEMPLATE_ID = "39618";                    // 发送短信的模板, 1: 测试模板
+    public static final String HOST_NAME = "app.cloopen.com"; // 服务器地址,不需要写https://
     public static final String PORT = "8883";                        // 服务器端口号
-    public static final String ACCOUNT_SID = "8a48b5514e8a7522014e94912a430b71";    // 主账号ID
-    public static final String AUTH_TOKEN = "d6ef7224347248e8821ba7f0032d7465";     // 主帐号TOKEN
-    public static final String APP_ID = "aaf98f894e91da24014e94916b4f010f";         // 应用ID
+    public static final String ACCOUNT_SID = "8a48b5514ff457cc014ff89c86450b36";    // 主账号ID
+    public static final String AUTH_TOKEN = "848dc97721ab4e338f7d5b89ca956239";     // 主帐号TOKEN
+    public static final String APP_ID = "8a48b5514ff923b40150037744331a2f";         // 应用ID
 
 
     @Resource

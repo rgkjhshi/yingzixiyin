@@ -1,5 +1,6 @@
 package com.yingzixiyin.core.facade;
 
+import com.yingzixiyin.api.dto.BaseResponseDto;
 import com.yingzixiyin.api.dto.CodeInfo;
 import com.yingzixiyin.api.facade.CodeFacade;
 import com.yingzixiyin.core.BaseTest;
@@ -20,8 +21,8 @@ public class CodeFacadeTest extends BaseTest {
     @Test
     public void testSendCode() {
 
-//        BaseResponseDto responseDto = codeFacade.sendCode("13121435540");
-//        System.out.println(responseDto);
+        BaseResponseDto responseDto = codeFacade.sendCode("13121435540");
+        System.out.println(responseDto);
     }
 
     @Test
@@ -29,9 +30,9 @@ public class CodeFacadeTest extends BaseTest {
 
         CodeInfo info = new CodeInfo();
         info.setPhone("13121435540");
-        info.setCode("627843");
-//        BaseResponseDto responseDto = codeFacade.checkCode(info);
-//        System.out.println(responseDto);
+        info.setCode("813539");
+        BaseResponseDto responseDto = codeFacade.checkCode(info);
+        System.out.println(responseDto);
     }
 
     @Test
