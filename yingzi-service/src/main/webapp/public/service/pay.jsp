@@ -42,7 +42,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</body> --%>
 	<body>
 		<div style="padding:0 20px;">
-			<h1 class="result" style="text-align: center;font-weight: bold;color: #44b549;margin: 60px 0;"></h1>
+			<h1 class="result" style="text-align: center;font-weight: bold;color: #44b549;margin: 60px 0;">正在支付</h1>
 			<p class="detail" style="line-height: 2em;font-size: 16px;color: #666;"></p>
 			<div id="close">关闭</div>
 		</div>
@@ -59,6 +59,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		           "paySign":"${paySign}" //微信签名 
 		       },
 		       function(res){    
+		       		alert(res.err_msg);
 		            if(res.err_msg == "get_brand_wcpay_request:ok" ) {
 		            	$(".result").text("支付成功");
 		            	$(".detail").html("线上聊天咨询请到咨询室与咨询师开始咨询吧！面对面咨询和视频咨询请联系客服预约时间、地点。");
@@ -77,6 +78,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		       }
 		    );
 			$("#close").on("click",function(){
+				window.close();
 				WeixinJSBridge.call('closeWindow');
 			});
 		}
