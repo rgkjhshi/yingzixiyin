@@ -311,7 +311,7 @@ public class WeiXinPayController {
 			total_fee = cinfo.getVideoPrice().multiply(new BigDecimal(100))
 					.intValue();
 		}
-		total_fee=1;
+//		total_fee=1;
 		String spbill_create_ip = NetUtils.getRemoteHost(request);
 		String trade_type = "JSAPI";
 		String notify_url = WeChat.getNotifyUrl();
