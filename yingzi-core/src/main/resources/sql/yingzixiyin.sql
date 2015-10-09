@@ -45,8 +45,7 @@ CREATE TABLE `consultant` (
   `range_type` tinyint(4) NOT NULL DEFAULT '0' COMMENT '咨询师可咨询的范围类型',
   `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '咨询师状态，0:初始状态, 1:申请 2:审核通过, 3:审核不通过',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `idx_phone` (`phone`),
-  UNIQUE KEY `idx_email` (`email`)
+  UNIQUE KEY `idx_phone` (`phone`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='咨询师信息';
 
 
