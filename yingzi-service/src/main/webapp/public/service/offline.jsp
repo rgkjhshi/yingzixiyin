@@ -59,11 +59,7 @@
                 面对面咨询请您在线上付款预约，客服将在第一时间与您沟通具体时间地点。
             </li>
             <li>
-                <div class="choose_btn" data-type="offline" data-price='<fmt:formatNumber value="${cinfo.facePrice }" pattern="##.##" minFractionDigits="2"></fmt:formatNumber>'>
-                
-                <a href="<%=path%>/wxpay/prepay.do?consultant_id=${cinfo.id}&counsultantType=<%=ConsultTypeEnum.FACE_TO_FACE.getValue()%>" style="color:#fff;">付款预约</a>
-                
-                </div>
+                <a class="choose_btn" href="<%=path%>/wxpay/prepay.do?consultant_id=${cinfo.id}&counsultantType=<%=ConsultTypeEnum.FACE_TO_FACE.getValue()%>" style="color:#fff;">付款预约</a>
             </li>
         </ul>
     </div>
