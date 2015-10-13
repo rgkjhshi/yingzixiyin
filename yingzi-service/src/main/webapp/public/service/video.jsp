@@ -60,7 +60,7 @@
             </li>
             <li>
                 <div class="choose_btn"  data-type="online" data-price='<fmt:formatNumber value="${cinfo.videoPrice }" pattern="##.##" minFractionDigits="2"></fmt:formatNumber>'>
-                 <a href="<%=path%>/wxpay/prepay.do?consultant_id=1&counsultantType=<%=ConsultTypeEnum.VIDEO.getValue()%>">付款预约</a>
+                 <a href="<%=path%>/wxpay/prepay.do?consultant_id=${cinfo.id}&counsultantType=<%=ConsultTypeEnum.VIDEO.getValue()%>">付款预约</a>
                 </div>
             </li>
         </ul>

@@ -49,8 +49,8 @@ public class WeChatFilter implements Filter {
         ServletInputStream in = request.getInputStream();
         String xmlMsg = Tools.inputStream2String(in);
         LOGGER.debug("输入消息:[" + xmlMsg + "]");
-        String xml = WeChat.processing(xmlMsg);
-        response.getWriter().write(xml);
+//        String xml = WeChat.processing(xmlMsg);
+//        response.getWriter().write(xml);
     }
 
     private void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
