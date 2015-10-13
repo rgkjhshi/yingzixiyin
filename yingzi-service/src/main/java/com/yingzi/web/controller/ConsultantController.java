@@ -404,8 +404,8 @@ public class ConsultantController {
 		cqrDto.setId(consultant_id);
 		cqrDto.setStatus(StatusEnum.ACCEPTED);
 		ConsultantInfo cinfo=consultantFacade.queryOne(cqrDto);
-		if(cinfo==null){
-			//做异常处理
+		if(cinfo!=null){
+			request.setAttribute("cinfo", cinfo);
 		}
 		return response_page;
 	}
