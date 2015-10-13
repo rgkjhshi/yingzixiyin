@@ -31,9 +31,11 @@
             <!-- <textarea class="contentform" placeholder="请输入您要咨询的内容（500）字以内"></textarea> -->
             您正在申请进行线上咨询。<br/>请通过微信支付进行付费。
         </div>
-        <div class="choose_btn" data-type="online" data-price='<fmt:formatNumber value="${cinfo.price }" pattern="##.##" minFractionDigits="2"></fmt:formatNumber>'>
-        
-        <a href="<%=path%>/wxpay/prepay.do?consultant_id=${cinfo.id}&counsultantType=<%=ConsultTypeEnum.CHAT.getValue()%>" style="color:#fff;">确定付费</a></div>
+        <a href="<%=path%>/wxpay/prepay.do?consultant_id=${cinfo.id}&counsultantType=<%=ConsultTypeEnum.CHAT.getValue()%>" style="color:#fff;">
+            <div class="choose_btn" data-type="online" data-price='<fmt:formatNumber value="${cinfo.price }" pattern="##.##" minFractionDigits="2"></fmt:formatNumber>'>
+                确定付费
+            </div>
+        </a>
     </div>
 <script type="text/javascript" src="<%=path %>/js/main_wechat.js"></script>
 </body>
