@@ -24,7 +24,7 @@ CREATE TABLE `admin` (
 CREATE TABLE `consultant` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键id',
   `phone` varchar(20) NOT NULL DEFAULT '' COMMENT '电话号码',
-  `email` varchar(20) NOT NULL DEFAULT '' COMMENT '邮箱',
+  `email` varchar(50) NOT NULL DEFAULT '' COMMENT '邮箱',
   `password` varchar(20) NOT NULL DEFAULT '123456' COMMENT '密码',
   `alipay` varchar(100) NOT NULL DEFAULT '' COMMENT '支付宝账号',
   `nickname` varchar(50) NOT NULL DEFAULT '' COMMENT '昵称',
